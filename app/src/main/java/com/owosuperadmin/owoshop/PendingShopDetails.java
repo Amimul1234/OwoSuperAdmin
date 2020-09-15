@@ -7,12 +7,26 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.owosuperadmin.LatLng;
 import com.owosuperadmin.model.PendingShop;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PendingShopDetails extends AppCompatActivity {
 
@@ -25,12 +39,19 @@ public class PendingShopDetails extends AppCompatActivity {
 
     private Button see_in_map, approve_shop;
 
+    private PendingShop pendingShop;
+
+    private AllianceLoader loader;
+
+    private List<String> permissions = new ArrayList<>();
+    int size = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_shop_details);
 
-        PendingShop pendingShop = (PendingShop) getIntent().getSerializableExtra("PendingShop");
+        pendingShop = (PendingShop) getIntent().getSerializableExtra("PendingShop");
 
         shop_name = findViewById(R.id.shop_name);
         shop_keeper_name = findViewById(R.id.shop_owner_name);
@@ -53,6 +74,8 @@ public class PendingShopDetails extends AppCompatActivity {
         see_in_map = findViewById(R.id.shop_address_in_map);
         approve_shop = findViewById(R.id.approve_shop);
 
+        loader = findViewById(R.id.alliance_loader);
+
         shop_name.setText(pendingShop.getShop_name());
         shop_keeper_name.setText(pendingShop.getShop_owner_name());
         shop_keeper_mobile.setText(pendingShop.getShop_owner_mobile());
@@ -65,7 +88,7 @@ public class PendingShopDetails extends AppCompatActivity {
 
         LatLng latLng = pendingShop.getLatLng();
 
-        int size = pendingShop.getHaveAccess().size();
+        size = pendingShop.getHaveAccess().size();
 
         if(size == 1)
         {
@@ -95,5 +118,114 @@ public class PendingShopDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        approve_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(size == 1)
+                {
+                    if(!checkbox1.isChecked())
+                    {
+                        Toast.makeText(PendingShopDetails.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        validate();
+                    }
+                }
+                else if(size == 2)
+                {
+                    if(!checkbox1.isChecked() && !checkbox2.isChecked())
+                    {
+                        Toast.makeText(PendingShopDetails.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        validate();
+                    }
+                }
+                else
+                {
+                    if(!checkbox1.isChecked() && !checkbox2.isChecked() && !checkBox3.isChecked())
+                    {
+                        Toast.makeText(PendingShopDetails.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        validate();
+                    }
+                }
+
+            }
+        });
+    }
+
+    private void validate() {
+
+        if(checkbox1.isChecked())
+        {
+            permissions.add(req_category_1.getText().toString());
+        }
+        if(checkbox2.isChecked())
+        {
+            permissions.add(req_category_2.getText().toString());
+        }
+        if(checkBox3.isChecked())
+        {
+            permissions.add(req_category_3.getText().toString());
+        }
+
+        DatabaseReference permittedShopKeeper = FirebaseDatabase.getInstance().getReference();
+
+        loader.setVisibility(View.VISIBLE);
+
+        permittedShopKeeper.child("permittedShopKeeper").child(pendingShop.getShop_owner_mobile())
+                .setValue(permissions).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(PendingShopDetails.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
+
+                DatabaseReference deleteReq = FirebaseDatabase.getInstance().getReference();
+
+                deleteReq.child("PendingShopRequest").child(pendingShop.getShop_owner_mobile()).removeValue()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(PendingShopDetails.this, "Removed from pending list", Toast.LENGTH_SHORT).show();
+
+                                DatabaseReference ApprovedShop = FirebaseDatabase.getInstance().getReference();
+
+                                ApprovedShop.child("approvedShops").child(pendingShop.getShop_owner_mobile()).setValue(pendingShop)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(PendingShopDetails.this, "Shop permitted", Toast.LENGTH_SHORT).show();
+                                                loader.setVisibility(View.GONE);
+                                                finish();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(PendingShopDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
+                                        loader.setVisibility(View.GONE);
+                                    }
+                                });
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(PendingShopDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
+                        loader.setVisibility(View.GONE);
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(PendingShopDetails.this, "Failed, try again", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

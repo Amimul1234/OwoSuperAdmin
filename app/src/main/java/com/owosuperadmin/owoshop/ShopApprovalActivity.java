@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,13 +26,17 @@ public class ShopApprovalActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private AllianceLoader loader;
+    private ImageView empty_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_approval);
+
         recyclerView=findViewById(R.id.shop_approval_recyclerviewid);
         loader = findViewById(R.id.loader);
+        empty_image = findViewById(R.id.empty);
+
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -86,16 +91,20 @@ public class ShopApprovalActivity extends AppCompatActivity {
 
             @Override
             public void onDataChanged() {
-                /*
                 if(getItemCount() == 0)
                 {
                     empty_image.setVisibility(View.VISIBLE);
-                    empty_text.setVisibility(View.VISIBLE);
+                    loader.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 }
-
-                 */
+                else
+                {
+                    empty_image.setVisibility(View.INVISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
             }
         };
+
         recyclerView.setAdapter(adapter);
         adapter.startListening();
     }

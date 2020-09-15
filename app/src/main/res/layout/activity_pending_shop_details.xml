@@ -328,4 +328,5 @@
         app:alliance_thirdDotsColor="@color/blue"
         android:layout_centerInParent="true"/>
 
+
 </RelativeLayout>
