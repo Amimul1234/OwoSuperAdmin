@@ -1,0 +1,115 @@
+{
+  "project_info": {
+    "project_number": "625966490788",
+    "firebase_url": "https://owodokan2.firebaseio.com",
+    "project_id": "owodokan2",
+    "storage_bucket": "owodokan2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625966490788:android:af191b9e95ad27be41b231",
+        "android_client_info": {
+          "package_name": "com.example.owosemiadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625966490788-ihpcfss6guiah2r3vv914oea9ch6diu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZBdIoPyNMVS5ypmY5RRh9dt0mb2aBkLA"
+        },
+        {
+          "current_key": "AIzaSyDX6YQ4dRErpb5muuAg0vtBHIK9o20iDns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625966490788-ihpcfss6guiah2r3vv914oea9ch6diu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625966490788:android:c6dd66553c4730f141b231",
+        "android_client_info": {
+          "package_name": "com.owoshopkeeperpanel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625966490788-ms6jj66jhhspfml9qj8374i7rm23gefm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.owoshopkeeperpanel",
+            "certificate_hash": "cccbf9ab479a5210aeccdff5103df8c2b86ad4a5"
+          }
+        },
+        {
+          "client_id": "625966490788-ihpcfss6guiah2r3vv914oea9ch6diu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZBdIoPyNMVS5ypmY5RRh9dt0mb2aBkLA"
+        },
+        {
+          "current_key": "AIzaSyDX6YQ4dRErpb5muuAg0vtBHIK9o20iDns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625966490788-ihpcfss6guiah2r3vv914oea9ch6diu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625966490788:android:db363c5ed358532741b231",
+        "android_client_info": {
+          "package_name": "com.owosuperadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625966490788-ihpcfss6guiah2r3vv914oea9ch6diu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZBdIoPyNMVS5ypmY5RRh9dt0mb2aBkLA"
+        },
+        {
+          "current_key": "AIzaSyDX6YQ4dRErpb5muuAg0vtBHIK9o20iDns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625966490788-ihpcfss6guiah2r3vv914oea9ch6diu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

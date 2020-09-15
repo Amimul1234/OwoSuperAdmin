@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ShopApprovalActivity">
+
+    <TextView
+        android:id="@+id/heading1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Shop Approval"
+        android:layout_margin="20dp"
+        android:textColor="#0026FF"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/heading1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/shop_approval_recyclerviewid">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+    <com.agrawalsuneet.dotsloader.loaders.AllianceLoader
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:alliance_animDuration="500"
+        app:alliance_distanceMultiplier="4"
+        app:alliance_dotsRadius="10dp"
+        app:alliance_drawOnlyStroke="true"
+        app:alliance_firstDotsColor="@color/red"
+        app:alliance_secondDotsColor="@color/blue"
+        android:visibility="gone"
+        app:alliance_strokeWidth="8dp"
+        app:alliance_thirdDotsColor="@color/green"
+        android:layout_centerInParent="true"/>
+
+
+</RelativeLayout>

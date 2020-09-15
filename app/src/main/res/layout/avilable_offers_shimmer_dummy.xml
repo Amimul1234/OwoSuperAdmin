@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#4BDDDDDD"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <View
+            android:id="@+id/offer_image_id"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/grey"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:id="@+id/offer_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_margin="5dp"
+            android:background="@color/grey"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/offer_image_id"/>
+
+
+        <View
+            android:id="@+id/start_date"
+            android:layout_below="@+id/offer_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_margin="5dp"
+            android:background="@color/grey"/>
+
+        <View
+            android:id="@+id/end_date"
+            android:layout_below="@+id/start_date"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:background="@color/grey"
+            android:layout_margin="5dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

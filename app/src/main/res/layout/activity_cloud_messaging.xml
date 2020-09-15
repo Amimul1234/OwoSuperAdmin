@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.OwoDokan.owoshop.CloudMessagingActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/z_toolbar"
+        android:background="@android:color/holo_blue_bright"
+        android:paddingEnd = "15dp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin">
+
+        <LinearLayout
+            android:gravity="center"
+            android:background="#00F0F8FF"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:id="@+id/back_to_home_img"
+                android:background="?attr/actionBarItemBackground"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_baseline_arrow_back_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ethnocentric"
+                android:textSize="18sp"
+                android:text="Cloud Messaging"
+                android:layout_marginLeft="20dp"
+                android:textColor="@android:color/black"
+                />
+
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cloud_msg_firebase"
+        />
+
+</LinearLayout>

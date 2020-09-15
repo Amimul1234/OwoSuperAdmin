@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    tools:context=".preview_product">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_preview"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/product_name_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true"
+            app:title="Product Name"
+            app:scrimAnimationDuration="10"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginBottom="15dp"
+            app:expandedTitleMarginEnd="20dp"
+            app:expandedTitleMarginStart="25dp"
+            app:expandedTitleMarginTop="0dp"
+            app:expandedTitleGravity="bottom"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyleBlack"
+            app:collapsedTitleTextAppearance="@style/CollapsingToolbarLayoutCollapsedTextStyle"
+            >
+
+
+            <ImageView
+                android:id="@+id/product_image_preview"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:src="@drawable/logo1"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/z_toolbar"
+                android:background="@android:color/transparent"
+                android:paddingEnd = "15dp"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:id="@+id/back_to_home"
+                    android:background="@color/colorPrimary"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_baseline_arrow_back_24" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grey"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OWO Price: "
+                    android:layout_marginEnd="8dp"
+                    android:textSize="25sp"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/product_discounted_price_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/red"
+                    android:textColorHint="@color/red"
+                    android:textSize="25sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MRP Price: "
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#535151"
+                    />
+
+                <TextView
+                    android:id="@+id/product_price_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:text="15000"
+                    android:textColor="#535151"
+                    android:textColorHint="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profit :"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/product_discount_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2500 (20.28%) "
+                    android:layout_marginStart="62dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity :"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/product_quantity_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50"
+                    android:layout_marginStart="35dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/grey"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                />
+
+
+            <TextView
+                android:id="@+id/product_preview_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mobile_description"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                />
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

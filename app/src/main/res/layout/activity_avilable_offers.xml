@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AvilableOffersActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/z_toolbar"
+        android:background="@color/colorPrimary"
+        android:paddingEnd = "15dp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        >
+
+
+        <ImageView
+            android:id="@+id/back_to_home"
+            android:background="?attr/actionBarItemBackground"
+            android:focusable="true"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_baseline_arrow_back_24_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available Offers"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:layout_marginStart="10dp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_avilable_offer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/avilable_offers_shimmer_dummy"/>
+            <include layout="@layout/avilable_offers_shimmer_dummy"/>
+            <include layout="@layout/avilable_offers_shimmer_dummy"/>
+
+        </LinearLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/offer_availability_recyclerview_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

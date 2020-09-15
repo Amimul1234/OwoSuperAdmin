@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.OwoDokan.owoshop.QuponActivity">
+
+    <EditText
+        android:id="@+id/qupon_code"
+        android:layout_marginTop="50dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:hint="Voucher Code"
+        android:inputType="text"
+        android:background="@drawable/edittext_design"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/qupon_discount"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:hint="Voucher discount"
+        android:inputType="number"
+        android:background="@drawable/edittext_design"
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:id="@+id/create_qupon_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Qupon"
+        android:textAllCaps="false"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/buttons_blue"
+        android:textStyle="italic|bold"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        />
+
+</LinearLayout>

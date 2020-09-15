@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".UpdateOfferActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="Update Offer"
+            app:titleEnabled="true"
+            app:scrimAnimationDuration="10"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginBottom="15dp"
+            app:expandedTitleMarginEnd="20dp"
+            app:expandedTitleMarginStart="25dp"
+            app:expandedTitleMarginTop="0dp"
+            app:expandedTitleGravity="bottom"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
+            app:collapsedTitleTextAppearance="@style/CollapsingToolbarLayoutCollapsedTextStyle"
+            >
+
+
+            <ImageView
+                android:id="@+id/offer_image_update"
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:src="@drawable/offers"
+                android:scaleType="fitXY"
+                android:clickable="false"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/z_toolbar"
+                android:background="@android:color/transparent"
+                android:paddingEnd = "15dp"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:background="#00F0F8FF"
+                    android:layout_width="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_height="40dp">
+
+                    <ImageView
+                        android:id="@+id/back_to_home"
+                        android:background="?attr/actionBarItemBackground"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_baseline_arrow_back_24" />
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="80dp"
+            >
+
+            <EditText
+                android:id="@+id/offer_name_update"
+                android:layout_marginTop="25dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_alignParentTop="true"
+                android:hint="Offer Title"
+                android:background="@drawable/edittext_design"
+                android:textSize="20sp"
+                />
+
+
+            <RelativeLayout
+                android:id="@+id/relative1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_below="@+id/offer_name_update"
+                >
+
+                <EditText
+                    android:id="@+id/start_date_update"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Start date (DD:MM:YYYY)"
+                    android:background="@drawable/edittext_design"
+                    android:textSize="20sp"
+                    android:inputType="date"
+                    />
+
+                <ImageView
+                    android:id="@+id/start_date_update_picker"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_baseline_date_range_24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignBottom="@+id/offer_start_date"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/relative2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_below="@+id/relative1"
+                >
+
+                <EditText
+                    android:id="@+id/end_date_update"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="End date (DD:MM:YYYY) "
+                    android:background="@drawable/edittext_design"
+                    android:textSize="20sp"
+                    android:inputType="date"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/end_date_update_picker"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_baseline_date_range_24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignBottom="@+id/offer_end_date"
+                    />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/update_offers_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Offer"
+                android:textAllCaps="false"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/relative2"
+                android:background="@drawable/buttons_blue"
+                android:textStyle="italic|bold"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"
+                />
+
+            <Button
+                android:id="@+id/delete_offers_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete Offer"
+                android:textAllCaps="false"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/update_offers_button"
+                android:background="@drawable/buttons_red"
+                android:textStyle="italic|bold"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"
+                />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <ProgressBar
+        android:id="@+id/complete_progress"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

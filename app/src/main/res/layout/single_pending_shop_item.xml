@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:layout_marginTop="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:padding="10dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/shop_image"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp"
+            android:layout_marginEnd="5dp"/>
+
+        <LinearLayout
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="ABCD Medicine Shop"
+                android:textAlignment="textStart"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:layout_marginTop="15dp"
+                >
+
+                <TextView
+                    android:id="@+id/shop_keeper_mobile_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="01718995606"
+                    android:textColor="#F14813"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    tools:ignore="RtlCompat" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

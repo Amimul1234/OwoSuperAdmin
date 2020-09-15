@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".UpdateSemiAdminActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="Semi Admin"
+            app:titleEnabled="true"
+            app:scrimAnimationDuration="10"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginBottom="15dp"
+            app:expandedTitleMarginEnd="20dp"
+            app:expandedTitleMarginStart="25dp"
+            app:expandedTitleMarginTop="0dp"
+            app:expandedTitleGravity="bottom"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
+            app:collapsedTitleTextAppearance="@style/CollapsingToolbarLayoutCollapsedTextStyle"
+            >
+
+
+            <ImageView
+                android:id="@+id/clicked_admin_profileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/person"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/z_toolbar"
+                android:background="@android:color/transparent"
+                android:paddingEnd = "15dp"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:id="@+id/back_to_semi_admins"
+                    android:background="?attr/actionBarItemBackground"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_baseline_arrow_back_24"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="80dp"
+            >
+
+            <TextView
+                android:id="@+id/clicked_admin_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin Name"
+                android:fontFamily="@font/ethnocentric"
+                android:textSize="30sp"
+                android:textAlignment="textStart"
+                android:textColor="#000000"
+                />
+
+            <TextView
+                android:id="@+id/clicked_admin_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/clicked_admin_name"
+                android:fontFamily="@font/ethnocentric"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textAlignment="textStart"
+                android:text="01731304074"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/slogan2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/clicked_admin_mobile"
+                android:text="ACCESS"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="#0026FF"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:background="#8651B6F4"
+                android:fontFamily="@font/ethnocentric"/>
+
+
+
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/slogan2"
+                >
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Approve Shop"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+
+                <Switch
+                    android:id="@+id/clicked_approve_shop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ff02" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/linear1">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Maintain Shop"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+
+                <Switch
+                    android:id="@+id/clicked_maintain_shop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/linear2">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Add Products"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+
+                <Switch
+                    android:id="@+id/clicked_add_products"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/linear4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/linear3">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Update Products"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+
+                <Switch
+                    android:id="@+id/clicked_update_products"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/linear4">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Create Offers"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+
+                <Switch
+                    android:id="@+id/clicked_create_offers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/linear5">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Maintain Users"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+
+                <Switch
+                    android:id="@+id/clicked_maintain_users"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/linear6">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Messaging"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+
+                <Switch
+                    android:id="@+id/clicked_messaging"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/update_admin_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Admin Info"
+                android:background="@drawable/buttons_blue"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/ethnocentric"
+                android:layout_gravity="center"
+                android:layout_below="@id/linear7"
+                />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <ProgressBar
+        android:id="@+id/clicked_complete_progress"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

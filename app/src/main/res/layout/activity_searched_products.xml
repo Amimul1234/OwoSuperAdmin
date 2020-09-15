@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.OwoDokan.owoshop.SearchedProducts"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:elevation="4dp"
+        android:background="@color/white"
+        >
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_product_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:iconifiedByDefault="false"
+            android:focusable="true"
+            app:defaultQueryHint="Search Products"
+            />
+
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/searched_progressbar"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/searched_products_recycler_view"
+        tools:listitem="@layout/product_availability_sample"
+        />
+
+
+
+</LinearLayout>
