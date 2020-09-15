@@ -24,6 +24,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+//Getting location from map
+
 public class LocationFromMap extends AppCompatActivity
         implements OnMapReadyCallback {
 
