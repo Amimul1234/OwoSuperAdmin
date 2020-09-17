@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PendingShopDetails"></activity>
+        <activity android:name=".AddASubCategory"></activity>
+        <activity android:name=".PendingShopDetails" />
         <activity android:name=".QuponActivity" />
         <activity android:name=".SearchedProducts" />
         <activity android:name=".CloudMessagingActivity" />
@@ -27,9 +28,8 @@
 
         <activity
             android:name=".LocationFromMap"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_location_from_map" />
-
+            android:label="@string/title_activity_location_from_map"
+            android:screenOrientation="portrait" />
         <activity android:name=".DummyPendingShopActivity" />
         <activity android:name=".UpdateOfferActivity" />
         <activity android:name=".AvilableOffersActivity" />
@@ -53,9 +53,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateNewAdminActivity" />
+
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+
         <activity android:name=".HomeActivity" />
 
         <service android:name=".MyFirebaseMessagingService">

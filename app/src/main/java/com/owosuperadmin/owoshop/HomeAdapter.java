@@ -172,7 +172,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     Intent intent=new Intent(holder.itemView.getContext(), QuponActivity.class);
                     holder.itemView.getContext().startActivity(intent);
                 }
-
+                else if(position == 10)
+                {
+                    Intent intent=new Intent(holder.itemView.getContext(), AddASubCategory.class);
+                    holder.itemView.getContext().startActivity(intent);
+                }
             }
         });
 
