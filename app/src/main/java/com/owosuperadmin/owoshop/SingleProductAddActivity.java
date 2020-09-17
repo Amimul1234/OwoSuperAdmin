@@ -68,6 +68,10 @@ public class SingleProductAddActivity extends AppCompatActivity {
 
     private Spinner sub_category_selection;
 
+    private String selected_sub_category;
+
+    int i = 1;
+
     ArrayAdapter<String> adapter;
 
     @Override
@@ -243,6 +247,7 @@ public class SingleProductAddActivity extends AppCompatActivity {
         Pname = InputProductName.getText().toString();
         Discount = InputProductDiscount.getText().toString();
         quantity = product_quantity.getText().toString();
+        selected_sub_category = sub_category_selection.getSelectedItem().toString();
 
         if(ImageUri==null)
         {
@@ -340,7 +345,7 @@ public class SingleProductAddActivity extends AppCompatActivity {
                 .getInstance()
                 .getApi()
                 .createProduct(downloadImageUrl, Pname, CategoryName,
-                        Price, Discount, quantity, Description, saveCurrentDate, saveCurrentTime);
+                        Price, Discount, quantity, Description, saveCurrentDate, saveCurrentTime, selected_sub_category);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -397,24 +402,27 @@ public class SingleProductAddActivity extends AppCompatActivity {
         sub_cat_ref.child("Categories").child(CategoryName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
+                if(i==1)
                 {
-                    sub_categories = snapshot.getValue(Sub_categories.class);
-                    int size = sub_categories.getSub_categories().size();
-                    for(int i=0; i<size; i++)
+                    if(snapshot.exists())
                     {
-                        sub_category_names.add(sub_categories.getSub_categories().get(i).get("Name"));
-                    }
+                        sub_categories = snapshot.getValue(Sub_categories.class);
+                        int size = sub_categories.getSub_categories().size();
+                        for(int i=0; i<size; i++)
+                        {
+                            sub_category_names.add(sub_categories.getSub_categories().get(i).get("Name"));
+                        }
 
-                    adapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_item, sub_category_names);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    sub_category_selection.setAdapter(adapter);
-                    
-                }
-                else
-                {
-                    Toast.makeText(SingleProductAddActivity.this, "No sub category exists", Toast.LENGTH_SHORT).show();
+                        adapter = new ArrayAdapter<String>(getApplicationContext(),
+                                android.R.layout.simple_spinner_item, sub_category_names);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sub_category_selection.setAdapter(adapter);
+                        i++;
+                    }
+                    else
+                    {
+                        Toast.makeText(SingleProductAddActivity.this, "No sub category exists", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

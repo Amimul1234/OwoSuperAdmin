@@ -6,12 +6,12 @@ public class Products implements Serializable {
 
     private int product_id;
     private String product_image, product_name, product_category, product_price, product_discount,
-            product_quantity, product_description, product_date, product_time;
+            product_quantity, product_description, product_date, product_time, product_sub_category;
 
     public Products() {
     }
 
-    public Products(int product_id, String product_image, String product_name, String product_category, String product_price, String product_discount, String product_quantity, String product_description, String product_date, String product_time) {
+    public Products(int product_id, String product_image, String product_name, String product_category, String product_price, String product_discount, String product_quantity, String product_description, String product_date, String product_time, String product_sub_category) {
         this.product_id = product_id;
         this.product_image = product_image;
         this.product_name = product_name;
@@ -22,6 +22,7 @@ public class Products implements Serializable {
         this.product_description = product_description;
         this.product_date = product_date;
         this.product_time = product_time;
+        this.product_sub_category = product_sub_category;
     }
 
     public int getProduct_id() {
@@ -102,5 +103,13 @@ public class Products implements Serializable {
 
     public void setProduct_time(String product_time) {
         this.product_time = product_time;
+    }
+
+    public String getProduct_sub_category() {
+        return product_sub_category;
+    }
+
+    public void setProduct_sub_category(String product_sub_category) {
+        this.product_sub_category = product_sub_category;
     }
 }

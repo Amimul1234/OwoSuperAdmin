@@ -157,7 +157,7 @@ public class BrowsePicture2 extends AppCompatActivity {
                                     if(task.isSuccessful())
                                     {
                                         downloadImageUrl=task.getResult().toString();
-                                        SaveProductInfoToDatabase(saveCurrentDate, saveCurrentTime);
+                                        //SaveProductInfoToDatabase(saveCurrentDate, saveCurrentTime);
                                     }
                                 }
                             });
@@ -171,7 +171,7 @@ public class BrowsePicture2 extends AppCompatActivity {
 
 
 
-
+/*
 
     private void SaveProductInfoToDatabase(String saveCurrentDate, String saveCurrentTime) {
 
@@ -222,6 +222,8 @@ public class BrowsePicture2 extends AppCompatActivity {
         });
     }
 
+
+ */
 
 
 }

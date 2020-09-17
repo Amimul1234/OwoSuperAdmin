@@ -29,7 +29,8 @@ public interface Api {
             @Field("product_quantity") String product_quantity,
             @Field("product_description") String product_description,
             @Field("product_date") String product_date,
-            @Field("product_time") String product_time
+            @Field("product_time") String product_time,
+            @Field("product_sub_category") String product_sub_category
     );
 
     @GET("allProducts")
@@ -56,7 +57,8 @@ public interface Api {
             @Field("product_quantity") String product_quantity,
             @Field("product_description") String product_description,
             @Field("product_date") String product_date,
-            @Field("product_time") String product_time
+            @Field("product_time") String product_time,
+            @Field("product_sub_category") String product_sub_category
     );
 
     @DELETE("deleteProduct/{product_id}")

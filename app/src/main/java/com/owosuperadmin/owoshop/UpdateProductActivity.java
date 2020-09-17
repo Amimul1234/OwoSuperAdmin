@@ -202,7 +202,8 @@ public class UpdateProductActivity extends AppCompatActivity {
                                 products.getProduct_quantity(),
                                 products.getProduct_description(),
                                 products.getProduct_date(),
-                                products.getProduct_time()
+                                products.getProduct_time(),
+                                products.getProduct_sub_category()
                         );
 
 
