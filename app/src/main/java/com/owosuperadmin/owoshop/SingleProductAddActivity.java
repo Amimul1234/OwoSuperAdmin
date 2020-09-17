@@ -6,9 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,18 +22,25 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.model.Sub_categories;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -52,6 +61,14 @@ public class SingleProductAddActivity extends AppCompatActivity {
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingbar;
+
+    private List<String> sub_category_names = new ArrayList<>();
+
+    private Sub_categories sub_categories;
+
+    private Spinner sub_category_selection;
+
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +93,7 @@ public class SingleProductAddActivity extends AppCompatActivity {
         product_quantity = findViewById(R.id.product_quantity);
 
         loadingbar = new ProgressDialog(this);
-
+        sub_category_selection = findViewById(R.id.sub_category_selector);
 
         preview_new_product.setOnClickListener(new View.OnClickListener() {// Have to give product preview
             @Override
@@ -371,5 +388,43 @@ public class SingleProductAddActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        DatabaseReference sub_cat_ref = FirebaseDatabase.getInstance().getReference();
+        sub_cat_ref.child("Categories").child(CategoryName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    sub_categories = snapshot.getValue(Sub_categories.class);
+                    int size = sub_categories.getSub_categories().size();
+                    for(int i=0; i<size; i++)
+                    {
+                        sub_category_names.add(sub_categories.getSub_categories().get(i).get("Name"));
+                    }
+
+                    adapter = new ArrayAdapter<String>(getApplicationContext(),
+                            android.R.layout.simple_spinner_item, sub_category_names);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sub_category_selection.setAdapter(adapter);
+                    
+                }
+                else
+                {
+                    Toast.makeText(SingleProductAddActivity.this, "No sub category exists", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(SingleProductAddActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
 }

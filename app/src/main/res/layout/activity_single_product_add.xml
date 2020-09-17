@@ -174,12 +174,19 @@
         </LinearLayout>
 
 
+        <Spinner
+            android:id="@+id/sub_category_selector"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@id/linear1"/>
 
         <Button
             android:id="@+id/preview_new_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linear1"
+            android:layout_below="@id/sub_category_selector"
             android:layout_marginTop="10dp"
             android:text="Preview"
             android:fontFamily="@font/ethnocentric"
@@ -206,8 +213,5 @@
             android:textSize="20sp"
             android:textColor="@android:color/white"
             android:background="@drawable/buttons_blue"/>
-
-
-
     </RelativeLayout>
 </ScrollView>
