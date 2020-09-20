@@ -22,6 +22,11 @@
         <activity android:name=".CloudMessagingActivity" />
         <activity android:name=".preview_product" />
 
+
+        <activity android:name="com.owosuperadmin.dummy.BrowsePicture2">
+
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/maps_api_key" />
@@ -46,11 +51,14 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ManagementActivity" />
         <activity android:name=".Splash_screen">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
         <activity android:name=".CreateNewAdminActivity" />
 

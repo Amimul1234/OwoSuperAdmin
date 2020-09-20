@@ -157,7 +157,7 @@ public class BrowsePicture2 extends AppCompatActivity {
                                     if(task.isSuccessful())
                                     {
                                         downloadImageUrl=task.getResult().toString();
-                                        //SaveProductInfoToDatabase(saveCurrentDate, saveCurrentTime);
+                                        SaveProductInfoToDatabase(saveCurrentDate, saveCurrentTime);
                                     }
                                 }
                             });
@@ -169,17 +169,13 @@ public class BrowsePicture2 extends AppCompatActivity {
     }
 
 
-
-
-/*
-
     private void SaveProductInfoToDatabase(String saveCurrentDate, String saveCurrentTime) {
 
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .createProduct(downloadImageUrl, "Sports accessories", "Sports",
-                        "500", "31", "500", "Testing the capability of the server", saveCurrentDate, saveCurrentTime);
+                .createProduct(downloadImageUrl, "Watches", "Watch and Clock",
+                        "150", "31", "500", "Testing the capability of the server", saveCurrentDate, saveCurrentTime, "Table clock");
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -221,9 +217,6 @@ public class BrowsePicture2 extends AppCompatActivity {
             }
         });
     }
-
-
- */
 
 
 }
