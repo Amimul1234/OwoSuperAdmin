@@ -1,5 +1,6 @@
 package com.owosuperadmin.owoshop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,6 +66,14 @@ public class ManagementActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull PendingShopViewHolderForAdmin holder, int position, @NonNull PendingShop model) {
                         holder.bind(model, ManagementActivity.this);
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(ManagementActivity.this, approved_shop_details.class);
+                                intent.putExtra("approvedShop", model);
+                                startActivity(intent);
+                            }
+                        });
                     }
 
                     @Override

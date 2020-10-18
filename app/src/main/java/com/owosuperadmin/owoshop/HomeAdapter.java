@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.owosuperadmin.shop_related.confirm_shop_orders;
+
 import static com.owosuperadmin.owoshop.HomeActivity.p;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
@@ -60,7 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 }
                 else if (position==3)
                 {
-                    CharSequence options[]=new CharSequence[]{"Shop Management","Shop Orders","Shop Messages"};
+                    CharSequence options[]=new CharSequence[]{"Shop Management","Shop Orders"};
                     AlertDialog.Builder builder=new AlertDialog.Builder(context);
                     builder.setTitle("SHOPS");
                     builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -74,11 +76,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                             }
                             else if(i==1)
                             {
-
-                            }
-                            else if(i==2)
-                            {
-
+                                Intent intent = new Intent(holder.itemView.getContext(), confirm_shop_orders.class);
+                                holder.itemView.getContext().startActivity(intent);
                             }
                         }
                     });
