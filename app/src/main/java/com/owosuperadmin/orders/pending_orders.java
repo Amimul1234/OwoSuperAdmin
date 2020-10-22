@@ -2,6 +2,7 @@ package com.owosuperadmin.orders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -15,13 +16,18 @@ import android.widget.Toast;
 import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
+import com.firebase.ui.database.paging.LoadingState;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.owosuperadmin.model.Order_model_class;
 import com.owosuperadmin.owoshop.R;
+import com.owosuperadmin.shop_related.order_details;
+import com.owosuperadmin.viewHolder.OrderListItemViewHolder;
 
 public class pending_orders extends AppCompatActivity {
 
@@ -52,48 +58,33 @@ public class pending_orders extends AppCompatActivity {
 
         Query query = cartListRef.child("Shop Keeper Orders").orderByChild("state").equalTo("Pending");
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
-                {
-                    Toast.makeText(pending_orders.this, snapshot.toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
+        FirebaseRecyclerOptions<Order_model_class> options =
+                new FirebaseRecyclerOptions.Builder<Order_model_class>()
+                        .setQuery(query, Order_model_class.class).build();
+
+
+        FirebaseRecyclerAdapter<Order_model_class, OrderListItemViewHolder> adapter
+                = new FirebaseRecyclerAdapter<Order_model_class, OrderListItemViewHolder>(options) {
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            protected void onBindViewHolder(@NonNull final OrderListItemViewHolder holder, int position, @NonNull final Order_model_class model) {
 
-            }
-        });
+                holder.order_number.setText("Order :"+model.getOrder_number());
+                holder.order_phone_number.setText(model.getShop_number());
 
-
-        /*
-        FirebaseRecyclerOptions<Ordered_products_model> options =
-                new FirebaseRecyclerOptions.Builder<Ordered_products_model>()
-                        .setQuery(query, Ordered_products_model.class).build();
-
-
-        FirebaseRecyclerAdapter<Ordered_products_model, OrderListItemViewHolder> adapter
-                = new FirebaseRecyclerAdapter<Ordered_products_model, OrderListItemViewHolder>(options) {
-
-            @Override
-            protected void onBindViewHolder(@NonNull final OrderListItemViewHolder holder, int position, @NonNull final Ordered_products_model model) {
-
-                holder.order_number.setText(model.getOrder_number());
 
                 Double total_with_discount = Double.parseDouble(model.getTotalAmount()) - model.getCoupon_discount();
                 holder.total_amount_with_discount.setText("৳ "+ String.valueOf(total_with_discount));
 
-                holder.order_status.setText(model.getState());
+                holder.order_address_city.setText(model.getDelivery_address());
 
                 holder.time_and_date.setText(model.getDate() + ", "+model.getTime());
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Order_list.this, Order_details_for_single_item.class);//For giving product description to the user when clicks on a cart item
-                        intent.putExtra("Order", model);
+                        Intent intent = new Intent(pending_orders.this, order_details.class);//For giving product description to the user when clicks on a cart item
+                        intent.putExtra("pending_order", model);
                         startActivity(intent);
                     }
                 });
@@ -102,26 +93,17 @@ public class pending_orders extends AppCompatActivity {
             @NonNull
             @Override
             public OrderListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
                 OrderListItemViewHolder holder = new OrderListItemViewHolder(view);
                 allianceLoader.setVisibility(View.INVISIBLE);
                 return holder;
             }
 
-            @Override
-            public void onDataChanged() {
-                if(getItemCount() == 0)
-                {
-                    empty_image_view.setVisibility(View.VISIBLE);
-                    empty_text_view.setVisibility(View.VISIBLE);
-                    allianceLoader.setVisibility(View.INVISIBLE);
-                }
-            }
         };
 
-        order_list_recycler_view.setAdapter(adapter);
+        pending_orders.setAdapter(adapter);
+        pending_orders.setLayoutManager(new LinearLayoutManager(this));
         adapter.startListening();
-         */
     }
 
 }
