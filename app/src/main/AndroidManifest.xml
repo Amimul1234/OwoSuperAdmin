@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.owosuperadmin.shop_related.order_details"></activity>
+        <activity android:name="com.owosuperadmin.shop_related.shipped_order_activity"></activity>
+        <activity android:name="com.owosuperadmin.shop_related.shipped_order_state" />
+        <activity android:name="com.owosuperadmin.shop_related.picked_order_state" />
+        <activity android:name="com.owosuperadmin.shop_related.picked_order_activity" />
+        <activity android:name="com.owosuperadmin.shop_related.pending_order_details" />
         <activity android:name="com.owosuperadmin.shop_related.completed_orders" />
         <activity android:name="com.owosuperadmin.shop_related.cancel_order" />
         <activity android:name="com.owosuperadmin.shop_related.update_order_state" />
@@ -29,6 +33,7 @@
         <activity android:name=".CloudMessagingActivity" />
         <activity android:name=".preview_product" />
         <activity android:name="com.owosuperadmin.dummy.BrowsePicture2" />
+        <activity android:name="com.owosuperadmin.shop_related.confirmed_order_details" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

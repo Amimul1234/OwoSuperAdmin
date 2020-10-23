@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,23 +23,22 @@ import com.owosuperadmin.model.Order_model_class;
 import com.owosuperadmin.model.Ordered_products;
 import com.owosuperadmin.owoshop.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class order_details extends AppCompatActivity {
+public class confirmed_order_details extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<Ordered_products> ordered_products_list;
     private ImageView back_from_order_details;
     private TextView shipping_method;
     private Button confirm_button, cancel_button;
+    private ProgressBar progressBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_details);
+        setContentView(R.layout.confirm_order_details);
 
         Order_model_class order_model_class = (Order_model_class) getIntent().getSerializableExtra("pending_order");
 
@@ -55,6 +55,7 @@ public class order_details extends AppCompatActivity {
         shipping_method = findViewById(R.id.shipping_method);
         confirm_button = findViewById(R.id.confirm_order_button);
         cancel_button = findViewById(R.id.cancel_order);
+        progressBar = findViewById(R.id.log_in_progress);
 
         ordered_products_list = order_model_class.getProduct_ids();
         recyclerView = findViewById(R.id.ordered_products);
@@ -80,24 +81,33 @@ public class order_details extends AppCompatActivity {
         mobile_number.setText(order_model_class.getReceiver_phone());
         shipping_method.setText(order_model_class.getDelivery_method());
 
+        back_from_order_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                order_model_class.setState("Confirmed");
+                progressBar.setVisibility(View.VISIBLE);
+                order_model_class.setState("Processing");
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
                 databaseReference.child("Shop Keeper Orders").child(order_model_class.getOrder_number()).setValue(order_model_class).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(order_details.this, "Order state Updated", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(confirmed_order_details.this, "Order state Updated", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.VISIBLE);
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
-                    }
+                        progressBar.setVisibility(View.INVISIBLE);                    }
                 });
             }
         });

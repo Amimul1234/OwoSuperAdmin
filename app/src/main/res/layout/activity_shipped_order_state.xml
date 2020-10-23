@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owosuperadmin.shop_related.update_order_state">
+    tools:context="com.owosuperadmin.shop_related.shipped_order_state">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/topbar"
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirmed Orders"
+            android:text="Ship Order"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:layout_marginStart="20dp"/>

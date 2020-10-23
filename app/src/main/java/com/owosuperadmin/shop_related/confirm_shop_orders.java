@@ -22,6 +22,7 @@ public class confirm_shop_orders extends AppCompatActivity {
         setContentView(R.layout.activity_confirm_shop_orders);
 
         back = findViewById(R.id.back_to_home);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.owosuperadmin.shop_related.pending_order_details">
+    tools:context="com.owosuperadmin.shop_related.shipped_order_activity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,13 +28,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Details"
+            android:text="Ship Order"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_marginStart="25dp"/>
 
     </androidx.appcompat.widget.Toolbar>
-
 
     <ProgressBar
         android:id="@+id/log_in_progress"
@@ -355,10 +354,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/mobile_number"
                 android:layout_margin="10dp"
+                android:layout_marginTop="48dp"
                 android:background="@drawable/buttons_blue"
-                android:text="Confirm Order"
-                android:textSize="18sp"
-                android:textColor="@color/white"/>
+                android:text="Shipped"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/cancel_order"
@@ -370,7 +370,6 @@
                 android:text="Cancel Order"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
-
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>

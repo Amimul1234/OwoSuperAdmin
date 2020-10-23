@@ -1,4 +1,4 @@
-package com.owosuperadmin.orders;
+package com.owosuperadmin.shop_related;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,25 +21,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.owosuperadmin.model.Order_model_class;
 import com.owosuperadmin.owoshop.R;
-import com.owosuperadmin.shop_related.pending_order_details;
 import com.owosuperadmin.viewHolder.OrderListItemViewHolder;
 
-public class pending_orders extends AppCompatActivity {
+public class picked_order_state extends AppCompatActivity {
 
     private ImageView back_to_home;
-    private RecyclerView pending_orders;
     private AllianceLoader allianceLoader;
+    private RecyclerView update_order_state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_orders);
+        setContentView(R.layout.activity_picked_order_state);
 
         back_to_home = findViewById(R.id.back_to_home);
-        pending_orders = findViewById(R.id.pending_orders);
         allianceLoader = findViewById(R.id.loader);
-
-        pending_orders.setHasFixedSize(true);
+        update_order_state = findViewById(R.id.update_order_state);
 
         back_to_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +46,6 @@ public class pending_orders extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -58,7 +54,7 @@ public class pending_orders extends AppCompatActivity {
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference();
 
-        Query query = cartListRef.child("Shop Keeper Orders").orderByChild("state").equalTo("Pending");
+        Query query = cartListRef.child("Shop Keeper Orders").orderByChild("state").equalTo("Processing");
 
         FirebaseRecyclerOptions<Order_model_class> options =
                 new FirebaseRecyclerOptions.Builder<Order_model_class>()
@@ -85,7 +81,7 @@ public class pending_orders extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(pending_orders.this, pending_order_details.class);//For giving product description to the user when clicks on a cart item
+                        Intent intent = new Intent(picked_order_state.this, picked_order_activity.class);//For giving product description to the user when clicks on a cart item
                         intent.putExtra("pending_order", model);
                         startActivity(intent);
                     }
@@ -104,17 +100,17 @@ public class pending_orders extends AppCompatActivity {
             @Override
             public void onDataChanged() {
                 super.onDataChanged();
+
                 if(getItemCount() == 0)
                 {
-                    Toast.makeText(pending_orders.this, "No Pending orders", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(picked_order_state.this, "No orders", Toast.LENGTH_SHORT).show();
                     allianceLoader.setVisibility(View.INVISIBLE);
                 }
             }
         };
 
-        pending_orders.setAdapter(adapter);
-        pending_orders.setLayoutManager(new LinearLayoutManager(this));
+        update_order_state.setAdapter(adapter);
+        update_order_state.setLayoutManager(new LinearLayoutManager(this));
         adapter.startListening();
     }
-
 }

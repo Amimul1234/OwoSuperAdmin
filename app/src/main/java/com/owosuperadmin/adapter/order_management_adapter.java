@@ -2,6 +2,7 @@ package com.owosuperadmin.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -11,16 +12,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.owosuperadmin.model.Products;
 import com.owosuperadmin.orders.pending_orders;
+import com.owosuperadmin.owoshop.ManagementActivity;
 import com.owosuperadmin.owoshop.R;
 import com.owosuperadmin.owoshop.UpdateProductActivity;
 import com.owosuperadmin.shop_related.cancel_order;
 import com.owosuperadmin.shop_related.completed_orders;
+import com.owosuperadmin.shop_related.confirm_shop_orders;
+import com.owosuperadmin.shop_related.picked_order_state;
+import com.owosuperadmin.shop_related.shipped_order_state;
 import com.owosuperadmin.shop_related.update_order_state;
 
 import java.util.List;
@@ -80,8 +86,33 @@ public class order_management_adapter  extends RecyclerView.Adapter<order_manage
                         }
                         case 1:
                         {
-                            Intent intent = new Intent(mCtx, update_order_state.class);
-                            mCtx.startActivity(intent);
+                            CharSequence options[]=new CharSequence[]{"Set to Processing","Set to Picked", "Set to Shipped", "Set to Completed"};
+
+                            AlertDialog.Builder builder=new AlertDialog.Builder(mCtx);
+                            builder.setTitle("Change Order State");
+
+                            builder.setItems(options, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int i) {
+
+                                    if (i==0)
+                                    {
+                                        Intent intent=new Intent(mCtx, update_order_state.class);
+                                        mCtx.startActivity(intent);
+                                    }
+                                    else if(i == 1)
+                                    {
+                                        Intent intent=new Intent(mCtx, picked_order_state.class);
+                                        mCtx.startActivity(intent);
+                                    }
+                                    else if(i == 2)
+                                    {
+                                        Intent intent=new Intent(mCtx, shipped_order_state.class);
+                                        mCtx.startActivity(intent);
+                                    }
+                                }
+                            });
+                            builder.show();
                             break;
                         }
                         case 2:
