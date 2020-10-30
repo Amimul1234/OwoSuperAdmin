@@ -133,7 +133,6 @@
                 android:drawablePadding="10dp"
                 android:text="Calc."
                 android:textColor="#FFFFFF"
-                android:fontFamily="@font/ethnocentric"
                 android:background="@drawable/buttons_blue"
                 android:padding="8dp"
                 android:layout_marginStart="15dp"/>
@@ -173,6 +172,17 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/heading_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose a Sub Category:"
+            android:layout_below="@+id/linear1"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:textSize="18sp"/>
+
 
         <Spinner
             android:id="@+id/sub_category_selector"
@@ -180,16 +190,38 @@
             android:layout_height="70dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:layout_below="@id/linear1"/>
+            android:layout_below="@id/heading_2"/>
+
+
+
+        <TextView
+            android:id="@+id/heading_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose a brand"
+            android:layout_below="@+id/sub_category_selector"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:textSize="18sp"/>
+
+
+        <Spinner
+            android:id="@+id/brand_selector"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@id/heading_3"/>
 
         <Button
             android:id="@+id/preview_new_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sub_category_selector"
+            android:layout_below="@id/brand_selector"
             android:layout_marginTop="10dp"
             android:text="Preview"
-            android:fontFamily="@font/ethnocentric"
+            android:textStyle="bold"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:padding="10dp"
@@ -205,7 +237,6 @@
             android:layout_below="@+id/preview_new_product"
             android:layout_marginBottom="25dp"
             android:text="Add Product"
-            android:fontFamily="@font/ethnocentric"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:padding="10dp"

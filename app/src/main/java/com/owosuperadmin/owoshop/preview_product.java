@@ -15,7 +15,7 @@ public class preview_product extends AppCompatActivity {
 
     private TextView product_discounted_price_preview,
         product_price_preview, product_discount_preview,
-        product_quantity_preview, product_description_preview;
+        product_quantity_preview, product_description_preview, product_brand;
 
     private ImageView product_image_preview, back_to_home;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -32,6 +32,8 @@ public class preview_product extends AppCompatActivity {
         product_quantity_preview = findViewById(R.id.product_quantity_preview);
         product_description_preview = findViewById(R.id.product_preview_description);
 
+        product_brand = findViewById(R.id.product_brand);
+
         product_image_preview = findViewById(R.id.product_image_preview);
         collapsingToolbarLayout = findViewById(R.id.product_name_preview);
         appBarLayout = findViewById(R.id.appbar_preview);
@@ -45,6 +47,7 @@ public class preview_product extends AppCompatActivity {
         String description = getIntent().getStringExtra("description");
         String imageURI = getIntent().getStringExtra("image");
         String quantity = getIntent().getStringExtra("quantity");
+        String brand = getIntent().getStringExtra("brand");
 
 
         double discounted_price = Double.parseDouble(price) - Double.parseDouble(discount);
@@ -55,6 +58,8 @@ public class preview_product extends AppCompatActivity {
         product_image_preview.setImageURI(Uri.parse(imageURI));
         product_image_preview.setMinimumHeight(HomeActivity.p-200);
         collapsingToolbarLayout.setTitle(title);
+
+        product_brand.setText(brand);
 
         product_price_preview.setText("৳ "+price);
         product_description_preview.setText(description);

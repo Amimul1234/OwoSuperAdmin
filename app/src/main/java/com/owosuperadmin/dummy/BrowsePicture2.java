@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +25,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.owoshop.R;
+import com.owosuperadmin.owoshop.SingleProductAddActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -171,51 +174,30 @@ public class BrowsePicture2 extends AppCompatActivity {
 
     private void SaveProductInfoToDatabase(String saveCurrentDate, String saveCurrentTime) {
 
-        Call<ResponseBody> call = RetrofitClient
+        Owo_product owo_product = new Owo_product("Science Books", "Books and Stationary", 500.12, 30.00, 600, "The Science Book: Everything You Need to Know About the World and How It Works encapsulates centuries of scientific thought in one volume. Natural phenomena, revolutionary inventions, scientific facts, and the most up-to-date questions are all explained in detailed text that is complemented by visually arresting graphics.   Six major sections ranging from the universe and the planet Earth to biology, chemistry, physics, and mathematics are further broken down into subsections that encompass everything from microscopic life to nuclear power.   The Science Book covers a wide range of scientific areas, providing both a general overview of topics for the browsing reader, and more specific information for those who wish to obtain in-depth insight into a particular subject area. Natural phenomena, revolutionary inventions, scientific facts, and up-to-date questions are explained in detailed texts. The vivid illustrations, pictures, and graphics throughout the book make the information even more accessible and comprehensible.   Within the book, the theory of the universe and the character of the earth are detailed, along with an overview of the diverse living organisms that can be found on Earth. The technical developments and achievements of humankind are discussed and we pay particular attention to subjects of current interest, like climate change and genetic engineering.   The well-structured organization of this book with its numerous sections and chapters offers the reader an entertaining introduction into the large field of natural sciences and allows just as well for quick reference. Events and issues of special significance are discussed in greater detail in side bars of 3 different kinds. Numerous cross-references within the chapters and to other sections of the book emphasize the many links between the individual scientific fields. Illustrative elements, such as 3-D-graphics and pictograms and the great variety of photographic material make even the most complex information easy",
+                saveCurrentDate, saveCurrentTime, "Science Books", "Oracle", downloadImageUrl);
+
+        Call<Owo_product> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .createProduct(downloadImageUrl, "Watches", "Watch and Clock",
-                        "150", "31", "500", "Testing the capability of the server", saveCurrentDate, saveCurrentTime, "Table clock");
+                .createProduct(owo_product);
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<Owo_product>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                String s = null;
-
-                try{
-                    if(response.code() == 201)
-                    {
-                        s = response.body().string();
-                        finish();
-                    }
-                    else
-                    {
-                        s = response.errorBody().string();
-                    }
-                }catch(IOException e)
+            public void onResponse(Call<Owo_product> call, Response<Owo_product> response) {
+                if(response.isSuccessful())
                 {
-                    e.printStackTrace();
+                    Toast.makeText(BrowsePicture2.this, "Product Added Successfully", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-
-                if(s!=null)
-                {
-                    try {
-                        JSONObject jsonObject = new JSONObject(s);
-
-                        boolean error = jsonObject.getBoolean("error");
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Owo_product> call, Throwable t) {
+                Toast.makeText(BrowsePicture2.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 

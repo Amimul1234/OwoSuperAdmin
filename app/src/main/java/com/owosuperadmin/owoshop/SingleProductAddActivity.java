@@ -31,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.model.Sub_categories;
 
 import org.json.JSONException;
@@ -40,6 +41,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -63,16 +65,19 @@ public class SingleProductAddActivity extends AppCompatActivity {
     private ProgressDialog loadingbar;
 
     private List<String> sub_category_names = new ArrayList<>();
+    private List<String> brand_names = new ArrayList<>();
 
     private Sub_categories sub_categories;
 
-    private Spinner sub_category_selection;
+    private Spinner sub_category_selection, brand_selector;
 
     private String selected_sub_category;
+    private String selected_brand;
 
     int i = 1;
 
     ArrayAdapter<String> adapter;
+    ArrayAdapter<String> brand_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +88,8 @@ public class SingleProductAddActivity extends AppCompatActivity {
         CategoryName = getIntent().getExtras().get("category").toString();
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("ProductImage");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+
+        collectInfo();
 
 
         AddNewProductButton = (Button)findViewById(R.id.add_new_product);
@@ -98,6 +105,7 @@ public class SingleProductAddActivity extends AppCompatActivity {
 
         loadingbar = new ProgressDialog(this);
         sub_category_selection = findViewById(R.id.sub_category_selector);
+        brand_selector = findViewById(R.id.brand_selector);
 
         preview_new_product.setOnClickListener(new View.OnClickListener() {// Have to give product preview
             @Override
@@ -144,6 +152,7 @@ public class SingleProductAddActivity extends AppCompatActivity {
                     intent.putExtra("discount", InputProductDiscount.getText().toString());
                     intent.putExtra("description", InputProductDescription.getText().toString());
                     intent.putExtra("quantity", product_quantity.getText().toString());
+                    intent.putExtra("brand", brand_selector.getSelectedItem().toString());
                     startActivity(intent);
                 }
             }
@@ -223,6 +232,68 @@ public class SingleProductAddActivity extends AppCompatActivity {
 
     }
 
+    private void collectInfo() {
+        DatabaseReference sub_cat_ref = FirebaseDatabase.getInstance().getReference();
+        sub_cat_ref.child("Categories").child(CategoryName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    sub_categories = snapshot.getValue(Sub_categories.class);
+                    int size = sub_categories.getSub_categories().size();
+                    for (int i = 0; i < size; i++) {
+                        sub_category_names.add(sub_categories.getSub_categories().get(i).get("Name"));
+                    }
+
+                    adapter = new ArrayAdapter<String>(getApplicationContext(),
+                            android.R.layout.simple_spinner_item, sub_category_names);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sub_category_selection.setAdapter(adapter);
+                }
+                else
+                {
+                    Toast.makeText(SingleProductAddActivity.this, "No sub category exists", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(SingleProductAddActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        sub_cat_ref.child("Brands").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    List<HashMap<String, String>> hashMapList = new ArrayList<>();
+                    hashMapList = (List<HashMap<String, String>>) snapshot.getValue();
+
+                    int size = hashMapList.size();
+
+                    for(int i=0; i<size; i++)
+                    {
+                        brand_names.add(hashMapList.get(i).get("Name"));
+                    }
+
+                    brand_adapter = new ArrayAdapter<String>(getApplicationContext(),
+                            android.R.layout.simple_spinner_item, brand_names);
+                    brand_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    brand_selector.setAdapter(brand_adapter);
+                }
+                else
+                {
+                    Toast.makeText(SingleProductAddActivity.this, "No brand exists", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(SingleProductAddActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
     private void OpenGallery() {
         Intent galleryIntent=new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
@@ -248,6 +319,7 @@ public class SingleProductAddActivity extends AppCompatActivity {
         Discount = InputProductDiscount.getText().toString();
         quantity = product_quantity.getText().toString();
         selected_sub_category = sub_category_selection.getSelectedItem().toString();
+        selected_brand = brand_selector.getSelectedItem().toString();
 
         if(ImageUri==null)
         {
@@ -341,98 +413,29 @@ public class SingleProductAddActivity extends AppCompatActivity {
 
     private void SaveProductInfoToDatabase() {
 
-        Call<ResponseBody> call = RetrofitClient
+        Owo_product owo_product = new Owo_product(Pname, CategoryName, Double.parseDouble(Price), Double.parseDouble(Discount), Integer.parseInt(quantity), Description,
+                saveCurrentDate, saveCurrentTime, selected_sub_category, selected_brand, downloadImageUrl);
+
+        Call<Owo_product> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .createProduct(downloadImageUrl, Pname, CategoryName,
-                        Price, Discount, quantity, Description, saveCurrentDate, saveCurrentTime, selected_sub_category);
+                .createProduct(owo_product);
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<Owo_product>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                String s = null;
-
-                try{
-                    if(response.code() == 201)
-                    {
-                        s = response.body().string();
-                        Toast.makeText(SingleProductAddActivity.this, "Product is added successfully...", Toast.LENGTH_SHORT).show();
-                        loadingbar.dismiss();
-                        finish();
-                    }
-                    else
-                    {
-                        s = response.errorBody().string();
-                        loadingbar.dismiss();
-                    }
-                }catch(IOException e)
+            public void onResponse(Call<Owo_product> call, Response<Owo_product> response) {
+                if(response.isSuccessful())
                 {
-                    e.printStackTrace();
+                    Toast.makeText(SingleProductAddActivity.this, "Product Added Successfully", Toast.LENGTH_SHORT).show();
+                    loadingbar.dismiss();
+                    finish();
                 }
-
-                if(s!=null)
-                {
-                    try {
-                        JSONObject jsonObject = new JSONObject(s);
-
-                        boolean error = jsonObject.getBoolean("error");
-
-                        Toast.makeText(SingleProductAddActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Owo_product> call, Throwable t) {
                 Toast.makeText(SingleProductAddActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        DatabaseReference sub_cat_ref = FirebaseDatabase.getInstance().getReference();
-        sub_cat_ref.child("Categories").child(CategoryName).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(i==1)
-                {
-                    if(snapshot.exists())
-                    {
-                        sub_categories = snapshot.getValue(Sub_categories.class);
-                        int size = sub_categories.getSub_categories().size();
-                        for(int i=0; i<size; i++)
-                        {
-                            sub_category_names.add(sub_categories.getSub_categories().get(i).get("Name"));
-                        }
-
-                        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                                android.R.layout.simple_spinner_item, sub_category_names);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        sub_category_selection.setAdapter(adapter);
-                        i++;
-                    }
-                    else
-                    {
-                        Toast.makeText(SingleProductAddActivity.this, "No sub category exists", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(SingleProductAddActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-
 }
