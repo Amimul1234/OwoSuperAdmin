@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.owosuperadmin.model.Products;
+import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.owoshop.R;
 import com.owosuperadmin.owoshop.UpdateProductActivity;
 
@@ -21,9 +21,9 @@ import java.util.List;
 public class SearchedAdapter  extends RecyclerView.Adapter<SearchedAdapter.ProductViewHolder> {
 
     private Context mCtx;
-    private List<Products> productsList;
+    private List<Owo_product> productsList;
 
-    public SearchedAdapter(Context mCtx, List<Products> productsList) {
+    public SearchedAdapter(Context mCtx, List<Owo_product> productsList) {
         this.mCtx = mCtx;
         this.productsList = productsList;
     }
@@ -37,10 +37,10 @@ public class SearchedAdapter  extends RecyclerView.Adapter<SearchedAdapter.Produ
 
     @Override
     public void onBindViewHolder(@NonNull SearchedAdapter.ProductViewHolder holder, int position) {
-        Products products = productsList.get(position);
+        Owo_product products = productsList.get(position);
 
         holder.product_name.setText(products.getProduct_name());
-        holder.product_price.setText(products.getProduct_price());
+        holder.product_price.setText(String.valueOf(products.getProduct_price()));
 
         Glide.with(mCtx).load(products.getProduct_image()).into(holder.product_image);
 
@@ -67,7 +67,7 @@ public class SearchedAdapter  extends RecyclerView.Adapter<SearchedAdapter.Produ
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    Products products = productsList.get(position);
+                    Owo_product products = productsList.get(position);
 
                     Intent intent = new Intent(mCtx, UpdateProductActivity.class);
                     intent.putExtra("Products", products);

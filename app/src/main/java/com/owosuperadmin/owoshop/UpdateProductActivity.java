@@ -23,10 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.model.Products;
-import com.owosuperadmin.response.DeleteResponse;
-import com.owosuperadmin.response.UpdatedProductResponse;
+import com.owosuperadmin.model.Owo_product;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,14 +62,14 @@ public class UpdateProductActivity extends AppCompatActivity {
 
         loadingbar =new ProgressDialog(this);
 
-        final com.owosuperadmin.model.Products products = (Products) getIntent().getSerializableExtra("Products");
+        final com.owosuperadmin.model.Owo_product product = (Owo_product) getIntent().getSerializableExtra("Products");
 
-        Glide.with(this).load(products.getProduct_image()).into(imageUpdate);
-        collapsingToolbarLayout.setTitle(products.getProduct_name());
-        descriptionUpdate.setText(products.getProduct_description());
-        priceUpdate.setText(products.getProduct_price());
-        discountUpdate.setText(products.getProduct_discount());
-        quantity_update.setText(products.getProduct_quantity());
+        Glide.with(this).load(product.getProduct_image()).into(imageUpdate);
+        collapsingToolbarLayout.setTitle(product.getProduct_name());
+        descriptionUpdate.setText(product.getProduct_description());
+        priceUpdate.setText(String.valueOf(product.getProduct_price()));
+        discountUpdate.setText(String.valueOf(product.getProduct_discount()));
+        quantity_update.setText(String.valueOf(product.getProduct_quantity()));
 
         calculate_new_price.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,13 +108,12 @@ public class UpdateProductActivity extends AppCompatActivity {
 
                         if (i==0)
                         {
-
                             loadingbar.setTitle("Update Product");
                             loadingbar.setMessage("Please wait while we are updating the product...");
                             loadingbar.setCanceledOnTouchOutside(false);
                             loadingbar.show();
 
-                            StorageReference ProductImagesRef = FirebaseStorage.getInstance().getReferenceFromUrl(products.getProduct_image());
+                            StorageReference ProductImagesRef = FirebaseStorage.getInstance().getReferenceFromUrl(product.getProduct_image());
 
                             ProductImagesRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -123,16 +121,14 @@ public class UpdateProductActivity extends AppCompatActivity {
 
                                     Toast.makeText(UpdateProductActivity.this, "Product Image removed successfully", Toast.LENGTH_SHORT).show();
 
-                                    Call<DeleteResponse> call = RetrofitClient.getInstance()
-                                            .getApi().deleteProduct(products.getProduct_id());
+                                    Call<ResponseBody> call = RetrofitClient.getInstance()
+                                            .getApi().deleteProduct(product.getProduct_id());
 
-                                    call.enqueue(new Callback<DeleteResponse>() {
+                                    call.enqueue(new Callback<ResponseBody>() {
                                         @Override
-                                        public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
-
-                                            Toast.makeText(UpdateProductActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                                            if(!response.body().isError()) {
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                            if(response.isSuccessful()) {
+                                                Toast.makeText(UpdateProductActivity.this, "Product Deleted", Toast.LENGTH_SHORT).show();
                                                 loadingbar.dismiss();
                                                 finish();
                                             }
@@ -143,7 +139,7 @@ public class UpdateProductActivity extends AppCompatActivity {
                                         }
 
                                         @Override
-                                        public void onFailure(Call<DeleteResponse> call, Throwable t) {
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
                                             Toast.makeText(UpdateProductActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                             loadingbar.dismiss();
                                         }
@@ -186,34 +182,21 @@ public class UpdateProductActivity extends AppCompatActivity {
                 loadingbar.show();
 
 
-                products.setProduct_description(descriptionUpdate.getText().toString());
-                products.setProduct_price(priceUpdate.getText().toString());
-                products.setProduct_discount(discountUpdate.getText().toString());
-                products.setProduct_quantity(quantity_update.getText().toString());
+                product.setProduct_description(descriptionUpdate.getText().toString());
+                product.setProduct_price(Double.parseDouble(priceUpdate.getText().toString()));
+                product.setProduct_discount(Double.parseDouble(discountUpdate.getText().toString()));
+                product.setProduct_quantity(Integer.parseInt(quantity_update.getText().toString()));
 
-                Call<UpdatedProductResponse> call = RetrofitClient.getInstance()
-                        .getApi().updateProduct(
-                                products.getProduct_id(),
-                                products.getProduct_image(),
-                                products.getProduct_name(),
-                                products.getProduct_category(),
-                                products.getProduct_price(),
-                                products.getProduct_discount(),
-                                products.getProduct_quantity(),
-                                products.getProduct_description(),
-                                products.getProduct_date(),
-                                products.getProduct_time(),
-                                products.getProduct_sub_category()
-                        );
+                Call<Owo_product> call = RetrofitClient.getInstance()
+                        .getApi().updateProduct(product);
 
-
-                call.enqueue(new Callback<UpdatedProductResponse>() {
+                call.enqueue(new Callback<Owo_product>() {
                     @Override
-                    public void onResponse(Call<UpdatedProductResponse> call, Response<UpdatedProductResponse> response) {
-                        Toast.makeText(UpdateProductActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    public void onResponse(Call<Owo_product> call, Response<Owo_product> response) {
 
-                        if(!response.body().isError())
+                        if(response.isSuccessful())
                         {
+                            Toast.makeText(UpdateProductActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(UpdateProductActivity.this, ProductAvailabilityActivity.class);
                             loadingbar.dismiss();
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -228,7 +211,7 @@ public class UpdateProductActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<UpdatedProductResponse> call, Throwable t) {
+                    public void onFailure(Call<Owo_product> call, Throwable t) {
                         Toast.makeText(UpdateProductActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

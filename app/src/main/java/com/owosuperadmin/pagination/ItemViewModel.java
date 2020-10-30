@@ -6,12 +6,12 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PageKeyedDataSource;
 import androidx.paging.PagedList;
 
-import com.owosuperadmin.model.Products;
+import com.owosuperadmin.model.Owo_product;
 
 public class ItemViewModel extends ViewModel {
 
-    public LiveData<PagedList<Products>> itemPagedList;
-    LiveData<PageKeyedDataSource<Integer, Products>> liveDataSource;
+    public LiveData<PagedList<Owo_product>> itemPagedList;
+    LiveData<PageKeyedDataSource<Integer, Owo_product>> liveDataSource;
 
     public ItemViewModel() {
 

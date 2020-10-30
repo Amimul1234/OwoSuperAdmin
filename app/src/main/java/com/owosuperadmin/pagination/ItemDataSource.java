@@ -6,23 +6,23 @@ import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.model.Products;
+import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.response.OwoApiResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ItemDataSource extends PageKeyedDataSource<Integer, Products> {
+public class ItemDataSource extends PageKeyedDataSource<Integer, Owo_product> {
 
     private static final int FIRST_PAGE = 0;
 
     @Override
-    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, Products> callback) {
+    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, Owo_product> callback) {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getAnswers(FIRST_PAGE)
+                .getAllProducts(FIRST_PAGE)
                 .enqueue(new Callback<OwoApiResponse>() {
                     @Override
                     public void onResponse(Call<OwoApiResponse> call, Response<OwoApiResponse> response) {
@@ -43,11 +43,11 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Products> {
     }
 
     @Override
-    public void loadBefore(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Products> callback) {
+    public void loadBefore(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Owo_product> callback) {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getAnswers(params.key)
+                .getAllProducts(params.key)
                 .enqueue(new Callback<OwoApiResponse>() {
                     @Override
                     public void onResponse(Call<OwoApiResponse> call, Response<OwoApiResponse> response) {
@@ -69,11 +69,11 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Products> {
     }
 
     @Override
-    public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Products> callback) {
+    public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Owo_product> callback) {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getAnswers(params.key)
+                .getAllProducts(params.key)
                 .enqueue(new Callback<OwoApiResponse>() {
                     @Override
                     public void onResponse(Call<OwoApiResponse> call, Response<OwoApiResponse> response) {

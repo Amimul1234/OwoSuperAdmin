@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.owosuperadmin.Network.RetrofitClient;
 import com.owosuperadmin.adapter.SearchedAdapter;
-import com.owosuperadmin.model.Products;
+import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.response.OwoApiResponse;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class SearchedProducts extends AppCompatActivity {
 
     private SearchView searchView;
     private RecyclerView recyclerView;
-    private List<Products> productsList;
+    private List<Owo_product> productsList;
     private SearchedAdapter adapter;
     private ProgressBar progressBar;
 

@@ -1,10 +1,8 @@
 package com.owosuperadmin.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +15,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.owosuperadmin.model.Products;
 import com.owosuperadmin.orders.pending_orders;
-import com.owosuperadmin.owoshop.ManagementActivity;
 import com.owosuperadmin.owoshop.R;
-import com.owosuperadmin.owoshop.UpdateProductActivity;
 import com.owosuperadmin.shop_related.cancel_order;
 import com.owosuperadmin.shop_related.completed_order_state;
 import com.owosuperadmin.shop_related.completed_orders;
-import com.owosuperadmin.shop_related.confirm_shop_orders;
 import com.owosuperadmin.shop_related.picked_order_state;
 import com.owosuperadmin.shop_related.shipped_order_state;
 import com.owosuperadmin.shop_related.update_order_state;
-
-import java.util.List;
 
 public class order_management_adapter  extends RecyclerView.Adapter<order_management_adapter.ProductViewHolder> {
 

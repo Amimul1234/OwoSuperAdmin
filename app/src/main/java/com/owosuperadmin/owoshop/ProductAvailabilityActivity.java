@@ -13,7 +13,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import com.owosuperadmin.model.Products;
+
+import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.pagination.ItemAdapter;
 import com.owosuperadmin.pagination.ItemViewModel;
 
@@ -52,18 +53,17 @@ public class ProductAvailabilityActivity extends AppCompatActivity implements Vi
 
     public void getProducts() {
         adapter = new ItemAdapter(this);
-        ItemViewModel itemViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
+        ItemViewModel itemViewModel = new ItemViewModel();
 
-        itemViewModel.itemPagedList.observe(this, new Observer<PagedList<Products>>() {
+        itemViewModel.itemPagedList.observe(this, new Observer<PagedList<Owo_product>>() {
             @Override
-            public void onChanged(@Nullable PagedList<Products> items) {
+            public void onChanged(@Nullable PagedList<Owo_product> items) {
                 adapter.submitList(items);
                 showOnRecyclerView();
             }
         });
 
     }
-
 
     private void showOnRecyclerView() {
         recyclerView.setHasFixedSize(true);
