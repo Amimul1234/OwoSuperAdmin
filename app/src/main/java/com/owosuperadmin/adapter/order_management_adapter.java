@@ -23,6 +23,7 @@ import com.owosuperadmin.owoshop.ManagementActivity;
 import com.owosuperadmin.owoshop.R;
 import com.owosuperadmin.owoshop.UpdateProductActivity;
 import com.owosuperadmin.shop_related.cancel_order;
+import com.owosuperadmin.shop_related.completed_order_state;
 import com.owosuperadmin.shop_related.completed_orders;
 import com.owosuperadmin.shop_related.confirm_shop_orders;
 import com.owosuperadmin.shop_related.picked_order_state;
@@ -108,6 +109,11 @@ public class order_management_adapter  extends RecyclerView.Adapter<order_manage
                                     else if(i == 2)
                                     {
                                         Intent intent=new Intent(mCtx, shipped_order_state.class);
+                                        mCtx.startActivity(intent);
+                                    }
+                                    else if(i == 3)
+                                    {
+                                        Intent intent = new Intent(mCtx, completed_order_state.class);
                                         mCtx.startActivity(intent);
                                     }
                                 }

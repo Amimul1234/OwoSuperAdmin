@@ -176,6 +176,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     Intent intent=new Intent(holder.itemView.getContext(), AddASubCategory.class);
                     holder.itemView.getContext().startActivity(intent);
                 }
+                else if(position == 11)
+                {
+                    Intent intent = new Intent(holder.itemView.getContext(), AddABrand.class);
+                    holder.itemView.getContext().startActivity(intent);
+                }
             }
         });
 

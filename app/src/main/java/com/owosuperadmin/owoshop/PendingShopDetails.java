@@ -2,6 +2,7 @@ package com.owosuperadmin.owoshop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,16 +18,20 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.owosuperadmin.LatLng;
+import com.owosuperadmin.Network.RetrofitClient;
 import com.owosuperadmin.model.PendingShop;
+import com.owosuperadmin.model.PermissionWithId;
+import com.owosuperadmin.model.Shops;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PendingShopDetails extends AppCompatActivity {
 
@@ -179,53 +184,64 @@ public class PendingShopDetails extends AppCompatActivity {
 
         loader.setVisibility(View.VISIBLE);
 
-        permittedShopKeeper.child("permittedShopKeeper").child(pendingShop.getShop_owner_mobile())
-                .setValue(permissions).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        Shops shops = new Shops(pendingShop.getLatLng().getLatitude(), pendingShop.getLatLng().getLongitude(), pendingShop.getShop_address(),
+                pendingShop.getShop_image_uri(), pendingShop.getShop_keeper_nid_front_uri(), pendingShop.getShop_name(), pendingShop.getShop_owner_mobile(),
+                pendingShop.getShop_owner_name(), pendingShop.getShop_service_mobile(), pendingShop.getTrade_license_uri());
+
+
+        Call<Shops> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .approveShop(shops);
+
+        call.enqueue(new Callback<Shops>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(PendingShopDetails.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<Shops> call, Response<Shops> response) {
+                if(response.body()!=null)
+                {
+                    int id = response.body().getId();
 
-                DatabaseReference deleteReq = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference deleteReq = FirebaseDatabase.getInstance().getReference();
 
-                deleteReq.child("PendingShopRequest").child(pendingShop.getShop_owner_mobile()).removeValue()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(PendingShopDetails.this, "Removed from pending list", Toast.LENGTH_SHORT).show();
+                    deleteReq.child("PendingShopRequest").child(pendingShop.getShop_owner_mobile()).removeValue()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(PendingShopDetails.this, "Removed from pending list", Toast.LENGTH_SHORT).show();
 
-                                DatabaseReference ApprovedShop = FirebaseDatabase.getInstance().getReference();
+                                    PermissionWithId permissionWithId = new PermissionWithId(id, permissions);
 
-                                ApprovedShop.child("approvedShops").child(pendingShop.getShop_owner_mobile()).setValue(pendingShop)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(PendingShopDetails.this, "Shop permitted", Toast.LENGTH_SHORT).show();
-                                                loader.setVisibility(View.GONE);
-                                                finish();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(PendingShopDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
-                                        loader.setVisibility(View.GONE);
-                                    }
-                                });
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(PendingShopDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
-                        loader.setVisibility(View.GONE);
-                    }
-                });
+                                    permittedShopKeeper.child("permittedShopKeeper").child(pendingShop.getShop_owner_mobile())
+                                            .setValue(permissionWithId).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(PendingShopDetails.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(PendingShopDetails.this, "Failed, try again", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
 
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(PendingShopDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
+                            loader.setVisibility(View.GONE);
+                        }
+                    });
+
+                }
             }
-        }).addOnFailureListener(new OnFailureListener() {
+
             @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(PendingShopDetails.this, "Failed, try again", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Shops> call, Throwable t) {
+                Log.d("Error on creating shop", t.getMessage());
             }
         });
-
     }
 }

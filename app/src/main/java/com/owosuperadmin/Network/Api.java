@@ -1,11 +1,13 @@
 package com.owosuperadmin.Network;
 
+import com.owosuperadmin.model.Shops;
 import com.owosuperadmin.response.DeleteResponse;
 import com.owosuperadmin.response.OwoApiResponse;
 import com.owosuperadmin.response.UpdatedProductResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -65,4 +67,10 @@ public interface Api {
     Call<DeleteResponse> deleteProduct(
             @Path("product_id") int product_id
     );
+
+    @POST("approveShop")
+    Call<Shops> approveShop(
+            @Body Shops shops
+    );
+
 }

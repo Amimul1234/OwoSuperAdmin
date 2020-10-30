@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.owosuperadmin.shop_related.shipped_order_activity"></activity>
+        <activity android:name=".AddABrand"></activity>
+        <activity android:name="com.owosuperadmin.shop_related.completed_order_state" />
+        <activity android:name="com.owosuperadmin.shop_related.shipped_order_activity" />
         <activity android:name="com.owosuperadmin.shop_related.shipped_order_state" />
         <activity android:name="com.owosuperadmin.shop_related.picked_order_state" />
         <activity android:name="com.owosuperadmin.shop_related.picked_order_activity" />

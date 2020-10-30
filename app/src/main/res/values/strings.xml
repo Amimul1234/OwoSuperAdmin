@@ -47,6 +47,7 @@
         <item>Cloud Messaging</item>
         <item>Add Qupon</item>
         <item>Add A Subcategory</item>
+        <item>Add A Brand</item>
     </string-array>
 
     <string-array name="productname">
