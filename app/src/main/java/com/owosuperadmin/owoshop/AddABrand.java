@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,9 +27,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.model.Brands;
+import com.owosuperadmin.model.Owo_product;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddABrand extends AppCompatActivity {
 
@@ -36,14 +45,11 @@ public class AddABrand extends AppCompatActivity {
     private ImageView brand_image;
     private Button create_a_new_brand;
     private ProgressBar progressBar;
-
     private Uri imageuri;
     private String myUrl = "";
-
-    private int brand_count = 0;
-
     private StorageTask uploadTask;
     private StorageReference storageSubCategoryReference;
+    private Spinner category_selector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,8 @@ public class AddABrand extends AppCompatActivity {
         brand_image = findViewById(R.id.brand_image);
         create_a_new_brand = findViewById(R.id.add_new_category);
         progressBar = findViewById(R.id.progress);
+
+        category_selector = findViewById(R.id.category_selector);
 
         storageSubCategoryReference = FirebaseStorage.getInstance().getReference().child("Brands");
 
@@ -139,98 +147,37 @@ public class AddABrand extends AppCompatActivity {
                         Uri downloadUrl = task.getResult();
                         myUrl = downloadUrl.toString();
 
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                        Brands brands = new Brands(brand_name.getText().toString(), myUrl, category_selector.getSelectedItem().toString());
 
-                        databaseReference.child("Brand Count").addListenerForSingleValueEvent(new ValueEventListener() {
+                        Call<ResponseBody> call = RetrofitClient
+                                .getInstance()
+                                .getApi()
+                                .addABrand(brands);
+
+                        call.enqueue(new Callback<ResponseBody>() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.exists())
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if(response.isSuccessful())
                                 {
-                                    brand_count = Integer.parseInt(snapshot.getValue(String.class));
-
-                                    HashMap<String, String> brands = new HashMap<>();
-
-                                    brands.put("Name", subcategory_name);
-                                    brands.put("Image", myUrl);
-
-                                    brand_count++;
-
-                                    databaseReference.child("Brands").child(String.valueOf(brand_count)).setValue(brands)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    databaseReference.child("Brand Count").setValue(String.valueOf(brand_count))
-                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    progressDialog.dismiss();
-                                                                    Toast.makeText(AddABrand.this, "Brand Added Successfully", Toast.LENGTH_SHORT).show();
-                                                                    finish();
-                                                                }
-                                                            }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(AddABrand.this, "Can not add brand", Toast.LENGTH_SHORT).show();
-                                                            finish();
-                                                        }
-                                                    });
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            progressDialog.dismiss();
-                                            Toast.makeText(AddABrand.this, "Can not add brand", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
+                                    Toast.makeText(AddABrand.this, "Brand added successfully", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                    finish();
                                 }
-                                else{
-                                    brand_count = 0;
-
-                                    HashMap<String, String> brands = new HashMap<>();
-
-                                    brands.put("Name", subcategory_name);
-                                    brands.put("Image", myUrl);
-
-                                    databaseReference.child("Brands").child(String.valueOf(brand_count)).setValue(brands)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    databaseReference.child("Brand Count").setValue(String.valueOf(brand_count))
-                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    progressDialog.dismiss();
-                                                                    Toast.makeText(AddABrand.this, "Brand Added Successfully", Toast.LENGTH_SHORT).show();
-                                                                    finish();
-                                                                }
-                                                            }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(AddABrand.this, "Can not add brand", Toast.LENGTH_SHORT).show();
-                                                            finish();
-                                                        }
-                                                    });
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            progressDialog.dismiss();
-                                            Toast.makeText(AddABrand.this, "Can not add brand", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
+                                else
+                                {
+                                    Toast.makeText(AddABrand.this, "Can not add brand", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
                                 }
                             }
 
                             @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Toast.makeText(AddABrand.this, "Failed to add brand", Toast.LENGTH_SHORT).show();
-                                finish();
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Toast.makeText(AddABrand.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             }
                         });
-                    }
 
+                    }
                     else
                     {
                         progressDialog.dismiss();

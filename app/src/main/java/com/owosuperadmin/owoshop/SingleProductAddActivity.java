@@ -260,20 +260,16 @@ public class SingleProductAddActivity extends AppCompatActivity {
             }
         });
 
-        sub_cat_ref.child("Brands").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        Call<List<String>> call = RetrofitClient.getInstance().getApi().getBrands(CategoryName);
+
+        call.enqueue(new Callback<List<String>>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                if(response.isSuccessful())
                 {
-                    List<HashMap<String, String>> hashMapList = new ArrayList<>();
-                    hashMapList = (List<HashMap<String, String>>) snapshot.getValue();
-
-                    int size = hashMapList.size();
-
-                    for(int i=0; i<size; i++)
-                    {
-                        brand_names.add(hashMapList.get(i).get("Name"));
-                    }
+                    assert response.body() != null;
+                    brand_names.addAll(response.body());
 
                     brand_adapter = new ArrayAdapter<String>(getApplicationContext(),
                             android.R.layout.simple_spinner_item, brand_names);
@@ -282,13 +278,13 @@ public class SingleProductAddActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(SingleProductAddActivity.this, "No brand exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SingleProductAddActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(SingleProductAddActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Toast.makeText(SingleProductAddActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -351,7 +347,6 @@ public class SingleProductAddActivity extends AppCompatActivity {
     }
 
     private void StoreProductInformation() {
-
         loadingbar.setTitle("Add New Product");
         loadingbar.setMessage("Please wait, we are adding the new product.");
         loadingbar.setCanceledOnTouchOutside(false);

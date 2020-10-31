@@ -72,7 +72,6 @@ public class AddProductActivity extends AppCompatActivity {
                     }
                 })
         );
-        //ei prjonto
 
         adapter = new AddProductAdapter(pairList, AddProductActivity.this);
 

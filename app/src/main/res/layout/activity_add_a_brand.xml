@@ -43,12 +43,32 @@
         android:textAlignment="center"
         />
 
+    <TextView
+        android:id="@+id/heading_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select A Category"
+        android:layout_below="@id/heading"
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"/>
+
+    <Spinner
+        android:id="@+id/category_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/heading_2"
+        android:entries="@array/productname"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"/>
+
+
 
     <EditText
         android:id="@+id/brand_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/heading"
+        android:layout_below="@+id/category_selector"
         android:background="@drawable/edit_text_black"
         android:hint="Enter brand name"
         android:textSize="22sp"
