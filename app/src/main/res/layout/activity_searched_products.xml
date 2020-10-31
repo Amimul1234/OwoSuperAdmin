@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.OwoDokan.owoshop.SearchedProducts"
+    tools:context=".SearchedProducts"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -23,8 +23,6 @@
             android:focusable="true"
             app:defaultQueryHint="Search Products"
             />
-
-
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     <ProgressBar
@@ -42,7 +40,5 @@
         android:id="@+id/searched_products_recycler_view"
         tools:listitem="@layout/product_availability_sample"
         />
-
-
 
 </LinearLayout>

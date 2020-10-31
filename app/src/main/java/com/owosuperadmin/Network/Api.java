@@ -27,8 +27,9 @@ public interface Api {
             @Query("page") int page
     );
 
-    @GET("searchProduct")
+    @GET("searchProduct_admin")
     Call<OwoApiResponse> searchProduct(
+            @Query("page") int page,
             @Query("product_name") String product_name
     );
 

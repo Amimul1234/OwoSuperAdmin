@@ -4,28 +4,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.Observer;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.adapter.SearchedAdapter;
 import com.owosuperadmin.model.Owo_product;
-import com.owosuperadmin.response.OwoApiResponse;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.owosuperadmin.pagination.SearchAdapter;
+import com.owosuperadmin.pagination.SearchViewModel;
 
 public class SearchedProducts extends AppCompatActivity {
 
     private SearchView searchView;
     private RecyclerView recyclerView;
-    private List<Owo_product> productsList;
-    private SearchedAdapter adapter;
+    private SearchAdapter adapter = new SearchAdapter(this);
     private ProgressBar progressBar;
 
     @Override
@@ -55,26 +50,27 @@ public class SearchedProducts extends AppCompatActivity {
     }
 
     private void getItem(String query) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(SearchedProducts.this));
+        SearchViewModel searchViewModel = new SearchViewModel(query);//Refreshing the model for new filtration
 
-        Call<OwoApiResponse> call = RetrofitClient.getInstance().getApi().searchProduct(query);
-
-        call.enqueue(new Callback<OwoApiResponse>() {
+        searchViewModel.itemPagedList.observe(this, new Observer<PagedList<Owo_product>>() {
             @Override
-            public void onResponse(Call<OwoApiResponse> call, Response<OwoApiResponse> response) {
-                if(!response.body().error)
-                {
-                    productsList = response.body().products;
-                    adapter = new SearchedAdapter(SearchedProducts.this, productsList);
-                    progressBar.setVisibility(View.GONE);
-                    recyclerView.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OwoApiResponse> call, Throwable t) {
-
+            public void onChanged(@Nullable PagedList<Owo_product> items) {
+                adapter.submitList(items);
+                progressBar.setVisibility(View.GONE);
+                showOnRecyclerView();
             }
         });
     }
+
+
+    private void showOnRecyclerView() {
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+
+
 }
