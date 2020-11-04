@@ -48,12 +48,13 @@
         <item>Add Qupon</item>
         <item>Add A Subcategory</item>
         <item>Add A Brand</item>
+        <item>Add A Time Slot</item>
     </string-array>
 
     <string-array name="productname">
         <item>Bags and Luggage</item>
         <item>Beauty and Bodycare</item>
-        <item>Books and Stationery</item>
+        <item>Books and Stationary</item>
         <item>Construction Materials</item>
         <item>Decoration Materials</item>
         <item>Digital Goods</item>

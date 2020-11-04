@@ -17,7 +17,7 @@ public class HomeActivity extends AppCompatActivity {
     static String[] segment;
     static int[] icons = {R.drawable.home1,R.drawable.home2,R.drawable.home3,R.drawable.home4,
             R.drawable.home5, R.drawable.home6, R.drawable.home7,R.drawable.home8,R.drawable.home9,R.drawable.home10, R.drawable.home11
-            , R.drawable.home12};
+            , R.drawable.home12, R.drawable.time_slot};
 
     public static int p;
 

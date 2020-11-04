@@ -181,6 +181,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     Intent intent = new Intent(holder.itemView.getContext(), AddABrand.class);
                     holder.itemView.getContext().startActivity(intent);
                 }
+                else if(position == 12)
+                {
+                    Intent intent = new Intent(holder.itemView.getContext(), AddATimeSlot.class);
+                    holder.itemView.getContext().startActivity(intent);
+                }
             }
         });
 
