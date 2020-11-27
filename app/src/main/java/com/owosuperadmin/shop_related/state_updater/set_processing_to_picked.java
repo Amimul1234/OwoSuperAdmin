@@ -1,4 +1,4 @@
-package com.owosuperadmin.orders;
+package com.owosuperadmin.shop_related.state_updater;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.adapter.order_adapter.PendingOrderAdapter;
+import com.owosuperadmin.adapter.order_adapter.ProcessingOrderAdapter;
 import com.owosuperadmin.model.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
@@ -19,25 +19,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class pending_orders extends AppCompatActivity {
+public class set_processing_to_picked extends AppCompatActivity {
+
     private ImageView back_to_home;
-    private RecyclerView pending_orders;
     private AllianceLoader allianceLoader;
     private List<Shop_keeper_orders> shop_keeper_ordersList = new ArrayList<>();
-    private PendingOrderAdapter pendingOrderAdapter;
+    private RecyclerView picked_orders_recyclerview;
+    private ProcessingOrderAdapter processingOrderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_orders);
+        setContentView(R.layout.activity_picked_order_state);
 
         back_to_home = findViewById(R.id.back_to_home);
-        pending_orders = findViewById(R.id.pending_orders);
         allianceLoader = findViewById(R.id.loader);
+        picked_orders_recyclerview = findViewById(R.id.update_order_state);
 
-        pending_orders.setHasFixedSize(true);
-
-        loadPendingOrder();
+        loadProcessingOrder();
 
         back_to_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,12 +46,12 @@ public class pending_orders extends AppCompatActivity {
         });
     }
 
-    private void loadPendingOrder() {
+    private void loadProcessingOrder() {
 
         allianceLoader.setVisibility(View.VISIBLE);
 
         RetrofitClient.getInstance().getApi()
-                .getShopKeeperPendingOrders()
+                .getProcessingOrders()
                 .enqueue(new Callback<List<Shop_keeper_orders>>() {
                     @Override
                     public void onResponse(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Response<List<Shop_keeper_orders>> response) {
@@ -61,23 +60,25 @@ public class pending_orders extends AppCompatActivity {
                             assert response.body() != null;
                             shop_keeper_ordersList.addAll(response.body());
                             allianceLoader.setVisibility(View.INVISIBLE);
-                            pendingOrderAdapter = new PendingOrderAdapter(pending_orders.this, shop_keeper_ordersList);
-                            pending_orders.setAdapter(pendingOrderAdapter);
-                            pending_orders.setLayoutManager(new LinearLayoutManager(pending_orders.this));
-                            pendingOrderAdapter.notifyDataSetChanged();
+                            processingOrderAdapter = new ProcessingOrderAdapter(set_processing_to_picked.this, shop_keeper_ordersList);
+                            picked_orders_recyclerview.setAdapter(processingOrderAdapter);
+                            picked_orders_recyclerview.setLayoutManager(new LinearLayoutManager(set_processing_to_picked.this));
+                            processingOrderAdapter.notifyDataSetChanged();
                         }
                         else
                         {
-                            Toast.makeText(pending_orders.this, "Error occurred...please try again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(set_processing_to_picked.this, "Error occurred...please try again", Toast.LENGTH_SHORT).show();
                             allianceLoader.setVisibility(View.INVISIBLE);
                         }
                     }
 
                     @Override
                     public void onFailure(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Throwable t) {
-                        Toast.makeText(pending_orders.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(set_processing_to_picked.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         allianceLoader.setVisibility(View.INVISIBLE);
                     }
                 });
     }
+
+
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owosuperadmin.shop_related.state_updater.set_picked_to_shipped">
+    tools:context="com.owosuperadmin.shop_related.state_updater.set_shipped_to_delivered">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/topbar"
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Picked Orders"
+            android:text="Shipped Orders"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:layout_marginStart="20dp"/>
@@ -37,17 +37,17 @@
 
     <com.agrawalsuneet.dotsloader.loaders.AllianceLoader
         android:id="@+id/loader"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
         app:alliance_animDuration="500"
         app:alliance_distanceMultiplier="4"
         app:alliance_dotsRadius="20dp"
         app:alliance_firstDotsColor="@color/red"
         app:alliance_secondDotsColor="@color/green"
         app:alliance_strokeWidth="8dp"
-        app:alliance_thirdDotsColor="@color/blue"
-        android:layout_centerInParent="true"/>
+        app:alliance_thirdDotsColor="@color/blue" />
 
 
 </RelativeLayout>

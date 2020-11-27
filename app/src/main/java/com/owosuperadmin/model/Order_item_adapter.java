@@ -8,18 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.owosuperadmin.owoshop.R;
-
 import java.util.List;
 
 public class Order_item_adapter extends  RecyclerView.Adapter<Order_item_adapter.ViewHolder>{
 
     private Context mCtx;
-    private List<Ordered_products> ordered_products;
+    private List<Shop_keeper_ordered_products> ordered_products;
 
-    public Order_item_adapter(Context mCtx, List<Ordered_products> ordered_products) {
+    public Order_item_adapter(Context mCtx, List<Shop_keeper_ordered_products> ordered_products) {
         this.mCtx = mCtx;
         this.ordered_products = ordered_products;
     }

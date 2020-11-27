@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.owosuperadmin.shop_related.update_order_state">
+    tools:context="com.owosuperadmin.shop_related.state_updater.set_confirmed_to_processing">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

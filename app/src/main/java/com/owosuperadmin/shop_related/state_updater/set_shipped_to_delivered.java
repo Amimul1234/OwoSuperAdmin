@@ -1,4 +1,4 @@
-package com.owosuperadmin.orders;
+package com.owosuperadmin.shop_related.state_updater;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.adapter.order_adapter.PendingOrderAdapter;
+import com.owosuperadmin.adapter.order_adapter.ShippedOrderAdapter;
 import com.owosuperadmin.model.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
@@ -19,25 +18,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class pending_orders extends AppCompatActivity {
+public class set_shipped_to_delivered extends AppCompatActivity {
+
     private ImageView back_to_home;
-    private RecyclerView pending_orders;
-    private AllianceLoader allianceLoader;
     private List<Shop_keeper_orders> shop_keeper_ordersList = new ArrayList<>();
-    private PendingOrderAdapter pendingOrderAdapter;
+    private RecyclerView shop_orders_recyclerview;
+    private ShippedOrderAdapter shippedOrderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_orders);
+        setContentView(R.layout.activity_set_shipped_to_delivered);
+
+        loadShippedOrders();
 
         back_to_home = findViewById(R.id.back_to_home);
-        pending_orders = findViewById(R.id.pending_orders);
-        allianceLoader = findViewById(R.id.loader);
-
-        pending_orders.setHasFixedSize(true);
-
-        loadPendingOrder();
+        shop_orders_recyclerview = findViewById(R.id.update_order_state);
 
         back_to_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,12 +43,9 @@ public class pending_orders extends AppCompatActivity {
         });
     }
 
-    private void loadPendingOrder() {
-
-        allianceLoader.setVisibility(View.VISIBLE);
-
+    private void loadShippedOrders() {
         RetrofitClient.getInstance().getApi()
-                .getShopKeeperPendingOrders()
+                .getShippedOrders()
                 .enqueue(new Callback<List<Shop_keeper_orders>>() {
                     @Override
                     public void onResponse(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Response<List<Shop_keeper_orders>> response) {
@@ -60,24 +53,22 @@ public class pending_orders extends AppCompatActivity {
                         {
                             assert response.body() != null;
                             shop_keeper_ordersList.addAll(response.body());
-                            allianceLoader.setVisibility(View.INVISIBLE);
-                            pendingOrderAdapter = new PendingOrderAdapter(pending_orders.this, shop_keeper_ordersList);
-                            pending_orders.setAdapter(pendingOrderAdapter);
-                            pending_orders.setLayoutManager(new LinearLayoutManager(pending_orders.this));
-                            pendingOrderAdapter.notifyDataSetChanged();
+                            shippedOrderAdapter = new ShippedOrderAdapter(set_shipped_to_delivered.this, shop_keeper_ordersList);
+                            shop_orders_recyclerview.setAdapter(shippedOrderAdapter);
+                            shop_orders_recyclerview.setLayoutManager(new LinearLayoutManager(set_shipped_to_delivered.this));
+                            shippedOrderAdapter.notifyDataSetChanged();
                         }
                         else
                         {
-                            Toast.makeText(pending_orders.this, "Error occurred...please try again", Toast.LENGTH_SHORT).show();
-                            allianceLoader.setVisibility(View.INVISIBLE);
+                            Toast.makeText(set_shipped_to_delivered.this, "Error occurred...please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Throwable t) {
-                        Toast.makeText(pending_orders.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                        allianceLoader.setVisibility(View.INVISIBLE);
+                        Toast.makeText(set_shipped_to_delivered.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
 }

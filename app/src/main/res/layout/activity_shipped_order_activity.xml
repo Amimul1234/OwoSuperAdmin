@@ -304,21 +304,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"/>
 
-
-            <TextView
-                android:id="@+id/person_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name of the customer"
-                android:textSize="18sp"
-                android:maxLines="1"
-                android:drawableStart="@drawable/ic_baseline_person_24"
-                android:drawablePadding="15dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="10dp"
-                android:layout_below="@id/tagline_3"/>
-
             <TextView
                 android:id="@+id/shipping_address"
                 android:layout_width="match_parent"
@@ -331,7 +316,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="10dp"
-                android:layout_below="@id/person_name"/>
+                android:layout_below="@id/tagline_3"/>
 
             <TextView
                 android:id="@+id/mobile_number"

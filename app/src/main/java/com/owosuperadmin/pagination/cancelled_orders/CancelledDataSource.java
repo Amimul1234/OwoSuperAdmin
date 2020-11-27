@@ -1,48 +1,41 @@
-package com.owosuperadmin.pagination;
+package com.owosuperadmin.pagination.cancelled_orders;
 
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.model.Owo_product;
+import com.owosuperadmin.model.Shop_keeper_orders;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchDataSource extends PageKeyedDataSource<Integer, Owo_product> {
+public class CancelledDataSource extends PageKeyedDataSource<Integer, Shop_keeper_orders> {
 
     private static final int FIRST_PAGE = 0;
-    private String searchedProduct;
-
-
-    public SearchDataSource(String searchedProduct) {
-        this.searchedProduct = searchedProduct;
-    }
-
 
     @Override
-    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, Owo_product> callback) {
+    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, Shop_keeper_orders> callback) {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .searchProduct(FIRST_PAGE, searchedProduct)
-                .enqueue(new Callback<List<Owo_product>>() {
+                .getCancelledOrders(FIRST_PAGE)
+                .enqueue(new Callback<List<Shop_keeper_orders>>() {
                     @Override
-                    public void onResponse(@NotNull Call<List<Owo_product>> call, @NotNull Response<List<Owo_product>> response) {
+                    public void onResponse(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Response<List<Shop_keeper_orders>> response) {
 
-                        if(response.isSuccessful()){
-                            callback.onResult(response.body(), null, FIRST_PAGE+1);//(First page +1) is representing next page
+                        if (response.isSuccessful()) {
+                            callback.onResult(response.body(), null, FIRST_PAGE + 1);
                         }
                         else
                         {
                             Log.e("Error", "Server error occurred");
                         }
-                    }
 
+                    }
                     @Override
-                    public void onFailure(@NotNull Call<List<Owo_product>> call, @NotNull Throwable t) {
+                    public void onFailure(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Throwable t) {
                         Log.e("Error", t.getMessage());
                     }
                 });
@@ -50,14 +43,14 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, Owo_product> 
     }
 
     @Override
-    public void loadBefore(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Owo_product> callback) {
+    public void loadBefore(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Shop_keeper_orders> callback) {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .searchProduct(params.key, searchedProduct)
-                .enqueue(new Callback<List<Owo_product>>() {
+                .getCancelledOrders(params.key)
+                .enqueue(new Callback<List<Shop_keeper_orders>>() {
                     @Override
-                    public void onResponse(@NotNull Call<List<Owo_product>> call, @NotNull Response<List<Owo_product>> response) {
+                    public void onResponse(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Response<List<Shop_keeper_orders>> response) {
                         if(response.isSuccessful()){
                             Integer key = (params.key > 0) ? params.key - 1 : null;
                             callback.onResult(response.body(), key);
@@ -69,7 +62,7 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, Owo_product> 
                     }
 
                     @Override
-                    public void onFailure(@NotNull Call<List<Owo_product>> call, @NotNull Throwable t) {
+                    public void onFailure(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Throwable t) {
                         Log.e("Error", t.getMessage());
                     }
                 });
@@ -77,14 +70,15 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, Owo_product> 
     }
 
     @Override
-    public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Owo_product> callback) {
+    public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Shop_keeper_orders> callback) {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .searchProduct(params.key, searchedProduct)
-                .enqueue(new Callback<List<Owo_product>>() {
+                .getCancelledOrders(params.key)
+                .enqueue(new Callback<List<Shop_keeper_orders>>() {
                     @Override
-                    public void onResponse(@NotNull Call<List<Owo_product>> call, @NotNull Response<List<Owo_product>> response) {
+                    public void onResponse(Call<List<Shop_keeper_orders>> call, Response<List<Shop_keeper_orders>> response) {
+
                         if(response.isSuccessful()){
                             callback.onResult(response.body(), params.key+1);
                         }
@@ -92,14 +86,13 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, Owo_product> 
                         {
                             Log.e("Error", "Server error occurred");
                         }
+
                     }
 
                     @Override
-                    public void onFailure(@NotNull Call<List<Owo_product>> call, @NotNull Throwable t) {
+                    public void onFailure(@NotNull Call<List<Shop_keeper_orders>> call, @NotNull Throwable t) {
                         Log.e("Error", t.getMessage());
                     }
                 });
-
-
     }
 }

@@ -1,27 +1,12 @@
 package com.owosuperadmin.shop_related;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.owosuperadmin.model.Order_model_class;
 import com.owosuperadmin.owoshop.R;
-import com.owosuperadmin.viewHolder.OrderListItemViewHolder;
 
 public class completed_order_state extends AppCompatActivity {
 
@@ -46,6 +31,7 @@ public class completed_order_state extends AppCompatActivity {
         });
     }
 
+    /*
     @Override
     protected void onStart() {
         super.onStart();
@@ -114,5 +100,7 @@ public class completed_order_state extends AppCompatActivity {
     }
 
 
+
+     */
 
 }

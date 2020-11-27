@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,18 +26,10 @@ import com.google.firebase.storage.UploadTask;
 import com.owosuperadmin.Network.RetrofitClient;
 import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.owoshop.R;
-import com.owosuperadmin.owoshop.SingleProductAddActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -174,8 +165,8 @@ public class BrowsePicture2 extends AppCompatActivity {
 
     private void SaveProductInfoToDatabase(String saveCurrentDate, String saveCurrentTime) {
 
-        Owo_product owo_product = new Owo_product("Science Books", "Books and Stationary", 500.12, 30.00, 600, "The Science Book: Everything You Need to Know About the World and How It Works encapsulates centuries of scientific thought in one volume. Natural phenomena, revolutionary inventions, scientific facts, and the most up-to-date questions are all explained in detailed text that is complemented by visually arresting graphics.   Six major sections ranging from the universe and the planet Earth to biology, chemistry, physics, and mathematics are further broken down into subsections that encompass everything from microscopic life to nuclear power.   The Science Book covers a wide range of scientific areas, providing both a general overview of topics for the browsing reader, and more specific information for those who wish to obtain in-depth insight into a particular subject area. Natural phenomena, revolutionary inventions, scientific facts, and up-to-date questions are explained in detailed texts. The vivid illustrations, pictures, and graphics throughout the book make the information even more accessible and comprehensible.   Within the book, the theory of the universe and the character of the earth are detailed, along with an overview of the diverse living organisms that can be found on Earth. The technical developments and achievements of humankind are discussed and we pay particular attention to subjects of current interest, like climate change and genetic engineering.   The well-structured organization of this book with its numerous sections and chapters offers the reader an entertaining introduction into the large field of natural sciences and allows just as well for quick reference. Events and issues of special significance are discussed in greater detail in side bars of 3 different kinds. Numerous cross-references within the chapters and to other sections of the book emphasize the many links between the individual scientific fields. Illustrative elements, such as 3-D-graphics and pictograms and the great variety of photographic material make even the most complex information easy",
-                saveCurrentDate, saveCurrentTime, "Science Books", "Oracle", downloadImageUrl);
+        Owo_product owo_product = new Owo_product("Beauty and Bodycare", "Bags and Luggage", 500.12, 30.00, 600, "The Science Book: Everything You Need to Know About the World and How It Works encapsulates centuries of scientific thought in one volume. Natural phenomena, revolutionary inventions, scientific facts, and the most up-to-date questions are all explained in detailed text that is complemented by visually arresting graphics.   Six major sections ranging from the universe and the planet Earth to biology, chemistry, physics, and mathematics are further broken down into subsections that encompass everything from microscopic life to nuclear power.   The Science Book covers a wide range of scientific areas, providing both a general overview of topics for the browsing reader, and more specific information for those who wish to obtain in-depth insight into a particular subject area. Natural phenomena, revolutionary inventions, scientific facts, and up-to-date questions are explained in detailed texts. The vivid illustrations, pictures, and graphics throughout the book make the information even more accessible and comprehensible.   Within the book, the theory of the universe and the character of the earth are detailed, along with an overview of the diverse living organisms that can be found on Earth. The technical developments and achievements of humankind are discussed and we pay particular attention to subjects of current interest, like climate change and genetic engineering.   The well-structured organization of this book with its numerous sections and chapters offers the reader an entertaining introduction into the large field of natural sciences and allows just as well for quick reference. Events and issues of special significance are discussed in greater detail in side bars of 3 different kinds. Numerous cross-references within the chapters and to other sections of the book emphasize the many links between the individual scientific fields. Illustrative elements, such as 3-D-graphics and pictograms and the great variety of photographic material make even the most complex information easy",
+                saveCurrentDate, saveCurrentTime, "Bags", "Calvin Klein", downloadImageUrl);
 
         Call<Owo_product> call = RetrofitClient
                 .getInstance()

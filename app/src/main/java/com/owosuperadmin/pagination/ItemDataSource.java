@@ -1,14 +1,12 @@
 package com.owosuperadmin.pagination;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
-
 import com.owosuperadmin.Network.RetrofitClient;
 import com.owosuperadmin.model.Owo_product;
-import com.owosuperadmin.response.OwoApiResponse;
-
+import org.jetbrains.annotations.NotNull;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,20 +21,22 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Owo_product> {
         RetrofitClient.getInstance()
                 .getApi()
                 .getAllProducts(FIRST_PAGE)
-                .enqueue(new Callback<OwoApiResponse>() {
+                .enqueue(new Callback<List<Owo_product>>() {
                     @Override
-                    public void onResponse(Call<OwoApiResponse> call, Response<OwoApiResponse> response) {
+                    public void onResponse(@NotNull Call<List<Owo_product>> call, @NotNull Response<List<Owo_product>> response) {
 
-                        if(response.body() != null){
-
-                            callback.onResult(response.body().products, null, FIRST_PAGE+1);//(First page +1) is representing next page
-
+                        if (response.isSuccessful()) {
+                            callback.onResult(response.body(), null, FIRST_PAGE + 1);
                         }
+                        else
+                        {
+                            Log.e("Error", "Server error occurred");
+                        }
+
                     }
-
                     @Override
-                    public void onFailure(Call<OwoApiResponse> call, Throwable t) {
-
+                    public void onFailure(@NotNull Call<List<Owo_product>> call, @NotNull Throwable t) {
+                        Log.e("Error", t.getMessage());
                     }
                 });
 
@@ -48,21 +48,22 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Owo_product> {
         RetrofitClient.getInstance()
                 .getApi()
                 .getAllProducts(params.key)
-                .enqueue(new Callback<OwoApiResponse>() {
+                .enqueue(new Callback<List<Owo_product>>() {
                     @Override
-                    public void onResponse(Call<OwoApiResponse> call, Response<OwoApiResponse> response) {
-
-                        Log.d("Amimul", "Called");
-
-                        if(response.body() != null){
+                    public void onResponse(@NotNull Call<List<Owo_product>> call, @NotNull Response<List<Owo_product>> response) {
+                        if(response.isSuccessful()){
                             Integer key = (params.key > 0) ? params.key - 1 : null;
-                            callback.onResult(response.body().products, key);
+                            callback.onResult(response.body(), key);
+                        }
+                        else
+                        {
+                            Log.e("Error", "Server error occurred");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<OwoApiResponse> call, Throwable t) {
-
+                    public void onFailure(@NotNull Call<List<Owo_product>> call, @NotNull Throwable t) {
+                        Log.e("Error", t.getMessage());
                     }
                 });
 
@@ -74,22 +75,24 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Owo_product> {
         RetrofitClient.getInstance()
                 .getApi()
                 .getAllProducts(params.key)
-                .enqueue(new Callback<OwoApiResponse>() {
+                .enqueue(new Callback<List<Owo_product>>() {
                     @Override
-                    public void onResponse(Call<OwoApiResponse> call, Response<OwoApiResponse> response) {
+                    public void onResponse(Call<List<Owo_product>> call, Response<List<Owo_product>> response) {
 
-                        if(response.body() != null){
-                            callback.onResult(response.body().products, params.key+1);
+                        if(response.isSuccessful()){
+                            callback.onResult(response.body(), params.key+1);
+                        }
+                        else
+                        {
+                            Log.e("Error", "Server error occurred");
                         }
 
                     }
 
                     @Override
-                    public void onFailure(Call<OwoApiResponse> call, Throwable t) {
-
+                    public void onFailure(@NotNull Call<List<Owo_product>> call, @NotNull Throwable t) {
+                        Log.e("Error", t.getMessage());
                     }
                 });
-
-
     }
 }

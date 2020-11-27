@@ -3,17 +3,14 @@ package com.owosuperadmin.owoshop;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.pagination.ItemAdapter;
 import com.owosuperadmin.pagination.ItemViewModel;

@@ -8,27 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.owosuperadmin.orders.pending_orders;
 import com.owosuperadmin.owoshop.R;
 import com.owosuperadmin.shop_related.cancel_order;
-import com.owosuperadmin.shop_related.completed_order_state;
 import com.owosuperadmin.shop_related.completed_orders;
-import com.owosuperadmin.shop_related.picked_order_state;
-import com.owosuperadmin.shop_related.shipped_order_state;
-import com.owosuperadmin.shop_related.update_order_state;
+import com.owosuperadmin.shop_related.state_updater.set_processing_to_picked;
+import com.owosuperadmin.shop_related.state_updater.set_picked_to_shipped;
+import com.owosuperadmin.shop_related.state_updater.set_confirmed_to_processing;
+import com.owosuperadmin.shop_related.state_updater.set_shipped_to_delivered;
 
 public class order_management_adapter  extends RecyclerView.Adapter<order_management_adapter.ProductViewHolder> {
 
-    private int images[] = {R.drawable.pending_order, R.drawable.update_order, R.drawable.cancel_order, R.drawable.complete_order};
-    private String[] order_management = {"Pending order", "Update State", "Cancel Order", "Completed Orders"};
-    private Context mCtx;
+    private int[] images = {R.drawable.pending_order, R.drawable.update_order, R.drawable.cancel_order, R.drawable.complete_order};
+    private final String[] order_management = {"Pending order", "Update State", "Canceled Order", "Completed Orders"};
+    private final Context mCtx;
 
     public order_management_adapter(Context mCtx) {
         this.mCtx = mCtx;
@@ -90,22 +88,22 @@ public class order_management_adapter  extends RecyclerView.Adapter<order_manage
 
                                     if (i==0)
                                     {
-                                        Intent intent=new Intent(mCtx, update_order_state.class);
+                                        Intent intent=new Intent(mCtx, set_confirmed_to_processing.class);
                                         mCtx.startActivity(intent);
                                     }
                                     else if(i == 1)
                                     {
-                                        Intent intent=new Intent(mCtx, picked_order_state.class);
+                                        Intent intent=new Intent(mCtx, set_processing_to_picked.class);
                                         mCtx.startActivity(intent);
                                     }
                                     else if(i == 2)
                                     {
-                                        Intent intent=new Intent(mCtx, shipped_order_state.class);
+                                        Intent intent=new Intent(mCtx, set_picked_to_shipped.class);
                                         mCtx.startActivity(intent);
                                     }
                                     else if(i == 3)
                                     {
-                                        Intent intent = new Intent(mCtx, completed_order_state.class);
+                                        Intent intent = new Intent(mCtx, set_shipped_to_delivered.class);
                                         mCtx.startActivity(intent);
                                     }
                                 }
