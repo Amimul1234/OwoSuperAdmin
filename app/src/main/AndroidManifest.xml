@@ -18,12 +18,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
         tools:targetApi="m">
+        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.CompletedOrderDetails"></activity>
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Cancelled_order_details" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Shipped_orders_details" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Picked_order_details" />

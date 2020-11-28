@@ -1,28 +1,24 @@
 package com.owosuperadmin.shop_related;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import com.owosuperadmin.model.Order_item_adapter;
-import com.owosuperadmin.model.Shop_keeper_ordered_products;
 import com.owosuperadmin.model.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;
-import java.util.List;
+import com.owosuperadmin.pagination.completed_orders.CompletedAdapter;
+import com.owosuperadmin.pagination.completed_orders.CompletedViewModel;
 
-public class completed_orders extends AppCompatActivity {
+public class completed_orders extends AppCompatActivity{
 
     private RecyclerView recyclerView;
-    private List<Shop_keeper_ordered_products> shop_keeper_ordered_productsList;
-    private ImageView back_from_order_details;
-    private TextView shipping_method;
-    private Button confirm_button, cancel_button;
-    private ProgressBar progressBar;
+    RecyclerView.LayoutManager layoutManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private CompletedAdapter completedAdapter;
 
 
     @Override
@@ -30,58 +26,41 @@ public class completed_orders extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_orders);
 
-        Shop_keeper_orders order_model_class = (Shop_keeper_orders) getIntent().getSerializableExtra("pending_order");
+        recyclerView = findViewById(R.id.product_availability_recyclerview_id);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
-        TextView order_number = findViewById(R.id.order_number);
-        TextView order_date  = findViewById(R.id.order_date);
-        TextView total_taka = findViewById(R.id.total_taka);
-        TextView discount = findViewById(R.id.discount_taka);
-        TextView sub_total = findViewById(R.id.sub_total);
-        TextView shipping_address = findViewById(R.id.shipping_address);
-        TextView mobile_number = findViewById(R.id.mobile_number);
-        TextView additional_comments = findViewById(R.id.additional_comments);
-        back_from_order_details  = findViewById(R.id.back_from_order_details);
-        shipping_method = findViewById(R.id.shipping_method);
-        confirm_button = findViewById(R.id.confirm_order_button);
-        cancel_button = findViewById(R.id.cancel_order);
-        progressBar = findViewById(R.id.log_in_progress);
+        getCompletedOrders();
 
-        shop_keeper_ordered_productsList = order_model_class.getShop_keeper_ordered_products();
-        recyclerView = findViewById(R.id.ordered_products);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getCompletedOrders();
+            }
+        });
 
-        Order_item_adapter adapter = new Order_item_adapter(this, shop_keeper_ordered_productsList);
-        recyclerView.setAdapter(adapter);
+    }
+
+    private void getCompletedOrders() {
+        completedAdapter = new CompletedAdapter(this);
+        CompletedViewModel completedViewModel = new CompletedViewModel();
+
+        completedViewModel.itemPagedList.observe(this, new Observer<PagedList<Shop_keeper_orders>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<Shop_keeper_orders> items) {
+                completedAdapter.submitList(items);
+                showOnRecyclerView();
+            }
+        });
+
+    }
+
+    private void showOnRecyclerView() {
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        order_number.setText(order_model_class != null ? "#"+order_model_class.getOrder_number() : null);
-        order_date.setText(order_model_class.getDate());
-        total_taka.setText(String.valueOf(order_model_class.getTotal_amount()));
-        discount.setText(String.valueOf(order_model_class.getCoupon_discount()));
-
-        Double sub = order_model_class.getTotal_amount() - order_model_class.getCoupon_discount();
-
-        sub_total.setText(String.valueOf(sub));
-
-        additional_comments.setText(order_model_class.getAdditional_comments());
-
-        shipping_address.setText(order_model_class.getDelivery_address());
-        mobile_number.setText(order_model_class.getReceiver_phone());
-        shipping_method.setText(order_model_class.getMethod());
-
-        back_from_order_details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
-
-        confirm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(completedAdapter);
+        completedAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
