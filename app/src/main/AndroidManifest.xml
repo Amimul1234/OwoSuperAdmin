@@ -18,8 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Shipped_orders_details"/>
+        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Cancelled_order_details"></activity>
+        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Shipped_orders_details" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Picked_order_details" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Processing_orders_details" />
         <activity android:name="com.owosuperadmin.shop_related.state_updater.set_shipped_to_delivered" />

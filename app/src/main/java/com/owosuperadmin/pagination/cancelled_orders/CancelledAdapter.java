@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import com.owosuperadmin.model.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;
-import com.owosuperadmin.shop_related.details_of_current_state.confirmed_order_details;
+import com.owosuperadmin.shop_related.details_of_current_state.Cancelled_order_details;
 
 public class CancelledAdapter extends PagedListAdapter<Shop_keeper_orders, CancelledAdapter.ViewHolder>{
 
@@ -80,7 +80,7 @@ public class CancelledAdapter extends PagedListAdapter<Shop_keeper_orders, Cance
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mCtx, confirmed_order_details.class);//For giving product description to the user when clicks on a cart item
+                    Intent intent = new Intent(mCtx, Cancelled_order_details.class);//For giving product description to the user when clicks on a cart item
                     intent.putExtra("pending_order", getItem(getAdapterPosition()));
                     mCtx.startActivity(intent);
                 }
