@@ -1,14 +1,17 @@
 package com.owosuperadmin.owoshop;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,8 +33,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.owosuperadmin.model.Sub_categories;
-import com.theartofdev.edmodo.cropper.CropImage;
-
 import java.util.HashMap;
 
 public class AddASubCategory extends AppCompatActivity {
@@ -41,14 +42,14 @@ public class AddASubCategory extends AppCompatActivity {
     private Button create_sub_category;
     private Spinner category_name;
     private ProgressBar progressBar;
-
     private Uri imageuri;
     private String myUrl = "";
-
     private Sub_categories sub_categories = new Sub_categories();
-
     private StorageTask uploadTask;
     private StorageReference storageSubCategoryReference;
+
+    private int STORAGE_PERMISSION_CODE = 1;
+
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
     @Override
@@ -67,9 +68,7 @@ public class AddASubCategory extends AppCompatActivity {
         sub_category_image.setOnClickListener(new View.OnClickListener() {//For selecting the profile image
             @Override
             public void onClick(View v) {
-                CropImage.activity(imageuri)
-                        .setAspectRatio(1, 1)
-                        .start(AddASubCategory.this);
+                requestStoragePermission();
             }
         });
 
@@ -96,20 +95,6 @@ public class AddASubCategory extends AppCompatActivity {
         });
 
 
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageuri = result.getUri();
-            sub_category_image.setImageURI(imageuri);
-        } else {
-            Toast.makeText(this, "Error, Try again.", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(AddASubCategory.this, AddASubCategory.class));
-            finish();
-        }
     }
 
 
@@ -231,5 +216,63 @@ public class AddASubCategory extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && data != null)
+        {
+            imageuri = data.getData();
+            sub_category_image.setImageURI(imageuri);
+        }
+        else
+        {
+            Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed because of taking image from gallery")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(AddASubCategory.this,
+                                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE)  {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                ImagePicker.Companion.with(AddASubCategory.this)
+                        .crop()	    			//Crop image(Optional), Check Customization for more option
+                        .compress(512)			//Final image size will be less than 1 MB(Optional)
+                        .maxResultSize(540, 540)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .start();
+            } else {
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 
 }

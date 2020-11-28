@@ -1,7 +1,10 @@
 package com.owosuperadmin.owoshop;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
@@ -12,11 +15,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.ActivityCompat;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,30 +31,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.theartofdev.edmodo.cropper.CropImage;
 
 public class CreateNewAdminActivity extends AppCompatActivity {
 
     private Switch approveShop,maintainShop,addProducts,
             updateProducts,createOffers,maintainUsers,messaging;
-
     private EditText newAdminMobileNumber, newAdminPassword, newAdminConfirmPassword, newAdminName;
-
     private Button createNewAdminBtn;
-
     private ProgressBar progressBar;
-
     private ImageView s_password, s_c_password, profileImage, back_to_home;
-
     private Uri imageuri;
-
     private String myUrl = "", admin_email;
     private Boolean isShowPassword = false, isShowConfirmPassword = false;
-
     private StorageTask uploadTask;
     private StorageReference storageProfilePictureRef;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-
+    private int STORAGE_PERMISSION_CODE = 1;
 
 
     @Override
@@ -94,9 +89,7 @@ public class CreateNewAdminActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                CropImage.activity(imageuri)
-                        .setAspectRatio(1, 1)
-                        .start(CreateNewAdminActivity.this);
+                requestStoragePermission();
             }
 
         });
@@ -274,29 +267,6 @@ public class CreateNewAdminActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data!=null)//If user wants to update the profile picture
-        {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageuri = result.getUri();
-            profileImage.setImageURI(imageuri);
-        }
-
-        else
-        {
-            Toast.makeText(this, "Error, Try Again...", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(CreateNewAdminActivity.this, CreateNewAdminActivity.class));
-            finish();
-        }
-    }
-
-
-
-
     private void verification() {
 
         String Admin_name = newAdminName.getText().toString();
@@ -366,4 +336,62 @@ public class CreateNewAdminActivity extends AppCompatActivity {
         }
 
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && data != null)
+        {
+            imageuri = data.getData();
+            profileImage.setImageURI(imageuri);
+        }
+        else
+        {
+            Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed because of taking image from gallery")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(CreateNewAdminActivity.this,
+                                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE)  {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                ImagePicker.Companion.with(CreateNewAdminActivity.this)
+                        .crop()	    			//Crop image(Optional), Check Customization for more option
+                        .compress(512)			//Final image size will be less than 1 MB(Optional)
+                        .maxResultSize(540, 540)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .start();
+            } else {
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 }
