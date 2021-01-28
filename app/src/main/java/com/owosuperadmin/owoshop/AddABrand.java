@@ -24,7 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.model.Brands;
+import com.owosuperadmin.models.Brands;
 import org.jetbrains.annotations.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

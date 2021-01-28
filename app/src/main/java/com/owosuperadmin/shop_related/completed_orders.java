@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
-import com.owosuperadmin.model.Shop_keeper_orders;
+import com.owosuperadmin.models.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;
 import com.owosuperadmin.pagination.completed_orders.CompletedAdapter;
 import com.owosuperadmin.pagination.completed_orders.CompletedViewModel;

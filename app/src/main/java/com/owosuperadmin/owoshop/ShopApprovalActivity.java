@@ -18,8 +18,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.owosuperadmin.model.PendingShop;
-import com.owosuperadmin.viewHolder.PendingShopViewHolder;
+import com.owosuperadmin.models.PendingShop;
+import com.owosuperadmin.viewHolders.PendingShopViewHolder;
 
 public class ShopApprovalActivity extends AppCompatActivity {
 

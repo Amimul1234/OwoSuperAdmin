@@ -14,8 +14,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.owosuperadmin.model.Cart;
-import com.owosuperadmin.viewHolder.CartViewHolder;
+import com.owosuperadmin.models.Cart;
+import com.owosuperadmin.viewHolders.CartViewHolder;
 
 public class AdminUserProductsActivity extends AppCompatActivity {
 

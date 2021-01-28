@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.owosuperadmin.model.semi_admins;
+import com.owosuperadmin.models.semi_admins;
 
 public class UpdateSemiAdminActivity extends AppCompatActivity {
 
@@ -51,7 +51,7 @@ public class UpdateSemiAdminActivity extends AppCompatActivity {
         updateAdminBtn = (Button)findViewById(R.id.update_admin_btn);
 
 
-        final com.owosuperadmin.model.semi_admins semiAdmins = (semi_admins) getIntent().
+        final com.owosuperadmin.models.semi_admins semiAdmins = (semi_admins) getIntent().
                 getSerializableExtra("Semi Admin");//Getting the required class from the SemiAdminActivity
 
 

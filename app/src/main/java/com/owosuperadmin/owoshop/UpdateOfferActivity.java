@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.owosuperadmin.model.Offers;
+import com.owosuperadmin.models.Offers;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -82,7 +82,7 @@ public class UpdateOfferActivity extends AppCompatActivity {
         };
 
 
-        final com.owosuperadmin.model.Offers offers = (Offers) getIntent().getSerializableExtra("Offers");
+        final com.owosuperadmin.models.Offers offers = (Offers) getIntent().getSerializableExtra("Offers");
 
         Glide.with(UpdateOfferActivity.this).load(offers.getImage()).into(imageUpdate);
         nameUpdate.setText(offers.getName());

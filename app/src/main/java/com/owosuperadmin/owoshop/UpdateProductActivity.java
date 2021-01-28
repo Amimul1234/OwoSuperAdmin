@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.model.Owo_product;
+import com.owosuperadmin.models.Owo_product;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -62,7 +62,7 @@ public class UpdateProductActivity extends AppCompatActivity {
 
         loadingbar =new ProgressDialog(this);
 
-        final com.owosuperadmin.model.Owo_product product = (Owo_product) getIntent().getSerializableExtra("Products");
+        final com.owosuperadmin.models.Owo_product product = (Owo_product) getIntent().getSerializableExtra("Products");
 
         Glide.with(this).load(product.getProduct_image()).into(imageUpdate);
         collapsingToolbarLayout.setTitle(product.getProduct_name());

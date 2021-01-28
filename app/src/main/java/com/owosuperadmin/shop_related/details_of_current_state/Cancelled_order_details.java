@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.owosuperadmin.model.Order_item_adapter;
-import com.owosuperadmin.model.Shop_keeper_ordered_products;
-import com.owosuperadmin.model.Shop_keeper_orders;
+import com.owosuperadmin.models.Order_item_adapter;
+import com.owosuperadmin.models.Shop_keeper_ordered_products;
+import com.owosuperadmin.models.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;
 import java.util.List;
 

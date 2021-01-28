@@ -24,7 +24,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.CompletedOrderDetails"></activity>
+        <activity android:name=".category.AddACategory"></activity>
+        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.CompletedOrderDetails" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Cancelled_order_details" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Shipped_orders_details" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Picked_order_details" />
@@ -44,7 +45,7 @@
         <activity android:name="com.owosuperadmin.orders.pending_orders" />
         <activity android:name="com.owosuperadmin.shop_related.confirm_shop_orders" />
         <activity android:name=".approved_shop_details" />
-        <activity android:name=".AddASubCategory" />
+        <activity android:name=".category.AddASubCategory" />
         <activity android:name=".PendingShopDetails" />
         <activity android:name=".QuponActivity" />
         <activity android:name=".SearchedProducts" />

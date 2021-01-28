@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.owosuperadmin.LatLng;
-import com.owosuperadmin.model.PendingShop;
+import com.owosuperadmin.models.PendingShop;
 import java.util.ArrayList;
 import java.util.List;
 

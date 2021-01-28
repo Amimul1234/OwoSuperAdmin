@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import com.owosuperadmin.adapter.order_management_adapter;
+import com.owosuperadmin.adapters.order_management_adapter;
 import com.owosuperadmin.owoshop.R;
 
 public class confirm_shop_orders extends AppCompatActivity {

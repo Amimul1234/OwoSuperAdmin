@@ -3,7 +3,7 @@ package com.owosuperadmin.pagination.cancelled_orders;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import androidx.paging.PageKeyedDataSource;
-import com.owosuperadmin.model.Shop_keeper_orders;
+import com.owosuperadmin.models.Shop_keeper_orders;
 
 public class CancelledDataSourceFactory extends DataSource.Factory {
 

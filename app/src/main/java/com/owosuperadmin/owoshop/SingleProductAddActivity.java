@@ -31,20 +31,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.model.Owo_product;
-import com.owosuperadmin.model.Sub_categories;
+import com.owosuperadmin.models.Owo_product;
+import com.owosuperadmin.models.Sub_categories;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

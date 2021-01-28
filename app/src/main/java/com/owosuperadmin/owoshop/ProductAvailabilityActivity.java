@@ -11,9 +11,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import com.owosuperadmin.model.Owo_product;
-import com.owosuperadmin.pagination.ItemAdapter;
-import com.owosuperadmin.pagination.ItemViewModel;
+import com.owosuperadmin.models.Owo_product;
+import com.owosuperadmin.pagination.products.ItemAdapter;
+import com.owosuperadmin.pagination.products.ItemViewModel;
 
 public class ProductAvailabilityActivity extends AppCompatActivity implements View.OnClickListener {
 

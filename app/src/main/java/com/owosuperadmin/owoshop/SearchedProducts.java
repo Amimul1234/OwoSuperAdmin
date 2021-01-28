@@ -12,9 +12,9 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.owosuperadmin.model.Owo_product;
-import com.owosuperadmin.pagination.SearchAdapter;
-import com.owosuperadmin.pagination.SearchViewModel;
+import com.owosuperadmin.models.Owo_product;
+import com.owosuperadmin.pagination.search.SearchAdapter;
+import com.owosuperadmin.pagination.search.SearchViewModel;
 
 public class SearchedProducts extends AppCompatActivity {
 

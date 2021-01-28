@@ -196,7 +196,7 @@ public class CreateNewAdminActivity extends AppCompatActivity {
                                    Boolean create_offers, Boolean maintain_users, Boolean messaging_) {
 
 
-        final com.owosuperadmin.model.semi_admins new_Semi_Admin = new com.owosuperadmin.model.semi_admins(myUrl, Admin_name, phone,approve_shop, maintain_shop,
+        final com.owosuperadmin.models.semi_admins new_Semi_Admin = new com.owosuperadmin.models.semi_admins(myUrl, Admin_name, phone,approve_shop, maintain_shop,
                 add_products, update_products, create_offers, maintain_users, messaging_);
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();

@@ -1,10 +1,10 @@
 package com.owosuperadmin.Network;
 
-import com.owosuperadmin.model.Brands;
-import com.owosuperadmin.model.OffersEntity;
-import com.owosuperadmin.model.Owo_product;
-import com.owosuperadmin.model.Shop_keeper_orders;
-import com.owosuperadmin.model.Shops;
+import com.owosuperadmin.models.Brands;
+import com.owosuperadmin.models.OffersEntity;
+import com.owosuperadmin.models.Owo_product;
+import com.owosuperadmin.models.Shop_keeper_orders;
+import com.owosuperadmin.models.Shops;
 import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;

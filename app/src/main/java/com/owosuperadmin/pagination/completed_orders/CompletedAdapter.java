@@ -10,9 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-import com.owosuperadmin.model.Shop_keeper_orders;
+import com.owosuperadmin.models.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;
-import com.owosuperadmin.shop_related.details_of_current_state.Cancelled_order_details;
 import com.owosuperadmin.shop_related.details_of_current_state.CompletedOrderDetails;
 
 public class CompletedAdapter extends PagedListAdapter<Shop_keeper_orders, CompletedAdapter.ViewHolder>{

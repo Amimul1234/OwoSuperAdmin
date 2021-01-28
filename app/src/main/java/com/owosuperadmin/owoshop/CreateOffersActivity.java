@@ -27,7 +27,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.model.OffersEntity;
+import com.owosuperadmin.models.OffersEntity;
 import org.jetbrains.annotations.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

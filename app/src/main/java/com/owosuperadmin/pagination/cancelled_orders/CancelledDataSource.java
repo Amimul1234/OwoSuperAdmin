@@ -4,7 +4,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 import com.owosuperadmin.Network.RetrofitClient;
-import com.owosuperadmin.model.Shop_keeper_orders;
+import com.owosuperadmin.models.Shop_keeper_orders;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import retrofit2.Call;

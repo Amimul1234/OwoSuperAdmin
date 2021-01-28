@@ -2,17 +2,13 @@ package com.owosuperadmin.owoshop;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.paging.DatabasePagingOptions;
@@ -21,8 +17,8 @@ import com.firebase.ui.database.paging.LoadingState;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.owosuperadmin.model.PendingShop;
-import com.owosuperadmin.viewHolder.PendingShopViewHolderForAdmin;
+import com.owosuperadmin.models.PendingShop;
+import com.owosuperadmin.viewHolders.PendingShopViewHolderForAdmin;
 
 public class ManagementActivity extends AppCompatActivity {
 
