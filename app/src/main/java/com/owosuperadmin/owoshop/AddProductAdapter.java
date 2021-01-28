@@ -21,7 +21,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.xy
     }
 
     public AddProductAdapter(List<Pair<String, Integer>> product1, Context context) {
-        this.product1 = product1;
+        AddProductAdapter.product1 = product1;
         this.context = context;
         product2.addAll(product1);
     }
@@ -36,10 +36,8 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.xy
 
     @Override
     public void onBindViewHolder(@NonNull final xyz holder, final int position) {
-
         holder.imageView.setImageResource(product1.get(position).second);
         holder.textView.setText(product1.get(position).first);
-
     }
 
     @Override
@@ -64,6 +62,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.xy
                 }
             }
         }
+
         notifyDataSetChanged();
     }
 
@@ -74,8 +73,8 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.xy
 
         public xyz(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.imageviewid);
-            textView=itemView.findViewById(R.id.textviewid);
+            imageView = itemView.findViewById(R.id.imageviewid);
+            textView = itemView.findViewById(R.id.textviewid);
         }
 
     }

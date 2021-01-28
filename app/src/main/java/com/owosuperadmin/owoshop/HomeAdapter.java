@@ -146,7 +146,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     available_offers.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(holder.itemView.getContext(), AvilableOffersActivity.class);
+                            Intent intent=new Intent(holder.itemView.getContext(), AvailableOffersActivity.class);
                             holder.itemView.getContext().startActivity(intent);
                             alertDialog.cancel();
                         }

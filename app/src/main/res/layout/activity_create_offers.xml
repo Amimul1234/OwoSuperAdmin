@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/blue"
         >
 
         <ImageView
@@ -24,11 +24,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CREATE OFFERS"
+            android:text="CREATE A NEW OFFERS"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:layout_marginStart="30dp"
-            android:fontFamily="@font/ethnocentric"
+            android:textStyle="bold"
             />
     </androidx.appcompat.widget.Toolbar>
 
@@ -38,27 +38,24 @@
     <ImageView
         android:id="@+id/create_offers_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_margin="5dp"
         android:padding="5dp"
         android:scaleType="fitXY"
         android:src="@drawable/offers"
-        android:background="@drawable/edittext_design"
+        android:background="@drawable/edit_text_black"
         />
 
-    <EditText
-        android:id="@+id/offer_name"
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/offer_is_for"
         android:layout_marginTop="25dp"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
-        android:hint="Offer Title"
-        android:background="@drawable/edittext_design"
-        android:textSize="20sp"
-        />
-
+        android:background="@drawable/edit_text_black"
+        android:entries="@array/offer_is_for"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -73,10 +70,11 @@
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Start date (DD:MM:YYYY)"
-            android:background="@drawable/edittext_design"
-            android:textSize="20sp"
-            android:inputType="date"
+            android:hint="Please Select Start Date"
+            android:background="@drawable/edit_text_black"
+            android:textSize="17sp"
+            android:layout_marginEnd="10dp"
+            android:inputType="none"
             />
 
         <ImageView
@@ -84,7 +82,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_baseline_date_range_24"
-            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/offer_start_date"
             android:layout_alignParentTop="true"
             android:layout_alignBottom="@+id/offer_start_date"
             />
@@ -101,14 +99,17 @@
 
         <EditText
             android:id="@+id/offer_end_date"
-            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="End date (DD:MM:YYYY) "
-            android:background="@drawable/edittext_design"
-            android:textSize="20sp"
-            android:inputType="date"
-            />
+            android:hint="Please Select End Date"
+            android:background="@drawable/edit_text_black"
+            android:textSize="17sp"
+            android:layout_marginEnd="10dp"
+            android:inputType="none"/>
 
 
         <ImageView
@@ -116,13 +117,42 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_baseline_date_range_24"
-            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/offer_end_date"
             android:layout_alignParentTop="true"
             android:layout_alignBottom="@+id/offer_end_date"
             />
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        >
+
+        <TextView
+            android:id="@+id/enable_offer_text"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enable Offer Now"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            android:inputType="none"
+            />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/enable_offer_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            />
+
+    </RelativeLayout>
 
 
 
@@ -136,8 +166,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/buttons_blue"
-        android:textStyle="italic|bold"
-        android:textSize="30sp"
+        android:textStyle = "bold"
+        android:textSize="25sp"
         android:textColor="@android:color/white"
         />
 

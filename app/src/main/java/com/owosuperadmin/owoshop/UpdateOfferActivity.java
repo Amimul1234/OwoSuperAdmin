@@ -142,7 +142,7 @@ public class UpdateOfferActivity extends AppCompatActivity {
                         if(task.isSuccessful())
                         {
                             Toast.makeText(UpdateOfferActivity.this, "Offer updated successfully.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(UpdateOfferActivity.this, AvilableOffersActivity.class);
+                            Intent intent = new Intent(UpdateOfferActivity.this, AvailableOffersActivity.class);
                             loadingbar.dismiss();
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);

@@ -77,7 +77,7 @@
         <item>Kitchen and Dining</item>
         <item>Leather Goods</item>
         <item>LP Gas</item>
-        <item>Machineries</item>
+        <item>Machinery\'s</item>
         <item>Mother, Kids and Toys</item>
         <item>Paints</item>
         <item>Pet and Poultry Supplies</item>
@@ -93,6 +93,11 @@
         <item>Cooking</item>
         <item>Beverages</item>
         <item>Office Products</item>
+    </string-array>
+
+    <string-array name="offer_is_for">
+        <item>ShopKeeper</item>
+        <item>Consumer</item>
     </string-array>
 
     <string name="title_activity_location_from_map">Map</string>

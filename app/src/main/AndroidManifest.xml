@@ -63,7 +63,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".DummyPendingShopActivity" />
         <activity android:name=".UpdateOfferActivity" />
-        <activity android:name=".AvilableOffersActivity" />
+        <activity android:name=".AvailableOffersActivity" />
         <activity android:name=".UpdateProductActivity" />
         <activity android:name=".ProductAvailabilityActivity" />
         <activity android:name=".SingleProductAddActivity" />

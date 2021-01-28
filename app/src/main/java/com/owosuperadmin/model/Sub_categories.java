@@ -1,7 +1,5 @@
 package com.owosuperadmin.model;
 
-import android.util.Pair;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

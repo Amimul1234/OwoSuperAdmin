@@ -1,11 +1,11 @@
 package com.owosuperadmin.Network;
 
 import com.owosuperadmin.model.Brands;
+import com.owosuperadmin.model.OffersEntity;
 import com.owosuperadmin.model.Owo_product;
 import com.owosuperadmin.model.Shop_keeper_orders;
 import com.owosuperadmin.model.Shops;
 import java.util.List;
-
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -96,6 +96,11 @@ public interface Api {
     Call<ResponseBody> uploadImageToServer(
             @Path("directory") String directory,
             @Part MultipartBody.Part multipartFile
+    );
+
+    @POST("/addAnOffer")
+    Call<ResponseBody> addAnOffer(
+            @Body OffersEntity offersEntity
     );
 
 }

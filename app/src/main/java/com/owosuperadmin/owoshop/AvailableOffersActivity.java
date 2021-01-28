@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.owosuperadmin.model.Offers;
 
-public class AvilableOffersActivity extends AppCompatActivity {
+public class AvailableOffersActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -65,7 +64,7 @@ public class AvilableOffersActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Offers> options = new FirebaseRecyclerOptions.Builder<Offers>()
                 .setQuery(OffersRef, Offers.class).build();
 
-        FirebaseRecyclerAdapter<Offers, AvilableOffersActivity.OfferViewHolder> adapter=
+        FirebaseRecyclerAdapter<Offers, AvailableOffersActivity.OfferViewHolder> adapter=
                 new FirebaseRecyclerAdapter<Offers, OfferViewHolder>(options) {
 
                     @Override
@@ -82,17 +81,8 @@ public class AvilableOffersActivity extends AppCompatActivity {
                         holder.txtOfferStartDate.setText("Start Date: "+model.getStartdate());
                         holder.txtOfferEndDate.setText("End Date: "+model.getEnddate());
 
-                        Glide.with(AvilableOffersActivity.this).load(model.getImage()).into(holder.imageView);
+                        Glide.with(AvailableOffersActivity.this).load(model.getImage()).into(holder.imageView);
 
-                        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                Intent intent=new Intent(holder.itemView.getContext(), UpdateOfferActivity.class);
-                                intent.putExtra("Offers",model);
-                                holder.itemView.getContext().startActivity(intent);
-                            }
-                        });*/
                     }
 
                     @NonNull
@@ -104,10 +94,10 @@ public class AvilableOffersActivity extends AppCompatActivity {
                 };
 
         recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(AvilableOffersActivity.this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(AvailableOffersActivity.this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(AvilableOffersActivity.this, UpdateOfferActivity.class);
+                        Intent intent = new Intent(AvailableOffersActivity.this, UpdateOfferActivity.class);
                         intent.putExtra("Offers",adapter.getItem(position));
                         startActivity(intent);
                         finish();

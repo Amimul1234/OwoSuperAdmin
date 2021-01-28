@@ -6,7 +6,6 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,21 +16,16 @@ import java.util.List;
 
 public class AddProductActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    String[] product;
-    AddProductAdapter adapter;
-    private ImageView back_to_home;
-    private SearchView search_in_category;
-    private TextView category_heading;
+    private AddProductAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
 
-        back_to_home = findViewById(R.id.back_to_home_arrow);
-        search_in_category = findViewById(R.id.search_in_category);
-        category_heading = findViewById(R.id.heading_category);
+        ImageView back_to_home = findViewById(R.id.back_to_home_arrow);
+        SearchView search_in_category = findViewById(R.id.search_in_category);
+        TextView category_heading = findViewById(R.id.heading_category);
 
         int[] icons = {R.drawable.icon1, R.drawable.icon2, R.drawable.icon3, R.drawable.icon4, R.drawable.icon5, R.drawable.icon6,
                 R.drawable.icon7, R.drawable.icon8, R.drawable.icon9, R.drawable.icon10, R.drawable.icon11, R.drawable.icon12,
@@ -41,7 +35,7 @@ public class AddProductActivity extends AppCompatActivity {
                 R.drawable.icon31, R.drawable.icon32, R.drawable.icon33, R.drawable.icon34, R.drawable.icon35, R.drawable.icon36,
                 R.drawable.icon37, R.drawable.icon38, R.drawable.icon39, R.drawable.icon40, R.drawable.icon41};
 
-        product = getResources().getStringArray(R.array.productname);
+        String[] product = getResources().getStringArray(R.array.productname);
 
         List<String> product1 = new ArrayList<>();
 
@@ -53,11 +47,11 @@ public class AddProductActivity extends AppCompatActivity {
             pairList.add(new Pair<String, Integer>(product[i], icons[i]));
         }
 
-        recyclerView = findViewById(R.id.add_product_recyclerview_id);
+        RecyclerView recyclerView = findViewById(R.id.add_product_recyclerview_id);
 
         //this is added now
         recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(AddProductActivity.this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(AddProductActivity.this, recyclerView,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(AddProductActivity.this, SingleProductAddActivity.class);

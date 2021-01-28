@@ -1,77 +1,85 @@
 package com.owosuperadmin.owoshop;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.owosuperadmin.model.Offers;
-
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.model.OffersEntity;
+import org.jetbrains.annotations.NotNull;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.UUID;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateOffersActivity extends AppCompatActivity {
 
-    private String StartDate,EndDate,OfferName,saveCurrentDate,saveCurrentTime,OfferRandomKey,downloadImageUrl;
+    private final String TAG = "Create Offer Activity";
+    private final int STORAGE_PERMISSION_CODE = 1;
+    private final Calendar myCalendar = Calendar.getInstance();
 
-    private ImageView createOfferImage, offer_start_date_picker, offer_end_date_picker, back_to_home;
-    private EditText offerName,offerStartDate,offerEndDate;
-    private Button createOfferBtn;
-
-    private static final int GalleryPick=1;
-    private Uri ImageUri;
-    private StorageReference OfferImagesRef;
-    private DatabaseReference OffersRef;
-    private ProgressDialog loadingbar;
-    private int state = 0;
-
-    final Calendar myCalendar = Calendar.getInstance();
+    private ImageView createOfferImage;
+    private EditText offerStartDate, offerEndDate;
+    private Date StartDate, EndDate;
+    private Spinner offer_is_for_spinner;
+    private ProgressDialog loading;
+    private SwitchMaterial enable_offer_switch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_offers);
 
-        OfferImagesRef= FirebaseStorage.getInstance().getReference().child("OfferImage");
-        OffersRef= FirebaseDatabase.getInstance().getReference().child("Offers");
+        createOfferImage = findViewById(R.id.create_offers_image);
+        offerStartDate = findViewById(R.id.offer_start_date);
+        offerEndDate = findViewById(R.id.offer_end_date);
+        offer_is_for_spinner = findViewById(R.id.offer_is_for);
+        enable_offer_switch = findViewById(R.id.enable_offer_switch);
 
-        createOfferImage=(ImageView)findViewById(R.id.create_offers_image);
-        offerName=(EditText)findViewById(R.id.offer_name);
-        offerStartDate=(EditText)findViewById(R.id.offer_start_date);
-        offerEndDate=(EditText)findViewById(R.id.offer_end_date);
-        createOfferBtn=(Button)findViewById(R.id.create_offer_btn);
-        offer_start_date_picker = findViewById(R.id.start_date_picker);
-        offer_end_date_picker = findViewById(R.id.end_date_picker);
-        back_to_home = findViewById(R.id.back_to_home);
+        loading = new ProgressDialog(this);
 
+        Button createOfferBtn = findViewById(R.id.create_offer_btn);
+        ImageView offer_start_date_picker = findViewById(R.id.start_date_picker);
+        ImageView offer_end_date_picker = findViewById(R.id.end_date_picker);
+        ImageView back_to_home = findViewById(R.id.back_to_home);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
@@ -79,24 +87,28 @@ public class CreateOffersActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-
+                updateLabel(1);
             }
-
         };
 
+        final DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel(2);
+            }
+        };
 
         offer_start_date_picker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                state = 1;
-
                 new DatePickerDialog(CreateOffersActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-
-
             }
         });
 
@@ -104,14 +116,9 @@ public class CreateOffersActivity extends AppCompatActivity {
         offer_end_date_picker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                state = 2;
-
-                new DatePickerDialog(CreateOffersActivity.this, date, myCalendar
+                new DatePickerDialog(CreateOffersActivity.this, date2, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-
-
             }
         });
 
@@ -125,12 +132,11 @@ public class CreateOffersActivity extends AppCompatActivity {
             }
         });
 
-        loadingbar=new ProgressDialog(this);
 
         createOfferImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OpenGallery();
+                requestStoragePermission();
             }
         });
 
@@ -142,164 +148,257 @@ public class CreateOffersActivity extends AppCompatActivity {
         });
     }
 
-    private void updateLabel() {
+    private void updateLabel(int state) {
 
         String myFormat = "dd/MM/yyyy";
 
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+
+        SimpleDateFormat format2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
         if(state == 1)
-            offerStartDate.setText(sdf.format(myCalendar.getTime()));
-        else if(state == 2)
-            offerEndDate.setText(sdf.format(myCalendar.getTime()));
-    }
-
-
-    private void OpenGallery() {
-        Intent galleryIntent=new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent,GalleryPick);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode==GalleryPick && resultCode==RESULT_OK && data!=null)
         {
-            ImageUri=data.getData();
-            createOfferImage.setImageURI(ImageUri);
+            offerStartDate.setText(sdf.format(myCalendar.getTime()));
+            try {
+                StartDate = format2.parse(myCalendar.getTime().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if(state == 2)
+        {
+            offerEndDate.setText(sdf.format(myCalendar.getTime()));
+            try {
+                EndDate = format2.parse(myCalendar.getTime().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private void ValidateOfferData() {
 
-        OfferName = offerName.getText().toString();
-        StartDate = offerStartDate.getText().toString();
-        EndDate = offerEndDate.getText().toString();
-
-        if(ImageUri==null)
+        if(createOfferImage.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(CreateOffersActivity.this, R.drawable.offers)).getConstantState())
         {
             Toast.makeText(this, "Offer image is mandatory...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(OfferName))
+        else if (StartDate == null)
         {
-            Toast.makeText(this, "Please write offer name...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter offer start date...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(StartDate))
+        else if (EndDate == null)
         {
-            Toast.makeText(this, "Please write offer start date...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(EndDate))
-        {
-            Toast.makeText(this, "Please write offer end date...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter offer end date...", Toast.LENGTH_SHORT).show();
         }
 
         else {
 
-            try {
-                Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(StartDate);
-                Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(EndDate);
-
-                if(date1.after(date2))
-                {
-                    Toast.makeText(this, "Start date can not be less than end date", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if(StartDate.after(EndDate))
+            {
+                Toast.makeText(this, "Start date can not be less than the end date", Toast.LENGTH_SHORT).show();
                 return;
             }
-
-
             StoreOfferInformation();
         }
     }
 
     private void StoreOfferInformation() {
 
-        loadingbar.setTitle("Add New Offer");
-        loadingbar.setMessage("Please wait, we are adding the new offer.");
-        loadingbar.setCanceledOnTouchOutside(false);
-        loadingbar.show();
+        loading.setTitle("Add A New Offer");
+        loading.setMessage("Please wait, we are adding the new offer...");
+        loading.setCanceledOnTouchOutside(false);
+        loading.show();
 
-        Calendar calendar = Calendar.getInstance();
+        Bitmap bitmap = ((BitmapDrawable) createOfferImage.getDrawable()).getBitmap();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-        saveCurrentDate = currentDate.format(calendar.getTime());
+        String filename = UUID.randomUUID().toString();
 
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentTime.format(calendar.getTime());
+        File file = new File(CreateOffersActivity.this.getCacheDir() + File.separator + filename + ".jpg");
 
-        OfferRandomKey = saveCurrentDate + saveCurrentTime;
+        try {
+            FileOutputStream fo = new FileOutputStream(file);
+            fo.write(byteArrayOutputStream.toByteArray());
+            fo.flush();
+            fo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        final StorageReference filePath=OfferImagesRef.child(ImageUri.getLastPathSegment() + OfferRandomKey +".jpg");
+        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part multipartFile = MultipartBody.Part.createFormData("multipartFile", file.getName(), requestBody);
 
-        final UploadTask uploadTask=filePath.putFile(ImageUri);
-
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                String message=e.toString();
-                Toast.makeText(CreateOffersActivity.this, "Error : "+message, Toast.LENGTH_SHORT).show();
-                loadingbar.dismiss();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(CreateOffersActivity.this, "Offer Image uploaded successfully", Toast.LENGTH_SHORT).show();
-                Task<Uri> urlTask=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+        RetrofitClient.getInstance().getApi()
+                .uploadImageToServer("Offers", multipartFile)
+                .enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-
-                        if (!task.isSuccessful())
+                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                        if(response.isSuccessful())
                         {
-                            throw  task.getException();
+
+                            String path = null;
+
+                            try {
+                                path = response.body().string();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Log.e(TAG, e.getMessage());
+                            }
+
+                            OffersEntity offersEntity = new OffersEntity();
+
+                            offersEntity.setOffer_start_date(StartDate);
+                            offersEntity.setOffer_end_date(EndDate);
+                            offersEntity.setOffer_is_for(offer_is_for_spinner.getSelectedItem().toString());
+                            offersEntity.setOffer_image(path);
+                            offersEntity.setCategory("ABCD");//Should obviously change letter
+                            offersEntity.setEnabled(enable_offer_switch.isChecked());
+
+                            SaveOfferInfoToDatabase(offersEntity);
                         }
-
-                        downloadImageUrl=filePath.getDownloadUrl().toString();
-                        return filePath.getDownloadUrl();
-
                     }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+
                     @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if(task.isSuccessful())
-                        {
-                            downloadImageUrl=task.getResult().toString();
-                            Toast.makeText(CreateOffersActivity.this, "Got the Offer image url Successfully", Toast.LENGTH_SHORT).show();
-                            SaveOfferInfoToDatabase();
-                        }
+                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                        Toast.makeText(CreateOffersActivity.this, "Error uploading image to server", Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
+                        Log.e(TAG, t.getMessage());
                     }
                 });
-            }
-        });
     }
 
-    private void SaveOfferInfoToDatabase() {
-
-        Offers offers = new Offers(OfferName, StartDate, EndDate, downloadImageUrl, OfferRandomKey, saveCurrentDate, saveCurrentTime);
-
-        OffersRef.child(OfferRandomKey).setValue(offers)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+    private void SaveOfferInfoToDatabase(OffersEntity offersEntity) {
+        RetrofitClient.getInstance().getApi()
+                .addAnOffer(offersEntity)
+                .enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
+                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                        if(response.isSuccessful())
                         {
+                            loading.dismiss();
+                            Toast.makeText(CreateOffersActivity.this, "Offer is added successfully...", Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(CreateOffersActivity.this, HomeActivity.class);
                             startActivity(intent);
-
-                            loadingbar.dismiss();
-                            Toast.makeText(CreateOffersActivity.this, "Offer is added successfully...", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
-                        else {
-                            loadingbar.dismiss();
-                            String message= Objects.requireNonNull(task.getException()).toString();
-                            Toast.makeText(CreateOffersActivity.this, "Error : "+message, Toast.LENGTH_SHORT).show();
+                        else
+                        {
+                            loading.dismiss();
+                            Toast.makeText(CreateOffersActivity.this, "Error creating offer..., try again", Toast.LENGTH_SHORT).show();
+                            try {
+                                Log.e(TAG, response.body().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Log.e(TAG, e.getMessage());
+                            }
                         }
                     }
+
+                    @Override
+                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                        Log.e(TAG, t.getMessage());
+                        Toast.makeText(CreateOffersActivity.this, "Failed to create offer", Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
+                    }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
+                        createOfferImage.setImageBitmap(selectedImage);
+                    }
+
+                    break;
+                case 1:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Uri selectedImage = data.getData();
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                        if (selectedImage != null) {
+                            Cursor cursor = getContentResolver().query(selectedImage,
+                                    filePathColumn, null, null, null);
+                            if (cursor != null) {
+                                cursor.moveToFirst();
+
+                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                                String picturePath = cursor.getString(columnIndex);
+                                createOfferImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                cursor.close();
+                            }
+                        }
+
+                    }
+                    break;
+            }
+        }
+    }
+
+
+    private void selectImage(Context context) {
+
+        final CharSequence[] options = { "Take Photo", "Choose from Gallery"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Choose your profile picture");
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Take Photo")) {
+                    Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(takePicture, 0);
+
+                } else if (options[item].equals("Choose from Gallery")) {
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto , 1);
+                }
+            }
+        });
+
+        builder.setCancelable(false);
+        builder.show();
+    }
+
+
+    private void requestStoragePermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed because of taking image from gallery")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            ActivityCompat.requestPermissions(CreateOffersActivity.this,
+                                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+
+                            selectImage(CreateOffersActivity.this);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+
+            selectImage(CreateOffersActivity.this);
+        }
     }
 
 
