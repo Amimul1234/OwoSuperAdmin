@@ -20,10 +20,17 @@
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo1"
-            android:contentDescription="@string/logo" />
-
+            android:src="@drawable/logo1"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/log_in_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:indeterminateTint="#0026FF"
+        android:visibility="invisible"
+        />
 
 
     <LinearLayout
@@ -34,7 +41,9 @@
         android:paddingRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.6">
+        android:layout_weight="1.6"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
         <EditText
             android:textSize="20sp"
@@ -46,11 +55,10 @@
             android:paddingBottom="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email_address"
-            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:hint="Email Address"
+            android:drawableLeft="@drawable/ic_baseline_email_24"
             android:drawablePadding="10dp"
-            android:inputType="textEmailAddress"
-            android:autofillHints="email" />
+            android:inputType="textEmailAddress"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -67,21 +75,19 @@
                 android:paddingBottom="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
-                android:drawableStart="@drawable/ic_input_lock"
+                android:hint="Password"
+                android:drawableLeft="@drawable/ic_input_lock"
                 android:drawablePadding="10dp"
-                android:inputType="textPassword"
-                android:autofillHints="password"/>
+                android:inputType="textPassword"/>
 
             <ImageView
                 android:id="@+id/show_password"
-                android:paddingEnd="10dp"
+                android:paddingRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_visibility_off"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:contentDescription="@string/see_password" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
 
         </RelativeLayout>
 
@@ -94,7 +100,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/buttons_blue"
             android:layout_marginTop="22dp"
-            android:text="@string/log_in"
+            android:text="Log In"
             android:textAllCaps="false"
             android:elevation="0dp" />
     </LinearLayout>

@@ -101,5 +101,10 @@
     </string-array>
 
     <string name="title_activity_location_from_map">Map</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="logo">Logo</string>
+    <string name="see_password">See Password</string>
 
 </resources>
