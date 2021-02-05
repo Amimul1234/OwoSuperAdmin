@@ -58,9 +58,9 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/add_product_recyclerview_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/add_product_recyclerview_id"
         >
 
     </androidx.recyclerview.widget.RecyclerView>

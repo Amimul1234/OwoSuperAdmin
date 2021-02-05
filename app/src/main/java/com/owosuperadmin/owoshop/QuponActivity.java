@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.owosuperadmin.homePanel.HomeActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -80,7 +81,7 @@ public class QuponActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful())
                         {
-                            Intent intent=new Intent(QuponActivity.this,HomeActivity.class);
+                            Intent intent=new Intent(QuponActivity.this, HomeActivity.class);
                             startActivity(intent);
                             Toast.makeText(QuponActivity.this, "Voucher is added successfully...", Toast.LENGTH_SHORT).show();
                         }

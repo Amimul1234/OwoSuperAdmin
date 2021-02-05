@@ -1,4 +1,4 @@
-package com.owosuperadmin.viewHolders;
+package com.owosuperadmin.shopManagement;
 
 import android.content.Context;
 import android.view.View;

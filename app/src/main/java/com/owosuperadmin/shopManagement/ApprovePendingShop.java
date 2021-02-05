@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop;
+package com.owosuperadmin.shopManagement;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,9 @@ import com.owosuperadmin.network.RetrofitClient;
 import com.owosuperadmin.models.PendingShop;
 import com.owosuperadmin.models.PermissionWithId;
 import com.owosuperadmin.models.Shops;
+import com.owosuperadmin.owoshop.LocationFromMap;
+import com.owosuperadmin.owoshop.R;
+
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PendingShopDetails extends AppCompatActivity {
+public class ApprovePendingShop extends AppCompatActivity {
 
     private TextView req_category_1;
     private TextView req_category_2;
@@ -104,7 +107,7 @@ public class PendingShopDetails extends AppCompatActivity {
 
         see_in_map.setOnClickListener(v -> {
             com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(latLng.getLatitude(), latLng.getLongitude());
-            Intent intent = new Intent(PendingShopDetails.this, LocationFromMap.class);
+            Intent intent = new Intent(ApprovePendingShop.this, LocationFromMap.class);
             intent.putExtra("latlang", mapsLatLng);
             startActivity(intent);
         });
@@ -114,7 +117,7 @@ public class PendingShopDetails extends AppCompatActivity {
             {
                 if(!checkbox1.isChecked())
                 {
-                    Toast.makeText(PendingShopDetails.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ApprovePendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -125,7 +128,7 @@ public class PendingShopDetails extends AppCompatActivity {
             {
                 if(!checkbox1.isChecked() && !checkbox2.isChecked())
                 {
-                    Toast.makeText(PendingShopDetails.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ApprovePendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -136,7 +139,7 @@ public class PendingShopDetails extends AppCompatActivity {
             {
                 if(!checkbox1.isChecked() && !checkbox2.isChecked() && !checkBox3.isChecked())
                 {
-                    Toast.makeText(PendingShopDetails.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ApprovePendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -188,18 +191,18 @@ public class PendingShopDetails extends AppCompatActivity {
 
                     deleteReq.child("PendingShopRequest").child(pendingShop.getShop_owner_mobile()).removeValue()
                             .addOnCompleteListener(task -> {
-                                Toast.makeText(PendingShopDetails.this, "Removed from pending list", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ApprovePendingShop.this, "Removed from pending list", Toast.LENGTH_SHORT).show();
 
                                 PermissionWithId permissionWithId = new PermissionWithId(id, permissions);
 
                                 permittedShopKeeper.child("permittedShopKeeper").child(pendingShop.getShop_owner_mobile())
                                         .setValue(permissionWithId).addOnCompleteListener(task1 -> {
-                                            Toast.makeText(PendingShopDetails.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ApprovePendingShop.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
                                             finish();
-                                        }).addOnFailureListener(e -> Toast.makeText(PendingShopDetails.this, "Failed, try again", Toast.LENGTH_SHORT).show());
+                                        }).addOnFailureListener(e -> Toast.makeText(ApprovePendingShop.this, "Failed, try again", Toast.LENGTH_SHORT).show());
 
                             }).addOnFailureListener(e -> {
-                                Toast.makeText(PendingShopDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ApprovePendingShop.this, "Please try again", Toast.LENGTH_SHORT).show();
                                 loader.setVisibility(View.GONE);
                             });
 

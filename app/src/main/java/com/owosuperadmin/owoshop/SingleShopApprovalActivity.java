@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.owosuperadmin.shopManagement.ShopApprovalActivity;
+
 public class SingleShopApprovalActivity extends AppCompatActivity {
 
     private Button approveBtn,rejectBtn;
@@ -32,7 +34,7 @@ public class SingleShopApprovalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SingleShopApprovalActivity.this, "Shop Approved Successfully.", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(SingleShopApprovalActivity.this,ShopApprovalActivity.class);
+                Intent intent=new Intent(SingleShopApprovalActivity.this, ShopApprovalActivity.class);
                 startActivity(intent);
             }
         });

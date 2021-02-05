@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop.category;
+package com.owosuperadmin.categoryManagement.subCategory;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;

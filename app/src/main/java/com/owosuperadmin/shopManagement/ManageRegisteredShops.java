@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop;
+package com.owosuperadmin.shopManagement;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,9 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.owosuperadmin.models.PendingShop;
-import com.owosuperadmin.viewHolders.PendingShopViewHolderForAdmin;
+import com.owosuperadmin.owoshop.R;
 
-public class ManagementActivity extends AppCompatActivity {
+public class ManageRegisteredShops extends AppCompatActivity {
 
     FirebaseRecyclerPagingAdapter<PendingShop, PendingShopViewHolderForAdmin> adapter;
 
@@ -61,11 +61,11 @@ public class ManagementActivity extends AppCompatActivity {
 
                     @Override
                     protected void onBindViewHolder(@NonNull PendingShopViewHolderForAdmin holder, int position, @NonNull PendingShop model) {
-                        holder.bind(model, ManagementActivity.this);
+                        holder.bind(model, ManageRegisteredShops.this);
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(ManagementActivity.this, approved_shop_details.class);
+                                Intent intent = new Intent(ManageRegisteredShops.this, RegisteredShop.class);
                                 intent.putExtra("approvedShop", model);
                                 startActivity(intent);
                             }

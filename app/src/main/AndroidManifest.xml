@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".category.AddNewCategory"/>
+        <activity android:name="com.owosuperadmin.categoryManagement.category.AddNewCategory"/>
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.CompletedOrderDetails" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Cancelled_order_details" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Shipped_orders_details" />
@@ -32,7 +32,7 @@
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Processing_orders_details" />
         <activity android:name="com.owosuperadmin.shop_related.state_updater.set_shipped_to_delivered" />
         <activity android:name=".AddATimeSlot" />
-        <activity android:name=".AddABrand" />
+        <activity android:name="com.owosuperadmin.categoryManagement.brand.AddABrand" />
         <activity android:name="com.owosuperadmin.shop_related.completed_order_state" />
         <activity android:name="com.owosuperadmin.shop_related.shipped_order_activity" />
         <activity android:name="com.owosuperadmin.shop_related.state_updater.set_picked_to_shipped" />
@@ -44,9 +44,9 @@
         <activity android:name="com.owosuperadmin.shop_related.state_updater.set_confirmed_to_processing" />
         <activity android:name="com.owosuperadmin.orders.pending_orders" />
         <activity android:name="com.owosuperadmin.shop_related.confirm_shop_orders" />
-        <activity android:name=".approved_shop_details" />
-        <activity android:name=".category.AddASubCategory" />
-        <activity android:name=".PendingShopDetails" />
+        <activity android:name="com.owosuperadmin.shopManagement.RegisteredShop" />
+        <activity android:name="com.owosuperadmin.categoryManagement.subCategory.AddASubCategory" />
+        <activity android:name="com.owosuperadmin.shopManagement.ApprovePendingShop" />
         <activity android:name=".QuponActivity" />
         <activity android:name=".SearchedProducts" />
         <activity android:name=".CloudMessagingActivity" />
@@ -61,21 +61,20 @@
             android:name=".LocationFromMap"
             android:label="@string/title_activity_location_from_map"
             android:screenOrientation="portrait" />
-        <activity android:name=".DummyPendingShopActivity" />
         <activity android:name=".UpdateOfferActivity" />
-        <activity android:name=".AvailableOffersActivity" />
+        <activity android:name="com.owosuperadmin.offersManagement.AvailableOffersActivity" />
         <activity android:name=".UpdateProductActivity" />
         <activity android:name=".ProductAvailabilityActivity" />
         <activity android:name=".SingleProductAddActivity" />
         <activity android:name=".AddProductActivity" />
         <activity android:name=".SingleShopApprovalActivity" />
-        <activity android:name=".ShopApprovalActivity" />
+        <activity android:name="com.owosuperadmin.shopManagement.ShopApprovalActivity" />
         <activity android:name=".UpdateSemiAdminActivity" />
         <activity android:name=".CreateOffersActivity" />
-        <activity android:name=".SemiAdminActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ManagementActivity" />
-        <activity android:name=".Splash_screen">
+        <activity android:name="com.owosuperadmin.adminManagement.SemiAdminActivity" />
+        <activity android:name="com.owosuperadmin.login.LoginActivity" />
+        <activity android:name="com.owosuperadmin.shopManagement.ManageRegisteredShops" />
+        <activity android:name="com.owosuperadmin.login.Splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -94,7 +93,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".HomeActivity" />
+        <activity android:name="com.owosuperadmin.homePanel.HomeActivity" />
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>

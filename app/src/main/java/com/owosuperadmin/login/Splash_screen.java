@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop;
+package com.owosuperadmin.login;
 
 import android.content.Intent;
 import android.os.Build;
@@ -9,6 +9,8 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.owosuperadmin.owoshop.R;
 
 @SuppressWarnings("deprecation")
 public class Splash_screen extends AppCompatActivity {
@@ -30,7 +32,7 @@ public class Splash_screen extends AppCompatActivity {
         }
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent mainIntent = new Intent(Splash_screen.this, MainActivity.class);
+            Intent mainIntent = new Intent(Splash_screen.this, LoginActivity.class);
             mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(mainIntent);
             finish();

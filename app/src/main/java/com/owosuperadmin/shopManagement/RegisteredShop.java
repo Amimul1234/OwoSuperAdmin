@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop;
+package com.owosuperadmin.shopManagement;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +21,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.owosuperadmin.LatLng;
 import com.owosuperadmin.models.PendingShop;
+import com.owosuperadmin.owoshop.LocationFromMap;
+import com.owosuperadmin.owoshop.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class approved_shop_details extends AppCompatActivity {
+public class RegisteredShop extends AppCompatActivity {
 
     private TextView shop_name, shop_keeper_name, shop_keeper_mobile, shop_address,
             shop_service_mobile, req_category_1, req_category_2, req_category_3;
@@ -100,7 +101,7 @@ public class approved_shop_details extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(latLng.getLatitude(), latLng.getLongitude());
-                Intent intent = new Intent(approved_shop_details.this, LocationFromMap.class);
+                Intent intent = new Intent(RegisteredShop.this, LocationFromMap.class);
                 intent.putExtra("latlang", mapsLatLng);
                 startActivity(intent);
             }
@@ -140,14 +141,14 @@ public class approved_shop_details extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
-                                                        Toast.makeText(approved_shop_details.this, "Shop Deleted", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(RegisteredShop.this, "Shop Deleted", Toast.LENGTH_SHORT).show();
                                                         loader.setVisibility(View.INVISIBLE);
                                                         finish();
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(approved_shop_details.this, "Failed to delete shop, Try again", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisteredShop.this, "Failed to delete shop, Try again", Toast.LENGTH_SHORT).show();
                                                 loader.setVisibility(View.INVISIBLE);
                                             }
                                         });
@@ -155,7 +156,7 @@ public class approved_shop_details extends AppCompatActivity {
                                 }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(approved_shop_details.this, "Can not delete shop, Please try again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisteredShop.this, "Can not delete shop, Please try again", Toast.LENGTH_SHORT).show();
                                 loader.setVisibility(View.INVISIBLE);
                             }
                         });

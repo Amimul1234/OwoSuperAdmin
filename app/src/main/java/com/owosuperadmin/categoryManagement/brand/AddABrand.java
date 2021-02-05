@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop;
+package com.owosuperadmin.categoryManagement.brand;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +25,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import com.owosuperadmin.network.RetrofitClient;
 import com.owosuperadmin.models.Brands;
+import com.owosuperadmin.owoshop.R;
+
 import org.jetbrains.annotations.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

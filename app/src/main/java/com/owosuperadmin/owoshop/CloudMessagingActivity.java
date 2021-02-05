@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.owosuperadmin.homePanel.HomeActivity;
+
 public class CloudMessagingActivity extends AppCompatActivity {
 
     private WebView webView;
@@ -32,7 +34,7 @@ public class CloudMessagingActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(CloudMessagingActivity.this,HomeActivity.class);
+                Intent intent=new Intent(CloudMessagingActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,7 +1,7 @@
 package com.owosuperadmin.network;
 
 import com.owosuperadmin.models.Brands;
-import com.owosuperadmin.models.CategoryEntity;
+import com.owosuperadmin.categoryManagement.category.entity.CategoryEntity;
 import com.owosuperadmin.models.OffersEntity;
 import com.owosuperadmin.models.Owo_product;
 import com.owosuperadmin.models.Shop_keeper_orders;

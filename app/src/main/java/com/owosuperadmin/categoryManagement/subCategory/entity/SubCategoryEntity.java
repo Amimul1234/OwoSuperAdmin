@@ -1,4 +1,4 @@
-package com.owosuperadmin.models;
+package com.owosuperadmin.categoryManagement.subCategory.entity;
 
 public class SubCategoryEntity {
     private Long sub_category_id;

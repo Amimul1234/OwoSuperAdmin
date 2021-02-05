@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop;
+package com.owosuperadmin.shopManagement;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.owosuperadmin.models.PendingShop;
-import com.owosuperadmin.viewHolders.PendingShopViewHolder;
+import com.owosuperadmin.owoshop.R;
 
 public class ShopApprovalActivity extends AppCompatActivity {
 
@@ -74,7 +73,7 @@ public class ShopApprovalActivity extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ShopApprovalActivity.this, PendingShopDetails.class);
+                        Intent intent = new Intent(ShopApprovalActivity.this, ApprovePendingShop.class);
                         intent.putExtra("PendingShop", model);
                         startActivity(intent);
                     }

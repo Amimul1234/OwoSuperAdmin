@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop;
+package com.owosuperadmin.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,10 +15,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.owosuperadmin.homePanel.HomeActivity;
+import com.owosuperadmin.owoshop.R;
+import java.util.Objects;
 
 
 @SuppressWarnings("deprecation")
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText email_address, password;
     private FirebaseAuth mAuth;
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+            ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
             progressDialog.setTitle("Sing In");
             progressDialog.setMessage("Signing In...please wait");
             progressDialog.setCanceledOnTouchOutside(false);
@@ -98,16 +101,16 @@ public class MainActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, login_password)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Log in successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Log in successful", Toast.LENGTH_SHORT).show();
 
-                            Intent intent=new Intent(MainActivity.this,HomeActivity.class);
+                            Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             finish();
                             startActivity(intent);
 
                         } else {
-                            Toast.makeText(MainActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
 

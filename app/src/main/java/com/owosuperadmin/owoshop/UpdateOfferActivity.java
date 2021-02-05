@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.owosuperadmin.models.Offers;
+import com.owosuperadmin.offersManagement.AvailableOffersActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

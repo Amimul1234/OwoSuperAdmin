@@ -106,5 +106,6 @@
     <string name="log_in">Log In</string>
     <string name="logo">Logo</string>
     <string name="see_password">See Password</string>
+    <string name="title">Title</string>
 
 </resources>

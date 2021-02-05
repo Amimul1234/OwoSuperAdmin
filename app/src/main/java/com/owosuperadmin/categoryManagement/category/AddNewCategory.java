@@ -1,4 +1,4 @@
-package com.owosuperadmin.owoshop.category;
+package com.owosuperadmin.categoryManagement.category;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +21,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.owosuperadmin.models.CategoryEntity;
+
+import com.owosuperadmin.categoryManagement.category.entity.CategoryEntity;
 import com.owosuperadmin.network.RetrofitClient;
 import com.owosuperadmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;

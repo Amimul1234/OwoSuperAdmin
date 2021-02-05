@@ -53,10 +53,7 @@ public class preview_product extends AppCompatActivity {
         double discounted_price = Double.parseDouble(price) - Double.parseDouble(discount);
         double discount_percent = (Double.parseDouble(discount)/ Double.parseDouble(price))*100;
 
-        appBarLayout.setMinimumHeight(HomeActivity.p+20);
-
         product_image_preview.setImageURI(Uri.parse(imageURI));
-        product_image_preview.setMinimumHeight(HomeActivity.p-200);
         collapsingToolbarLayout.setTitle(title);
 
         product_brand.setText(brand);

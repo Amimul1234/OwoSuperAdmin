@@ -1,38 +1,25 @@
-package com.owosuperadmin.owoshop;
+package com.owosuperadmin.homePanel;
 
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.owosuperadmin.owoshop.R;
+
 public class HomeActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    static String[] segment;
-    static int[] icons = {R.drawable.home1,R.drawable.home2,R.drawable.home3,R.drawable.home4,
-            R.drawable.home5, R.drawable.home6, R.drawable.home7,R.drawable.home8,R.drawable.home9,R.drawable.home10, R.drawable.home11
-            , R.drawable.home12, R.drawable.time_slot};
-
-    public static int p;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        DisplayMetrics displayMetrics = HomeActivity.this.getResources().getDisplayMetrics();
-        p = displayMetrics.widthPixels;
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewId);
 
-        recyclerView=findViewById(R.id.recyclerviewid);
-
-        segment = getResources().getStringArray(R.array.home);
 
 
         HomeAdapter adapter = new HomeAdapter(HomeActivity.this);
@@ -61,19 +48,8 @@ public class HomeActivity extends AppCompatActivity {
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        yes.setOnClickListener(v -> finish());
 
-                finish();
-            }
-        });
-
-        no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.cancel();
-            }
-        });
+        no.setOnClickListener(v -> alertDialog.cancel());
     }
 }

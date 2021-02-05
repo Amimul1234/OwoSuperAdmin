@@ -1,7 +1,6 @@
 package com.owosuperadmin.owoshop;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,8 +73,9 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.xy
 
         public xyz(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageviewid);
-            textView = itemView.findViewById(R.id.textviewid);
+
+            imageView = itemView.findViewById(R.id.imageViewId);
+            textView = itemView.findViewById(R.id.textViewId);
         }
 
         @Override

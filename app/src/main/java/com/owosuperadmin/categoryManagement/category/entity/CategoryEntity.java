@@ -1,4 +1,6 @@
-package com.owosuperadmin.models;
+package com.owosuperadmin.categoryManagement.category.entity;
+
+import com.owosuperadmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 
 import java.util.ArrayList;
 import java.util.List;

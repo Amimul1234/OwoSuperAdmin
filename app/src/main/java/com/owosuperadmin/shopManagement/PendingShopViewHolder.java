@@ -1,4 +1,4 @@
-package com.owosuperadmin.viewHolders;
+package com.owosuperadmin.shopManagement;
 
 import android.view.View;
 import android.widget.TextView;

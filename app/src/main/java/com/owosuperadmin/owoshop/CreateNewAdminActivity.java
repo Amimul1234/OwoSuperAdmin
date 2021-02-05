@@ -31,6 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.owosuperadmin.homePanel.HomeActivity;
+import com.owosuperadmin.login.LoginActivity;
 
 public class CreateNewAdminActivity extends AppCompatActivity {
 
@@ -222,7 +224,7 @@ public class CreateNewAdminActivity extends AppCompatActivity {
 
                                 FirebaseAuth.getInstance().signOut();
 
-                                FirebaseAuth.getInstance().signInWithEmailAndPassword(admin_email, MainActivity.login_password)
+                                FirebaseAuth.getInstance().signInWithEmailAndPassword(admin_email, LoginActivity.login_password)
                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
