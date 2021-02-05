@@ -1,6 +1,5 @@
 package com.owosuperadmin.owoshop;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -48,24 +47,6 @@ public class AddProductActivity extends AppCompatActivity {
         }
 
         RecyclerView recyclerView = findViewById(R.id.add_product_recyclerview_id);
-
-        //this is added now
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(AddProductActivity.this, recyclerView,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(AddProductActivity.this, SingleProductAddActivity.class);
-                        intent.putExtra("category", AddProductAdapter.product1.get(position).first);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-
-                    }
-                })
-        );
 
         adapter = new AddProductAdapter(pairList, AddProductActivity.this);
 

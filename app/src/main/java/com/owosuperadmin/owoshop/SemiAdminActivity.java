@@ -103,6 +103,8 @@ public class SemiAdminActivity extends AppCompatActivity {
 
 
         adminsList.setVisibility(View.VISIBLE);
+
+        /*
         adminsList.addOnItemTouchListener(
                 new RecyclerItemClickListener(SemiAdminActivity.this, adminsList ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
@@ -119,6 +121,8 @@ public class SemiAdminActivity extends AppCompatActivity {
                     }
                 })
         );
+
+         */
         adminsList.setAdapter(adapter);
         adapter.startListening();
 

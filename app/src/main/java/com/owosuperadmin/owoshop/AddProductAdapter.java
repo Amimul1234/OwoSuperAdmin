@@ -1,6 +1,7 @@
 package com.owosuperadmin.owoshop;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.xy
         notifyDataSetChanged();
     }
 
-    public class xyz extends RecyclerView.ViewHolder{
+    public class xyz extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageView;
         TextView textView;
@@ -77,5 +78,14 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.xy
             textView = itemView.findViewById(R.id.textviewid);
         }
 
+        @Override
+        public void onClick(View v) {
+            /*
+            Intent intent = new Intent(context, SingleProductAddActivity.class);
+            intent.putExtra("category", product1.get());
+            context.startActivity(intent);
+
+             */
+        }
     }
 }

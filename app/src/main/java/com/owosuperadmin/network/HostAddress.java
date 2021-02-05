@@ -1,4 +1,4 @@
-package com.owosuperadmin.Network;
+package com.owosuperadmin.network;
 
 public enum HostAddress {
     server_address("localhost"); //Should change with server address

@@ -93,6 +93,7 @@ public class AvailableOffersActivity extends AppCompatActivity {
                     }
                 };
 
+        /*
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(AvailableOffersActivity.this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
@@ -109,6 +110,9 @@ public class AvailableOffersActivity extends AppCompatActivity {
                     }
                 })
         );
+
+         */
+
         recyclerView.setAdapter(adapter);
         adapter.startListening();
     }

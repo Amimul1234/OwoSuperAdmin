@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".category.AddACategory"></activity>
+        <activity android:name=".category.AddNewCategory"/>
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.CompletedOrderDetails" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Cancelled_order_details" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Shipped_orders_details" />
@@ -52,7 +52,6 @@
         <activity android:name=".CloudMessagingActivity" />
         <activity android:name=".preview_product" />
         <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.confirmed_order_details" />
-        <activity android:name="com.owosuperadmin.dummy.BrowsePicture2" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

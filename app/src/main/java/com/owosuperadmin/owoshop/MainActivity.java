@@ -11,10 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ImageView visibility;
     private Boolean isShowPassword = false;
-    private Boolean loginbuttonhandler = true;
+    private Boolean loginButtonHandler = true;
     private ProgressBar progressBar;
     static String login_password;
 
@@ -48,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.admin_password);
         visibility = findViewById(R.id.show_password);
         progressBar = findViewById(R.id.log_in_progress);
-        loginButton.setEnabled(loginbuttonhandler);
+        loginButton.setEnabled(loginButtonHandler);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginbuttonhandler = false;
+                loginButtonHandler = false;
                 varify();
             }
         });
@@ -86,21 +84,21 @@ public class MainActivity extends AppCompatActivity {
         {
             email_address.setError("Please enter an email address");
             email_address.requestFocus();
-            loginbuttonhandler = true;
+            loginButtonHandler = true;
         }
 
         else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
             email_address.setError("Please enter a valid email address");
             email_address.requestFocus();
-            loginbuttonhandler = true;
+            loginButtonHandler = true;
         }
 
         else if(login_password.isEmpty())
         {
             password.setError("Please enter a password");
             password.requestFocus();
-            loginbuttonhandler = true;
+            loginButtonHandler = true;
         }
 
         else
@@ -125,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                             } else {
                                 Toast.makeText(MainActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
-                                loginbuttonhandler = true;
+                                loginButtonHandler = true;
                                 progressBar.setVisibility(View.INVISIBLE);
                             }
 

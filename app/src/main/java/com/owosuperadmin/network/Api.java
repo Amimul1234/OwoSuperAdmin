@@ -1,6 +1,7 @@
-package com.owosuperadmin.Network;
+package com.owosuperadmin.network;
 
 import com.owosuperadmin.models.Brands;
+import com.owosuperadmin.models.CategoryEntity;
 import com.owosuperadmin.models.OffersEntity;
 import com.owosuperadmin.models.Owo_product;
 import com.owosuperadmin.models.Shop_keeper_orders;
@@ -102,5 +103,10 @@ public interface Api {
     Call<ResponseBody> addAnOffer(
             @Body OffersEntity offersEntity
     );
+
+    @POST("/addNewCategory")
+    Call<ResponseBody> addNewCategory(
+            @Body CategoryEntity categoryEntity
+            );
 
 }

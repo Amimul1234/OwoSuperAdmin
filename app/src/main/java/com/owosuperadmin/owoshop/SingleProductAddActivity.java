@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.network.RetrofitClient;
 import com.owosuperadmin.models.Owo_product;
 import com.owosuperadmin.models.Sub_categories;
 

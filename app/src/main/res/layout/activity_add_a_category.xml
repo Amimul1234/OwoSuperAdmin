@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".category.AddACategory">
+    tools:context=".category.AddNewCategory">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -82,13 +82,13 @@
         android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/add_new_offer_button"
+        android:id="@+id/addNewCategory"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/category_add_progressbar"
         android:background="@drawable/buttons_blue"
         android:layout_margin="20dp"
-        android:text="Add A New Offer"
+        android:text="Add a new category"
         android:textColor="@color/white"
         android:textSize="18sp"/>
 

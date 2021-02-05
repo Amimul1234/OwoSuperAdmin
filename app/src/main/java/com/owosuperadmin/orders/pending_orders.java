@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
-import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.network.RetrofitClient;
 import com.owosuperadmin.adapters.order_adapter.PendingOrderAdapter;
 import com.owosuperadmin.models.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;

@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.network.RetrofitClient;
 import com.owosuperadmin.models.Brands;
 import org.jetbrains.annotations.NotNull;
 import java.io.ByteArrayOutputStream;
@@ -99,7 +99,7 @@ public class AddABrand extends AppCompatActivity {
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Upload Brand Image");
-        progressDialog.setMessage("Please wait while we are uploading brand category image...");
+        progressDialog.setMessage("Please wait while we are uploading brand image...");
         progressDialog.setCanceledOnTouchOutside(false);
 
         if (brand_image.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.home11)).getConstantState()) {
@@ -133,6 +133,7 @@ public class AddABrand extends AppCompatActivity {
 
                             if (response.isSuccessful()) {
                                 try {
+                                    assert response.body() != null;
                                     String path = response.body().string();
 
                                     Brands brands = new Brands(brand_name.getText().toString(), path, category_selector.getSelectedItem().toString());

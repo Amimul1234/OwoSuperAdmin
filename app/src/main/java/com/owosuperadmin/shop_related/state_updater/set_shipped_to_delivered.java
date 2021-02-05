@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.network.RetrofitClient;
 import com.owosuperadmin.adapters.order_adapter.ShippedOrderAdapter;
 import com.owosuperadmin.models.Shop_keeper_orders;
 import com.owosuperadmin.owoshop.R;

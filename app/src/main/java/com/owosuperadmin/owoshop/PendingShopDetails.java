@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.owosuperadmin.LatLng;
-import com.owosuperadmin.Network.RetrofitClient;
+import com.owosuperadmin.network.RetrofitClient;
 import com.owosuperadmin.models.PendingShop;
 import com.owosuperadmin.models.PermissionWithId;
 import com.owosuperadmin.models.Shops;
