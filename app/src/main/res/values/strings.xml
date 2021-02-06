@@ -35,20 +35,14 @@
         communications
     </string>
 
-    <string-array name="home">
-        <item>Create Admin</item>
-        <item>Semi Admins</item>
-        <item>Approve Shop</item>
-        <item>Shops</item>
-        <item>Product</item>
-        <item>Offers</item>
-        <item>Users</item>
-        <item>Message</item>
-        <item>Cloud Messaging</item>
-        <item>Add Qupon</item>
-        <item>Add A Subcategory</item>
-        <item>Add A Brand</item>
-        <item>Add A Time Slot</item>
+    <string-array name="adminPanelItems">
+        <item>Admin Management</item>
+        <item>Shop Management</item>
+        <item>Product Management</item>
+        <item>Offer Management</item>
+        <item>Category Management</item>
+        <item>User Management</item>
+        <item>Order Management</item>
     </string-array>
 
     <string-array name="productname">
@@ -107,5 +101,7 @@
     <string name="logo">Logo</string>
     <string name="see_password">See Password</string>
     <string name="title">Title</string>
+    <string name="home_panel_images">Home Panel Images</string>
+    <string name="circular_logo">Circular logo</string>
 
 </resources>

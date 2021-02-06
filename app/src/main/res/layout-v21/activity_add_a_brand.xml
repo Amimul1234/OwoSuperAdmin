@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owosuperadmin.owoshop.com.owosuperadmin.categoryManagement.AddABrand">
+    tools:context="com.owoSuperAdmin.categoryManagement.brand.AddABrand">
 
     <Toolbar
         android:id="@+id/toolbar"
@@ -26,7 +26,7 @@
         android:id="@+id/brand_image"
         android:layout_width="256dp"
         android:layout_height="256dp"
-        android:src="@drawable/home11"
+        android:src="@drawable/category_management"
         android:layout_below="@id/toolbar"
         android:layout_marginTop="10dp"
         android:padding="5dp"

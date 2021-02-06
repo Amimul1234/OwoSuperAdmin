@@ -15,10 +15,13 @@
 
         <ImageView
             android:id="@+id/homeElementImageView"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:scaleType="fitXY"
-            android:src="@drawable/home3" />
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/category_management"
+            android:contentDescription="@string/home_panel_images" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,9 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/title"
                 android:textAlignment="center"
-                android:fontFamily="@font/ethnocentric"
-                android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

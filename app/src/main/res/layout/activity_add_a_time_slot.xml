@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owosuperadmin.owoshop.AddATimeSlot">
+    tools:context="com.owoSuperAdmin.owoshop.AddATimeSlot">
 
     <Toolbar
         android:id="@+id/toolbar"

@@ -1,0 +1,210 @@
+package com.owoSuperAdmin.homePanel;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
+import com.owoSuperAdmin.categoryManagement.brand.AddABrand;
+import com.owoSuperAdmin.owoshop.AddATimeSlot;
+import com.owoSuperAdmin.productsManagement.AddProductActivity;
+import com.owoSuperAdmin.offersManagement.AvailableOffersActivity;
+import com.owoSuperAdmin.owoshop.CloudMessagingActivity;
+import com.owoSuperAdmin.owoshop.CreateNewAdminActivity;
+import com.owoSuperAdmin.offersManagement.CreateOffersActivity;
+import com.owoSuperAdmin.shopManagement.ManageRegisteredShops;
+import com.owoSuperAdmin.productsManagement.AvailableProducts;
+import com.owoSuperAdmin.offersManagement.QuponActivity;
+import com.owoSuperAdmin.owoshop.R;
+import com.owoSuperAdmin.adminManagement.SemiAdminActivity;
+import com.owoSuperAdmin.shopManagement.ShopApprovalActivity;
+import com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory;
+import com.owoSuperAdmin.ordersManagement.confirm_shop_orders;
+import org.jetbrains.annotations.NotNull;
+
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
+
+    private final Context context;
+    private final String[] segment;
+    private final int[] icons;
+
+    public HomeAdapter(Context context) {
+        this.context = context;
+        segment = context.getResources().getStringArray(R.array.adminPanelItems);
+
+        icons = new int[] {R.drawable.admin_management, R.drawable.shop_management, R.drawable.product_management,
+            R.drawable.offer_management, R.drawable.category_management, R.drawable.user_management,
+            R.drawable.order_management};
+    }
+
+    @NotNull
+    @Override
+    public xyz onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType){
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.home_sample,viewGroup,false);
+        return new  xyz(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull final xyz holder, final int position) {
+        holder.imageView.setImageResource(icons[position]);
+        holder.textView.setText(segment[position]);
+    }
+
+    @Override
+    public int getItemCount() {
+        return segment.length;
+    }
+
+
+    public class xyz extends RecyclerView.ViewHolder{
+        ImageView imageView;
+        TextView textView;
+
+        public xyz(@NonNull View itemView) {
+            super(itemView);
+
+            imageView = itemView.findViewById(R.id.homeElementImageView);
+            textView = itemView.findViewById(R.id.homeElementTextView);
+
+            itemView.setOnClickListener(v -> takeNecessaryActions(getAdapterPosition()));
+        }
+    }
+
+    private void takeNecessaryActions(int position) {
+        if (position==0)
+        {
+            Intent intent=new Intent(context, CreateNewAdminActivity.class);
+            context.startActivity(intent);
+        }
+        else if (position==1)
+        {
+            Intent intent=new Intent(context, SemiAdminActivity.class);
+            context.startActivity(intent);
+        }
+        else if (position==2)
+        {
+            Intent intent=new Intent(context, ShopApprovalActivity.class);
+            context.startActivity(intent);
+        }
+        else if (position==3)
+        {
+            CharSequence[] options=new CharSequence[]{"Shop Management","Shop Orders"};
+            AlertDialog.Builder builder=new AlertDialog.Builder(context);
+            builder.setTitle("SHOPS");
+            builder.setItems(options, (dialog, i) -> {
+                if (i==0)
+                {
+                    Intent intent=new Intent(context, ManageRegisteredShops.class);
+                    context.startActivity(intent);
+
+                }
+                else if(i==1)
+                {
+                    Intent intent = new Intent(context, confirm_shop_orders.class);
+                    context.startActivity(intent);
+                }
+            });
+            builder.show();
+
+        }
+        else if (position==4)
+        {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            View view = LayoutInflater.from(context).inflate(R.layout.custom_products_alert_dialog, null);
+
+            Button add_a_new_product = view.findViewById(R.id.add_a_new_product);
+            Button available_products = view.findViewById(R.id.available_products);
+
+            builder.setView(view);
+
+            final AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            add_a_new_product.setOnClickListener(v -> {
+                Intent intent=new Intent(context, AddProductActivity.class);
+                context.startActivity(intent);
+                alertDialog.cancel();
+            });
+
+            available_products.setOnClickListener(v -> {
+                Intent intent=new Intent(context, AvailableProducts.class);
+                context.startActivity(intent);
+                alertDialog.cancel();
+            });
+
+        }
+
+        else if (position==5)
+        {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            View view = LayoutInflater.from(context).inflate(R.layout.custom_offers_alert_dialog, null);
+
+            Button create_a_new_offer = view.findViewById(R.id.create_a_new_offer);
+            Button available_offers = view.findViewById(R.id.available_offers);
+
+            builder.setView(view);
+
+            final AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            create_a_new_offer.setOnClickListener(v -> {
+                Intent intent=new Intent(context, CreateOffersActivity.class);
+                context.startActivity(intent);
+                alertDialog.cancel();
+            });
+
+            available_offers.setOnClickListener(v -> {
+                Intent intent=new Intent(context, AvailableOffersActivity.class);
+                context.startActivity(intent);
+                alertDialog.cancel();
+            });
+
+        }
+        else if (position==6)
+        {
+
+        }
+        else if (position==7)
+        {
+
+        }
+        else if (position==8)
+        {
+            Intent intent=new Intent(context, CloudMessagingActivity.class);
+            context.startActivity(intent);
+        }
+        else if (position==9)
+        {
+            Intent intent=new Intent(context, QuponActivity.class);
+            context.startActivity(intent);
+        }
+        else if(position == 10)
+        {
+            Intent intent=new Intent(context, AddASubCategory.class);
+            context.startActivity(intent);
+        }
+        else if(position == 11)
+        {
+            Intent intent = new Intent(context, AddABrand.class);
+            context.startActivity(intent);
+        }
+        else if(position == 12)
+        {
+            Intent intent = new Intent(context, AddATimeSlot.class);
+            context.startActivity(intent);
+        }
+    }
+
+}
+

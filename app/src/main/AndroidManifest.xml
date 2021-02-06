@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.owosuperadmin.owoshop">
+    package="com.owoSuperAdmin.owoshop">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,64 +24,63 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.owosuperadmin.categoryManagement.category.AddNewCategory"/>
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.CompletedOrderDetails" />
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Cancelled_order_details" />
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Shipped_orders_details" />
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Picked_order_details" />
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.Processing_orders_details" />
-        <activity android:name="com.owosuperadmin.shop_related.state_updater.set_shipped_to_delivered" />
-        <activity android:name=".AddATimeSlot" />
-        <activity android:name="com.owosuperadmin.categoryManagement.brand.AddABrand" />
-        <activity android:name="com.owosuperadmin.shop_related.completed_order_state" />
-        <activity android:name="com.owosuperadmin.shop_related.shipped_order_activity" />
-        <activity android:name="com.owosuperadmin.shop_related.state_updater.set_picked_to_shipped" />
-        <activity android:name="com.owosuperadmin.shop_related.state_updater.set_processing_to_picked" />
-        <activity android:name="com.owosuperadmin.shop_related.picked_order_activity" />
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.pending_order_details" />
-        <activity android:name="com.owosuperadmin.shop_related.completed_orders" />
-        <activity android:name="com.owosuperadmin.shop_related.cancel_order" />
-        <activity android:name="com.owosuperadmin.shop_related.state_updater.set_confirmed_to_processing" />
-        <activity android:name="com.owosuperadmin.orders.pending_orders" />
-        <activity android:name="com.owosuperadmin.shop_related.confirm_shop_orders" />
-        <activity android:name="com.owosuperadmin.shopManagement.RegisteredShop" />
-        <activity android:name="com.owosuperadmin.categoryManagement.subCategory.AddASubCategory" />
-        <activity android:name="com.owosuperadmin.shopManagement.ApprovePendingShop" />
-        <activity android:name=".QuponActivity" />
-        <activity android:name=".SearchedProducts" />
-        <activity android:name=".CloudMessagingActivity" />
-        <activity android:name=".preview_product" />
-        <activity android:name="com.owosuperadmin.shop_related.details_of_current_state.confirmed_order_details" />
+        <activity android:name="com.owoSuperAdmin.categoryManagement.category.AddNewCategory"/>
+        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.CompletedOrderDetails" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Cancelled_order_details" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Shipped_orders_details" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Picked_order_details" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Processing_orders_details" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_shipped_to_delivered" />
+        <activity android:name="com.owoSuperAdmin.owoshop.AddATimeSlot" />
+        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.AddABrand" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.completed_order_state" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.shipped_order_activity" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_picked_to_shipped" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_processing_to_picked" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.picked_order_activity" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.pending_order_details" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.CompletedOrders" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.cancel_order" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_confirmed_to_processing" />
+        <activity android:name="com.owoSuperAdmin.orders.pending_orders" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.confirm_shop_orders" />
+        <activity android:name="com.owoSuperAdmin.shopManagement.RegisteredShop" />
+        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory" />
+        <activity android:name="com.owoSuperAdmin.shopManagement.ApprovePendingShop" />
+        <activity android:name="com.owoSuperAdmin.offersManagement.QuponActivity" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.SearchedProducts" />
+        <activity android:name="com.owoSuperAdmin.owoshop.CloudMessagingActivity" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.PreViewProductDetails" />
+        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.confirmed_order_details" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/maps_api_key" />
 
         <activity
-            android:name=".LocationFromMap"
+            android:name="com.owoSuperAdmin.owoshop.LocationFromMap"
             android:label="@string/title_activity_location_from_map"
             android:screenOrientation="portrait" />
-        <activity android:name=".UpdateOfferActivity" />
-        <activity android:name="com.owosuperadmin.offersManagement.AvailableOffersActivity" />
-        <activity android:name=".UpdateProductActivity" />
-        <activity android:name=".ProductAvailabilityActivity" />
-        <activity android:name=".SingleProductAddActivity" />
-        <activity android:name=".AddProductActivity" />
-        <activity android:name=".SingleShopApprovalActivity" />
-        <activity android:name="com.owosuperadmin.shopManagement.ShopApprovalActivity" />
-        <activity android:name=".UpdateSemiAdminActivity" />
-        <activity android:name=".CreateOffersActivity" />
-        <activity android:name="com.owosuperadmin.adminManagement.SemiAdminActivity" />
-        <activity android:name="com.owosuperadmin.login.LoginActivity" />
-        <activity android:name="com.owosuperadmin.shopManagement.ManageRegisteredShops" />
-        <activity android:name="com.owosuperadmin.login.Splash_screen">
+        <activity android:name="com.owoSuperAdmin.offersManagement.UpdateOfferActivity" />
+        <activity android:name="com.owoSuperAdmin.offersManagement.AvailableOffersActivity" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.UpdateProduct" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.AvailableProducts" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.AddAProduct" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.AddProductActivity" />
+        <activity android:name="com.owoSuperAdmin.shopManagement.ShopApprovalActivity" />
+        <activity android:name="com.owoSuperAdmin.adminManagement.UpdateSemiAdminActivity" />
+        <activity android:name="com.owoSuperAdmin.offersManagement.CreateOffersActivity" />
+        <activity android:name="com.owoSuperAdmin.adminManagement.SemiAdminActivity" />
+        <activity android:name="com.owoSuperAdmin.login.LoginActivity" />
+        <activity android:name="com.owoSuperAdmin.shopManagement.ManageRegisteredShops" />
+        <activity android:name="com.owoSuperAdmin.login.Splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateNewAdminActivity" />
+        <activity android:name="com.owoSuperAdmin.owoshop.CreateNewAdminActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -93,9 +92,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name="com.owosuperadmin.homePanel.HomeActivity" />
+        <activity android:name="com.owoSuperAdmin.homePanel.HomeActivity" />
 
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name="com.owoSuperAdmin.owoshop.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

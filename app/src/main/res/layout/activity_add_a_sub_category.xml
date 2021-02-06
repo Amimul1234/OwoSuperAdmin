@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owosuperadmin.owoshop.com.owosuperadmin.categoryManagement.AddASubCategory">
+    tools:context="com.owoSuperAdmin.owoshop.com.owosuperadmin.categoryManagement.AddASubCategory">
 
     <Toolbar
         android:id="@+id/toolbar"
@@ -35,7 +35,7 @@
         android:id="@+id/subcategory_image"
         android:layout_width="256dp"
         android:layout_height="256dp"
-        android:src="@drawable/home11"
+        android:src="@drawable/category_management"
         android:layout_below="@id/category_spinner"
         android:layout_marginTop="10dp"
         android:padding="5dp"

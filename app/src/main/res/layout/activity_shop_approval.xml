@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.owosuperadmin.shopManagement.ShopApprovalActivity">
+    tools:context="com.owoSuperAdmin.shopManagement.ShopApprovalActivity">
 
     <TextView
         android:id="@+id/heading1"

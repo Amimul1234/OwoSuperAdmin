@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.owosuperadmin.homePanel.HomeActivity">
+    tools:context="com.owoSuperAdmin.homePanel.HomeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="10dp"
-                />
+                android:contentDescription="@string/circular_logo" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/z_toolbar"
@@ -47,7 +47,8 @@
                 android:paddingEnd = "15dp"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin"
+                tools:ignore="RtlSymmetry" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -56,12 +57,10 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerViewId"
-        android:layout_marginTop="-60dp"
-        android:paddingBottom="100dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        />
+        android:layout_marginTop="-70dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
