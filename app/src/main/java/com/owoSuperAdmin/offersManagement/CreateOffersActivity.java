@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.owoSuperAdmin.homePanel.HomeActivity;
+import com.owoSuperAdmin.adminHomePanel.HomeActivity;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
 import com.owoSuperAdmin.owoshop.R;

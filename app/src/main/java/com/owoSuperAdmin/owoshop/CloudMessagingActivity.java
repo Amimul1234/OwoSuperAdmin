@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.owoSuperAdmin.homePanel.HomeActivity;
+import com.owoSuperAdmin.adminHomePanel.HomeActivity;
 
 public class CloudMessagingActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.homePanel;
+package com.owoSuperAdmin.adminHomePanel;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,31 +1,31 @@
-package com.owoSuperAdmin.shopManagement;
+package com.owoSuperAdmin.shopManagement.allRegisteredShops;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
 import com.firebase.ui.database.paging.LoadingState;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.owoSuperAdmin.shopManagement.entity.PendingShop;
+import com.owoSuperAdmin.shopManagement.PendingShopViewHolderForAdmin;
+import com.owoSuperAdmin.shopManagement.RegisteredShop;
+import com.owoSuperAdmin.shopManagement.approveShop.entities.PendingShop;
 import com.owoSuperAdmin.owoshop.R;
 
 public class ManageRegisteredShops extends AppCompatActivity {
 
     FirebaseRecyclerPagingAdapter<PendingShop, PendingShopViewHolderForAdmin> adapter;
 
-
     private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,10 +77,8 @@ public class ManageRegisteredShops extends AppCompatActivity {
 
                     }
                 };
-
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-
     }
 
     @Override

@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
@@ -66,8 +65,8 @@ public class AddNewCategory extends AppCompatActivity {
     }
 
     private void validateData() {
-        if(categoryImage.getDrawable().getConstantState() ==
-                Objects.requireNonNull(ContextCompat.getDrawable(AddNewCategory.this, R.drawable.addcategorypicture)).getConstantState())
+        if(categoryImage.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(
+                AddNewCategory.this, R.drawable.addcategorypicture)).getConstantState())
         {
             Toast.makeText(this, "Please select image for category", Toast.LENGTH_SHORT).show();
         }

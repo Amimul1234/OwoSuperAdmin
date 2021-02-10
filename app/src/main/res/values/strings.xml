@@ -103,5 +103,24 @@
     <string name="title">Title</string>
     <string name="home_panel_images">Home Panel Images</string>
     <string name="circular_logo">Circular logo</string>
+    <string name="back_button">Back Button</string>
+    <string name="registered_shops">Registered Shops</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="shop_image">Shop Image</string>
+    <string name="shopkeeper_personal_information">Shopkeeper Personal Information</string>
+    <string name="shop_owner_name">Shop Owner Name:</string>
+    <string name="shop_owner_mobile">Shop Owner Mobile:</string>
+    <string name="shop_owner_nid">Shop Owner NID:</string>
+    <string name="shop_information">Shop Information</string>
+    <string name="shop_keeper_nid_front_image">Shop Keeper Nid Front Image</string>
+    <string name="shop_address">Shop Address:</string>
+    <string name="shop_service_mobile">Shop Service Mobile:</string>
+    <string name="requested_categories">Requested Categories:</string>
+    <string name="shop_keeper_trade_license_image">Shop Keeper Trade License Image</string>
+    <string name="see_in_map">See Shop Address In Map</string>
+    <string name="approve_shop">Approve Shop</string>
+    <string name="shop_approval">Shop Approval Requests</string>
+    <string name="no_requests_image">No Requests Image</string>
+    <string name="back_to_main_admin_panel">Back To Main Admin Panel</string>
 
 </resources>

@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.owoSuperAdmin.homePanel.HomeActivity;
+import com.owoSuperAdmin.adminHomePanel.HomeActivity;
 import com.owoSuperAdmin.owoshop.R;
 import java.util.Objects;
 
@@ -101,6 +101,8 @@ public class LoginActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, login_password)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
+
+                            progressDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "Log in successful", Toast.LENGTH_SHORT).show();
 
                             Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
@@ -110,8 +112,8 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
 
                         } else {
-                            Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
+                            Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     });

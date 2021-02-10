@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.shopManagement.entity;
+package com.owoSuperAdmin.shopManagement.approveShop.entities;
 
 import com.owoSuperAdmin.LatLng;
 import java.io.Serializable;

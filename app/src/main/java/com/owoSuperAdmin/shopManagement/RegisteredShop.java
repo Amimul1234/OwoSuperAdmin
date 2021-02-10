@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.owoSuperAdmin.LatLng;
-import com.owoSuperAdmin.shopManagement.entity.PendingShop;
+import com.owoSuperAdmin.shopManagement.approveShop.entities.PendingShop;
 import com.owoSuperAdmin.owoshop.LocationFromMap;
 import com.owoSuperAdmin.owoshop.R;
 import java.util.ArrayList;

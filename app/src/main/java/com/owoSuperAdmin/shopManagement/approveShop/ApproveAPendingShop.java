@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.shopManagement;
+package com.owoSuperAdmin.shopManagement.approveShop;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,21 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.owoSuperAdmin.LatLng;
 import com.owoSuperAdmin.network.RetrofitClient;
-import com.owoSuperAdmin.shopManagement.entity.PendingShop;
+import com.owoSuperAdmin.shopManagement.approveShop.entities.PendingShop;
 import com.owoSuperAdmin.shopManagement.entity.PermissionWithId;
 import com.owoSuperAdmin.shopManagement.entity.Shops;
 import com.owoSuperAdmin.owoshop.LocationFromMap;
 import com.owoSuperAdmin.owoshop.R;
-
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +29,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ApprovePendingShop extends AppCompatActivity {
+public class ApproveAPendingShop extends AppCompatActivity {
 
     private TextView req_category_1;
     private TextView req_category_2;
     private TextView req_category_3;
     private CheckBox checkbox1, checkbox2, checkBox3;
     private PendingShop pendingShop;
-    private AllianceLoader loader;
+    private ProgressBar loader;
 
     private final List<String> permissions = new ArrayList<>();
     int size = 0;
@@ -107,7 +106,7 @@ public class ApprovePendingShop extends AppCompatActivity {
 
         see_in_map.setOnClickListener(v -> {
             com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(latLng.getLatitude(), latLng.getLongitude());
-            Intent intent = new Intent(ApprovePendingShop.this, LocationFromMap.class);
+            Intent intent = new Intent(ApproveAPendingShop.this, LocationFromMap.class);
             intent.putExtra("latlang", mapsLatLng);
             startActivity(intent);
         });
@@ -117,7 +116,7 @@ public class ApprovePendingShop extends AppCompatActivity {
             {
                 if(!checkbox1.isChecked())
                 {
-                    Toast.makeText(ApprovePendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ApproveAPendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -128,7 +127,7 @@ public class ApprovePendingShop extends AppCompatActivity {
             {
                 if(!checkbox1.isChecked() && !checkbox2.isChecked())
                 {
-                    Toast.makeText(ApprovePendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ApproveAPendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -139,7 +138,7 @@ public class ApprovePendingShop extends AppCompatActivity {
             {
                 if(!checkbox1.isChecked() && !checkbox2.isChecked() && !checkBox3.isChecked())
                 {
-                    Toast.makeText(ApprovePendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ApproveAPendingShop.this, "Please give minimum one permission", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -191,18 +190,18 @@ public class ApprovePendingShop extends AppCompatActivity {
 
                     deleteReq.child("PendingShopRequest").child(pendingShop.getShop_owner_mobile()).removeValue()
                             .addOnCompleteListener(task -> {
-                                Toast.makeText(ApprovePendingShop.this, "Removed from pending list", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ApproveAPendingShop.this, "Removed from pending list", Toast.LENGTH_SHORT).show();
 
                                 PermissionWithId permissionWithId = new PermissionWithId(id, permissions);
 
                                 permittedShopKeeper.child("permittedShopKeeper").child(pendingShop.getShop_owner_mobile())
                                         .setValue(permissionWithId).addOnCompleteListener(task1 -> {
-                                            Toast.makeText(ApprovePendingShop.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ApproveAPendingShop.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
                                             finish();
-                                        }).addOnFailureListener(e -> Toast.makeText(ApprovePendingShop.this, "Failed, try again", Toast.LENGTH_SHORT).show());
+                                        }).addOnFailureListener(e -> Toast.makeText(ApproveAPendingShop.this, "Failed, try again", Toast.LENGTH_SHORT).show());
 
                             }).addOnFailureListener(e -> {
-                                Toast.makeText(ApprovePendingShop.this, "Please try again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ApproveAPendingShop.this, "Please try again", Toast.LENGTH_SHORT).show();
                                 loader.setVisibility(View.GONE);
                             });
 

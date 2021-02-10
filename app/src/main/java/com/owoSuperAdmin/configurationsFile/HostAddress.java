@@ -1,8 +1,10 @@
-package com.owoSuperAdmin.network;
+package com.owoSuperAdmin.configurationsFile;
 
 public enum HostAddress {
-    server_address("localhost"); //Should change with server address
-    private String address;
+
+    HOST_ADDRESS("192.168.0.2"); //Should change with server address
+
+    private final String address;
 
     private HostAddress(String address) {
         this.address = address;

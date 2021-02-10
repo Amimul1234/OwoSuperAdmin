@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.shopManagement;
+package com.owoSuperAdmin.shopManagement.approveShop;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +17,13 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.owoSuperAdmin.shopManagement.entity.PendingShop;
+import com.owoSuperAdmin.shopManagement.PendingShopViewHolder;
+import com.owoSuperAdmin.shopManagement.approveShop.entities.PendingShop;
 import com.owoSuperAdmin.owoshop.R;
 
-public class ShopApprovalActivity extends AppCompatActivity {
+public class ShopCreationRequestsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private AllianceLoader loader;
     private ImageView empty_image;
 
@@ -32,12 +32,12 @@ public class ShopApprovalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_approval);
 
-        recyclerView=findViewById(R.id.shop_approval_recyclerviewid);
+        recyclerView = findViewById(R.id.shop_approval_recyclerviewid);
         loader = findViewById(R.id.loader);
         empty_image = findViewById(R.id.empty);
 
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -65,7 +65,7 @@ public class ShopApprovalActivity extends AppCompatActivity {
 
                 loader.setVisibility(View.GONE);
 
-                Glide.with(ShopApprovalActivity.this).load(model.getShop_image_uri()).into(holder.shop_image);
+                Glide.with(ShopCreationRequestsActivity.this).load(model.getShop_image_uri()).into(holder.shop_image);
 
                 holder.shop_name.setText(model.getShop_name());
                 holder.mobile_number.setText(model.getShop_owner_mobile());
@@ -73,7 +73,7 @@ public class ShopApprovalActivity extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ShopApprovalActivity.this, ApprovePendingShop.class);
+                        Intent intent = new Intent(ShopCreationRequestsActivity.this, ApproveAPendingShop.class);
                         intent.putExtra("PendingShop", model);
                         startActivity(intent);
                     }

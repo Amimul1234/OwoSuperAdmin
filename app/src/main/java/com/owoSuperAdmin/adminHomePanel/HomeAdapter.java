@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.homePanel;
+package com.owoSuperAdmin.adminHomePanel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,14 +18,15 @@ import com.owoSuperAdmin.offersManagement.AvailableOffersActivity;
 import com.owoSuperAdmin.owoshop.CloudMessagingActivity;
 import com.owoSuperAdmin.owoshop.CreateNewAdminActivity;
 import com.owoSuperAdmin.offersManagement.CreateOffersActivity;
-import com.owoSuperAdmin.shopManagement.ManageRegisteredShops;
+import com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops;
 import com.owoSuperAdmin.productsManagement.AvailableProducts;
 import com.owoSuperAdmin.offersManagement.QuponActivity;
 import com.owoSuperAdmin.owoshop.R;
-import com.owoSuperAdmin.adminManagement.SemiAdminActivity;
-import com.owoSuperAdmin.shopManagement.ShopApprovalActivity;
+import com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity;
 import com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory;
 import com.owoSuperAdmin.ordersManagement.confirm_shop_orders;
+import com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop;
+
 import org.jetbrains.annotations.NotNull;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
@@ -83,19 +84,48 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             Intent intent=new Intent(context, CreateNewAdminActivity.class);
             context.startActivity(intent);
         }
-        else if (position==1)
+        else if (position == 1)
         {
-            Intent intent=new Intent(context, SemiAdminActivity.class);
-            context.startActivity(intent);
+            CharSequence[] options=new CharSequence[] {"Manage Approved Shops","Approve A New Shop",
+                    "Rejected Shops", "Shops Category Extension Requests"};
+
+            AlertDialog.Builder builder=new AlertDialog.Builder(context);
+            builder.setTitle("Shop Management");
+
+            builder.setItems(options, (dialog, i) -> {
+                switch (i)
+                {
+                    case 0:
+                    {
+                        Intent intent=new Intent(context, ManageRegisteredShops.class);
+                        context.startActivity(intent);
+                        break;
+                    }
+                    case 1:
+                    {
+                        Intent intent = new Intent(context, ShopCreationRequestsActivity.class);
+                        context.startActivity(intent);
+                        break;
+                    }
+                    case 2:
+                    {
+                        Intent intent = new Intent(context, confirm_shop_orders.class);
+                        context.startActivity(intent);
+                        break;
+                    }
+                }
+            });
+            builder.show();
+
         }
         else if (position==2)
         {
-            Intent intent=new Intent(context, ShopApprovalActivity.class);
+            Intent intent=new Intent(context, ShopCreationRequestsActivity.class);
             context.startActivity(intent);
         }
         else if (position==3)
         {
-            CharSequence[] options=new CharSequence[]{"Shop Management","Shop Orders"};
+            CharSequence[] options=new CharSequence[]{"Shop Management", "Shop Orders"};
             AlertDialog.Builder builder=new AlertDialog.Builder(context);
             builder.setTitle("SHOPS");
             builder.setItems(options, (dialog, i) -> {

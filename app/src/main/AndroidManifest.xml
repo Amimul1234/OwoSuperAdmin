@@ -46,7 +46,7 @@
         <activity android:name="com.owoSuperAdmin.ordersManagement.confirm_shop_orders" />
         <activity android:name="com.owoSuperAdmin.shopManagement.RegisteredShop" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory" />
-        <activity android:name="com.owoSuperAdmin.shopManagement.ApprovePendingShop" />
+        <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop" />
         <activity android:name="com.owoSuperAdmin.offersManagement.QuponActivity" />
         <activity android:name="com.owoSuperAdmin.productsManagement.SearchedProducts" />
         <activity android:name="com.owoSuperAdmin.owoshop.CloudMessagingActivity" />
@@ -67,12 +67,12 @@
         <activity android:name="com.owoSuperAdmin.productsManagement.AvailableProducts" />
         <activity android:name="com.owoSuperAdmin.productsManagement.AddAProduct" />
         <activity android:name="com.owoSuperAdmin.productsManagement.AddProductActivity" />
-        <activity android:name="com.owoSuperAdmin.shopManagement.ShopApprovalActivity" />
+        <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity" />
         <activity android:name="com.owoSuperAdmin.adminManagement.UpdateSemiAdminActivity" />
         <activity android:name="com.owoSuperAdmin.offersManagement.CreateOffersActivity" />
         <activity android:name="com.owoSuperAdmin.adminManagement.SemiAdminActivity" />
         <activity android:name="com.owoSuperAdmin.login.LoginActivity" />
-        <activity android:name="com.owoSuperAdmin.shopManagement.ManageRegisteredShops" />
+        <activity android:name="com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops" />
         <activity android:name="com.owoSuperAdmin.login.Splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -92,7 +92,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name="com.owoSuperAdmin.homePanel.HomeActivity" />
+        <activity android:name="com.owoSuperAdmin.adminHomePanel.HomeActivity" />
 
         <service android:name="com.owoSuperAdmin.owoshop.MyFirebaseMessagingService">
             <intent-filter>
