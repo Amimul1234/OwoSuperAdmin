@@ -21,6 +21,12 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Api {
+    //Shops Management
+    @POST("/approveShop")
+    Call<Shops> approveShop(@Body Shops shops);
+
+    @GET("/getAllShopRegistrationRequests")
+    Call<ResponseBody> getAllShopRegistrationRequests(@Query("pageNumber") Long pageNumber);
 
     @POST("/addProduct")
     Call<Owo_product> createProduct(
@@ -30,11 +36,6 @@ public interface Api {
     @POST("/addABrand")
     Call<ResponseBody> addABrand(
             @Body Brands brands
-    );
-
-    @POST("/approveShop")
-    Call<Shops> approveShop(
-            @Body Shops shops
     );
 
     @PUT("/updateProduct")
@@ -100,13 +101,9 @@ public interface Api {
     );
 
     @POST("/addAnOffer")
-    Call<ResponseBody> addAnOffer(
-            @Body OffersEntity offersEntity
-    );
+    Call<ResponseBody> addAnOffer(@Body OffersEntity offersEntity);
 
     @POST("/addNewCategory")
-    Call<ResponseBody> addNewCategory(
-            @Body CategoryEntity categoryEntity
-            );
+    Call<ResponseBody> addNewCategory(@Body CategoryEntity categoryEntity);
 
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
@@ -16,13 +17,15 @@
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/shop_image"
+            android:id="@+id/shopImage"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="100dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/circularlogo"
+            android:contentDescription="@string/shop_image"
             app:civ_border_color="@color/black"
-            app:civ_border_width="2dp"
-            android:layout_marginEnd="5dp"/>
+            />
 
         <LinearLayout
             android:layout_weight="4"
@@ -32,37 +35,44 @@
             >
 
             <TextView
-                android:id="@+id/shop_name"
+                android:id="@+id/shopName"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="ABCD Medicine Shop"
-                android:textAlignment="textStart"
-                android:textColor="#000000"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="@string/shop_name"
+                android:textColor="@color/blue"
                 android:textSize="20sp"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:ellipsize="end"
                 android:textStyle="bold" />
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/shopOwnerMobileNumber"
                 android:layout_width="match_parent"
-                android:layout_height="31dp"
-                android:layout_marginTop="15dp"
-                >
+                android:layout_height="35dp"
+                android:text="@string/shop_owner_mobile"
+                android:textColor="@color/black"
+                android:drawablePadding="7dp"
+                android:gravity="center_vertical"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:textAlignment="textStart"
+                tools:ignore="RtlCompat"
+                app:drawableStartCompat="@drawable/ic_baseline_phone_android_24" />
 
-                <TextView
-                    android:id="@+id/shop_keeper_mobile_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:text="01718995606"
-                    android:textColor="#F14813"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textAlignment="textStart"
-                    tools:ignore="RtlCompat" />
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/shopAddress"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="@string/shop_address"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:textAlignment="textStart"
+                tools:ignore="RtlCompat"
+                android:drawablePadding="7dp"
+                app:drawableStartCompat="@drawable/ic_baseline_location_city_24" />
 
         </LinearLayout>
 

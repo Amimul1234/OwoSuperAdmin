@@ -1,9 +1,9 @@
 package com.owoSuperAdmin.shopManagement.entity;
 
 public class Shops {
-    private int shop_id;
-    private double latitude;
-    private double longitude;
+    private Long shop_id;
+    private Double latitude;
+    private Double longitude;
     private String shop_address;
     private String shop_image_uri;
     private String shop_keeper_nid_front_uri;
@@ -16,7 +16,11 @@ public class Shops {
     public Shops() {
     }
 
-    public Shops(double latitude, double longitude, String shop_address, String shop_image_uri, String shop_keeper_nid_front_uri, String shop_name, String shop_owner_mobile, String shop_owner_name, String shop_service_mobile, String trade_license_url) {
+    public Shops(Double latitude, Double longitude, String shop_address,
+                 String shop_image_uri, String shop_keeper_nid_front_uri,
+                 String shop_name, String shop_owner_mobile, String shop_owner_name,
+                 String shop_service_mobile, String trade_license_url)
+    {
         this.latitude = latitude;
         this.longitude = longitude;
         this.shop_address = shop_address;
@@ -30,27 +34,27 @@ public class Shops {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return shop_id;
     }
 
-    public void setId(int shop_id) {
+    public void setId(Long shop_id) {
         this.shop_id = shop_id;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 

@@ -6,11 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -23,22 +23,22 @@ import com.owoSuperAdmin.owoshop.R;
 
 public class ShopCreationRequestsActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private AllianceLoader loader;
-    private ImageView empty_image;
+    private RecyclerView shopApprovalRequestRecyclerView;
+    private ProgressBar progressBar;
+    private ImageView emptyRequestImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_approval);
 
-        recyclerView = findViewById(R.id.shop_approval_recyclerviewid);
-        loader = findViewById(R.id.loader);
-        empty_image = findViewById(R.id.empty);
+        shopApprovalRequestRecyclerView = findViewById(R.id.shopApprovalRequestRecyclerView);
+        progressBar = findViewById(R.id.progressBar);
+        emptyRequestImage = findViewById(R.id.emptyRequestImage);
 
-        recyclerView.setHasFixedSize(true);
+        shopApprovalRequestRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        shopApprovalRequestRecyclerView.setLayoutManager(layoutManager);
     }
 
 
