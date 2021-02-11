@@ -26,7 +26,7 @@ public interface Api {
     Call<Shops> approveShop(@Body Shops shops);
 
     @GET("/getAllShopRegistrationRequests")
-    Call<ResponseBody> getAllShopRegistrationRequests(@Query("pageNumber") Long pageNumber);
+    Call<List<Shops>> getAllShopRegistrationRequests(@Query("pageNumber") int pageNumber);
 
     @POST("/addProduct")
     Call<Owo_product> createProduct(

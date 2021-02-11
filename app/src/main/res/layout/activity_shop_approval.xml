@@ -39,27 +39,21 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/shopApprovalRequestRecyclerView"
-        android:layout_below="@id/shopApprovalToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateTint="@color/blue"
-        android:visibility="gone"
-        android:layout_centerInParent="true"/>
-
-    <ImageView
-        android:id="@+id/emptyRequestImage"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/empty"
-        android:visibility="invisible"
-        android:contentDescription="@string/no_requests_image"/>
+        android:layout_below="@id/shopApprovalToolbar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/shopApprovalRequestRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

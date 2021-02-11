@@ -44,7 +44,6 @@
         <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_confirmed_to_processing" />
         <activity android:name="com.owoSuperAdmin.orders.pending_orders" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.confirm_shop_orders" />
-        <activity android:name="com.owoSuperAdmin.shopManagement.RegisteredShop" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory" />
         <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop" />
         <activity android:name="com.owoSuperAdmin.offersManagement.QuponActivity" />

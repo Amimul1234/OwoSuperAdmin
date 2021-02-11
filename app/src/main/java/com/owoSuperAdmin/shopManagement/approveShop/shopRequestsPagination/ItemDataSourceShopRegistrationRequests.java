@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.shopManagement.approveShop.pagination;
+package com.owoSuperAdmin.shopManagement.approveShop.shopRequestsPagination;
 
 import android.util.Log;
 import androidx.annotation.NonNull;
@@ -10,14 +10,13 @@ import com.owoSuperAdmin.shopManagement.entity.Shops;
 import com.owoSuperAdmin.utilities.NetworkState;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ItemDataSourceShopRegistrationRequests extends PageKeyedDataSource<Long, Shops> {
+public class ItemDataSourceShopRegistrationRequests extends PageKeyedDataSource<Integer, Shops> {
 
-    private static final Long FIRST_PAGE = 0L;
+    private static final int FIRST_PAGE = 0;
     private final Api restApiFactory;
 
     private final MutableLiveData<NetworkState> networkState;
@@ -32,17 +31,19 @@ public class ItemDataSourceShopRegistrationRequests extends PageKeyedDataSource<
     }
 
     @Override
-    public void loadInitial(@NonNull LoadInitialParams<Long> params, @NonNull LoadInitialCallback<Long, Shops> callback) {
+    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Shops> callback) {
+
         networkState.postValue(NetworkState.LOADING);
 
         restApiFactory.getAllShopRegistrationRequests(FIRST_PAGE)
-                .enqueue(new Callback<ResponseBody>() {
+                .enqueue(new Callback<List<Shops>>() {
                     @Override
-                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                    public void onResponse(@NotNull Call<List<Shops>> call, @NotNull Response<List<Shops>> response) {
 
                         if(response.isSuccessful())
                         {
-                            callback.onResult((List<Shops>) response.body(), null, (long) (FIRST_PAGE+1));
+                            assert response.body() != null;
+                            callback.onResult(response.body(), null, FIRST_PAGE+1);
                             networkState.postValue(NetworkState.LOADED);
                         }
                         else
@@ -54,26 +55,27 @@ public class ItemDataSourceShopRegistrationRequests extends PageKeyedDataSource<
                     }
 
                     @Override
-                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                        String errorMessage = t == null ? "unknown error" : t.getMessage();
-                        Log.e("Dara Source Shop Reg.", errorMessage);
+                    public void onFailure(@NotNull Call<List<Shops>> call, @NotNull Throwable t) {
+                        String errorMessage = t.getMessage();
+                        Log.e("Data Source Shop Reg.", errorMessage);
                         networkState.postValue(new NetworkState(NetworkState.Status.FAILED, "Please try again"));
                     }
                 });
     }
 
     @Override
-    public void loadBefore(@NonNull LoadParams<Long> params, @NonNull LoadCallback<Long, Shops> callback) {
+    public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Shops> callback) {
         networkState.postValue(NetworkState.LOADING);
 
         restApiFactory.getAllShopRegistrationRequests(params.key)
-                .enqueue(new Callback<ResponseBody>() {
+                .enqueue(new Callback<List<Shops>>() {
                     @Override
-                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                    public void onResponse(@NotNull Call<List<Shops>> call, @NotNull Response<List<Shops>> response) {
                         if(response.isSuccessful())
                         {
-                            Long key = (params.key > 0) ? params.key - 1 : null;
-                            callback.onResult((List<Shops>) response.body(), key);
+                            Integer key = (params.key > 0) ? params.key - 1 : null;
+                            assert response.body() != null;
+                            callback.onResult(response.body(), key);
                             networkState.postValue(NetworkState.LOADED);
                         }
                         else
@@ -84,34 +86,36 @@ public class ItemDataSourceShopRegistrationRequests extends PageKeyedDataSource<
                     }
 
                     @Override
-                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                        String errorMessage = t == null ? "unknown error" : t.getMessage();
+                    public void onFailure(@NotNull Call<List<Shops>> call, @NotNull Throwable t) {
+                        String errorMessage = t.getMessage();
                         networkState.postValue(new NetworkState(NetworkState.Status.FAILED, errorMessage));
                     }
                 });
     }
 
     @Override
-    public void loadAfter(@NonNull LoadParams<Long> params, @NonNull LoadCallback<Long, Shops> callback) {
+    public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Shops> callback) {
 
         networkState.postValue(NetworkState.LOADING);
 
         restApiFactory.getAllShopRegistrationRequests(params.key)
-                .enqueue(new Callback<ResponseBody>() {
+                .enqueue(new Callback<List<Shops>>() {
                     @Override
-                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                    public void onResponse(@NotNull Call<List<Shops>> call, @NotNull Response<List<Shops>> response) {
                         if(response.isSuccessful())
                         {
                             if(params.key < 12)
                             {
                                 Log.d("loadAfter", String.valueOf(params.key));
-                                callback.onResult((List<Shops>) response.body(), params.key+1);
+                                assert response.body() != null;
+                                callback.onResult(response.body(), params.key+1);
 
                                 networkState.postValue(NetworkState.LOADED);
                             }
                             else
                             {
-                                callback.onResult((List<Shops>) response.body(), null);
+                                assert response.body() != null;
+                                callback.onResult(response.body(), null);
                             }
                         }
                         else
@@ -122,9 +126,9 @@ public class ItemDataSourceShopRegistrationRequests extends PageKeyedDataSource<
                     }
 
                     @Override
-                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                    public void onFailure(@NotNull Call<List<Shops>> call, @NotNull Throwable t) {
                         Log.e("Error", t.getMessage());
-                        String errorMessage = t == null ? "unknown error" : t.getMessage();
+                        String errorMessage = t.getMessage();
                         networkState.postValue(new NetworkState(NetworkState.Status.FAILED, errorMessage));
                     }
                 });

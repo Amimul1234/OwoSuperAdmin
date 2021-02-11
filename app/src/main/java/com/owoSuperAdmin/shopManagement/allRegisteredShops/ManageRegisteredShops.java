@@ -16,11 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.owoSuperAdmin.shopManagement.PendingShopViewHolderForAdmin;
-import com.owoSuperAdmin.shopManagement.RegisteredShop;
-import com.owoSuperAdmin.shopManagement.approveShop.entities.PendingShop;
 import com.owoSuperAdmin.owoshop.R;
 
 public class ManageRegisteredShops extends AppCompatActivity {
+    /*
 
     FirebaseRecyclerPagingAdapter<PendingShop, PendingShopViewHolderForAdmin> adapter;
 
@@ -93,4 +92,6 @@ public class ManageRegisteredShops extends AppCompatActivity {
         adapter.stopListening();
     }
 
+
+     */
 }

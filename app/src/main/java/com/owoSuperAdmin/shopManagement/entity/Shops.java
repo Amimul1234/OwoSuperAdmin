@@ -1,9 +1,15 @@
 package com.owoSuperAdmin.shopManagement.entity;
 
-public class Shops {
+import androidx.annotation.Nullable;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Shops implements Serializable {
     private Long shop_id;
     private Double latitude;
     private Double longitude;
+    private Boolean approved;
     private String shop_address;
     private String shop_image_uri;
     private String shop_keeper_nid_front_uri;
@@ -12,17 +18,20 @@ public class Shops {
     private String shop_owner_name;
     private String shop_service_mobile;
     private String trade_license_url;
+    private List<ShopKeeperPermissions> shopKeeperPermissions = new ArrayList<>();
 
     public Shops() {
     }
 
-    public Shops(Double latitude, Double longitude, String shop_address,
-                 String shop_image_uri, String shop_keeper_nid_front_uri,
-                 String shop_name, String shop_owner_mobile, String shop_owner_name,
-                 String shop_service_mobile, String trade_license_url)
+    public Shops(Long shop_id, Double latitude, Double longitude, Boolean approved,
+                 String shop_address, String shop_image_uri, String shop_keeper_nid_front_uri,
+                 String shop_name, String shop_owner_mobile, String shop_owner_name, String shop_service_mobile,
+                 String trade_license_url, List<ShopKeeperPermissions> shopKeeperPermissions)
     {
+        this.shop_id = shop_id;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.approved = approved;
         this.shop_address = shop_address;
         this.shop_image_uri = shop_image_uri;
         this.shop_keeper_nid_front_uri = shop_keeper_nid_front_uri;
@@ -31,14 +40,27 @@ public class Shops {
         this.shop_owner_name = shop_owner_name;
         this.shop_service_mobile = shop_service_mobile;
         this.trade_license_url = trade_license_url;
+        this.shopKeeperPermissions = shopKeeperPermissions;
     }
 
+    public List<ShopKeeperPermissions> getShopKeeperPermissions() {
+        return shopKeeperPermissions;
+    }
 
-    public Long getId() {
+    public void setShopKeeperPermissions(List<ShopKeeperPermissions> shopKeeperPermissions) {
+        this.shopKeeperPermissions = shopKeeperPermissions;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return super.equals(obj);
+    }
+
+    public Long getShop_id() {
         return shop_id;
     }
 
-    public void setId(Long shop_id) {
+    public void setShop_id(Long shop_id) {
         this.shop_id = shop_id;
     }
 
@@ -56,6 +78,14 @@ public class Shops {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 
     public String getShop_address() {

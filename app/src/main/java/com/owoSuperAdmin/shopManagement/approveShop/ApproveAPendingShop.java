@@ -12,12 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.owoSuperAdmin.LatLng;
+import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.network.RetrofitClient;
-import com.owoSuperAdmin.shopManagement.approveShop.entities.PendingShop;
-import com.owoSuperAdmin.shopManagement.entity.PermissionWithId;
+import com.owoSuperAdmin.shopManagement.entity.ShopKeeperPermissions;
 import com.owoSuperAdmin.shopManagement.entity.Shops;
 import com.owoSuperAdmin.owoshop.LocationFromMap;
 import com.owoSuperAdmin.owoshop.R;
@@ -35,10 +32,11 @@ public class ApproveAPendingShop extends AppCompatActivity {
     private TextView req_category_2;
     private TextView req_category_3;
     private CheckBox checkbox1, checkbox2, checkBox3;
-    private PendingShop pendingShop;
+    private Shops shops;
     private ProgressBar loader;
 
     private final List<String> permissions = new ArrayList<>();
+
     int size = 0;
 
     @Override
@@ -46,7 +44,7 @@ public class ApproveAPendingShop extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_shop_details);
 
-        pendingShop = (PendingShop) getIntent().getSerializableExtra("PendingShop");
+        shops = (Shops) getIntent().getSerializableExtra("ShopRequest");
 
         TextView shop_name = findViewById(R.id.shop_name);
         TextView shop_keeper_name = findViewById(R.id.shop_owner_name);
@@ -69,43 +67,41 @@ public class ApproveAPendingShop extends AppCompatActivity {
         Button see_in_map = findViewById(R.id.shop_address_in_map);
         Button approve_shop = findViewById(R.id.approve_shop);
 
-        loader = findViewById(R.id.alliance_loader);
+        loader = findViewById(R.id.progressBar);
 
-        shop_name.setText(pendingShop.getShop_name());
-        shop_keeper_name.setText(pendingShop.getShop_owner_name());
-        shop_keeper_mobile.setText(pendingShop.getShop_owner_mobile());
-        shop_service_mobile.setText(pendingShop.getShop_service_mobile());
-        shop_address.setText(pendingShop.getShop_address());
+        shop_name.setText(shops.getShop_name());
+        shop_keeper_name.setText(shops.getShop_owner_name());
+        shop_keeper_mobile.setText(shops.getShop_owner_mobile());
+        shop_service_mobile.setText(shops.getShop_service_mobile());
+        shop_address.setText(shops.getShop_address());
 
-        Glide.with(getApplicationContext()).load(pendingShop.getShop_image_uri()).into(shop_image);
-        Glide.with(getApplicationContext()).load(pendingShop.getShop_keeper_nid_front_uri()).into(shop_keeper_nid);
-        Glide.with(getApplicationContext()).load(pendingShop.getTrade_license_uri()).into(shop_trade_license);
+        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getShop_image_uri()).into(shop_image);
+        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getShop_keeper_nid_front_uri()).into(shop_keeper_nid);
+        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getTrade_license_url()).into(shop_trade_license);
 
-        LatLng latLng = pendingShop.getLatLng();
-
-        size = pendingShop.getHaveAccess().size();
+        size = shops.getShopKeeperPermissions().size();
 
         if(size == 1)
         {
-            req_category_1.setText(pendingShop.getHaveAccess().get(0));
+            req_category_1.setText(shops.getShopKeeperPermissions().get(0).getPermittedCategory());
             checkbox2.setVisibility(View.GONE);
             checkBox3.setVisibility(View.GONE);
         }
         else if(size == 2)
         {
-            req_category_1.setText(pendingShop.getHaveAccess().get(0));
-            req_category_2.setText(pendingShop.getHaveAccess().get(1));
+            req_category_1.setText(shops.getShopKeeperPermissions().get(0).getPermittedCategory());
+            req_category_2.setText(shops.getShopKeeperPermissions().get(1).getPermittedCategory());
             checkBox3.setVisibility(View.GONE);
         }
         else
         {
-            req_category_1.setText(pendingShop.getHaveAccess().get(0));
-            req_category_2.setText(pendingShop.getHaveAccess().get(1));
-            req_category_3.setText(pendingShop.getHaveAccess().get(2));
+            req_category_1.setText(shops.getShopKeeperPermissions().get(0).getPermittedCategory());
+            req_category_2.setText(shops.getShopKeeperPermissions().get(1).getPermittedCategory());
+            req_category_3.setText(shops.getShopKeeperPermissions().get(2).getPermittedCategory());
         }
 
         see_in_map.setOnClickListener(v -> {
-            com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(latLng.getLatitude(), latLng.getLongitude());
+            com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(shops.getLatitude(), shops.getLongitude());
             Intent intent = new Intent(ApproveAPendingShop.this, LocationFromMap.class);
             intent.putExtra("latlang", mapsLatLng);
             startActivity(intent);
@@ -164,54 +160,52 @@ public class ApproveAPendingShop extends AppCompatActivity {
             permissions.add(req_category_3.getText().toString());
         }
 
-        DatabaseReference permittedShopKeeper = FirebaseDatabase.getInstance().getReference();
-
         loader.setVisibility(View.VISIBLE);
 
-
-        Shops shops = new Shops(pendingShop.getLatLng().getLatitude(), pendingShop.getLatLng().getLongitude(), pendingShop.getShop_address(),
-                pendingShop.getShop_image_uri(), pendingShop.getShop_keeper_nid_front_uri(), pendingShop.getShop_name(), pendingShop.getShop_owner_mobile(),
-                pendingShop.getShop_owner_name(), pendingShop.getShop_service_mobile(), pendingShop.getTrade_license_uri());
+        Shops newShop = new Shops();
+        List<ShopKeeperPermissions> shopKeeperPermissionsList = new ArrayList<>();
 
 
-        Call<Shops> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .approveShop(shops);
+        for(int i=0; i<permissions.size(); i++)
+        {
+            shops.getShopKeeperPermissions().add(new ShopKeeperPermissions(permissions.get(i)));
+        }
 
-        call.enqueue(new Callback<Shops>() {
-            @Override
-            public void onResponse(@NotNull Call<Shops> call, @NotNull Response<Shops> response) {
-                if(response.body()!=null)
-                {
-                    int id = response.body().getId();
+        newShop.setShop_id(shops.getShop_id());
+        newShop.setLatitude(shops.getLatitude());
+        newShop.setLongitude(shops.getLongitude());
+        newShop.setApproved(true);
+        newShop.setShop_address(shops.getShop_address());
+        newShop.setShop_image_uri(shops.getShop_image_uri());
+        newShop.setShop_keeper_nid_front_uri(shops.getShop_keeper_nid_front_uri());
+        newShop.setShop_name(shops.getShop_name());
+        newShop.setShop_owner_mobile(shops.getShop_owner_mobile());
+        newShop.setShop_owner_name(shops.getShop_owner_name());
+        newShop.setShop_service_mobile(shops.getShop_service_mobile());
+        newShop.setTrade_license_url(shops.getTrade_license_url());
+        newShop.setShopKeeperPermissions(shopKeeperPermissionsList);
 
-                    DatabaseReference deleteReq = FirebaseDatabase.getInstance().getReference();
+        RetrofitClient.getInstance().getApi()
+                .approveShop(newShop)
+                .enqueue(new Callback<Shops>() {
+                    @Override
+                    public void onResponse(@NotNull Call<Shops> call, @NotNull Response<Shops> response) {
+                        if(response.isSuccessful())
+                        {
+                            Toast.makeText(ApproveAPendingShop.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                        }
+                        else
+                        {
+                            Toast.makeText(ApproveAPendingShop.this, "Failed, try again", Toast.LENGTH_SHORT).show();
+                            loader.setVisibility(View.GONE);
+                        }
+                    }
 
-                    deleteReq.child("PendingShopRequest").child(pendingShop.getShop_owner_mobile()).removeValue()
-                            .addOnCompleteListener(task -> {
-                                Toast.makeText(ApproveAPendingShop.this, "Removed from pending list", Toast.LENGTH_SHORT).show();
-
-                                PermissionWithId permissionWithId = new PermissionWithId(id, permissions);
-
-                                permittedShopKeeper.child("permittedShopKeeper").child(pendingShop.getShop_owner_mobile())
-                                        .setValue(permissionWithId).addOnCompleteListener(task1 -> {
-                                            Toast.makeText(ApproveAPendingShop.this, "Permission given to open shop", Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }).addOnFailureListener(e -> Toast.makeText(ApproveAPendingShop.this, "Failed, try again", Toast.LENGTH_SHORT).show());
-
-                            }).addOnFailureListener(e -> {
-                                Toast.makeText(ApproveAPendingShop.this, "Please try again", Toast.LENGTH_SHORT).show();
-                                loader.setVisibility(View.GONE);
-                            });
-
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<Shops> call, @NotNull Throwable t) {
-                Log.d("Error on creating shop", Objects.requireNonNull(t.getMessage()));
-            }
-        });
+                    @Override
+                    public void onFailure(@NotNull Call<Shops> call, @NotNull Throwable t) {
+                        Log.d("Error on creating shop", Objects.requireNonNull(t.getMessage()));
+                    }
+                });
     }
 }

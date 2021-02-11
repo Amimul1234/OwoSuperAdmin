@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PermissionWithId {
-    private int id;
+    private Long id;
     private List<String> permissions = new ArrayList<>();
-
-    public PermissionWithId(int id, List<String> permissions) {
-        this.id = id;
-        this.permissions = permissions;
-    }
 
     public PermissionWithId() {
     }
 
-    public int getId() {
+    public PermissionWithId(Long id, List<String> permissions) {
+        this.id = id;
+        this.permissions = permissions;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

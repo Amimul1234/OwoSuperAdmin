@@ -7,11 +7,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.owoSuperAdmin.shopManagement.approveShop.entities.PendingShop;
 import com.owoSuperAdmin.owoshop.R;
 
 public class PendingShopViewHolderForAdmin extends RecyclerView.ViewHolder{
-
     public TextView shop_name;
     public ImageView shop_image;
 
@@ -21,8 +19,11 @@ public class PendingShopViewHolderForAdmin extends RecyclerView.ViewHolder{
         shop_image = itemView.findViewById(R.id.shop_image);
     }
 
+    /*
     public void bind(PendingShop model, Context mcTx) {
         shop_name.setText(model.getShop_name());
         Glide.with(mcTx).load(model.getShop_image_uri()).into(shop_image);
     }
+
+     */
 }

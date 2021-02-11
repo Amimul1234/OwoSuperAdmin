@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.shopManagement.approveShop.pagination;
+package com.owoSuperAdmin.shopManagement.approveShop.shopRequestsPagination;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
