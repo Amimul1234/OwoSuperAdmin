@@ -190,6 +190,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         {
 
                         }
+                        else
+                        {
+
+                        }
                     }));
 
                     categoryBuilder.show();
@@ -197,8 +201,25 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 }
                 else if(i==1)
                 {
-                    Intent intent = new Intent(context, confirm_shop_orders.class);
-                    context.startActivity(intent);
+                    CharSequence[] subCategoryOptions = new CharSequence[]{"Create a new sub-category", "Update existent sub-category",
+                            "Delete existent sub-category"};
+
+                    AlertDialog.Builder subCategoryBuilder = new AlertDialog.Builder(context);
+                    subCategoryBuilder.setTitle("Sub Category Management");
+
+                    subCategoryBuilder.setItems(subCategoryOptions, ((dialog1, which) -> {
+                        if(which == 0)
+                        {
+                            Intent intent=new Intent(context, AddASubCategory.class);
+                            context.startActivity(intent);
+                        }
+                        else if(which == 1)
+                        {
+
+                        }
+                    }));
+
+                    subCategoryBuilder.show();
                 }
             });
 

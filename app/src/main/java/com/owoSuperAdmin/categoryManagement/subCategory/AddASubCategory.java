@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,10 +32,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.Sub_categories;
+import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
-
+import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddASubCategory extends AppCompatActivity {
 
@@ -64,38 +71,60 @@ public class AddASubCategory extends AppCompatActivity {
         category_name = findViewById(R.id.category_spinner);
         progressBar = findViewById(R.id.progress);
 
+        populateSpinner();
+
         storageSubCategoryReference = FirebaseStorage.getInstance().getReference().child("Sub Category");
 
-        sub_category_image.setOnClickListener(new View.OnClickListener() {//For selecting the profile image
-            @Override
-            public void onClick(View v) {
-                requestStoragePermission();
+        //For selecting the profile image
+        sub_category_image.setOnClickListener(v -> requestStoragePermission());
+
+        create_sub_category.setOnClickListener(view -> {
+            String sub_category_name_creation = sub_category_name.getText().toString();
+
+            if(sub_category_name_creation.isEmpty())
+            {
+                sub_category_name.setError("Please give a name to sub category");
+                sub_category_name.requestFocus();
             }
-        });
-
-        create_sub_category.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String sub_category_name_creation = sub_category_name.getText().toString();
-
-                if(sub_category_name_creation.isEmpty())
-                {
-                    sub_category_name.setError("Please give a name to sub category");
-                    sub_category_name.requestFocus();
-                }
-                else if(myUrl == null)
-                {
-                    Toast.makeText(AddASubCategory.this, "Image can not be null", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    uploadImageofAdmin(sub_category_name_creation);
-                    progressBar.setVisibility(View.VISIBLE);
-                }
+            else if(myUrl == null)
+            {
+                Toast.makeText(AddASubCategory.this, "Image can not be null", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                uploadImageofAdmin(sub_category_name_creation);
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
 
 
+    }
+
+    private void populateSpinner() {
+        RetrofitClient.getInstance().getApi()
+                .getAllCategories()
+                .enqueue(new Callback<List<CategoryEntity>>() {
+                    @Override
+                    public void onResponse(@NotNull Call<List<CategoryEntity>> call, @NotNull Response<List<CategoryEntity>> response) {
+                        if(response.isSuccessful())
+                        {
+                            CategoryCustomSpinnerAdapter categoryCustomSpinnerAdapter = new CategoryCustomSpinnerAdapter(AddASubCategory.this,
+                                    response.body());
+
+                            category_name.setAdapter(categoryCustomSpinnerAdapter);
+                        }
+                        else
+                        {
+                            Toast.makeText(AddASubCategory.this, "Can not get categories, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<List<CategoryEntity>> call, @NotNull Throwable t) {
+                        Log.e("Add sub_category", "Error is: "+t.getMessage());
+                        Toast.makeText(AddASubCategory.this, "Can not get categories, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 
@@ -112,101 +141,95 @@ public class AddASubCategory extends AppCompatActivity {
 
             uploadTask = fileRef.putFile(imageuri);
 
-            uploadTask.continueWithTask(new Continuation() {
-                @Override
-                public Object then(@NonNull Task task) throws Exception {
+            uploadTask.continueWithTask((Continuation) task -> {
 
-                    if(!task.isSuccessful())
-                    {
-                        throw task.getException();
-                    }
-
-                    return fileRef.getDownloadUrl();
-
+                if(!task.isSuccessful())
+                {
+                    throw task.getException();
                 }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful())
-                    {
-                        Uri downloadUrl = task.getResult();
-                        myUrl = downloadUrl.toString();
 
-                        database.child("Categories").child(category_name.getSelectedItem().toString())
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if(snapshot.exists())
-                                        {
-                                            sub_categories =  snapshot.getValue(Sub_categories.class);
+                return fileRef.getDownloadUrl();
 
-                                            HashMap<String, String> sub_category_under_category = new HashMap<>();
+            }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                if(task.isSuccessful())
+                {
+                    Uri downloadUrl = task.getResult();
+                    myUrl = downloadUrl.toString();
 
-                                            sub_category_under_category.put("Name", subcategory_name);
-                                            sub_category_under_category.put("Image", myUrl);
+                    database.child("Categories").child(category_name.getSelectedItem().toString())
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(snapshot.exists())
+                                    {
+                                        sub_categories =  snapshot.getValue(Sub_categories.class);
 
-                                            sub_categories.add(sub_category_under_category);
+                                        HashMap<String, String> sub_category_under_category = new HashMap<>();
 
+                                        sub_category_under_category.put("Name", subcategory_name);
+                                        sub_category_under_category.put("Image", myUrl);
 
-                                            database.child("Categories").child(category_name.getSelectedItem().toString())
-                                                    .setValue(sub_categories).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    Toast.makeText(AddASubCategory.this, "Subcategory added", Toast.LENGTH_SHORT).show();
-                                                    progressBar.setVisibility(View.GONE);
-                                                    finish();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(AddASubCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    progressBar.setVisibility(View.GONE);
-                                                }
-                                            });
-                                        }
-
-                                        else
-                                        {
-                                            HashMap<String, String> sub_category_under_category = new HashMap<>();
-
-                                            sub_category_under_category.put("Name", subcategory_name);
-                                            sub_category_under_category.put("Image", myUrl);
-
-                                            Sub_categories sub_categories2 = new Sub_categories();
-                                            sub_categories2.add(sub_category_under_category);
-
-                                            database.child("Categories").child(category_name.getSelectedItem().toString())
-                                                    .setValue(sub_categories2).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    Toast.makeText(AddASubCategory.this, "Subcategory added", Toast.LENGTH_SHORT).show();
-                                                    progressBar.setVisibility(View.GONE);
-                                                    finish();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(AddASubCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    progressBar.setVisibility(View.GONE);
-                                                }
-                                            });
-                                        }
+                                        sub_categories.add(sub_category_under_category);
 
 
+                                        database.child("Categories").child(category_name.getSelectedItem().toString())
+                                                .setValue(sub_categories).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(AddASubCategory.this, "Subcategory added", Toast.LENGTH_SHORT).show();
+                                                progressBar.setVisibility(View.GONE);
+                                                finish();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(AddASubCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                progressBar.setVisibility(View.GONE);
+                                            }
+                                        });
                                     }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    else
+                                    {
+                                        HashMap<String, String> sub_category_under_category = new HashMap<>();
 
+                                        sub_category_under_category.put("Name", subcategory_name);
+                                        sub_category_under_category.put("Image", myUrl);
+
+                                        Sub_categories sub_categories2 = new Sub_categories();
+                                        sub_categories2.add(sub_category_under_category);
+
+                                        database.child("Categories").child(category_name.getSelectedItem().toString())
+                                                .setValue(sub_categories2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(AddASubCategory.this, "Subcategory added", Toast.LENGTH_SHORT).show();
+                                                progressBar.setVisibility(View.GONE);
+                                                finish();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(AddASubCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                progressBar.setVisibility(View.GONE);
+                                            }
+                                        });
                                     }
-                                });
-                    }
 
-                    else
-                    {
-                        progressDialog.dismiss();
-                        Toast.makeText(AddASubCategory.this, "Error...Can not upload image", Toast.LENGTH_SHORT).show();
-                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                }
+
+                else
+                {
+                    progressDialog.dismiss();
+                    Toast.makeText(AddASubCategory.this, "Error...Can not upload image", Toast.LENGTH_SHORT).show();
                 }
             });
         }

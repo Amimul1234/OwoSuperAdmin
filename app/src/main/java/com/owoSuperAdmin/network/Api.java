@@ -33,21 +33,21 @@ public interface Api {
 
 
 
-
+    //Product Management
     @POST("/addProduct")
-    Call<Owo_product> createProduct(
-            @Body Owo_product owo_product
-    );
+    Call<Owo_product> createProduct(@Body Owo_product owo_product);
 
     @POST("/addABrand")
-    Call<ResponseBody> addABrand(
-            @Body Brands brands
-    );
+    Call<ResponseBody> addABrand(@Body Brands brands);
 
     @PUT("/updateProduct")
-    Call<Owo_product> updateProduct(
-            @Body Owo_product product
-    );
+    Call<Owo_product> updateProduct(@Body Owo_product product);
+
+    @DELETE("/deleteProduct/{product_id}")
+    Call<ResponseBody> deleteProduct(@Path("product_id") int product_id);
+
+    @GET("/allProducts")
+    Call<List<Owo_product>> getAllProducts(@Query("page") int page);
 
     @PUT("/setOrderState")
     Call<ResponseBody> setOrderState(
@@ -55,21 +55,8 @@ public interface Api {
             @Query("order_state") String order_state
     );
 
-    @DELETE("/deleteProduct/{product_id}")
-    Call<ResponseBody> deleteProduct(
-            @Path("product_id") int product_id
-    );
-
-
-    @GET("/allProducts")
-    Call<List<Owo_product>> getAllProducts(
-            @Query("page") int page
-    );
-
     @GET("/getBrandsAdmin")
-    Call<List<String>> getBrands(
-            @Query("category") String category
-    );
+    Call<List<String>> getBrands(@Query("category") String category);
 
 
     @GET("/searchProduct_admin")
@@ -99,6 +86,24 @@ public interface Api {
     @GET("/getCancelledOrders")
     Call<List<Shop_keeper_orders>> getCancelledOrders(@Query("page_num") int page_num);
 
+
+    @POST("/addAnOffer")
+    Call<ResponseBody> addAnOffer(@Body OffersEntity offersEntity);
+
+    //Category Management
+    @POST("/addNewCategory")
+    Call<ResponseBody> addNewCategory(@Body CategoryEntity categoryEntity);
+
+    @GET("/getAllCategories")
+    Call<List<CategoryEntity>> getAllCategories();
+
+    @PUT("/updateCategory")
+    Call<String> updateCategory(@Query("categoryId") Long categoryId, @Body CategoryEntity categoryEntity);
+
+    @DELETE("deleteCategory")
+    Call<String> deleteCategory(@Query("categoryId") Long categoryId);
+
+    //Image Controller
     @Multipart
     @POST("/imageController/{directory}")
     Call<ResponseBody> uploadImageToServer(
@@ -106,10 +111,7 @@ public interface Api {
             @Part MultipartBody.Part multipartFile
     );
 
-    @POST("/addAnOffer")
-    Call<ResponseBody> addAnOffer(@Body OffersEntity offersEntity);
-
-    @POST("/addNewCategory")
-    Call<ResponseBody> addNewCategory(@Body CategoryEntity categoryEntity);
+    @DELETE("/getImageFromServer")
+    Call<String> deleteImage(@Query("path_of_image") String path_of_image);
 
 }

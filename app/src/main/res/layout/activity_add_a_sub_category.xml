@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owoSuperAdmin.owoshop.com.owosuperadmin.categoryManagement.AddASubCategory">
+    tools:context="com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue">
+        android:background="@color/blue"
+        >
 
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24_white"
+            android:contentDescription="@string/back_button" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a new subcategory"
+            android:text="@string/add_a_new_sub_category"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-
-    </Toolbar>
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <Spinner
         android:id="@+id/category_spinner"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="10dp"
-        android:entries="@array/productname"/>
+        android:layout_marginTop="10dp"/>
 
     <ImageView
         android:id="@+id/subcategory_image"
@@ -39,14 +45,15 @@
         android:layout_below="@id/category_spinner"
         android:layout_marginTop="10dp"
         android:padding="5dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/sub_category_image" />
 
 
     <TextView
         android:id="@+id/heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="(Click to add sub-category image)"
+        android:text="@string/click_to_add_sub_category_image"
         android:layout_below="@id/subcategory_image"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
@@ -59,11 +66,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
         android:background="@drawable/edit_text_black"
-        android:hint="Enter subcategory name"
-        android:textSize="22sp"
+        android:hint="@string/enter_subcategory_name"
+        android:textSize="20sp"
         android:padding="10dp"
         android:layout_margin="10dp"
         android:layout_marginTop="10dp"
+        android:autofillHints="Sub Category Name"
+        android:inputType="text"
         />
 
 
@@ -71,7 +80,7 @@
         android:id="@+id/add_new_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Sub Category"
+        android:text="@string/new_sub_category"
         android:layout_below="@id/sub_category_name"
         android:background="@drawable/buttons_blue"
         android:textColor="@color/white"

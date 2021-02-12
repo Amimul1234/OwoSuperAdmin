@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,12 +16,13 @@
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_arrow_back_24_white"/>
+            android:src="@drawable/ic_baseline_arrow_back_24_white"
+            android:contentDescription="@string/back_button" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add A New Category"
+            android:text="@string/add_a_new_category"
             android:layout_marginStart="20dp"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -37,14 +37,14 @@
         android:layout_below="@+id/toolbar"
         android:src="@drawable/addcategorypicture"
         android:background="@drawable/edit_text_black"
-        />
+        android:contentDescription="@string/category_image" />
 
     <TextView
         android:id="@+id/category_tag_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="(Click to add category picture)"
+        android:text="@string/click_to_add_category_picture"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_below="@+id/category_image"
@@ -54,7 +54,7 @@
         android:id="@+id/category_tag_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Category Name:"
+        android:text="@string/category_name"
         android:layout_below="@id/category_tag_1"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
@@ -69,7 +69,8 @@
         android:paddingStart="15dp"
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_black"
-        android:hint="Please enter category name"/>
+        android:hint="@string/please_enter_category_name"
+        android:autofillHints="@string/category_name"/>
 
     <ProgressBar
         android:id="@+id/category_add_progressbar"
@@ -88,7 +89,7 @@
         android:layout_below="@+id/category_add_progressbar"
         android:background="@drawable/buttons_blue"
         android:layout_margin="20dp"
-        android:text="Add a new category"
+        android:text="@string/add_a_new_category"
         android:textColor="@color/white"
         android:textSize="18sp"/>
 

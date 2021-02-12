@@ -24,14 +24,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.owoSuperAdmin.categoryManagement.category.AddNewCategory"/>
+        <activity android:name="com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory"></activity>
+        <activity android:name="com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory" />
+        <activity android:name="com.owoSuperAdmin.categoryManagement.category.AddNewCategory" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.CompletedOrderDetails" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Cancelled_order_details" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Shipped_orders_details" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Picked_order_details" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Processing_orders_details" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_shipped_to_delivered" />
-        <activity android:name="com.owoSuperAdmin.owoshop.AddATimeSlot" />
+        <activity android:name=".AddATimeSlot" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.brand.AddABrand" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.completed_order_state" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.shipped_order_activity" />
@@ -48,7 +50,7 @@
         <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop" />
         <activity android:name="com.owoSuperAdmin.offersManagement.QuponActivity" />
         <activity android:name="com.owoSuperAdmin.productsManagement.SearchedProducts" />
-        <activity android:name="com.owoSuperAdmin.owoshop.CloudMessagingActivity" />
+        <activity android:name=".CloudMessagingActivity" />
         <activity android:name="com.owoSuperAdmin.productsManagement.PreViewProductDetails" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.confirmed_order_details" />
 
@@ -57,7 +59,7 @@
             android:value="@string/maps_api_key" />
 
         <activity
-            android:name="com.owoSuperAdmin.owoshop.LocationFromMap"
+            android:name=".LocationFromMap"
             android:label="@string/title_activity_location_from_map"
             android:screenOrientation="portrait" />
         <activity android:name="com.owoSuperAdmin.offersManagement.UpdateOfferActivity" />
@@ -79,7 +81,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.owoSuperAdmin.owoshop.CreateNewAdminActivity" />
+        <activity android:name=".CreateNewAdminActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -93,7 +95,7 @@
 
         <activity android:name="com.owoSuperAdmin.adminHomePanel.HomeActivity" />
 
-        <service android:name="com.owoSuperAdmin.owoshop.MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

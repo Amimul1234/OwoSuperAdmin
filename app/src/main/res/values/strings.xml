@@ -124,5 +124,15 @@
     <string name="back_to_main_admin_panel">Back To Main Admin Panel</string>
     <string name="message">Message</string>
     <string name="manage_shops">Manage Shops</string>
+    <string name="add_a_new_category">Add A New Category</string>
+    <string name="click_to_add_category_picture">(Click to add category picture)</string>
+    <string name="category_name">Category Name:</string>
+    <string name="please_enter_category_name">Please enter category name</string>
+    <string name="category_image">Category Image</string>
+    <string name="add_a_new_sub_category">Add A New Sub-Category</string>
+    <string name="sub_category_image">Sub Category Image</string>
+    <string name="click_to_add_sub_category_image">(Click to add sub-category image)</string>
+    <string name="enter_subcategory_name">Enter subcategory name</string>
+    <string name="new_sub_category">Add A New Sub Category</string>
 
 </resources>
