@@ -28,6 +28,12 @@ public interface Api {
     @GET("/getAllShopRegistrationRequests")
     Call<List<Shops>> getAllShopRegistrationRequests(@Query("pageNumber") int pageNumber);
 
+    @GET("/getAllRegisteredShops")
+    Call<List<Shops>> getAllRegisteredShops(@Query("pageNumber") int pageNumber);
+
+
+
+
     @POST("/addProduct")
     Call<Owo_product> createProduct(
             @Body Owo_product owo_product

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import com.owoSuperAdmin.categoryManagement.brand.AddABrand;
+import com.owoSuperAdmin.categoryManagement.category.AddNewCategory;
 import com.owoSuperAdmin.owoshop.AddATimeSlot;
 import com.owoSuperAdmin.productsManagement.AddProductActivity;
 import com.owoSuperAdmin.offersManagement.AvailableOffersActivity;
@@ -25,8 +26,6 @@ import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity;
 import com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory;
 import com.owoSuperAdmin.ordersManagement.confirm_shop_orders;
-import com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop;
-
 import org.jetbrains.annotations.NotNull;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
@@ -79,15 +78,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
     }
 
     private void takeNecessaryActions(int position) {
-        if (position==0)
+        if (position==0) //Admin management
         {
             Intent intent=new Intent(context, CreateNewAdminActivity.class);
             context.startActivity(intent);
         }
-        else if (position == 1)
+        else if (position == 1) //Shops management
         {
-            CharSequence[] options=new CharSequence[] {"Manage Approved Shops","Approve A New Shop",
-                    "Rejected Shops", "Shops Category Extension Requests"};
+            CharSequence[] options=new CharSequence[] {"Manage Registered Shops","Approve A New Shop",
+                    "Manage Blocked Shops", "Category Extension Requests"};
 
             AlertDialog.Builder builder=new AlertDialog.Builder(context);
             builder.setTitle("Shop Management");
@@ -118,35 +117,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             builder.show();
 
         }
-        else if (position==2)
+        else if (position==2)//Products management
         {
-            Intent intent=new Intent(context, ShopCreationRequestsActivity.class);
-            context.startActivity(intent);
-        }
-        else if (position==3)
-        {
-            CharSequence[] options=new CharSequence[]{"Shop Management", "Shop Orders"};
-            AlertDialog.Builder builder=new AlertDialog.Builder(context);
-            builder.setTitle("SHOPS");
-            builder.setItems(options, (dialog, i) -> {
-                if (i==0)
-                {
-                    Intent intent=new Intent(context, ManageRegisteredShops.class);
-                    context.startActivity(intent);
-
-                }
-                else if(i==1)
-                {
-                    Intent intent = new Intent(context, confirm_shop_orders.class);
-                    context.startActivity(intent);
-                }
-            });
-            builder.show();
-
-        }
-        else if (position==4)
-        {
-
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
             View view = LayoutInflater.from(context).inflate(R.layout.custom_products_alert_dialog, null);
@@ -170,7 +142,67 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 context.startActivity(intent);
                 alertDialog.cancel();
             });
+        }
 
+        else if (position==3) //It is offer management
+        {
+            CharSequence[] options=new CharSequence[]{"Shop Management", "Shop Orders"};
+            AlertDialog.Builder builder=new AlertDialog.Builder(context);
+            builder.setTitle("SHOPS");
+            builder.setItems(options, (dialog, i) -> {
+                if (i==0)
+                {
+                    Intent intent=new Intent(context, ManageRegisteredShops.class);
+                    context.startActivity(intent);
+
+                }
+                else if(i==1)
+                {
+                    Intent intent = new Intent(context, confirm_shop_orders.class);
+                    context.startActivity(intent);
+                }
+            });
+            builder.show();
+
+        }
+        else if (position==4)//Category and sub category management
+        {
+            CharSequence[] options = new CharSequence[]{"Manage Category", "Manage Sub Categories"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Category Management");
+
+            builder.setItems(options, (dialog, i) -> {
+                if (i==0)
+                {
+                    CharSequence[] categoryOptions = new CharSequence[]{"Create a new category", "Update existent category",
+                        "Delete existent category"};
+
+                    AlertDialog.Builder categoryBuilder = new AlertDialog.Builder(context);
+                    categoryBuilder.setTitle("Category Management");
+
+                    categoryBuilder.setItems(categoryOptions, ((dialog1, which) -> {
+                        if(which == 0)
+                        {
+                            Intent intent=new Intent(context, AddNewCategory.class);
+                            context.startActivity(intent);
+                        }
+                        else if(which == 1)
+                        {
+
+                        }
+                    }));
+
+                    categoryBuilder.show();
+
+                }
+                else if(i==1)
+                {
+                    Intent intent = new Intent(context, confirm_shop_orders.class);
+                    context.startActivity(intent);
+                }
+            });
+
+            builder.show();
         }
 
         else if (position==5)

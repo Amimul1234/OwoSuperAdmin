@@ -10,6 +10,7 @@ public class Shops implements Serializable {
     private Double latitude;
     private Double longitude;
     private Boolean approved;
+    private Boolean blocked;
     private String shop_address;
     private String shop_image_uri;
     private String shop_keeper_nid_front_uri;
@@ -24,14 +25,16 @@ public class Shops implements Serializable {
     }
 
     public Shops(Long shop_id, Double latitude, Double longitude, Boolean approved,
-                 String shop_address, String shop_image_uri, String shop_keeper_nid_front_uri,
-                 String shop_name, String shop_owner_mobile, String shop_owner_name, String shop_service_mobile,
-                 String trade_license_url, List<ShopKeeperPermissions> shopKeeperPermissions)
+                 Boolean blocked, String shop_address, String shop_image_uri,
+                 String shop_keeper_nid_front_uri, String shop_name, String shop_owner_mobile,
+                 String shop_owner_name, String shop_service_mobile, String trade_license_url,
+                 List<ShopKeeperPermissions> shopKeeperPermissions)
     {
         this.shop_id = shop_id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.approved = approved;
+        this.blocked = blocked;
         this.shop_address = shop_address;
         this.shop_image_uri = shop_image_uri;
         this.shop_keeper_nid_front_uri = shop_keeper_nid_front_uri;
@@ -41,6 +44,14 @@ public class Shops implements Serializable {
         this.shop_service_mobile = shop_service_mobile;
         this.trade_license_url = trade_license_url;
         this.shopKeeperPermissions = shopKeeperPermissions;
+    }
+
+    public Boolean getBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
     }
 
     public List<ShopKeeperPermissions> getShopKeeperPermissions() {

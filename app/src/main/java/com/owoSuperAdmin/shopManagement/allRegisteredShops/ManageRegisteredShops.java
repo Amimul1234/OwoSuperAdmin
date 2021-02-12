@@ -1,97 +1,63 @@
 package com.owoSuperAdmin.shopManagement.allRegisteredShops;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import androidx.annotation.NonNull;
+import android.widget.ImageView;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.paging.PagedList;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.firebase.ui.database.paging.DatabasePagingOptions;
-import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
-import com.firebase.ui.database.paging.LoadingState;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.owoSuperAdmin.shopManagement.PendingShopViewHolderForAdmin;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.owoSuperAdmin.owoshop.R;
+import com.owoSuperAdmin.shopManagement.allRegisteredShops.registeredShopsPagination.RegisteredShopViewModel;
+import com.owoSuperAdmin.shopManagement.entity.Shops;
 
 public class ManageRegisteredShops extends AppCompatActivity {
-    /*
 
-    FirebaseRecyclerPagingAdapter<PendingShop, PendingShopViewHolderForAdmin> adapter;
-
-    private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView registeredShopsRecyclerView;
+    private RegisteredShopAdapter registeredShopAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_management);
 
-        setTitle("Shops");
+        registeredShopAdapter = new RegisteredShopAdapter(this);
 
-        recyclerView=findViewById(R.id.management_recyclerviewid);
+        getShops();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        ImageView backFromRegisteredShops = findViewById(R.id.backFromRegisteredShops);
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+        registeredShopsRecyclerView = findViewById(R.id.registeredShopsRecyclerView);
 
-        Query baseQuery = databaseReference.child("approvedShops");
+        backFromRegisteredShops.setOnClickListener(v -> onBackPressed());
 
-        PagedList.Config config = new PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPrefetchDistance(10)
-                .setPageSize(20)
-                .build();
-
-        DatabasePagingOptions<PendingShop> options = new DatabasePagingOptions.Builder<PendingShop>()
-                .setLifecycleOwner(this)
-                .setQuery(baseQuery, config, PendingShop.class)
-                .build();
-
-
-        adapter = new FirebaseRecyclerPagingAdapter<PendingShop, PendingShopViewHolderForAdmin>(options) {
-                    @NonNull
-                    @Override
-                    public PendingShopViewHolderForAdmin onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = getLayoutInflater().inflate(R.layout.shops_sample_view, parent, false);
-                        return new PendingShopViewHolderForAdmin(view);
-                    }
-
-                    @Override
-                    protected void onBindViewHolder(@NonNull PendingShopViewHolderForAdmin holder, int position, @NonNull PendingShop model) {
-                        holder.bind(model, ManageRegisteredShops.this);
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(ManageRegisteredShops.this, RegisteredShop.class);
-                                intent.putExtra("approvedShop", model);
-                                startActivity(intent);
-                            }
-                        });
-                    }
-
-                    @Override
-                    protected void onLoadingStateChanged(@NonNull LoadingState state) {
-
-                    }
-                };
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
+        swipeRefreshLayout.setOnRefreshListener(this::getShops);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
+    private void getShops() {
+        RegisteredShopViewModel registeredShopViewModel = new RegisteredShopViewModel();
+
+        registeredShopViewModel.itemPagedList.observe(this, (Observer<PagedList<Shops>>) items -> {
+            registeredShopAdapter.submitList(items);
+            showOnRecyclerView();
+        });
+
+        registeredShopViewModel.getNetworkState().observe(this, networkState -> {
+            registeredShopAdapter.setNetworkState(networkState);
+        });
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
+    private void showOnRecyclerView() {
+        registeredShopsRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        registeredShopsRecyclerView.setLayoutManager(layoutManager);
+        registeredShopsRecyclerView.setAdapter(registeredShopAdapter);
+        registeredShopAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
-
-     */
 }

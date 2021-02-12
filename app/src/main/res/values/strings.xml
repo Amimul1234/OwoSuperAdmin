@@ -123,5 +123,6 @@
     <string name="no_requests_image">No Requests Image</string>
     <string name="back_to_main_admin_panel">Back To Main Admin Panel</string>
     <string name="message">Message</string>
+    <string name="manage_shops">Manage Shops</string>
 
 </resources>

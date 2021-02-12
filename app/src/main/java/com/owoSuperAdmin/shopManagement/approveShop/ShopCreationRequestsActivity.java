@@ -1,6 +1,5 @@
 package com.owoSuperAdmin.shopManagement.approveShop;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +18,6 @@ public class ShopCreationRequestsActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private ShopRequestsAdapter shopRequestsAdapter;
 
-    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,7 @@ public class ShopCreationRequestsActivity extends AppCompatActivity {
 
         getShops();
 
-        swipeRefreshLayout.setColorSchemeColors(R.color.blue);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
         swipeRefreshLayout.setOnRefreshListener(this::getShops);
     }
 
