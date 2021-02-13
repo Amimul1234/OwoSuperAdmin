@@ -134,5 +134,6 @@
     <string name="click_to_add_sub_category_image">(Click to add sub-category image)</string>
     <string name="enter_subcategory_name">Enter subcategory name</string>
     <string name="new_sub_category">Add A New Sub Category</string>
+    <string name="update_category">Update Category</string>
 
 </resources>
