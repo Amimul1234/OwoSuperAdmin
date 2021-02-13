@@ -53,6 +53,8 @@ public class UpdateExistentCategory extends AppCompatActivity {
 
     }
 
+
+
     private void showRecycler() {
         adapter = new UpdateCategoryAdapter(categoryEntities,this);
         updateRecyclerView.setAdapter(adapter);
