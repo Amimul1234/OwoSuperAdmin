@@ -118,6 +118,8 @@ public class UpdateCategoryActivity extends AppCompatActivity {
 
                                 String previousImagePath = categoryEntity.getCategoryImage();
 
+                                String cleanedAddress = previousImagePath.substring(34);
+
                                 categoryEntity.setCategoryImage(path);
                                 categoryEntity.setCategoryName(categoryName.getText().toString());
 
@@ -128,7 +130,7 @@ public class UpdateCategoryActivity extends AppCompatActivity {
                                                 if(response.isSuccessful())
                                                 {
                                                     RetrofitClient.getInstance()
-                                                            .getApi().deleteImage(previousImagePath)
+                                                            .getApi().deleteImage(cleanedAddress)
                                                             .enqueue(new Callback<ResponseBody>() {
                                                                 @Override
                                                                 public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
@@ -138,7 +140,7 @@ public class UpdateCategoryActivity extends AppCompatActivity {
                                                                         Toast.makeText(UpdateCategoryActivity.this, "Category updated successfully", Toast.LENGTH_SHORT).show();
                                                                         onBackPressed();
                                                                     }
-                                                                    else
+                                                                    else //here is the error occurring
                                                                     {
                                                                         categoryUpdateProgressBar.setVisibility(View.GONE);
                                                                         Toast.makeText(UpdateCategoryActivity.this, "Failed to update category, please try again", Toast.LENGTH_SHORT).show();

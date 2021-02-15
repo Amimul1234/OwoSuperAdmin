@@ -38,8 +38,6 @@ public class UpdateExistentCategory extends AppCompatActivity {
         ImageView backButton = findViewById(R.id.backIcon);
         backButton.setOnClickListener(v -> onBackPressed());
 
-        getCategoryData();
-
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
 
         swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
@@ -50,6 +48,8 @@ public class UpdateExistentCategory extends AppCompatActivity {
     }
 
     private void getCategoryData() {
+        categoryEntities.clear();
+
         RetrofitClient.getInstance().getApi()
                 .getAllCategories()
                 .enqueue(new Callback<List<CategoryEntity>>() {
@@ -85,4 +85,9 @@ public class UpdateExistentCategory extends AppCompatActivity {
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getCategoryData();
+    }
 }
