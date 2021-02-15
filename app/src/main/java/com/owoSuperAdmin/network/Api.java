@@ -99,7 +99,7 @@ public interface Api {
     Call<ResponseBody> updateCategory(@Query("categoryId") Long categoryId, @Body CategoryEntity categoryEntity);
 
     @DELETE("/deleteCategory")
-    Call<String> deleteCategory(@Query("categoryId") Long categoryId);
+    Call<ResponseBody> deleteCategory(@Query("categoryId") Long categoryId);
 
     //Image Controller
     @Multipart
