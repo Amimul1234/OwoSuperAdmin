@@ -9,25 +9,43 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
+import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
+import org.jetbrains.annotations.NotNull;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.UUID;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UpdateCategoryActivity extends AppCompatActivity {
 
     private ImageView categoryImage;
     private TextView categoryName;
-    private Button updateCategoryDetails;
     private ProgressBar categoryUpdateProgressBar;
     private final int STORAGE_PERMISSION_CODE = 1;
+    private CategoryEntity categoryEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +55,10 @@ public class UpdateCategoryActivity extends AppCompatActivity {
         ImageView backButton = findViewById(R.id.backButton);
         categoryImage = findViewById(R.id.categoryImage);
         categoryName = findViewById(R.id.categoryName);
-        updateCategoryDetails = findViewById(R.id.updateCategoryDetails);
+        Button updateCategoryDetails = findViewById(R.id.updateCategoryDetails);
         categoryUpdateProgressBar = findViewById(R.id.categoryUpdateProgressBar);
 
-        CategoryEntity categoryEntity = (CategoryEntity) getIntent().getSerializableExtra("categoryEntity");
+        categoryEntity = (CategoryEntity) getIntent().getSerializableExtra("categoryEntity");
 
         backButton.setOnClickListener(v -> onBackPressed());
 
@@ -48,6 +66,131 @@ public class UpdateCategoryActivity extends AppCompatActivity {
         Glide.with(this).load(HostAddress.HOST_ADDRESS.getAddress()+categoryEntity.getCategoryImage()).into(categoryImage);
 
         categoryImage.setOnClickListener(v -> requestStoragePermission());
+
+        updateCategoryDetails.setOnClickListener(v -> validateChecker());
+    }
+
+    private void validateChecker() {
+        if(categoryName.getText().toString().isEmpty())
+        {
+            Toast.makeText(this, "Please enter the updated category name", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            updateCategory();
+        }
+    }
+
+    private void updateCategory() {
+
+        Bitmap bitmap = ((BitmapDrawable) categoryImage.getDrawable()).getBitmap();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+
+        String filename = UUID.randomUUID().toString();
+
+        File file = new File(UpdateCategoryActivity.this.getCacheDir() + File.separator + filename + ".jpg");
+
+        try {
+            FileOutputStream fo = new FileOutputStream(file);
+            fo.write(byteArrayOutputStream.toByteArray());
+            fo.flush();
+            fo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part multipartFile = MultipartBody.Part.createFormData("multipartFile", file.getName(), requestBody);
+
+        categoryUpdateProgressBar.setVisibility(View.VISIBLE);
+
+        RetrofitClient.getInstance().getApi()
+                .uploadImageToServer("Category", multipartFile)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                        if(response.isSuccessful())
+                        {
+                            try {
+                                assert response.body() != null;
+                                String path = response.body().string();
+
+                                String previousImagePath = categoryEntity.getCategoryImage();
+
+                                categoryEntity.setCategoryImage(path);
+                                categoryEntity.setCategoryName(categoryName.getText().toString());
+
+                                RetrofitClient.getInstance().getApi().updateCategory(categoryEntity.getCategoryId(), categoryEntity)
+                                        .enqueue(new Callback<ResponseBody>() {
+                                            @Override
+                                            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                                                if(response.isSuccessful())
+                                                {
+                                                    RetrofitClient.getInstance()
+                                                            .getApi().deleteImage(previousImagePath)
+                                                            .enqueue(new Callback<ResponseBody>() {
+                                                                @Override
+                                                                public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                                                                    if(response.isSuccessful())
+                                                                    {
+                                                                        categoryUpdateProgressBar.setVisibility(View.GONE);
+                                                                        Toast.makeText(UpdateCategoryActivity.this, "Category updated successfully", Toast.LENGTH_SHORT).show();
+                                                                        onBackPressed();
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        categoryUpdateProgressBar.setVisibility(View.GONE);
+                                                                        Toast.makeText(UpdateCategoryActivity.this, "Failed to update category, please try again", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                                                                    Log.e("Update cat.", "Error occurred, Error is: "+t.getMessage());
+                                                                    categoryUpdateProgressBar.setVisibility(View.GONE);
+                                                                    Toast.makeText(UpdateCategoryActivity.this, "Failed to update category, please try again", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                }
+                                                else
+                                                {
+                                                    categoryUpdateProgressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(UpdateCategoryActivity.this, "Failed to update category, please try again", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                                                Log.e("Update cat.", "Error occurred, Error is: "+t.getMessage());
+                                                categoryUpdateProgressBar.setVisibility(View.GONE);
+                                                Toast.makeText(UpdateCategoryActivity.this, "Failed to update category, please try again", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+
+
+                            }catch (Exception e)
+                            {
+                                Log.e("Update cat.", "Error occurred, Error is: "+e.getMessage());
+                                categoryUpdateProgressBar.setVisibility(View.GONE);
+                                Toast.makeText(UpdateCategoryActivity.this, "Failed to upload image, please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else
+                        {
+                            categoryUpdateProgressBar.setVisibility(View.GONE);
+                            Toast.makeText(UpdateCategoryActivity.this, "Failed to upload image, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                        Log.e("Update cat.", "Error occurred, Error is: "+t.getMessage());
+                        categoryUpdateProgressBar.setVisibility(View.GONE);
+                        Toast.makeText(UpdateCategoryActivity.this, "Failed to upload image, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void requestStoragePermission()

@@ -96,7 +96,7 @@ public interface Api {
     Call<List<CategoryEntity>> getAllCategories();
 
     @PUT("/updateCategory")
-    Call<String> updateCategory(@Query("categoryId") Long categoryId, @Body CategoryEntity categoryEntity);
+    Call<ResponseBody> updateCategory(@Query("categoryId") Long categoryId, @Body CategoryEntity categoryEntity);
 
     @DELETE("/deleteCategory")
     Call<String> deleteCategory(@Query("categoryId") Long categoryId);
@@ -110,6 +110,6 @@ public interface Api {
     );
 
     @DELETE("/getImageFromServer")
-    Call<String> deleteImage(@Query("path_of_image") String path_of_image);
+    Call<ResponseBody> deleteImage(@Query("path_of_image") String path_of_image);
 
 }
