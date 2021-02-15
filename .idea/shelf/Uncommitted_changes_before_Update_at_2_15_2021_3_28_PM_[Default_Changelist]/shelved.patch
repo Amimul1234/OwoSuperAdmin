@@ -1,0 +1,211 @@
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">OWO DOKAN Super Admin</string>\r\n    <string name=\"maps_api_key\">AIzaSyDX6YQ4dRErpb5muuAg0vtBHIK9o20iDns</string>\r\n\r\n\r\n    <string name=\"product_dalali\">\r\n        Owo Dokan Products are first class in terms of quality as well as price. Owo ensures you\r\n        to get best price</string>\r\n\r\n    <string name=\"mobile_description\">Cell phone redirects here. For the film, see Cell Phone (film).\r\n        Handphone redirects here. For the film, see Handphone (film).\r\n        For the modern mobile phone, see Smartphone.\r\n\r\n        Evolution of mobile phones, to an early smartphone\r\n        A mobile phone, cellular phone, cell phone, cellphone\r\n        or hand phone, sometimes shortened to simply mobile,\r\n        cell or just phone, is a portable telephone that can\r\n        make and receive calls over a radio frequency link\r\n        while the user is moving within a telephone service area.\r\n        The radio frequency link establishes a connection to the\r\n        switching systems of a mobile phone operator,\r\n        which provides access to the public switched telephone\r\n        network (PSTN). Modern mobile telephone services use a\r\n        cellular network architecture and, therefore, mobile telephones\r\n        are called cellular telephones or cell phones in North America.\r\n        In addition to telephony, digital mobile phones (2G) support a\r\n        variety of other services, such as text messaging, MMS, email\r\n        , Internet access, short-range wireless communications (infrared, Bluetooth)\r\n        , business applications, video games and digital photography.\r\n        Mobile phones offering only those capabilities are known as feature phones;\r\n        mobile phones which offer greatly advanced computing capabilities are referred to as smartphones.\r\n\r\n        The development of metal-oxide-semiconductor (MOS) large-scale integration (LSI) technology,\r\n        information theory and cellular networking led to the development of affordable mobile\r\n        communications\r\n    </string>\r\n\r\n    <string-array name=\"adminPanelItems\">\r\n        <item>Admin Management</item>\r\n        <item>Shop Management</item>\r\n        <item>Product Management</item>\r\n        <item>Offer Management</item>\r\n        <item>Category Management</item>\r\n        <item>User Management</item>\r\n        <item>Order Management</item>\r\n    </string-array>\r\n\r\n    <string-array name=\"productname\">\r\n        <item>Bags and Luggage</item>\r\n        <item>Beauty and Bodycare</item>\r\n        <item>Books and Stationary</item>\r\n        <item>Construction Materials</item>\r\n        <item>Decoration Materials</item>\r\n        <item>Digital Goods</item>\r\n        <item>Electric and Parts</item>\r\n        <item>Electronics and Appliance</item>\r\n        <item>Event and Media</item>\r\n        <item>Fashion For Men</item>\r\n        <item>Fashion For Women</item>\r\n        <item>Furniture</item>\r\n        <item>Glasses</item>\r\n        <item>Grocery</item>\r\n        <item>Handmade</item>\r\n        <item>Harvesting and Agriculture</item>\r\n        <item>Health Care and Pharmacy</item>\r\n        <item>Home and Living</item>\r\n        <item>Home Appliance</item>\r\n        <item>Home Garden</item>\r\n        <item>Hotel Booking</item>\r\n        <item>Jewellery</item>\r\n        <item>Kitchen and Dining</item>\r\n        <item>Leather Goods</item>\r\n        <item>LP Gas</item>\r\n        <item>Machinery\\'s</item>\r\n        <item>Mother, Kids and Toys</item>\r\n        <item>Paints</item>\r\n        <item>Pet and Poultry Supplies</item>\r\n        <item>Plastic made Products</item>\r\n        <item>Property</item>\r\n        <item>Service</item>\r\n        <item>Shoes</item>\r\n        <item>Sports</item>\r\n        <item>Vehicles and Parts</item>\r\n        <item>Watch and Clock</item>\r\n        <item>Fruits and Vegetables</item>\r\n        <item>Meat and Fish</item>\r\n        <item>Cooking</item>\r\n        <item>Beverages</item>\r\n        <item>Office Products</item>\r\n    </string-array>\r\n\r\n    <string-array name=\"offer_is_for\">\r\n        <item>ShopKeeper</item>\r\n        <item>Consumer</item>\r\n    </string-array>\r\n\r\n    <string name=\"title_activity_location_from_map\">Map</string>\r\n    <string name=\"email_address\">Email Address</string>\r\n    <string name=\"password\">Password</string>\r\n    <string name=\"log_in\">Log In</string>\r\n    <string name=\"logo\">Logo</string>\r\n    <string name=\"see_password\">See Password</string>\r\n    <string name=\"title\">Title</string>\r\n    <string name=\"home_panel_images\">Home Panel Images</string>\r\n    <string name=\"circular_logo\">Circular logo</string>\r\n    <string name=\"back_button\">Back Button</string>\r\n    <string name=\"registered_shops\">Registered Shops</string>\r\n    <string name=\"shop_name\">Shop Name</string>\r\n    <string name=\"shop_image\">Shop Image</string>\r\n    <string name=\"shopkeeper_personal_information\">Shopkeeper Personal Information</string>\r\n    <string name=\"shop_owner_name\">Shop Owner Name:</string>\r\n    <string name=\"shop_owner_mobile\">Shop Owner Mobile:</string>\r\n    <string name=\"shop_owner_nid\">Shop Owner NID:</string>\r\n    <string name=\"shop_information\">Shop Information</string>\r\n    <string name=\"shop_keeper_nid_front_image\">Shop Keeper Nid Front Image</string>\r\n    <string name=\"shop_address\">Shop Address:</string>\r\n    <string name=\"shop_service_mobile\">Shop Service Mobile:</string>\r\n    <string name=\"requested_categories\">Requested Categories:</string>\r\n    <string name=\"shop_keeper_trade_license_image\">Shop Keeper Trade License Image</string>\r\n    <string name=\"see_in_map\">See Shop Address In Map</string>\r\n    <string name=\"approve_shop\">Approve Shop</string>\r\n    <string name=\"shop_approval\">Shop Approval Requests</string>\r\n    <string name=\"no_requests_image\">No Requests Image</string>\r\n    <string name=\"back_to_main_admin_panel\">Back To Main Admin Panel</string>\r\n    <string name=\"message\">Message</string>\r\n    <string name=\"manage_shops\">Manage Shops</string>\r\n    <string name=\"add_a_new_category\">Add A New Category</string>\r\n    <string name=\"click_to_add_category_picture\">(Click to add category picture)</string>\r\n    <string name=\"category_name\">Category Name:</string>\r\n    <string name=\"please_enter_category_name\">Please enter category name</string>\r\n    <string name=\"category_image\">Category Image</string>\r\n    <string name=\"add_a_new_sub_category\">Add A New Sub-Category</string>\r\n    <string name=\"sub_category_image\">Sub Category Image</string>\r\n    <string name=\"click_to_add_sub_category_image\">(Click to add sub-category image)</string>\r\n    <string name=\"enter_subcategory_name\">Enter subcategory name</string>\r\n    <string name=\"new_sub_category\">Add A New Sub Category</string>\r\n    <string name=\"update_category\">Update Category</string>\r\n\r\n</resources>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 6f70f11dc024cec3ea0316c2e784b7f421069f58)
++++ app/src/main/res/values/strings.xml	(date 1613379984183)
+@@ -135,5 +135,6 @@
+     <string name="enter_subcategory_name">Enter subcategory name</string>
+     <string name="new_sub_category">Add A New Sub Category</string>
+     <string name="update_category">Update Category</string>
++    <string name="delete_category">Delete Category</string>
+ 
+ </resources>
+Index: app/src/main/res/layout/activity_delete_existent_category.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\"com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory\">\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_delete_existent_category.xml	(revision 6f70f11dc024cec3ea0316c2e784b7f421069f58)
++++ app/src/main/res/layout/activity_delete_existent_category.xml	(date 1613379984137)
+@@ -1,9 +1,60 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
++    android:orientation="vertical"
++    android:animateLayoutChanges="true"
+     android:layout_height="match_parent"
+     tools:context="com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory">
+ 
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++    <androidx.appcompat.widget.Toolbar
++        android:id="@+id/deleteCategoryToolbar"
++        android:layout_width="match_parent"
++        android:layout_height="?attr/actionBarSize"
++        android:background="@color/blue"
++        android:layout_alignParentEnd="true"
++        android:layout_alignParentTop="true"
++        android:layout_alignParentStart="true"
++        >
++
++        <ImageView
++            android:id="@+id/backIcon"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:src="@drawable/ic_baseline_arrow_back_24_white"
++            android:layout_marginEnd="10dp"
++            android:contentDescription="@string/back_button" />
++
++        <TextView
++            android:id="@+id/heading1"
++            android:layout_width="wrap_content"
++            android:layout_height="match_parent"
++            android:gravity="center"
++            android:text="@string/delete_category"
++            android:textColor="@color/white"
++            android:textSize="20sp"
++            android:textStyle="bold"
++            android:layout_marginStart="10dp"
++            />
++
++    </androidx.appcompat.widget.Toolbar>
++    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
++        android:id="@+id/deleteSwipeRefresh"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_below="@id/deleteCategoryToolbar"
++        android:layout_alignParentBottom="true"
++        android:layout_alignParentStart="true"
++        android:layout_alignParentEnd="true"
++        >
++
++        <androidx.recyclerview.widget.RecyclerView
++            android:id="@+id/deleteCategoryRecyclerView"
++            android:layout_width="match_parent"
++            android:layout_below="@id/deleteCategoryToolbar"
++            android:layout_height="match_parent">
++        </androidx.recyclerview.widget.RecyclerView>
++    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/owoSuperAdmin/configurationsFile/HostAddress.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.owoSuperAdmin.configurationsFile;\r\n\r\npublic enum HostAddress {\r\n\r\n    HOST_ADDRESS(\"http://192.168.0.2/\");\r\n\r\n    private final String address;\r\n\r\n    HostAddress(String address) {\r\n        this.address = address;\r\n    }\r\n\r\n    public String getAddress() {\r\n        return address;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/owoSuperAdmin/configurationsFile/HostAddress.java	(revision 6f70f11dc024cec3ea0316c2e784b7f421069f58)
++++ app/src/main/java/com/owoSuperAdmin/configurationsFile/HostAddress.java	(date 1613379086234)
+@@ -2,7 +2,7 @@
+ 
+ public enum HostAddress {
+ 
+-    HOST_ADDRESS("http://192.168.0.2/");
++    HOST_ADDRESS("http://192.168.1.2/");
+ 
+     private final String address;
+ 
+Index: app/src/main/java/com/owoSuperAdmin/categoryManagement/category/DeleteExistentCategory.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.owoSuperAdmin.categoryManagement.category;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport android.os.Bundle;\r\nimport com.owoSuperAdmin.owoshop.R;\r\n\r\npublic class DeleteExistentCategory extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_delete_existent_category);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/owoSuperAdmin/categoryManagement/category/DeleteExistentCategory.java	(revision 6f70f11dc024cec3ea0316c2e784b7f421069f58)
++++ app/src/main/java/com/owoSuperAdmin/categoryManagement/category/DeleteExistentCategory.java	(date 1613379984172)
+@@ -1,14 +1,92 @@
+ package com.owoSuperAdmin.categoryManagement.category;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
++import androidx.recyclerview.widget.LinearLayoutManager;
++import androidx.recyclerview.widget.RecyclerView;
++import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
++
+ import android.os.Bundle;
++import android.util.Log;
++import android.widget.ImageView;
++import android.widget.Toast;
++
++import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
++import com.owoSuperAdmin.network.RetrofitClient;
+ import com.owoSuperAdmin.owoshop.R;
+ 
++import org.jetbrains.annotations.NotNull;
++
++import java.util.ArrayList;
++import java.util.List;
++
++import retrofit2.Call;
++import retrofit2.Callback;
++import retrofit2.Response;
++
+ public class DeleteExistentCategory extends AppCompatActivity {
+ 
++    private RecyclerView deleteRecyclerView;
++    private UpdateCategoryAdapter updateCategoryAdapter;
++    private LinearLayoutManager linearLayoutManager;
++    private final List<CategoryEntity> categoryEntities = new ArrayList<>();
++    private SwipeRefreshLayout swipeRefreshLayout;
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_delete_existent_category);
++
++        deleteRecyclerView=findViewById(R.id.deleteCategoryRecyclerView);
++        swipeRefreshLayout=findViewById(R.id.deleteSwipeRefresh);
++        linearLayoutManager = new LinearLayoutManager(this);
++
++        ImageView backButton = findViewById(R.id.backIcon);
++        backButton.setOnClickListener(v -> onBackPressed());
++
++        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
++
++        swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
++
++        deleteRecyclerView.setHasFixedSize(true);
++
++        showRecycler();
++    }
++
++    private void showRecycler() {
++        updateCategoryAdapter = new UpdateCategoryAdapter(DeleteExistentCategory.this, categoryEntities);
++        deleteRecyclerView.setAdapter(updateCategoryAdapter);
++        deleteRecyclerView.setLayoutManager(linearLayoutManager);
++        updateCategoryAdapter.notifyDataSetChanged();
++        swipeRefreshLayout.setRefreshing(false);
++    }
++
++    @Override
++    protected void onStart() {
++        super.onStart();
++
++        RetrofitClient.getInstance().getApi()
++                .getAllCategories()
++                .enqueue(new Callback<List<CategoryEntity>>() {
++                    @Override
++                    public void onResponse(@NotNull Call<List<CategoryEntity>> call, @NotNull Response<List<CategoryEntity>> response) {
++                        if(response.isSuccessful())
++                        {
++                            assert response.body() != null;
++                            categoryEntities.addAll(response.body());
++                            updateCategoryAdapter.notifyDataSetChanged();
++                        }
++                        else
++                        {
++                            Toast.makeText(getApplicationContext(), "No more categories", Toast.LENGTH_SHORT).show();
++                        }
++
++                    }
++
++                    @Override
++                    public void onFailure(@NotNull Call<List<CategoryEntity>> call, @NotNull Throwable t) {
++                        Log.e("Update cat. ", "Error is: "+t.getMessage());
++                        Toast.makeText(DeleteExistentCategory.this, "Error fetching categories, please try again", Toast.LENGTH_SHORT).show();
++                    }
++                });
+     }
+ }
+\ No newline at end of file
