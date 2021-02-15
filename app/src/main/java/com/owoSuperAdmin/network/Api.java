@@ -31,8 +31,6 @@ public interface Api {
     @GET("/getAllRegisteredShops")
     Call<List<Shops>> getAllRegisteredShops(@Query("pageNumber") int pageNumber);
 
-
-
     //Product Management
     @POST("/addProduct")
     Call<Owo_product> createProduct(@Body Owo_product owo_product);
@@ -100,7 +98,7 @@ public interface Api {
     @PUT("/updateCategory")
     Call<String> updateCategory(@Query("categoryId") Long categoryId, @Body CategoryEntity categoryEntity);
 
-    @DELETE("deleteCategory")
+    @DELETE("/deleteCategory")
     Call<String> deleteCategory(@Query("categoryId") Long categoryId);
 
     //Image Controller

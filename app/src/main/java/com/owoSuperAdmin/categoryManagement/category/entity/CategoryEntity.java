@@ -1,7 +1,6 @@
 package com.owoSuperAdmin.categoryManagement.category.entity;
 
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class CategoryEntity {
     }
 
     public CategoryEntity(String categoryName, String categoryImage, List<SubCategoryEntity> subCategoryEntities) {
-        this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryImage = categoryImage;
         this.subCategoryEntities = subCategoryEntities;

@@ -1,91 +1,89 @@
 package com.owoSuperAdmin.categoryManagement.category;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.owoSuperAdmin.adminHomePanel.HomeActivity;
-import com.owoSuperAdmin.adminHomePanel.HomeAdapter;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
-import com.owoSuperAdmin.shopManagement.allRegisteredShops.RegisteredShopAdapter;
-
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UpdateExistentCategory extends AppCompatActivity {
 
-
     private RecyclerView updateRecyclerView;
-    private UpdateCategoryAdapter adapter;
-    private UpdateCategoryAdapter updateAdapter;
-    private List<CategoryEntity>categoryEntities=new ArrayList<>();
+    private UpdateCategoryAdapter updateCategoryAdapter;
+    private LinearLayoutManager linearLayoutManager;
+    private final List<CategoryEntity>categoryEntities = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_existent_category);
+
         updateRecyclerView=findViewById(R.id.updateCategoryRecyclerView);
         swipeRefreshLayout=findViewById(R.id.updateSwipeRefresh);
+        linearLayoutManager = new LinearLayoutManager(this);
+
+        ImageView backButton = findViewById(R.id.backIcon);
+        backButton.setOnClickListener(v -> onBackPressed());
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(false);
-                showRecycler();
-            }
-        });
+
+        swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
+
         updateRecyclerView.setHasFixedSize(true);
-        adapter = new UpdateCategoryAdapter(categoryEntities,this);
+
         showRecycler();
-
-
     }
 
 
 
     private void showRecycler() {
-        adapter = new UpdateCategoryAdapter(categoryEntities,this);
-        updateRecyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        updateCategoryAdapter = new UpdateCategoryAdapter(UpdateExistentCategory.this, categoryEntities);
+        updateRecyclerView.setAdapter(updateCategoryAdapter);
+        updateRecyclerView.setLayoutManager(linearLayoutManager);
+        updateCategoryAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         RetrofitClient.getInstance().getApi()
                 .getAllCategories()
                 .enqueue(new Callback<List<CategoryEntity>>() {
                     @Override
-                    public void onResponse(Call<List<CategoryEntity>> call, Response<List<CategoryEntity>> response) {
-                        if(response.code() == 200)
+                    public void onResponse(@NotNull Call<List<CategoryEntity>> call, @NotNull Response<List<CategoryEntity>> response) {
+                        if(response.isSuccessful())
                         {
-                            categoryEntities.addAll((List<CategoryEntity>)response.body());
-                            adapter.notifyDataSetChanged();
+                            assert response.body() != null;
+                            categoryEntities.addAll(response.body());
+                            updateCategoryAdapter.notifyDataSetChanged();
                         }
                         else
                         {
-                            Toast.makeText(getApplicationContext(), "No more category", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "No more categories", Toast.LENGTH_SHORT).show();
                         }
 
                     }
 
                     @Override
-                    public void onFailure(Call<List<CategoryEntity>> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    public void onFailure(@NotNull Call<List<CategoryEntity>> call, @NotNull Throwable t) {
+                        Log.e("Update cat. ", "Error is: "+t.getMessage());
+                        Toast.makeText(UpdateExistentCategory.this, "Error fetching categories, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
 }

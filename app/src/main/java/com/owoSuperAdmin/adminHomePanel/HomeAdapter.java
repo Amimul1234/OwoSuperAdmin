@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import com.owoSuperAdmin.categoryManagement.brand.AddABrand;
 import com.owoSuperAdmin.categoryManagement.category.AddNewCategory;
+import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
 import com.owoSuperAdmin.owoshop.AddATimeSlot;
 import com.owoSuperAdmin.productsManagement.AddProductActivity;
 import com.owoSuperAdmin.offersManagement.AvailableOffersActivity;
@@ -188,7 +189,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         }
                         else if(which == 1)
                         {
-
+                            Intent intent = new Intent(context, UpdateExistentCategory.class);
+                            context.startActivity(intent);
                         }
                         else
                         {
