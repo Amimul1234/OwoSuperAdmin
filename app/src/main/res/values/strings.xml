@@ -135,6 +135,9 @@
     <string name="enter_subcategory_name">Enter subcategory name</string>
     <string name="new_sub_category">Add A New Sub Category</string>
     <string name="update_category">Update Category</string>
+    <string name="delete_category">Delete Category</string>
     <string name="update_category_details">Update Category Details</string>
+
+    <string name="delete_category_details">Delete Category Details</string>
 
 </resources>
