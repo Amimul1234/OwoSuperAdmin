@@ -38,6 +38,8 @@ public class UpdateExistentCategory extends AppCompatActivity {
         ImageView backButton = findViewById(R.id.backIcon);
         backButton.setOnClickListener(v -> onBackPressed());
 
+        getCategoryData();
+
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
 
         swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
@@ -47,19 +49,7 @@ public class UpdateExistentCategory extends AppCompatActivity {
         showRecycler();
     }
 
-
-
-    private void showRecycler() {
-        updateCategoryAdapter = new UpdateCategoryAdapter(UpdateExistentCategory.this, categoryEntities);
-        updateRecyclerView.setAdapter(updateCategoryAdapter);
-        updateRecyclerView.setLayoutManager(linearLayoutManager);
-        updateCategoryAdapter.notifyDataSetChanged();
-        swipeRefreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void getCategoryData() {
         RetrofitClient.getInstance().getApi()
                 .getAllCategories()
                 .enqueue(new Callback<List<CategoryEntity>>() {
@@ -84,6 +74,15 @@ public class UpdateExistentCategory extends AppCompatActivity {
                         Toast.makeText(UpdateExistentCategory.this, "Error fetching categories, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+
+    private void showRecycler() {
+        updateCategoryAdapter = new UpdateCategoryAdapter(UpdateExistentCategory.this, categoryEntities);
+        updateRecyclerView.setAdapter(updateCategoryAdapter);
+        updateRecyclerView.setLayoutManager(linearLayoutManager);
+        updateCategoryAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 }
