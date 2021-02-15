@@ -1,10 +1,12 @@
 package com.owoSuperAdmin.categoryManagement.category.entity;
 
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryEntity {
+public class CategoryEntity implements Serializable {
 
     private Long categoryId;
     private String categoryName;

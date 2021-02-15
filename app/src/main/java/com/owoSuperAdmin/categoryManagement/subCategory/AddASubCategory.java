@@ -47,7 +47,6 @@ public class AddASubCategory extends AppCompatActivity {
 
     private EditText sub_category_name;
     private ImageView sub_category_image;
-    private Button create_sub_category;
     private Spinner category_name;
     private ProgressBar progressBar;
     private Uri imageuri;
@@ -67,11 +66,15 @@ public class AddASubCategory extends AppCompatActivity {
 
         sub_category_name = findViewById(R.id.sub_category_name);
         sub_category_image = findViewById(R.id.subcategory_image);
-        create_sub_category = findViewById(R.id.add_new_category);
+        Button create_sub_category = findViewById(R.id.add_new_category);
         category_name = findViewById(R.id.category_spinner);
         progressBar = findViewById(R.id.progress);
 
         populateSpinner();
+
+        ImageView backButton = findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(v -> onBackPressed());
 
         storageSubCategoryReference = FirebaseStorage.getInstance().getReference().child("Sub Category");
 
