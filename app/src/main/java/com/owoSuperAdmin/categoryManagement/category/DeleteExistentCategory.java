@@ -63,7 +63,7 @@ public class DeleteExistentCategory extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        categoryEntities.clear();
         RetrofitClient.getInstance().getApi()
                 .getAllCategories()
                 .enqueue(new Callback<List<CategoryEntity>>() {
