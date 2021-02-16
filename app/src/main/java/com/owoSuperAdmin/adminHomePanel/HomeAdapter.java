@@ -15,6 +15,7 @@ import com.owoSuperAdmin.categoryManagement.brand.AddABrand;
 import com.owoSuperAdmin.categoryManagement.category.AddNewCategory;
 import com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory;
 import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
+import com.owoSuperAdmin.categoryManagement.subCategory.UpdateSubCategory;
 import com.owoSuperAdmin.owoshop.AddATimeSlot;
 import com.owoSuperAdmin.productsManagement.AddProductActivity;
 import com.owoSuperAdmin.offersManagement.AvailableOffersActivity;
@@ -205,8 +206,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 }
                 else if(i==1)
                 {
-                    CharSequence[] subCategoryOptions = new CharSequence[]{"Create a new sub-category", "Update existent sub-category",
-                            "Delete existent sub-category"};
+                    CharSequence[] subCategoryOptions = new CharSequence[]{"Create a new sub-category",
+                            "Update existent sub-category", "Delete existent sub-category"};
 
                     AlertDialog.Builder subCategoryBuilder = new AlertDialog.Builder(context);
                     subCategoryBuilder.setTitle("Sub Category Management");
@@ -219,7 +220,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         }
                         else if(which == 1)
                         {
-
+                            Intent intent = new Intent(context, UpdateSubCategory.class);
+                            context.startActivity(intent);
                         }
                     }));
 

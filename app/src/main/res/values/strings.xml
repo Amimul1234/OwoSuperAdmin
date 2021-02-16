@@ -139,5 +139,6 @@
     <string name="update_category_details">Update Category Details</string>
 
     <string name="delete_category_details">Delete Category Details</string>
+    <string name="categories">Categories</string>
 
 </resources>
