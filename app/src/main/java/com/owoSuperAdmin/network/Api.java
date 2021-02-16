@@ -106,6 +106,15 @@ public interface Api {
     @POST("/addNewSubCategory")
     Call<ResponseBody> addNewSubCategory(@Query("categoryId") Long categoryId, @Body SubCategoryEntity subCategoryEntity);
 
+    @GET("/getAllSubCategories")
+    Call<List<SubCategoryEntity>> getAllSubCategories(@Query("categoryId") Long categoryId);
+
+    @PUT("/updateSubCategory")
+    Call<ResponseBody> updateSubCategory(@Body SubCategoryEntity subCategoryEntity);
+
+    @DELETE("/deleteSubCategory")
+    Call<ResponseBody> deleteSubCategory(@Query("subCategoryId") Long subCategoryId);
+
     //Image Controller
     @Multipart
     @POST("/imageController/{directory}")
