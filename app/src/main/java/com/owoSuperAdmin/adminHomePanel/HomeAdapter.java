@@ -15,7 +15,7 @@ import com.owoSuperAdmin.categoryManagement.brand.AddABrand;
 import com.owoSuperAdmin.categoryManagement.category.AddNewCategory;
 import com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory;
 import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
-import com.owoSuperAdmin.categoryManagement.subCategory.UpdateSubCategory;
+import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
 import com.owoSuperAdmin.owoshop.AddATimeSlot;
 import com.owoSuperAdmin.productsManagement.AddProductActivity;
 import com.owoSuperAdmin.offersManagement.AvailableOffersActivity;
@@ -27,7 +27,7 @@ import com.owoSuperAdmin.productsManagement.AvailableProducts;
 import com.owoSuperAdmin.offersManagement.QuponActivity;
 import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity;
-import com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory;
+import com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory;
 import com.owoSuperAdmin.ordersManagement.confirm_shop_orders;
 import org.jetbrains.annotations.NotNull;
 
@@ -220,7 +220,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         }
                         else if(which == 1)
                         {
-                            Intent intent = new Intent(context, UpdateSubCategory.class);
+                            Intent intent = new Intent(context, UpdateSubCategoryAllCategories.class);
                             context.startActivity(intent);
                         }
                     }));

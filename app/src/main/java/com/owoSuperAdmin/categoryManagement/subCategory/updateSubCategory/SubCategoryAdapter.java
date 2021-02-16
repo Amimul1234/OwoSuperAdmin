@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.categoryManagement.subCategory;
+package com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory;
 
 import android.content.Context;
 import android.content.Intent;
@@ -61,13 +61,9 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
             itemView.setOnClickListener(v -> {
                 SubCategoryEntity subCategoryEntity = subCategoryEntityList.get(getAdapterPosition());
 
-                /*
-                Intent intent = new Intent(context, UpdateSubCategoryActivity.class);
-                intent.putExtra("categoryEntityId", String.valueOf(categoryEntity.getCategoryId()));
+                Intent intent = new Intent(context, SubCategoryUpdateActivity.class);
+                intent.putExtra("subCategoryEntity", subCategoryEntity);
                 context.startActivity(intent);
-
-
-                 */
             });
         }
     }

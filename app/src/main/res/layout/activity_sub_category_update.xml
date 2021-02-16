@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/update_category"
+            android:text="@string/update_sub_category"
             android:layout_marginStart="20dp"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -31,7 +31,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-        android:id="@+id/categoryImage"
+        android:id="@+id/subCategoryImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@+id/toolbar"
@@ -44,17 +44,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/click_to_add_category_picture"
+        android:text="@string/click_to_add_sub_category_picture"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_below="@+id/categoryImage"
+        android:layout_below="@+id/subCategoryImage"
         android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/category_tag_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/category_name"
+        android:text="@string/sub_category_name"
         android:layout_below="@id/category_tag_1"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
@@ -62,35 +62,35 @@
         />
 
     <EditText
-        android:id="@+id/categoryName"
+        android:id="@+id/subCategoryName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/category_tag_2"
         android:paddingStart="15dp"
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_black"
-        android:hint="@string/please_enter_category_name"
+        android:hint="@string/please_enter_sub_category_name"
         android:autofillHints="@string/category_name"
         android:inputType="text" />
 
     <ProgressBar
-        android:id="@+id/categoryUpdateProgressbar"
+        android:id="@+id/subCategoryUpdateProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_below="@+id/categoryName"
+        android:layout_below="@+id/subCategoryName"
         android:indeterminateTint="@color/blue"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/updateCategoryDetails"
+        android:id="@+id/updateSubCategoryDetails"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/categoryUpdateProgressbar"
+        android:layout_below="@+id/subCategoryUpdateProgressBar"
         android:background="@drawable/buttons_blue"
         android:layout_margin="20dp"
-        android:text="@string/update_category_details"
+        android:text="@string/update_sub_category_details"
         android:textColor="@color/white"
         android:textSize="18sp"/>
 

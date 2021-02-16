@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.categoryManagement.subCategory;
+package com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +16,12 @@ import com.owoSuperAdmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
-public class UpdateSubCategoryAdapter extends RecyclerView.Adapter<UpdateSubCategoryAdapter.xyz>{
+public class UpdateSubCategoryAllCategoriesAdapter extends RecyclerView.Adapter<UpdateSubCategoryAllCategoriesAdapter.xyz>{
 
     private final Context context;
     private final List<CategoryEntity> categoryEntities;
 
-    public UpdateSubCategoryAdapter(Context context, List<CategoryEntity> categoryEntities) {
+    public UpdateSubCategoryAllCategoriesAdapter(Context context, List<CategoryEntity> categoryEntities) {
         this.context = context;
         this.categoryEntities = categoryEntities;
     }
@@ -61,7 +61,7 @@ public class UpdateSubCategoryAdapter extends RecyclerView.Adapter<UpdateSubCate
             itemView.setOnClickListener(v -> {
                 CategoryEntity categoryEntity = categoryEntities.get(getAdapterPosition());
 
-                Intent intent = new Intent(context, UpdateSubCategoryActivity.class);
+                Intent intent = new Intent(context, UpdateSubCategorySubCategoriesOfCategory.class);
                 intent.putExtra("categoryEntityId", String.valueOf(categoryEntity.getCategoryId()));
                 context.startActivity(intent);
 

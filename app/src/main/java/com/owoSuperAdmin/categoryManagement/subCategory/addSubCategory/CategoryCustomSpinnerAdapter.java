@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.categoryManagement.subCategory;
+package com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

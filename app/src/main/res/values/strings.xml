@@ -140,5 +140,11 @@
 
     <string name="delete_category_details">Delete Category Details</string>
     <string name="categories">Categories</string>
+    <string name="sub_categories">Sub Categories</string>
+    <string name="update_sub_category">Update Sub-category</string>
+    <string name="sub_category_name">Sub-category name:</string>
+    <string name="please_enter_sub_category_name">Please enter sub-category name</string>
+    <string name="update_sub_category_details">Update sub-category details</string>
+    <string name="click_to_add_sub_category_picture">Click to add sub-category picture</string>
 
 </resources>

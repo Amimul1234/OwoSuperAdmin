@@ -21,8 +21,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.UpdateSubCategoryActivity"></activity>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.UpdateSubCategory" />
+        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.SubCategoryUpdateActivity"></activity>
+        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategorySubCategoriesOfCategory" />
+        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.category.DeleteCategoryActivity" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.category.UpdateCategoryActivity" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory" />
@@ -47,7 +48,7 @@
         <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_confirmed_to_processing" />
         <activity android:name="com.owoSuperAdmin.orders.pending_orders" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.confirm_shop_orders" />
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.AddASubCategory" />
+        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory" />
         <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop" />
         <activity android:name="com.owoSuperAdmin.offersManagement.QuponActivity" />
         <activity android:name="com.owoSuperAdmin.productsManagement.SearchedProducts" />

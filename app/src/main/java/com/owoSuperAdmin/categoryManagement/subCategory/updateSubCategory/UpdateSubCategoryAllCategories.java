@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.categoryManagement.subCategory;
+package com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,10 +18,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpdateSubCategory extends AppCompatActivity {
+public class UpdateSubCategoryAllCategories extends AppCompatActivity {
 
     private RecyclerView updateRecyclerView;
-    private UpdateSubCategoryAdapter updateSubCategoryAdapter;
+    private UpdateSubCategoryAllCategoriesAdapter updateSubCategoryAllCategoriesAdapter;
     private LinearLayoutManager linearLayoutManager;
     private final List<CategoryEntity>categoryEntities = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -31,8 +31,8 @@ public class UpdateSubCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_sub_category);
 
-        updateRecyclerView=findViewById(R.id.updateCategoryRecyclerView);
-        swipeRefreshLayout=findViewById(R.id.updateSwipeRefresh);
+        updateRecyclerView = findViewById(R.id.updateCategoryRecyclerView);
+        swipeRefreshLayout = findViewById(R.id.updateSwipeRefresh);
         linearLayoutManager = new LinearLayoutManager(this);
 
         ImageView backButton = findViewById(R.id.backIcon);
@@ -57,9 +57,10 @@ public class UpdateSubCategory extends AppCompatActivity {
                     public void onResponse(@NotNull Call<List<CategoryEntity>> call, @NotNull Response<List<CategoryEntity>> response) {
                         if(response.isSuccessful())
                         {
+
                             assert response.body() != null;
                             categoryEntities.addAll(response.body());
-                            updateSubCategoryAdapter.notifyDataSetChanged();
+                            updateSubCategoryAllCategoriesAdapter.notifyDataSetChanged();
                         }
                         else
                         {
@@ -71,17 +72,17 @@ public class UpdateSubCategory extends AppCompatActivity {
                     @Override
                     public void onFailure(@NotNull Call<List<CategoryEntity>> call, @NotNull Throwable t) {
                         Log.e("Update cat. ", "Error is: "+t.getMessage());
-                        Toast.makeText(UpdateSubCategory.this, "Error fetching categories, please try again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateSubCategoryAllCategories.this, "Error fetching sub-categories, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
 
     private void showRecycler() {
-        updateSubCategoryAdapter = new UpdateSubCategoryAdapter(UpdateSubCategory.this, categoryEntities);
-        updateRecyclerView.setAdapter(updateSubCategoryAdapter);
+        updateSubCategoryAllCategoriesAdapter = new UpdateSubCategoryAllCategoriesAdapter(UpdateSubCategoryAllCategories.this, categoryEntities);
+        updateRecyclerView.setAdapter(updateSubCategoryAllCategoriesAdapter);
         updateRecyclerView.setLayoutManager(linearLayoutManager);
-        updateSubCategoryAdapter.notifyDataSetChanged();
+        updateSubCategoryAllCategoriesAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
     }
 

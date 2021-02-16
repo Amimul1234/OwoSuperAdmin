@@ -56,7 +56,7 @@ public class UpdateCategoryActivity extends AppCompatActivity {
         categoryImage = findViewById(R.id.categoryImage);
         categoryName = findViewById(R.id.categoryName);
         Button updateCategoryDetails = findViewById(R.id.updateCategoryDetails);
-        categoryUpdateProgressBar = findViewById(R.id.categoryUpdateProgressBar);
+        categoryUpdateProgressBar = findViewById(R.id.categoryUpdateProgressbar);
 
         categoryEntity = (CategoryEntity) getIntent().getSerializableExtra("categoryEntity");
 
