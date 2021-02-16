@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,12 +33,10 @@ import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.productsManagement.entity.Owo_product;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.Sub_categories;
 import com.owoSuperAdmin.owoshop.R;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
