@@ -1,16 +1,19 @@
 package com.owoSuperAdmin.categoryManagement.subCategory;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,91 +22,172 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
-import com.owoSuperAdmin.categoryManagement.subCategory.entity.Sub_categories;
+import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
-import java.util.HashMap;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddASubCategory extends AppCompatActivity {
 
-    private EditText sub_category_name;
-    private ImageView sub_category_image;
-    private Spinner category_name;
+    private ImageView subCategoryImage;
+    private Spinner subCategorySpinner;
+    private EditText subCategoryName;
     private ProgressBar progressBar;
-    private Uri imageuri;
-    private String myUrl = "";
-    private Sub_categories sub_categories = new Sub_categories();
-    private StorageTask uploadTask;
-    private StorageReference storageSubCategoryReference;
 
-    private int STORAGE_PERMISSION_CODE = 1;
-
-    private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    private final int STORAGE_PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_a_sub_category);
 
-        sub_category_name = findViewById(R.id.sub_category_name);
-        sub_category_image = findViewById(R.id.subcategory_image);
-        Button create_sub_category = findViewById(R.id.add_new_category);
-        category_name = findViewById(R.id.category_spinner);
+        ImageView backButton = findViewById(R.id.backButton);
+
+        subCategorySpinner = findViewById(R.id.categorySpinner);
+        subCategoryName = findViewById(R.id.subCategoryName);
+        subCategoryImage = findViewById(R.id.subCategoryImage);
         progressBar = findViewById(R.id.progress);
+        Button addNewSubCategory = findViewById(R.id.addNewSubCategory);
 
         populateSpinner();
 
-        ImageView backButton = findViewById(R.id.backButton);
-
         backButton.setOnClickListener(v -> onBackPressed());
+        subCategoryImage.setOnClickListener(v -> requestStoragePermission());
+        addNewSubCategory.setOnClickListener(v -> checkInputValidation());
+    }
 
-        storageSubCategoryReference = FirebaseStorage.getInstance().getReference().child("Sub Category");
+    private void checkInputValidation() {
 
-        //For selecting the profile image
-        sub_category_image.setOnClickListener(v -> requestStoragePermission());
+        if(subCategoryImage.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(
+                AddASubCategory.this, R.drawable.category_management)).getConstantState())
+        {
+            Toast.makeText(this, "Please choose an image for the sub category", Toast.LENGTH_SHORT).show();
+        }
+        else if(subCategoryName.getText().toString().isEmpty())
+        {
+            Toast.makeText(this, "Please enter the name of the sub category", Toast.LENGTH_SHORT).show();
+        }
+        else if(subCategorySpinner.getSelectedItem().toString().isEmpty())
+        {
+            Toast.makeText(this, "Please select category first", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            saveSubCategoryToDatabase();
+        }
+    }
 
-        create_sub_category.setOnClickListener(view -> {
-            String sub_category_name_creation = sub_category_name.getText().toString();
+    private void saveSubCategoryToDatabase() {
+        progressBar.setVisibility(View.VISIBLE);
 
-            if(sub_category_name_creation.isEmpty())
-            {
-                sub_category_name.setError("Please give a name to sub category");
-                sub_category_name.requestFocus();
-            }
-            else if(myUrl == null)
-            {
-                Toast.makeText(AddASubCategory.this, "Image can not be null", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                uploadImageofAdmin(sub_category_name_creation);
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        });
+        Bitmap bitmap = ((BitmapDrawable) subCategoryImage.getDrawable()).getBitmap();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
 
+        String filename = UUID.randomUUID().toString();
+
+        File file = new File(AddASubCategory.this.getCacheDir() + File.separator + filename + ".jpg");
+
+        try {
+            FileOutputStream fo = new FileOutputStream(file);
+            fo.write(byteArrayOutputStream.toByteArray());
+            fo.flush();
+            fo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part multipartFile = MultipartBody.Part.createFormData("multipartFile", file.getName(), requestBody);
+
+        RetrofitClient.getInstance().getApi()
+                .uploadImageToServer("SubCategory", multipartFile)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                        if(response.isSuccessful())
+                        {
+                            try {
+                                assert response.body() != null;
+                                String path = response.body().string();
+
+                                Long categoryId = subCategorySpinner.getSelectedItemId();
+
+                                SubCategoryEntity subCategoryEntity = new SubCategoryEntity();
+
+                                subCategoryEntity.setSub_category_image(path);
+                                subCategoryEntity.setSub_category_name(subCategoryName.getText().toString());
+
+                                RetrofitClient.getInstance().getApi()
+                                        .addNewSubCategory(categoryId, subCategoryEntity)
+                                        .enqueue(new Callback<ResponseBody>() {
+                                            @Override
+                                            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                                                if(response.isSuccessful())
+                                                {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(AddASubCategory.this, "Sub category added successfully", Toast.LENGTH_SHORT).show();
+                                                    onBackPressed();
+                                                }
+                                                else
+                                                {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(AddASubCategory.this, "Failed to upload sub category, please try again", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                                                progressBar.setVisibility(View.GONE);
+                                                Log.e("Add Sub cat.", "Error occurred, Error is: "+t.getMessage());
+                                                Toast.makeText(AddASubCategory.this, "Failed to upload sub category, please try again", Toast.LENGTH_SHORT).show();
+                                                t.printStackTrace();
+                                            }
+                                        });
+
+
+                            } catch (IOException e) {
+                                progressBar.setVisibility(View.GONE);
+                                Log.e("Add Sub cat.", "Error occurred, Error is: "+e.getMessage());
+                                Toast.makeText(AddASubCategory.this, "Failed to upload image to server, please try again", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(AddASubCategory.this, "Failed to upload image to server, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                        progressBar.setVisibility(View.GONE);
+                        Log.e("Add Sub cat.", "Error occurred, Error is: "+t.getMessage());
+                        Toast.makeText(AddASubCategory.this, "Failed to upload image to server, please try again", Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
 
     }
 
     private void populateSpinner() {
+
         RetrofitClient.getInstance().getApi()
                 .getAllCategories()
                 .enqueue(new Callback<List<CategoryEntity>>() {
@@ -114,7 +198,8 @@ public class AddASubCategory extends AppCompatActivity {
                             CategoryCustomSpinnerAdapter categoryCustomSpinnerAdapter = new CategoryCustomSpinnerAdapter(AddASubCategory.this,
                                     response.body());
 
-                            category_name.setAdapter(categoryCustomSpinnerAdapter);
+                            subCategorySpinner.setAdapter(categoryCustomSpinnerAdapter);
+
                         }
                         else
                         {
@@ -131,175 +216,87 @@ public class AddASubCategory extends AppCompatActivity {
     }
 
 
-    private void uploadImageofAdmin(String subcategory_name) {
-
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Upload Sub Category Image");
-        progressDialog.setMessage("Please wait while we are uploading sub category image...");
-        progressDialog.setCanceledOnTouchOutside(false);
-
-        if(imageuri!=null)
-        {
-            final StorageReference fileRef = storageSubCategoryReference.child(subcategory_name+".jpg");
-
-            uploadTask = fileRef.putFile(imageuri);
-
-            uploadTask.continueWithTask((Continuation) task -> {
-
-                if(!task.isSuccessful())
-                {
-                    throw task.getException();
-                }
-
-                return fileRef.getDownloadUrl();
-
-            }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
-                if(task.isSuccessful())
-                {
-                    Uri downloadUrl = task.getResult();
-                    myUrl = downloadUrl.toString();
-
-                    database.child("Categories").child(category_name.getSelectedItem().toString())
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if(snapshot.exists())
-                                    {
-                                        sub_categories =  snapshot.getValue(Sub_categories.class);
-
-                                        HashMap<String, String> sub_category_under_category = new HashMap<>();
-
-                                        sub_category_under_category.put("Name", subcategory_name);
-                                        sub_category_under_category.put("Image", myUrl);
-
-                                        sub_categories.add(sub_category_under_category);
 
 
-                                        database.child("Categories").child(category_name.getSelectedItem().toString())
-                                                .setValue(sub_categories).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(AddASubCategory.this, "Subcategory added", Toast.LENGTH_SHORT).show();
-                                                progressBar.setVisibility(View.GONE);
-                                                finish();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(AddASubCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                progressBar.setVisibility(View.GONE);
-                                            }
-                                        });
-                                    }
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
-                                    else
-                                    {
-                                        HashMap<String, String> sub_category_under_category = new HashMap<>();
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed because of taking image from gallery")
+                    .setPositiveButton("ok", (dialog, which) -> {
 
-                                        sub_category_under_category.put("Name", subcategory_name);
-                                        sub_category_under_category.put("Image", myUrl);
+                        ActivityCompat.requestPermissions(AddASubCategory.this,
+                                new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
-                                        Sub_categories sub_categories2 = new Sub_categories();
-                                        sub_categories2.add(sub_category_under_category);
+                        selectImage(AddASubCategory.this);
+                    })
+                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
+                    .create().show();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
-                                        database.child("Categories").child(category_name.getSelectedItem().toString())
-                                                .setValue(sub_categories2).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(AddASubCategory.this, "Subcategory added", Toast.LENGTH_SHORT).show();
-                                                progressBar.setVisibility(View.GONE);
-                                                finish();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(AddASubCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                progressBar.setVisibility(View.GONE);
-                                            }
-                                        });
-                                    }
-
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-                }
-
-                else
-                {
-                    progressDialog.dismiss();
-                    Toast.makeText(AddASubCategory.this, "Error...Can not upload image", Toast.LENGTH_SHORT).show();
-                }
-            });
+            selectImage(AddASubCategory.this);
         }
+    }
 
-        else
-        {
-            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
-        }
+    private void selectImage(Context context) {
 
+        final CharSequence[] options = { "Take Photo", "Choose from Gallery"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Choose your profile picture");
+
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Take Photo")) {
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePicture, 0);
+
+            } else if (options[item].equals("Choose from Gallery")) {
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto , 1);
+            }
+        });
+
+        builder.setCancelable(false);
+        builder.show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == RESULT_OK && data != null)
-        {
-            imageuri = data.getData();
-            sub_category_image.setImageURI(imageuri);
-        }
-        else
-        {
-            Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show();
-        }
-    }
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
+                        subCategoryImage.setImageBitmap(selectedImage);
+                    }
 
+                    break;
+                case 1:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Uri selectedImage = data.getData();
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                        if (selectedImage != null) {
+                            Cursor cursor = getContentResolver().query(selectedImage,
+                                    filePathColumn, null, null, null);
+                            if (cursor != null) {
+                                cursor.moveToFirst();
 
-    private void requestStoragePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Permission needed")
-                    .setMessage("This permission is needed because of taking image from gallery")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(AddASubCategory.this,
-                                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                                String picturePath = cursor.getString(columnIndex);
+                                subCategoryImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                cursor.close();
+                            }
                         }
-                    })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .create().show();
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == STORAGE_PERMISSION_CODE)  {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                ImagePicker.Companion.with(AddASubCategory.this)
-                        .crop()	    			//Crop image(Optional), Check Customization for more option
-                        .compress(512)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(540, 540)	//Final image resolution will be less than 1080 x 1080(Optional)
-                        .start();
-            } else {
-                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+
+                    }
+                    break;
             }
         }
     }
-
-
-
 }

@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@+id/toolbar"
-        android:src="@drawable/addcategorypicture"
+        android:src="@drawable/category_management"
         android:background="@drawable/edit_text_black"
         android:contentDescription="@string/category_image" />
 
@@ -70,7 +70,8 @@
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_black"
         android:hint="@string/please_enter_category_name"
-        android:autofillHints="@string/category_name"/>
+        android:autofillHints="@string/category_name"
+        android:inputType="text" />
 
     <ProgressBar
         android:id="@+id/category_add_progressbar"

@@ -66,7 +66,7 @@ public class AddNewCategory extends AppCompatActivity {
 
     private void validateData() {
         if(categoryImage.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(
-                AddNewCategory.this, R.drawable.addcategorypicture)).getConstantState())
+                AddNewCategory.this, R.drawable.category_management)).getConstantState())
         {
             Toast.makeText(this, "Please select image for category", Toast.LENGTH_SHORT).show();
         }

@@ -31,18 +31,18 @@
     </androidx.appcompat.widget.Toolbar>
 
     <Spinner
-        android:id="@+id/category_spinner"
+        android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="10dp"/>
 
     <ImageView
-        android:id="@+id/subcategory_image"
-        android:layout_width="256dp"
+        android:id="@+id/subCategoryImage"
+        android:layout_width="match_parent"
         android:layout_height="256dp"
         android:src="@drawable/category_management"
-        android:layout_below="@id/category_spinner"
+        android:layout_below="@id/categorySpinner"
         android:layout_marginTop="10dp"
         android:padding="5dp"
         android:layout_centerHorizontal="true"
@@ -54,14 +54,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/click_to_add_sub_category_image"
-        android:layout_below="@id/subcategory_image"
+        android:layout_below="@id/subCategoryImage"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         />
 
 
     <EditText
-        android:id="@+id/sub_category_name"
+        android:id="@+id/subCategoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
@@ -77,11 +77,11 @@
 
 
     <Button
-        android:id="@+id/add_new_category"
+        android:id="@+id/addNewSubCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_sub_category"
-        android:layout_below="@id/sub_category_name"
+        android:layout_below="@id/subCategoryName"
         android:background="@drawable/buttons_blue"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -95,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/add_new_category"
+        android:layout_below="@+id/addNewSubCategory"
         android:layout_marginTop="8dp"
         android:indeterminateTint="@color/blue"/>
 

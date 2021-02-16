@@ -32,20 +32,20 @@ public class CategoryCustomSpinnerAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return categoryEntityList.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return categoryEntityList.get(i).getCategoryId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(R.layout.category_custom_spinner, null);
-        ImageView icon = (ImageView) view.findViewById(R.id.category_image);
-        TextView names = (TextView) view.findViewById(R.id.category_name);
+        ImageView icon = view.findViewById(R.id.category_image);
+        TextView names = view.findViewById(R.id.category_name);
         Glide.with(context).load(HostAddress.HOST_ADDRESS.getAddress()+categoryEntityList.get(position).getCategoryImage()).into(icon);
         names.setText(categoryEntityList.get(position).getCategoryName());
         return view;

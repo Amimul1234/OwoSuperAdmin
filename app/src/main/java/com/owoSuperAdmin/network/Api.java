@@ -2,6 +2,7 @@ package com.owoSuperAdmin.network;
 
 import com.owoSuperAdmin.categoryManagement.brand.entity.Brands;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
+import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
 import com.owoSuperAdmin.productsManagement.entity.Owo_product;
 import com.owoSuperAdmin.ordersManagement.entity.Shop_keeper_orders;
@@ -100,6 +101,10 @@ public interface Api {
 
     @DELETE("/deleteCategory")
     Call<ResponseBody> deleteCategory(@Query("categoryId") Long categoryId);
+
+    //Sub categories management
+    @POST("/addNewSubCategory")
+    Call<ResponseBody> addNewSubCategory(@Query("categoryId") Long categoryId, @Body SubCategoryEntity subCategoryEntity);
 
     //Image Controller
     @Multipart

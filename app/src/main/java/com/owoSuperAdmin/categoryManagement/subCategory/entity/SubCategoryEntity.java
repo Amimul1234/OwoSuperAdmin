@@ -1,6 +1,8 @@
 package com.owoSuperAdmin.categoryManagement.subCategory.entity;
 
-public class SubCategoryEntity {
+import java.io.Serializable;
+
+public class SubCategoryEntity implements Serializable {
     private Long sub_category_id;
     private String sub_category_name;
     private String sub_category_image;
