@@ -149,23 +149,29 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
 
         else if (position==3) //It is offer management
         {
-            CharSequence[] options=new CharSequence[]{"Shop Management", "Shop Orders"};
-            AlertDialog.Builder builder=new AlertDialog.Builder(context);
-            builder.setTitle("SHOPS");
-            builder.setItems(options, (dialog, i) -> {
-                if (i==0)
-                {
-                    Intent intent=new Intent(context, ManageRegisteredShops.class);
-                    context.startActivity(intent);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                }
-                else if(i==1)
-                {
-                    Intent intent = new Intent(context, confirm_shop_orders.class);
-                    context.startActivity(intent);
-                }
+            View view = LayoutInflater.from(context).inflate(R.layout.custom_offers_alert_dialog, null);
+
+            Button create_a_new_offer = view.findViewById(R.id.create_a_new_offer);
+            Button available_offers = view.findViewById(R.id.available_offers);
+
+            builder.setView(view);
+
+            final AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            create_a_new_offer.setOnClickListener(v -> {
+                Intent intent=new Intent(context, CreateOffersActivity.class);
+                context.startActivity(intent);
+                alertDialog.cancel();
             });
-            builder.show();
+
+            available_offers.setOnClickListener(v -> {
+                Intent intent=new Intent(context, AvailableOffersActivity.class);
+                context.startActivity(intent);
+                alertDialog.cancel();
+            });
 
         }
         else if (position==4)//Category and sub category management
@@ -235,34 +241,26 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
         else if (position==5)
         {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-            View view = LayoutInflater.from(context).inflate(R.layout.custom_offers_alert_dialog, null);
-
-            Button create_a_new_offer = view.findViewById(R.id.create_a_new_offer);
-            Button available_offers = view.findViewById(R.id.available_offers);
-
-            builder.setView(view);
-
-            final AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-
-            create_a_new_offer.setOnClickListener(v -> {
-                Intent intent=new Intent(context, CreateOffersActivity.class);
-                context.startActivity(intent);
-                alertDialog.cancel();
-            });
-
-            available_offers.setOnClickListener(v -> {
-                Intent intent=new Intent(context, AvailableOffersActivity.class);
-                context.startActivity(intent);
-                alertDialog.cancel();
-            });
-
         }
         else if (position==6)
         {
+            CharSequence[] options=new CharSequence[]{"Shop Management", "Shop Orders"};
+            AlertDialog.Builder builder=new AlertDialog.Builder(context);
+            builder.setTitle("SHOPS");
+            builder.setItems(options, (dialog, i) -> {
+                if (i==0)
+                {
+                    Intent intent=new Intent(context, ManageRegisteredShops.class);
+                    context.startActivity(intent);
 
+                }
+                else if(i==1)
+                {
+                    Intent intent = new Intent(context, confirm_shop_orders.class);
+                    context.startActivity(intent);
+                }
+            });
+            builder.show();
         }
         else if (position==7)
         {
