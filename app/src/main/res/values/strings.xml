@@ -45,50 +45,6 @@
         <item>Order Management</item>
     </string-array>
 
-    <string-array name="productname">
-        <item>Bags and Luggage</item>
-        <item>Beauty and Bodycare</item>
-        <item>Books and Stationary</item>
-        <item>Construction Materials</item>
-        <item>Decoration Materials</item>
-        <item>Digital Goods</item>
-        <item>Electric and Parts</item>
-        <item>Electronics and Appliance</item>
-        <item>Event and Media</item>
-        <item>Fashion For Men</item>
-        <item>Fashion For Women</item>
-        <item>Furniture</item>
-        <item>Glasses</item>
-        <item>Grocery</item>
-        <item>Handmade</item>
-        <item>Harvesting and Agriculture</item>
-        <item>Health Care and Pharmacy</item>
-        <item>Home and Living</item>
-        <item>Home Appliance</item>
-        <item>Home Garden</item>
-        <item>Hotel Booking</item>
-        <item>Jewellery</item>
-        <item>Kitchen and Dining</item>
-        <item>Leather Goods</item>
-        <item>LP Gas</item>
-        <item>Machinery\'s</item>
-        <item>Mother, Kids and Toys</item>
-        <item>Paints</item>
-        <item>Pet and Poultry Supplies</item>
-        <item>Plastic made Products</item>
-        <item>Property</item>
-        <item>Service</item>
-        <item>Shoes</item>
-        <item>Sports</item>
-        <item>Vehicles and Parts</item>
-        <item>Watch and Clock</item>
-        <item>Fruits and Vegetables</item>
-        <item>Meat and Fish</item>
-        <item>Cooking</item>
-        <item>Beverages</item>
-        <item>Office Products</item>
-    </string-array>
-
     <string-array name="offer_is_for">
         <item>ShopKeeper</item>
         <item>Consumer</item>
@@ -148,5 +104,19 @@
     <string name="update_sub_category_details">Update sub-category details</string>
     <string name="delete_sub_category_details">Delete sub-category details</string>
     <string name="click_to_add_sub_category_picture">Click to add sub-category picture</string>
+    <string name="click_to_choose_product_image">Click to choose product image</string>
+    <string name="product_image">Product Image</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_description">Product Description</string>
+    <string name="product_quantity">Product Quantity</string>
+    <string name="product_price">Product Price</string>
+    <string name="discount_taka">Discount taka</string>
+    <string name="calculate">Calculate</string>
+    <string name="discount_price">Discounted Price:</string>
+    <string name="add_a_new_product">Add A New Product</string>
+    <string name="choose_a_sub_category">Choose a Sub Category:</string>
+    <string name="choose_a_brand">Choose a brand</string>
+    <string name="add_product">Add Product</string>
+    <string name="preview">Preview</string>
 
 </resources>

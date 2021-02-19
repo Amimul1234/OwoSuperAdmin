@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.categoryManagement.brand.entity.Brands;
 import com.owoSuperAdmin.owoshop.R;
-
 import org.jetbrains.annotations.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -63,33 +61,25 @@ public class AddABrand extends AppCompatActivity {
 
         category_selector = findViewById(R.id.category_selector);
 
-        brand_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestStoragePermission();
+        brand_image.setOnClickListener(v -> requestStoragePermission());
+
+        create_a_new_brand.setOnClickListener(view -> {
+
+            String brand_name_creation = brand_name.getText().toString();
+
+            if(brand_name_creation.isEmpty())
+            {
+                brand_name.setError("Please give a name to sub category");
+                brand_name.requestFocus();
             }
-        });
-
-        create_a_new_brand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String brand_name_creation = brand_name.getText().toString();
-
-                if(brand_name_creation.isEmpty())
-                {
-                    brand_name.setError("Please give a name to sub category");
-                    brand_name.requestFocus();
-                }
-                else if(brand_image.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState())
-                {
-                    Toast.makeText(AddABrand.this, "Image can not be empty", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    uploadImageOfBrand();
-                    progressBar.setVisibility(View.VISIBLE);
-                }
+            else if(brand_image.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState())
+            {
+                Toast.makeText(AddABrand.this, "Image can not be empty", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                uploadImageOfBrand();
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
 
@@ -227,18 +217,14 @@ public class AddABrand extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Choose your profile picture");
 
-        builder.setItems(options, new DialogInterface.OnClickListener() {
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Take Photo")) {
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePicture, 0);
 
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(takePicture, 0);
-
-                } else if (options[item].equals("Choose from Gallery")) {
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(pickPhoto , 1);
-                }
+            } else if (options[item].equals("Choose from Gallery")) {
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto , 1);
             }
         });
 
@@ -254,22 +240,14 @@ public class AddABrand extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("Permission needed")
                     .setMessage("This permission is needed because of taking image from gallery")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                    .setPositiveButton("ok", (dialog, which) -> {
 
-                            ActivityCompat.requestPermissions(AddABrand.this,
-                                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        ActivityCompat.requestPermissions(AddABrand.this,
+                                new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
-                            selectImage(AddABrand.this);
-                        }
+                        selectImage(AddABrand.this);
                     })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
+                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
                     .create().show();
         } else {
             ActivityCompat.requestPermissions(this,

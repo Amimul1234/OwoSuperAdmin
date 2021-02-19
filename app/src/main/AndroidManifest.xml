@@ -71,8 +71,8 @@
         <activity android:name="com.owoSuperAdmin.offersManagement.AvailableOffersActivity" />
         <activity android:name="com.owoSuperAdmin.productsManagement.UpdateProduct" />
         <activity android:name="com.owoSuperAdmin.productsManagement.AvailableProducts" />
-        <activity android:name="com.owoSuperAdmin.productsManagement.AddAProduct" />
-        <activity android:name="com.owoSuperAdmin.productsManagement.AddProductActivity" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddAProduct" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity" />
         <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity" />
         <activity android:name="com.owoSuperAdmin.adminManagement.UpdateSemiAdminActivity" />
         <activity android:name="com.owoSuperAdmin.offersManagement.CreateOffersActivity" />

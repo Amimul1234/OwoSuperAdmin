@@ -1,155 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owoSuperAdmin.productsManagement.AddAProduct">
-
+    tools:context="com.owoSuperAdmin.productsManagement.addProduct.AddAProduct">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/productAddingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/blue"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            >
+
+            <ImageView
+                android:id="@+id/backFromProductAdding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_arrow_back_24_white"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/back_to_main_admin_panel" />
+
+            <TextView
+                android:id="@+id/heading1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/add_a_new_product"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+
 
         <RelativeLayout
             android:id="@+id/relative_1"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:layout_alignParentTop="true">
-
+            android:layout_marginEnd="10dp"
+            android:layout_below="@+id/productAddingToolbar"
+            android:layout_marginStart="10dp">
 
             <ImageView
-                android:id="@+id/select_product_image"
-                android:layout_width="350dp"
+                android:id="@+id/productImage"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:cropToPadding="false"
                 android:scaleType="centerCrop"
                 android:src="@drawable/select_product_image"
-                />
+                android:contentDescription="@string/product_image" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Click to choose product image"
+                android:text="@string/click_to_choose_product_image"
                 android:textSize="20sp"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="@color/blue"
                 android:textStyle="bold"
-                android:fontFamily="@font/ethnocentric"
                 android:layout_marginTop="70dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
                 />
-
         </RelativeLayout>
 
-
-
-
         <EditText
-            android:id="@+id/product_name"
+            android:id="@+id/productName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relative_1"
             android:inputType="textMultiLine"
             android:layout_marginTop="20dp"
             android:padding="15dp"
-            android:hint="Product Name"
+            android:hint="@string/product_name"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/edittext_design"/>
+            android:background="@drawable/edit_text_black"
+            android:autofillHints="@string/product_name" />
 
         <EditText
-            android:id="@+id/product_description"
+            android:id="@+id/productDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_name"
+            android:layout_below="@+id/productName"
             android:inputType="textMultiLine"
             android:layout_marginTop="10dp"
             android:padding="15dp"
-            android:hint="Product Description"
+            android:hint="@string/product_description"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/edittext_design"/>
+            android:background="@drawable/edit_text_black"
+            android:autofillHints="@string/product_description" />
 
         <EditText
-            android:id="@+id/product_quantity"
+            android:id="@+id/productQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_description"
+            android:layout_below="@+id/productDescription"
             android:inputType="numberDecimal"
             android:layout_marginTop="10dp"
             android:padding="15dp"
-            android:hint="Product Quantity"
+            android:hint="@string/product_quantity"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/edittext_design"/>
+            android:background="@drawable/edit_text_black"
+            android:autofillHints="@string/product_quantity" />
 
 
         <EditText
-            android:id="@+id/product_price"
+            android:id="@+id/productPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_quantity"
+            android:layout_below="@+id/productQuantity"
             android:inputType="numberDecimal"
             android:layout_marginTop="10dp"
             android:padding="15dp"
-            android:hint="Product Price"
+            android:hint="@string/product_price"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/edittext_design"/>
+            android:background="@drawable/edit_text_black"
+            android:autofillHints="@string/product_price" />
 
-        <LinearLayout
-            android:id="@+id/linear_2"
+        <EditText
+            android:id="@+id/productDiscount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_price"
+            android:inputType="numberDecimal"
+            android:hint="@string/discount_taka"
+            android:padding="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            >
+            android:layout_below="@+id/productPrice"
+            android:background="@drawable/edit_text_black"
+            android:autofillHints="@string/discount_taka" />
 
-            <EditText
-                android:id="@+id/product_discount"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:hint="Discount taka"
-                android:padding="15dp"
-                android:background="@drawable/edittext_design"/>
-
-            <Button
-                android:id="@+id/calculate_discount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/accounting"
-                android:drawableTint="@color/white"
-                android:drawablePadding="10dp"
-                android:text="Calc."
-                android:textColor="#FFFFFF"
-                android:background="@drawable/buttons_blue"
-                android:padding="8dp"
-                android:layout_marginStart="15dp"/>
-
-        </LinearLayout>
-
-
+        <Button
+            android:id = "@+id/calculateDiscount"
+            android:layout_width = "match_parent"
+            android:layout_height = "50dp"
+            android:drawableStart = "@drawable/ic_baseline_calculate_24"
+            android:text = "@string/calculate"
+            android:textColor = "@color/white"
+            android:layout_marginTop = "20dp"
+            android:layout_marginStart = "15dp"
+            android:layout_marginEnd = "15dp"
+            android:paddingStart = "10dp"
+            android:textSize="18sp"
+            android:background="@drawable/buttons_blue"
+            android:layout_below="@+id/productDiscount"/>
 
         <LinearLayout
             android:id="@+id/linear1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/linear_2"
+            android:layout_below="@+id/calculateDiscount"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:padding="15dp"
             android:layout_marginTop="15dp"
@@ -159,11 +182,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Discount: "
+                android:text="@string/discount_price"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/discounted_price"
+                android:id="@+id/discountedPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ff02"
@@ -176,16 +199,15 @@
             android:id="@+id/heading_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose a Sub Category:"
+            android:text="@string/choose_a_sub_category"
             android:layout_below="@+id/linear1"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
             android:textSize="18sp"/>
 
-
         <Spinner
-            android:id="@+id/sub_category_selector"
+            android:id="@+id/subCategorySelectorSpinner"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginRight="15dp"
@@ -198,8 +220,8 @@
             android:id="@+id/heading_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose a brand"
-            android:layout_below="@+id/sub_category_selector"
+            android:text="@string/choose_a_brand"
+            android:layout_below="@+id/subCategorySelectorSpinner"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
@@ -207,42 +229,36 @@
 
 
         <Spinner
-            android:id="@+id/brand_selector"
+            android:id="@+id/brandSelectorSpinner"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:layout_below="@id/heading_3"/>
 
-        <Button
-            android:id="@+id/preview_new_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/brand_selector"
-            android:layout_marginTop="10dp"
-            android:text="Preview"
-            android:textStyle="bold"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:padding="10dp"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/buttons_blue"/>
-
 
         <Button
-            android:id="@+id/add_new_product"
+            android:id="@+id/addNewProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/preview_new_product"
-            android:layout_marginBottom="25dp"
-            android:text="Add Product"
+            android:layout_below="@+id/brandSelectorSpinner"
+            android:text="@string/add_product"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:padding="10dp"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="25dp"
             android:textSize="20sp"
             android:textColor="@android:color/white"
             android:background="@drawable/buttons_blue"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/blue"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+
     </RelativeLayout>
 </ScrollView>

@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.productsManagement;
+package com.owoSuperAdmin.productsManagement.addProduct;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.owoshop.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class AddProductAdapter extends RecyclerView.Adapter<AddProductAdapter.xy
             itemView.setOnClickListener(v ->
             {
                 Intent intent = new Intent(context, AddAProduct.class);
-                intent.putExtra("category", categoryEntityList.get(getAdapterPosition()).getCategoryName());
+                intent.putExtra("category", categoryEntityList.get(getAdapterPosition()));
                 context.startActivity(intent);
             });
         }

@@ -17,7 +17,7 @@ import com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory;
 import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
 import com.owoSuperAdmin.owoshop.AddATimeSlot;
-import com.owoSuperAdmin.productsManagement.AddProductActivity;
+import com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity;
 import com.owoSuperAdmin.offersManagement.AvailableOffersActivity;
 import com.owoSuperAdmin.owoshop.CloudMessagingActivity;
 import com.owoSuperAdmin.owoshop.CreateNewAdminActivity;

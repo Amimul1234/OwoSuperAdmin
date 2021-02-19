@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.productsManagement;
+package com.owoSuperAdmin.productsManagement.addProduct;
 
 import android.os.Bundle;
 import android.util.Log;
