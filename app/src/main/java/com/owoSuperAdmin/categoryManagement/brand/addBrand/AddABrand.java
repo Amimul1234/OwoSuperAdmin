@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.categoryManagement.brand;
+package com.owoSuperAdmin.categoryManagement.brand.addBrand;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +15,18 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
+import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
+import com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.CategoryCustomSpinnerAdapter;
+import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.categoryManagement.brand.entity.Brands;
 import com.owoSuperAdmin.owoshop.R;
@@ -30,6 +35,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import okhttp3.MediaType;
@@ -42,37 +49,64 @@ import retrofit2.Response;
 
 public class AddABrand extends AppCompatActivity {
 
-    private EditText brand_name;
-    private ImageView brand_image;
+    private EditText brandName;
+    private ImageView brandImage;
     private ProgressBar progressBar;
-    private Spinner category_selector;
+    private Spinner categorySelector, subCategorySelector;
 
     private final int STORAGE_PERMISSION_CODE = 1;
+    private final List<CategoryEntity> categoryEntityList = new ArrayList<>();
+    private final List<SubCategoryEntity> subCategoryEntityList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_a_brand);
 
-        brand_name = findViewById(R.id.brand_name);
-        brand_image = findViewById(R.id.brand_image);
-        Button create_a_new_brand = findViewById(R.id.add_new_category);
+        brandName = findViewById(R.id.brand_name);
+        brandImage = findViewById(R.id.brand_image);
         progressBar = findViewById(R.id.progress);
+        categorySelector = findViewById(R.id.category_selector);
+        subCategorySelector = findViewById(R.id.sub_category_selector);
 
-        category_selector = findViewById(R.id.category_selector);
+        Button create_a_new_brand = findViewById(R.id.add_new_category);
+        ImageView backButton = findViewById(R.id.back_button);
 
-        brand_image.setOnClickListener(v -> requestStoragePermission());
+        categoryFetcher(); //Fetching categories
+        progressBar.setVisibility(View.VISIBLE);
+
+
+        brandImage.setOnClickListener(v -> requestStoragePermission());
+        backButton.setOnClickListener(v -> onBackPressed());
+
+        categorySelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!categoryEntityList.isEmpty())
+                    fetchSubCategory(categoryEntityList.get(position));
+                else
+                {
+                    Toast.makeText(AddABrand.this, "Can not fetch category, please wait", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         create_a_new_brand.setOnClickListener(view -> {
 
-            String brand_name_creation = brand_name.getText().toString();
+            String brand_name_creation = brandName.getText().toString();
 
             if(brand_name_creation.isEmpty())
             {
-                brand_name.setError("Please give a name to sub category");
-                brand_name.requestFocus();
+                brandName.setError("Please give a name to sub category");
+                brandName.requestFocus();
             }
-            else if(brand_image.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState())
+            else if(brandImage.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState())
             {
                 Toast.makeText(AddABrand.this, "Image can not be empty", Toast.LENGTH_SHORT).show();
             }
@@ -83,9 +117,67 @@ public class AddABrand extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void fetchSubCategory(CategoryEntity categoryEntity) {
+
+        RetrofitClient.getInstance().getApi()
+                .getAllSubCategories(categoryEntity.getCategoryId())
+                .enqueue(new Callback<List<SubCategoryEntity>>() {
+                    @Override
+                    public void onResponse(@NotNull Call<List<SubCategoryEntity>> call, @NotNull Response<List<SubCategoryEntity>> response) {
+                        if(response.isSuccessful())
+                        {
+                            subCategoryEntityList.clear();
+                            assert response.body() != null;
+                            subCategoryEntityList.addAll(response.body());
+                            SubCategoryCustomSpinner subCategoryCustomSpinner = new SubCategoryCustomSpinner(AddABrand.this, subCategoryEntityList);
+                            subCategorySelector.setAdapter(subCategoryCustomSpinner);
+                        }
+                        else
+                        {
+                            Toast.makeText(AddABrand.this, "Can not get sub category, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<List<SubCategoryEntity>> call, @NotNull Throwable t) {
+                        Log.e("Add sub_category", "Error is: "+t.getMessage());
+                        Toast.makeText(AddABrand.this, "Can not get sub categories, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 
+    private void categoryFetcher() {
+        RetrofitClient.getInstance().getApi()
+                .getAllCategories()
+                .enqueue(new Callback<List<CategoryEntity>>() {
+                    @Override
+                    public void onResponse(@NotNull Call<List<CategoryEntity>> call, @NotNull Response<List<CategoryEntity>> response) {
+                        if(response.isSuccessful())
+                        {
+                            progressBar.setVisibility(View.GONE);
+                            assert response.body() != null;
+                            categoryEntityList.addAll(response.body());
+                            CategoryCustomSpinnerAdapter categoryCustomSpinnerAdapter = new CategoryCustomSpinnerAdapter(AddABrand.this, categoryEntityList);
+                            categorySelector.setAdapter(categoryCustomSpinnerAdapter);
+                        }
+                        else
+                        {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(AddABrand.this, "Can not get categories, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<List<CategoryEntity>> call, @NotNull Throwable t) {
+                        progressBar.setVisibility(View.GONE);
+                        Log.e("Add sub_category", "Error is: "+t.getMessage());
+                        Toast.makeText(AddABrand.this, "Can not get categories, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     private void uploadImageOfBrand()
     {
@@ -95,9 +187,9 @@ public class AddABrand extends AppCompatActivity {
         progressDialog.setMessage("Please wait while we are uploading brand image...");
         progressDialog.setCanceledOnTouchOutside(false);
 
-        if (brand_image.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState()) {
+        if (brandImage.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState()) {
 
-            Bitmap bitmap = ((BitmapDrawable) brand_image.getDrawable()).getBitmap();
+            Bitmap bitmap = ((BitmapDrawable) brandImage.getDrawable()).getBitmap();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
 
@@ -129,7 +221,7 @@ public class AddABrand extends AppCompatActivity {
                                     assert response.body() != null;
                                     String path = response.body().string();
 
-                                    Brands brands = new Brands(brand_name.getText().toString(), path, category_selector.getSelectedItem().toString());
+                                    Brands brands = new Brands(brandName.getText().toString(), path, categorySelector.getSelectedItem().toString());
 
 
                                     RetrofitClient.getInstance().getApi()
@@ -183,7 +275,7 @@ public class AddABrand extends AppCompatActivity {
                 case 0:
                     if (resultCode == RESULT_OK && data != null) {
                         Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
-                        brand_image.setImageBitmap(selectedImage);
+                        brandImage.setImageBitmap(selectedImage);
                     }
 
                     break;
@@ -199,7 +291,7 @@ public class AddABrand extends AppCompatActivity {
 
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
-                                brand_image.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                brandImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
                                 cursor.close();
                             }
                         }
@@ -233,7 +325,8 @@ public class AddABrand extends AppCompatActivity {
         builder.show();
     }
 
-    private void requestStoragePermission() {
+    private void requestStoragePermission()
+    {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)) {

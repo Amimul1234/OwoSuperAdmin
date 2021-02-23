@@ -118,5 +118,11 @@
     <string name="choose_a_brand">Choose a brand</string>
     <string name="add_product">Add Product</string>
     <string name="preview">Preview</string>
+    <string name="add_a_new_brand">Add A New Brand</string>
+    <string name="brand_image">Brand Image</string>
+    <string name="click_to_add_brand_image">(Click to add brand image)</string>
+    <string name="select_a_category">Select A Category</string>
+    <string name="select_a_sub_category">Select A Sub Category</string>
+    <string name="enter_brand_name">Enter brand name</string>
 
 </resources>

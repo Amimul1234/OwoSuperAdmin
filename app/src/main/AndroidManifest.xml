@@ -39,7 +39,7 @@
         <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Processing_orders_details" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_shipped_to_delivered" />
         <activity android:name=".AddATimeSlot" />
-        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.AddABrand" />
+        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.completed_order_state" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.shipped_order_activity" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_picked_to_shipped" />

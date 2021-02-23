@@ -186,7 +186,8 @@ public class AddASubCategory extends AppCompatActivity {
 
     }
 
-    private void populateSpinner() {
+    private void populateSpinner()
+    {
 
         RetrofitClient.getInstance().getApi()
                 .getAllCategories()
@@ -214,9 +215,6 @@ public class AddASubCategory extends AppCompatActivity {
                     }
                 });
     }
-
-
-
 
     private void requestStoragePermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,

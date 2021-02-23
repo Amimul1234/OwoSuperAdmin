@@ -3,42 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owoSuperAdmin.owoshop.com.owosuperadmin.categoryManagement.AddABrand">
+    tools:context="com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/blue"
-        tools:targetApi="lollipop">
+        >
 
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24_white"
+            android:contentDescription="@string/back_button" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a brand"
+            android:text="@string/add_a_new_brand"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
 
-    </Toolbar>
+    </androidx.appcompat.widget.Toolbar>
+
 
     <ImageView
         android:id="@+id/brand_image"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:src="@drawable/home11"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:src="@drawable/category_management"
         android:layout_below="@id/toolbar"
-        android:layout_marginTop="10dp"
         android:padding="5dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/brand_image" />
 
 
     <TextView
         android:id="@+id/heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="(Click to add brand image)"
+        android:text="@string/click_to_add_brand_image"
         android:layout_below="@id/brand_image"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
@@ -48,49 +57,68 @@
         android:id="@+id/heading_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select A Category"
+        android:text="@string/select_a_category"
         android:layout_below="@id/heading"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_marginStart="10dp"/>
 
     <Spinner
         android:id="@+id/category_selector"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@id/heading_2"
-        android:entries="@array/productname"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="15dp"/>
 
+    <TextView
+        android:id="@+id/heading_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_a_sub_category"
+        android:layout_below="@id/category_selector"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"/>
 
+    <Spinner
+        android:id="@+id/sub_category_selector"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/heading_3"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="15dp"/>
 
     <EditText
         android:id="@+id/brand_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/category_selector"
+        android:layout_height="60dp"
+        android:layout_below="@+id/sub_category_selector"
         android:background="@drawable/edit_text_black"
-        android:hint="Enter brand name"
+        android:hint="@string/enter_brand_name"
         android:textSize="22sp"
         android:padding="10dp"
         android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        />
-
+        android:layout_marginTop="8dp"
+        android:autofillHints="Brand Name"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/add_new_category"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Brand to Database"
+        android:text="@string/add_a_new_brand"
         android:layout_below="@id/brand_name"
         android:background="@drawable/buttons_blue"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:padding="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:textSize="18sp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"/>
 
     <ProgressBar
         android:id="@+id/progress"

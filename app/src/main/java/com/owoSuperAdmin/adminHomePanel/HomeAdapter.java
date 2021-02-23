@@ -11,10 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-import com.owoSuperAdmin.categoryManagement.brand.AddABrand;
+import com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand;
 import com.owoSuperAdmin.categoryManagement.category.AddNewCategory;
 import com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory;
 import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
+import com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories;
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
 import com.owoSuperAdmin.owoshop.AddATimeSlot;
 import com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity;
@@ -229,6 +230,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                             Intent intent = new Intent(context, UpdateSubCategoryAllCategories.class);
                             context.startActivity(intent);
                         }
+                        else if(which == 2)
+                        {
+                            Intent intent = new Intent(context, DeleteSubCategoryAllCategories.class);
+                            context.startActivity(intent);
+                        }
+
                     }));
 
                     subCategoryBuilder.show();
