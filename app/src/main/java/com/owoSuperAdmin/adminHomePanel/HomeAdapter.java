@@ -176,7 +176,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
         }
         else if (position==4)//Category and sub category management
         {
-            CharSequence[] options = new CharSequence[]{"Manage Category", "Manage Sub Categories"};
+            CharSequence[] options = new CharSequence[]{"Manage Category", "Manage Sub Categories", "Manage Brands"};
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Category Management");
 
@@ -232,6 +232,29 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     }));
 
                     subCategoryBuilder.show();
+                }
+                else if(i==2)
+                {
+                    CharSequence[] brandsOptions = new CharSequence[]{"Create a new brand",
+                            "Update existent brand", "Delete existent brand"};
+
+                    AlertDialog.Builder brandsBuilder = new AlertDialog.Builder(context);
+                    brandsBuilder.setTitle("Brands Management");
+
+                    brandsBuilder.setItems(brandsOptions, ((dialog1, which) -> {
+                        if(which == 0)
+                        {
+                            Intent intent=new Intent(context, AddABrand.class);
+                            context.startActivity(intent);
+                        }
+                        else if(which == 1)
+                        {
+                            Intent intent = new Intent(context, UpdateSubCategoryAllCategories.class);
+                            context.startActivity(intent);
+                        }
+                    }));
+
+                    brandsBuilder.show();
                 }
             });
 

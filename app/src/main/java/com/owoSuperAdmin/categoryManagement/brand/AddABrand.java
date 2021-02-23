@@ -87,7 +87,8 @@ public class AddABrand extends AppCompatActivity {
     }
 
 
-    private void uploadImageOfBrand() {
+    private void uploadImageOfBrand()
+    {
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Upload Brand Image");
@@ -172,9 +173,9 @@ public class AddABrand extends AppCompatActivity {
         }
     }
 
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode != RESULT_CANCELED) {
@@ -209,8 +210,8 @@ public class AddABrand extends AppCompatActivity {
         }
     }
 
-
-    private void selectImage(Context context) {
+    private void selectImage(Context context)
+    {
 
         final CharSequence[] options = { "Take Photo", "Choose from Gallery"};
 
@@ -231,7 +232,6 @@ public class AddABrand extends AppCompatActivity {
         builder.setCancelable(false);
         builder.show();
     }
-
 
     private void requestStoragePermission() {
 
