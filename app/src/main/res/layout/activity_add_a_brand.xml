@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,7 +32,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-
     <ImageView
         android:id="@+id/brand_image"
         android:layout_width="match_parent"
@@ -41,7 +41,6 @@
         android:padding="5dp"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/brand_image" />
-
 
     <TextView
         android:id="@+id/heading"

@@ -148,7 +148,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             });
         }
 
-        else if (position==3) //It is offer management
+        else if (position==3) //Offers management
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 

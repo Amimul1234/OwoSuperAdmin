@@ -20,10 +20,12 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
     private final Context context;
     private final List<SubCategoryEntity> subCategoryEntityList;
+    private final Long categoryId;
 
-    public SubCategoryAdapter(Context context, List<SubCategoryEntity> subCategoryEntityList) {
+    public SubCategoryAdapter(Context context, List<SubCategoryEntity> subCategoryEntityList, Long categoryId) {
         this.context = context;
         this.subCategoryEntityList = subCategoryEntityList;
+        this.categoryId = categoryId;
     }
 
     @NotNull
@@ -63,6 +65,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
                 Intent intent = new Intent(context, SubCategoryUpdateActivity.class);
                 intent.putExtra("subCategoryEntity", subCategoryEntity);
+                intent.putExtra("categoryId", String.valueOf(categoryId));
                 context.startActivity(intent);
             });
         }

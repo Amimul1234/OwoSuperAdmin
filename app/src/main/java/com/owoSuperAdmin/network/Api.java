@@ -1,6 +1,6 @@
 package com.owoSuperAdmin.network;
 
-import com.owoSuperAdmin.categoryManagement.brand.entity.Brands;
+import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
@@ -110,7 +110,7 @@ public interface Api {
     Call<List<SubCategoryEntity>> getAllSubCategories(@Query("categoryId") Long categoryId);
 
     @PUT("/updateSubCategory")
-    Call<ResponseBody> updateSubCategory(@Body SubCategoryEntity subCategoryEntity);
+    Call<ResponseBody> updateSubCategory(@Query("categoryId") Long categoryId, @Body SubCategoryEntity subCategoryEntity);
 
     @DELETE("/deleteSubCategory")
     Call<ResponseBody> deleteSubCategory(@Query("subCategoryId") Long subCategoryId);

@@ -78,7 +78,7 @@ public class UpdateSubCategorySubCategoriesOfCategory extends AppCompatActivity 
 
 
     private void showRecycler() {
-        subCategoryAdapter = new SubCategoryAdapter(UpdateSubCategorySubCategoriesOfCategory.this, subCategoryEntityList);
+        subCategoryAdapter = new SubCategoryAdapter(UpdateSubCategorySubCategoriesOfCategory.this, subCategoryEntityList, categoryId);
         updateSubCategoryRecyclerView.setAdapter(subCategoryAdapter);
         updateSubCategoryRecyclerView.setLayoutManager(linearLayoutManager);
         subCategoryAdapter.notifyDataSetChanged();

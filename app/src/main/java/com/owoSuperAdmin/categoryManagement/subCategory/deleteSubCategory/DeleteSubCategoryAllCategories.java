@@ -57,7 +57,6 @@ public class DeleteSubCategoryAllCategories extends AppCompatActivity {
                     public void onResponse(@NotNull Call<List<CategoryEntity>> call, @NotNull Response<List<CategoryEntity>> response) {
                         if(response.isSuccessful())
                         {
-
                             assert response.body() != null;
                             categoryEntities.addAll(response.body());
                             deleteSubCategoryAllCategoriesAdapter.notifyDataSetChanged();
@@ -76,7 +75,6 @@ public class DeleteSubCategoryAllCategories extends AppCompatActivity {
                     }
                 });
     }
-
 
     private void showRecycler() {
         deleteSubCategoryAllCategoriesAdapter = new DeleteSubCategoryAllCategoriesAdapter(DeleteSubCategoryAllCategories.this, categoryEntities);

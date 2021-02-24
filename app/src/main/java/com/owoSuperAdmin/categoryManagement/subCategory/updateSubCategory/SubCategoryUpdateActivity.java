@@ -45,8 +45,10 @@ public class SubCategoryUpdateActivity extends AppCompatActivity {
     private EditText subCategoryName;
     private ProgressBar subCategoryUpdateProgressBar;
     private SubCategoryEntity subCategoryEntity;
+    private String previousPath;
 
     private final int STORAGE_PERMISSION_CODE = 1;
+    private Long categoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,10 @@ public class SubCategoryUpdateActivity extends AppCompatActivity {
         subCategoryUpdateProgressBar = findViewById(R.id.subCategoryUpdateProgressBar);
 
         subCategoryEntity = (SubCategoryEntity) getIntent().getSerializableExtra("subCategoryEntity");
+        categoryId = Long.parseLong(getIntent().getStringExtra("categoryId"));
+
+        previousPath = subCategoryEntity.getSub_category_image();
+        previousPath = previousPath.substring(34);
 
         backButton.setOnClickListener(v -> onBackPressed());
 
@@ -117,22 +123,18 @@ public class SubCategoryUpdateActivity extends AppCompatActivity {
                                 assert response.body() != null;
                                 String path = response.body().string();
 
-                                String previousImagePath = subCategoryEntity.getSub_category_image();
-
-                                String cleanedAddress = previousImagePath.substring(34);
-
                                 subCategoryEntity.setSub_category_image(path);
                                 subCategoryEntity.setSub_category_name(subCategoryName.getText().toString());
 
                                 RetrofitClient.getInstance().getApi()
-                                        .updateSubCategory(subCategoryEntity)
+                                        .updateSubCategory(categoryId, subCategoryEntity)
                                         .enqueue(new Callback<ResponseBody>() {
                                             @Override
                                             public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                                                 if(response.isSuccessful())
                                                 {
                                                     RetrofitClient.getInstance()
-                                                            .getApi().deleteImage(cleanedAddress)
+                                                            .getApi().deleteImage(previousPath)
                                                             .enqueue(new Callback<ResponseBody>() {
                                                                 @Override
                                                                 public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
@@ -140,7 +142,7 @@ public class SubCategoryUpdateActivity extends AppCompatActivity {
                                                                     {
                                                                         subCategoryUpdateProgressBar.setVisibility(View.GONE);
                                                                         Toast.makeText(SubCategoryUpdateActivity.this, "Sub-category updated successfully", Toast.LENGTH_SHORT).show();
-                                                                        onBackPressed();
+                                                                        finish();
                                                                     }
                                                                     else //here is the error occurring
                                                                     {

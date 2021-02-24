@@ -42,7 +42,7 @@ public class SubCategoryCustomSpinner extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        @SuppressLint("ViewHolder")
+        @SuppressLint({"ViewHolder", "InflateParams"})
         View view = inflater.inflate(R.layout.category_custom_spinner, null);
         ImageView icon = view.findViewById(R.id.category_image);
         TextView names = view.findViewById(R.id.category_name);

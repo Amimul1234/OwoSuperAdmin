@@ -70,7 +70,8 @@ public class SubCategoryDeleteActivity extends AppCompatActivity {
 
                     Toast.makeText(SubCategoryDeleteActivity.this, "Sub Category deleted successfully", Toast.LENGTH_SHORT).show();
 
-                    RetrofitClient.getInstance().getApi().deleteImage(cleanPath)
+                    RetrofitClient.getInstance().getApi().
+                            deleteImage(cleanPath)
                             .enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {

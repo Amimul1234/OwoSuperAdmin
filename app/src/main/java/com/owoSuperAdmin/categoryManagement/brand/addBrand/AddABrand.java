@@ -28,7 +28,6 @@ import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.CategoryCustomSpinnerAdapter;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.owoSuperAdmin.network.RetrofitClient;
-import com.owoSuperAdmin.categoryManagement.brand.entity.Brands;
 import com.owoSuperAdmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
 import java.io.ByteArrayOutputStream;
@@ -58,7 +57,6 @@ public class AddABrand extends AppCompatActivity {
     private final List<CategoryEntity> categoryEntityList = new ArrayList<>();
     private final List<SubCategoryEntity> subCategoryEntityList = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,14 +66,14 @@ public class AddABrand extends AppCompatActivity {
         brandImage = findViewById(R.id.brand_image);
         progressBar = findViewById(R.id.progress);
         categorySelector = findViewById(R.id.category_selector);
+        Button addANewBrands = findViewById(R.id.add_new_category);
         subCategorySelector = findViewById(R.id.sub_category_selector);
 
-        Button create_a_new_brand = findViewById(R.id.add_new_category);
         ImageView backButton = findViewById(R.id.back_button);
 
-        categoryFetcher(); //Fetching categories
-        progressBar.setVisibility(View.VISIBLE);
+        categoryFetcher();
 
+        progressBar.setVisibility(View.VISIBLE);
 
         brandImage.setOnClickListener(v -> requestStoragePermission());
         backButton.setOnClickListener(v -> onBackPressed());
@@ -97,22 +95,28 @@ public class AddABrand extends AppCompatActivity {
             }
         });
 
-        create_a_new_brand.setOnClickListener(view -> {
+        addANewBrands.setOnClickListener(view -> {
 
-            String brand_name_creation = brandName.getText().toString();
+            SubCategoryEntity subCategoryEntity = (SubCategoryEntity) subCategorySelector.getSelectedItem();
+            String name = brandName.getText().toString();
 
-            if(brand_name_creation.isEmpty())
+            if(subCategoryEntity == null)
             {
-                brandName.setError("Please give a name to sub category");
+                brandName.setError("Please select a sub category");
                 brandName.requestFocus();
             }
-            else if(brandImage.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState())
+            else if(brandImage.getDrawable().getConstantState() == Objects.requireNonNull(
+                    ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState())
             {
-                Toast.makeText(AddABrand.this, "Image can not be empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddABrand.this, "Please select a brand image", Toast.LENGTH_SHORT).show();
+            }
+            else if(name.isEmpty())
+            {
+                Toast.makeText(this, "Please enter brand name", Toast.LENGTH_SHORT).show();
             }
             else
             {
-                uploadImageOfBrand();
+                uploadImageOfBrand(subCategoryEntity, name);
                 progressBar.setVisibility(View.VISIBLE);
             }
         });
@@ -149,7 +153,8 @@ public class AddABrand extends AppCompatActivity {
 
     }
 
-    private void categoryFetcher() {
+    private void categoryFetcher()
+    {
         RetrofitClient.getInstance().getApi()
                 .getAllCategories()
                 .enqueue(new Callback<List<CategoryEntity>>() {
@@ -179,15 +184,15 @@ public class AddABrand extends AppCompatActivity {
                 });
     }
 
-    private void uploadImageOfBrand()
+    private void uploadImageOfBrand(SubCategoryEntity subCategoryEntity, String name)
     {
-
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Upload Brand Image");
         progressDialog.setMessage("Please wait while we are uploading brand image...");
         progressDialog.setCanceledOnTouchOutside(false);
 
-        if (brandImage.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState()) {
+        if (brandImage.getDrawable().getConstantState() != Objects.requireNonNull(
+                ContextCompat.getDrawable(AddABrand.this, R.drawable.category_management)).getConstantState()) {
 
             Bitmap bitmap = ((BitmapDrawable) brandImage.getDrawable()).getBitmap();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -215,14 +220,12 @@ public class AddABrand extends AppCompatActivity {
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
-
                             if (response.isSuccessful()) {
                                 try {
                                     assert response.body() != null;
                                     String path = response.body().string();
 
-                                    Brands brands = new Brands(brandName.getText().toString(), path, categorySelector.getSelectedItem().toString());
-
+                                    Brands brands = new Brands(name, path, subCategoryEntity);
 
                                     RetrofitClient.getInstance().getApi()
                                             .addABrand(brands)
@@ -277,7 +280,6 @@ public class AddABrand extends AppCompatActivity {
                         Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
                         brandImage.setImageBitmap(selectedImage);
                     }
-
                     break;
                 case 1:
                     if (resultCode == RESULT_OK && data != null) {
