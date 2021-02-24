@@ -32,8 +32,6 @@ public class SubCategoryDeleteActivity extends AppCompatActivity {
     private ProgressBar subCategoryDeleteProgressBar;
     private SubCategoryEntity subCategoryEntity;
 
-    private final int STORAGE_PERMISSION_CODE = 1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +41,7 @@ public class SubCategoryDeleteActivity extends AppCompatActivity {
         subCategoryImage = findViewById(R.id.subCategoryImage);
         subCategoryName = findViewById(R.id.subCategoryName);
         Button deleteSubCategoryDetails = findViewById(R.id.deleteSubCategoryDetails);
+
         subCategoryDeleteProgressBar= findViewById(R.id.subCategoryDeleteProgressBar);
 
         subCategoryEntity = (SubCategoryEntity) getIntent().getSerializableExtra("subCategoryEntity");
