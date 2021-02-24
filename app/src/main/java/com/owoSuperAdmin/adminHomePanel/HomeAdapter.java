@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand;
+import com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllCategories;
 import com.owoSuperAdmin.categoryManagement.category.AddNewCategory;
 import com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory;
 import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
@@ -256,7 +257,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         }
                         else if(which == 1)
                         {
-                            Intent intent = new Intent(context, UpdateSubCategoryAllCategories.class);
+                            Intent intent = new Intent(context, AllCategories.class);
+                            context.startActivity(intent);
+                        }
+                        else if(which == 2)
+                        {
+                            Intent intent = new Intent(context, AllCategories.class);
                             context.startActivity(intent);
                         }
                     }));

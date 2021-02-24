@@ -42,7 +42,12 @@ public class UpdateSubCategorySubCategoriesOfCategory extends AppCompatActivity 
         backIcon.setOnClickListener(v -> onBackPressed());
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
-        swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
+
+        swipeRefreshLayout.setOnRefreshListener(()->{
+            getSubCategoryAdapter();
+            showRecycler();
+        });
+
         updateSubCategoryRecyclerView.setHasFixedSize(true);
         showRecycler();
     }

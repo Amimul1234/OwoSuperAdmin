@@ -66,7 +66,6 @@ public class UpdateSubCategoryAllCategories extends AppCompatActivity {
                         {
                             Toast.makeText(getApplicationContext(), "No more categories", Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                     @Override

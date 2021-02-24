@@ -37,11 +37,10 @@ public class AvailableProducts extends AppCompatActivity implements View.OnClick
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getProducts();
-            }
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getProducts();
+            showOnRecyclerView();
         });
 
         recyclerView = findViewById(R.id.product_availability_recyclerview_id);

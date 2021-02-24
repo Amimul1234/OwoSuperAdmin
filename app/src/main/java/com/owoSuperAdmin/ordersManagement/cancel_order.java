@@ -36,6 +36,7 @@ public class cancel_order extends AppCompatActivity{
             @Override
             public void onRefresh() {
                 getCancelledOrders();
+                showOnRecyclerView();
             }
         });
 

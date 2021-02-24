@@ -21,7 +21,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.SubCategoryDeleteActivity"></activity>
+        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllCategories"></activity>
+        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.SubCategoryDeleteActivity" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategorySubCategoriesOfCategory" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.SubCategoryUpdateActivity" />
