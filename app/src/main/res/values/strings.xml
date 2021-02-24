@@ -124,5 +124,10 @@
     <string name="select_a_category">Select A Category</string>
     <string name="select_a_sub_category">Select A Sub Category</string>
     <string name="enter_brand_name">Enter brand name</string>
+    <string name="brands">Brands</string>
+    <string name="empty_image">Empty Image</string>
+    <string name="update_brand">Update Brand</string>
+    <string name="brand_name">Brand Name</string>
+    <string name="please_enter_brand_name">Please enter brand name</string>
 
 </resources>

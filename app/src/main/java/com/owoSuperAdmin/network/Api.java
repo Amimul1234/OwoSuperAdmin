@@ -36,9 +36,6 @@ public interface Api {
     @POST("/addProduct")
     Call<Owo_product> createProduct(@Body Owo_product owo_product);
 
-    @POST("/addABrand")
-    Call<ResponseBody> addABrand(@Body Brands brands);
-
     @PUT("/updateProduct")
     Call<Owo_product> updateProduct(@Body Owo_product product);
 
@@ -53,9 +50,6 @@ public interface Api {
             @Query("order_id") long order_id,
             @Query("order_state") String order_state
     );
-
-    @GET("/getBrandsAdmin")
-    Call<List<String>> getBrands(@Query("category") String category);
 
 
     @GET("/searchProduct_admin")
@@ -114,6 +108,16 @@ public interface Api {
 
     @DELETE("/deleteSubCategory")
     Call<ResponseBody> deleteSubCategory(@Query("subCategoryId") Long subCategoryId);
+
+    //Brands Management
+    @POST("/addABrand")
+    Call<ResponseBody> addABrand(@Body Brands brands);
+
+    @GET("/getAllBrandsOfASubCategory")
+    Call<List<Brands>> getAllBrands(@Query("subCategoryId") Long subCategoryId);
+
+    @PUT("/updateBrand")
+    Call<ResponseBody> updateBrand(@Query("subCategoryId") Long subCategoryId, @Body Brands brands);
 
     //Image Controller
     @Multipart

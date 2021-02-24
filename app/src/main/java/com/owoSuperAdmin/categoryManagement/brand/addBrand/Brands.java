@@ -5,9 +5,11 @@ import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity
 import java.io.Serializable;
 
 public class Brands implements Serializable {
+    private Long brandId;
     private String brandName;
     private String brandImage;
     private SubCategoryEntity subCategoryEntity;
+
 
     public Brands() {
     }
@@ -16,6 +18,14 @@ public class Brands implements Serializable {
         this.brandName = brandName;
         this.brandImage = brandImage;
         this.subCategoryEntity = subCategoryEntity;
+    }
+
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
     }
 
     public String getBrandName() {

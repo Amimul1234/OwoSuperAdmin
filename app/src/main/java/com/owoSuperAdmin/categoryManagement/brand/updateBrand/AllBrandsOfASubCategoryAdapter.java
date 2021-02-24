@@ -10,20 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
+import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
-public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdapter.xyz>{
+public class AllBrandsOfASubCategoryAdapter extends RecyclerView.Adapter<AllBrandsOfASubCategoryAdapter.xyz>{
 
     private final Context context;
-    private final List<CategoryEntity> categoryEntities;
+    private final List<Brands> brandsList;
+    private final Long subCategoryId;
 
-    public AllCategoriesAdapter(Context context, List<CategoryEntity> categoryEntities) {
+    public AllBrandsOfASubCategoryAdapter(Context context, List<Brands> brandsList, Long subCategoryId) {
         this.context = context;
-        this.categoryEntities = categoryEntities;
+        this.brandsList = brandsList;
+        this.subCategoryId = subCategoryId;
     }
 
     @NotNull
@@ -36,15 +38,15 @@ public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdap
 
     @Override
     public void onBindViewHolder(@NonNull final xyz holder, final int position) {
-        Glide.with(context).load(HostAddress.HOST_ADDRESS.getAddress()+categoryEntities.get(position).getCategoryImage()).
+        Glide.with(context).load(HostAddress.HOST_ADDRESS.getAddress()+brandsList.get(position).getBrandImage()).
                 into(holder.imageView);
 
-        holder.textView.setText(categoryEntities.get(position).getCategoryName());
+        holder.textView.setText(brandsList.get(position).getBrandName());
     }
 
     @Override
     public int getItemCount() {
-        return categoryEntities.size();
+        return brandsList.size();
     }
 
 
@@ -60,12 +62,12 @@ public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdap
 
             itemView.setOnClickListener(v -> {
 
-                CategoryEntity categoryEntity = categoryEntities.get(getAdapterPosition());
+                Brands brands = brandsList.get(getAdapterPosition());
 
-                Intent intent = new Intent(context, AllSubCategoriesOfACategory.class);
-                intent.putExtra("categoryEntityId", String.valueOf(categoryEntity.getCategoryId()));
+                Intent intent = new Intent(context, UpdateBrand.class);
+                intent.putExtra("brand", brands);
+                intent.putExtra("subCategoryId", String.valueOf(subCategoryId));
                 context.startActivity(intent);
-
             });
         }
     }
