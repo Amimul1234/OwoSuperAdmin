@@ -21,9 +21,12 @@ public class AllSubCategoriesOfACategoryAdapter extends RecyclerView.Adapter<All
     private final Context context;
     private final List<SubCategoryEntity> subCategoryEntityList;
 
-    public AllSubCategoriesOfACategoryAdapter(Context context, List<SubCategoryEntity> subCategoryEntityList) {
+    private final String indicate;
+
+    public AllSubCategoriesOfACategoryAdapter(Context context, List<SubCategoryEntity> subCategoryEntityList, String indicate) {
         this.context = context;
         this.subCategoryEntityList = subCategoryEntityList;
+        this.indicate = indicate;
     }
 
     @NotNull
@@ -63,6 +66,7 @@ public class AllSubCategoriesOfACategoryAdapter extends RecyclerView.Adapter<All
                 SubCategoryEntity subCategoryEntity = subCategoryEntityList.get(getAdapterPosition());
 
                 Intent intent = new Intent(context, AllBrandsOfASubCategory.class);
+                intent.putExtra("indicate", indicate);
                 intent.putExtra("subCategoryId", String.valueOf(subCategoryEntity.getSub_category_id()));
                 context.startActivity(intent);
             });

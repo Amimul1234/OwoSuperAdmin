@@ -21,9 +21,12 @@ public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdap
     private final Context context;
     private final List<CategoryEntity> categoryEntities;
 
-    public AllCategoriesAdapter(Context context, List<CategoryEntity> categoryEntities) {
+    private final String indicate;
+
+    public AllCategoriesAdapter(Context context, List<CategoryEntity> categoryEntities, String indicate) {
         this.context = context;
         this.categoryEntities = categoryEntities;
+        this.indicate = indicate;
     }
 
     @NotNull
@@ -63,6 +66,7 @@ public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdap
                 CategoryEntity categoryEntity = categoryEntities.get(getAdapterPosition());
 
                 Intent intent = new Intent(context, AllSubCategoriesOfACategory.class);
+                intent.putExtra("indicate", indicate);
                 intent.putExtra("categoryEntityId", String.valueOf(categoryEntity.getCategoryId()));
                 context.startActivity(intent);
 

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
+import com.owoSuperAdmin.categoryManagement.brand.deleteBrand.DeleteBrand;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
@@ -22,10 +23,13 @@ public class AllBrandsOfASubCategoryAdapter extends RecyclerView.Adapter<AllBran
     private final List<Brands> brandsList;
     private final Long subCategoryId;
 
-    public AllBrandsOfASubCategoryAdapter(Context context, List<Brands> brandsList, Long subCategoryId) {
+    private final String indicate;
+
+    public AllBrandsOfASubCategoryAdapter(Context context, List<Brands> brandsList, Long subCategoryId, String indicate) {
         this.context = context;
         this.brandsList = brandsList;
         this.subCategoryId = subCategoryId;
+        this.indicate = indicate;
     }
 
     @NotNull
@@ -64,10 +68,19 @@ public class AllBrandsOfASubCategoryAdapter extends RecyclerView.Adapter<AllBran
 
                 Brands brands = brandsList.get(getAdapterPosition());
 
-                Intent intent = new Intent(context, UpdateBrand.class);
-                intent.putExtra("brand", brands);
-                intent.putExtra("subCategoryId", String.valueOf(subCategoryId));
-                context.startActivity(intent);
+                if(indicate.equals("update"))
+                {
+                    Intent intent = new Intent(context, UpdateBrand.class);
+                    intent.putExtra("brand", brands);
+                    intent.putExtra("subCategoryId", String.valueOf(subCategoryId));
+                    context.startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(context, DeleteBrand.class);
+                    intent.putExtra("brand", brands);
+                    intent.putExtra("subCategoryId", String.valueOf(subCategoryId));
+                    context.startActivity(intent);
+                }
             });
         }
     }

@@ -27,12 +27,15 @@ public class AllSubCategoriesOfACategory extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView updateSubCategoryRecyclerView;
 
+    private String indicate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_sub_categories_of_a_category);
 
         categoryId = Long.parseLong(getIntent().getStringExtra("categoryEntityId"));
+        indicate = getIntent().getStringExtra("indicate");
 
         updateSubCategoryRecyclerView = findViewById(R.id.updateSubCategoryRecyclerView);
         swipeRefreshLayout = findViewById(R.id.updateSwipeRefresh);
@@ -84,7 +87,7 @@ public class AllSubCategoriesOfACategory extends AppCompatActivity {
 
 
     private void showRecycler() {
-        subCategoryAdapter = new AllSubCategoriesOfACategoryAdapter(AllSubCategoriesOfACategory.this, subCategoryEntityList);
+        subCategoryAdapter = new AllSubCategoriesOfACategoryAdapter(AllSubCategoriesOfACategory.this, subCategoryEntityList, indicate);
         updateSubCategoryRecyclerView.setAdapter(subCategoryAdapter);
         updateSubCategoryRecyclerView.setLayoutManager(linearLayoutManager);
         subCategoryAdapter.notifyDataSetChanged();

@@ -22,6 +22,7 @@ import retrofit2.Response;
 public class AllBrandsOfASubCategory extends AppCompatActivity {
 
     private Long subCategoryId;
+    private String indicate;
 
     private AllBrandsOfASubCategoryAdapter brandsOfASubCategoryAdapter;
     private final List<Brands> brandsList = new ArrayList<>();
@@ -35,6 +36,7 @@ public class AllBrandsOfASubCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_brands_of_a_sub_category);
 
+        indicate = getIntent().getStringExtra("indicate");
         subCategoryId = Long.parseLong(getIntent().getStringExtra("subCategoryId"));
 
         updateSubCategoryRecyclerView = findViewById(R.id.updateSubCategoryRecyclerView);
@@ -90,7 +92,7 @@ public class AllBrandsOfASubCategory extends AppCompatActivity {
 
 
     private void showRecycler() {
-        brandsOfASubCategoryAdapter = new AllBrandsOfASubCategoryAdapter(AllBrandsOfASubCategory.this, brandsList, subCategoryId);
+        brandsOfASubCategoryAdapter = new AllBrandsOfASubCategoryAdapter(AllBrandsOfASubCategory.this, brandsList, subCategoryId, indicate);
         updateSubCategoryRecyclerView.setAdapter(brandsOfASubCategoryAdapter);
         updateSubCategoryRecyclerView.setLayoutManager(linearLayoutManager);
         brandsOfASubCategoryAdapter.notifyDataSetChanged();

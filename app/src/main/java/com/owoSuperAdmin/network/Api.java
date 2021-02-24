@@ -110,14 +110,17 @@ public interface Api {
     Call<ResponseBody> deleteSubCategory(@Query("subCategoryId") Long subCategoryId);
 
     //Brands Management
-    @POST("/addABrand")
-    Call<ResponseBody> addABrand(@Body Brands brands);
-
     @GET("/getAllBrandsOfASubCategory")
     Call<List<Brands>> getAllBrands(@Query("subCategoryId") Long subCategoryId);
 
+    @POST("/addABrand")
+    Call<ResponseBody> addABrand(@Body Brands brands);
+
     @PUT("/updateBrand")
     Call<ResponseBody> updateBrand(@Query("subCategoryId") Long subCategoryId, @Body Brands brands);
+
+    @DELETE("/deleteBrand")
+    Call<ResponseBody> deleteBrand(@Query("subCategoryId") Long subCategoryId, @Body Brands brands);
 
     //Image Controller
     @Multipart
