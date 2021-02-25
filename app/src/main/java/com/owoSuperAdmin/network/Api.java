@@ -79,10 +79,6 @@ public interface Api {
     @GET("/getCancelledOrders")
     Call<List<Shop_keeper_orders>> getCancelledOrders(@Query("page_num") int page_num);
 
-
-    @POST("/addAnOffer")
-    Call<ResponseBody> addAnOffer(@Body OffersEntity offersEntity);
-
     //Category Management
     @POST("/addNewCategory")
     Call<ResponseBody> addNewCategory(@Body CategoryEntity categoryEntity);
@@ -132,5 +128,12 @@ public interface Api {
 
     @DELETE("/getImageFromServer")
     Call<ResponseBody> deleteImage(@Query("path_of_image") String path_of_image);
+
+    //Offers Management
+    @POST("/addAnOffer")
+    Call<ResponseBody> addAnOffer(@Body OffersEntity offersEntity);
+
+    @GET("/getAllOffers")
+    Call<List<OffersEntity>> getAllOffers();
 
 }

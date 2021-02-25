@@ -20,10 +20,10 @@ import com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.Delete
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
 import com.owoSuperAdmin.owoshop.AddATimeSlot;
 import com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity;
-import com.owoSuperAdmin.offersManagement.AvailableOffersActivity;
+import com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity;
 import com.owoSuperAdmin.owoshop.CloudMessagingActivity;
 import com.owoSuperAdmin.owoshop.CreateNewAdminActivity;
-import com.owoSuperAdmin.offersManagement.CreateOffersActivity;
+import com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity;
 import com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops;
 import com.owoSuperAdmin.productsManagement.AvailableProducts;
 import com.owoSuperAdmin.offersManagement.QuponActivity;

@@ -73,14 +73,14 @@
             android:label="@string/title_activity_location_from_map"
             android:screenOrientation="portrait" />
         <activity android:name="com.owoSuperAdmin.offersManagement.UpdateOfferActivity" />
-        <activity android:name="com.owoSuperAdmin.offersManagement.AvailableOffersActivity" />
+        <activity android:name="com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity" />
         <activity android:name="com.owoSuperAdmin.productsManagement.UpdateProduct" />
         <activity android:name="com.owoSuperAdmin.productsManagement.AvailableProducts" />
         <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddAProduct" />
         <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity" />
         <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity" />
         <activity android:name="com.owoSuperAdmin.adminManagement.UpdateSemiAdminActivity" />
-        <activity android:name="com.owoSuperAdmin.offersManagement.CreateOffersActivity" />
+        <activity android:name="com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity" />
         <activity android:name="com.owoSuperAdmin.adminManagement.SemiAdminActivity" />
         <activity android:name="com.owoSuperAdmin.login.LoginActivity" />
         <activity android:name="com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops" />

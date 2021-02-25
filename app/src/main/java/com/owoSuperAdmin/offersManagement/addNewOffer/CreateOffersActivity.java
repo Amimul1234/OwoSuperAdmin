@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.offersManagement;
+package com.owoSuperAdmin.offersManagement.addNewOffer;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
