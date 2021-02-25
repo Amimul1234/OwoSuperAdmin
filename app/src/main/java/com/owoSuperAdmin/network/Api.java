@@ -120,7 +120,7 @@ public interface Api {
     Call<ResponseBody> updateBrand(@Query("subCategoryId") Long subCategoryId, @Body Brands brands);
 
     @DELETE("/deleteBrand")
-    Call<ResponseBody> deleteBrand(@Query("subCategoryId") Long subCategoryId, @Body Brands brands);
+    Call<ResponseBody> deleteBrand(@Query("subCategoryId") Long subCategoryId, @Query("brandsId") Long brandsId);
 
     //Image Controller
     @Multipart

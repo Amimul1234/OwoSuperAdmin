@@ -129,5 +129,6 @@
     <string name="update_brand">Update Brand</string>
     <string name="brand_name">Brand Name</string>
     <string name="please_enter_brand_name">Please enter brand name</string>
+    <string name="delete_brand">Delete Brand</string>
 
 </resources>
