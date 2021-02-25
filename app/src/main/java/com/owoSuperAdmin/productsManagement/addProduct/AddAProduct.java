@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,16 +24,23 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import com.owoSuperAdmin.adminHomePanel.HomeActivity;
+import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
+import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import org.jetbrains.annotations.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 import okhttp3.MediaType;
@@ -41,6 +50,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -55,6 +65,12 @@ public class AddAProduct extends AppCompatActivity {
     private Spinner subCategorySelectorSpinner, brandSelectorSpinner;
     private CategoryEntity categoryEntity;
     private ProgressBar progressBar;
+
+    private AddProductBrandSpinnerAdapter addProductBrandSpinnerAdapter;
+    private AddProductSubCategorySpinnerAdapter addProductSubCategorySpinnerAdapter;
+
+    private final List<SubCategoryEntity> subCategoryEntityList = new ArrayList<>();
+    private final List<Brands> brandsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +90,12 @@ public class AddAProduct extends AppCompatActivity {
         subCategorySelectorSpinner = findViewById(R.id.subCategorySelectorSpinner);
         brandSelectorSpinner = findViewById(R.id.brandSelectorSpinner);
         progressBar = findViewById(R.id.progressBar);
+
+        addProductSubCategorySpinnerAdapter = new AddProductSubCategorySpinnerAdapter(AddAProduct.this, subCategoryEntityList);
+        addProductBrandSpinnerAdapter = new AddProductBrandSpinnerAdapter(AddAProduct.this, brandsList);
+
+        subCategorySelectorSpinner.setAdapter(addProductSubCategorySpinnerAdapter);
+        brandSelectorSpinner.setAdapter(addProductBrandSpinnerAdapter);
 
 
         categoryEntity = (CategoryEntity) getIntent().getSerializableExtra("category");
@@ -122,9 +144,26 @@ public class AddAProduct extends AppCompatActivity {
                 double discount_price = product_price - product_discount;
                 double discount_percentage = (product_discount/product_price) * 100.00;
 
-                String priceWithDiscount = "৳ "+ discount_price + "( "+ String.format("%.2f", discount_percentage)+ "% )";
+                String priceWithDiscount = "৳ "+ discount_price + "( "+ String.format(Locale.ENGLISH, "%.2f", discount_percentage)+ "% )";
 
                 discountedPrice.setText(priceWithDiscount);
+            }
+        });
+
+        subCategorySelectorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!subCategoryEntityList.isEmpty())
+                    fetchBrands(subCategoryEntityList.get(position));
+                else
+                {
+                    Toast.makeText(AddAProduct.this, "Can not fetch category, please wait", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -132,9 +171,42 @@ public class AddAProduct extends AppCompatActivity {
 
     }
 
+    private void fetchBrands(SubCategoryEntity subCategoryEntity) {
+
+        RetrofitClient.getInstance().getApi()
+                .getAllBrands(subCategoryEntity.getSub_category_id())
+                .enqueue(new Callback<List<Brands>>() {
+                    @Override
+                    public void onResponse(@NotNull Call<List<Brands>> call, @NotNull Response<List<Brands>> response) {
+                        if(response.isSuccessful())
+                        {
+                            brandsList.clear();
+                            assert response.body() != null;
+                            brandsList.addAll(response.body());
+                            addProductBrandSpinnerAdapter.notifyDataSetChanged();
+                        }
+                        else
+                        {
+                            brandsList.clear();
+                            addProductBrandSpinnerAdapter.notifyDataSetChanged();
+                            Toast.makeText(AddAProduct.this, "No brands available", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<List<Brands>> call, @NotNull Throwable t) {
+                        Log.e("Add product", "Error is: "+t.getMessage());
+                        Toast.makeText(AddAProduct.this, "Can not get brands, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
     private void collectInfo() {
 
         progressBar.setVisibility(VISIBLE);
+
+        subCategoryEntityList.clear();
 
         RetrofitClient.getInstance().getApi()
                 .getAllSubCategories(categoryEntity.getCategoryId())
@@ -144,18 +216,19 @@ public class AddAProduct extends AppCompatActivity {
                         if(response.isSuccessful())
                         {
                             progressBar.setVisibility(GONE);
-                            AddProductSubCategorySpinnerAdapter addProductSubCategorySpinnerAdapter = 
-                                    new AddProductSubCategorySpinnerAdapter(AddAProduct.this, response.body());
-                            subCategorySelectorSpinner.setAdapter(addProductSubCategorySpinnerAdapter);
+                            subCategoryEntityList.addAll(response.body());
+                            addProductSubCategorySpinnerAdapter.notifyDataSetChanged();
                         }
                         else
                         {
+                            progressBar.setVisibility(GONE);
                             Toast.makeText(AddAProduct.this, "Can not get sub categories, please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(@NotNull Call<List<SubCategoryEntity>> call, @NotNull Throwable t) {
+                        progressBar.setVisibility(GONE);
                         Log.e(TAG, "Error occurred, Error is: "+t.getMessage());
                         Toast.makeText(AddAProduct.this, "Can not get sub category, please try again", Toast.LENGTH_SHORT).show();
                     }
@@ -169,43 +242,47 @@ public class AddAProduct extends AppCompatActivity {
         String quantity = productQuantity.getText().toString();
         String price = productPrice.getText().toString();
         String discount = productDiscount.getText().toString();
-        String subCategory = subCategorySelectorSpinner.getSelectedItem().toString();
-        String brand = brandSelectorSpinner.getSelectedItem().toString();
 
         if(productImage.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(
                 AddAProduct.this, R.drawable.select_product_image)).getConstantState())
         {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
         }
-        else if (description.isEmpty())
-        {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
-        }
-        else if (price.isEmpty())
-        {
-            Toast.makeText(this, "Please write product price...", Toast.LENGTH_SHORT).show();
-        }
         else if (name.isEmpty())
         {
-            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
+            productName.setError("Please write product name...");
+            productName.requestFocus();
         }
-        else if (discount.isEmpty())
+        else if (description.isEmpty())
         {
-            Toast.makeText(this, "Please write product discount...", Toast.LENGTH_SHORT).show();
+            productDescription.setError("Please write product description...");
+            productDescription.requestFocus();
         }
         else if (quantity.isEmpty())
         {
-            Toast.makeText(AddAProduct.this, "Product quantity can not be empty", Toast.LENGTH_SHORT).show();
+            productQuantity.setError("Product quantity can not be empty");
+            productQuantity.requestFocus();
         }
-        else if(subCategory.isEmpty())
+        else if (price.isEmpty())
+        {
+            productPrice.setError("Please write product price...");
+            productPrice.requestFocus();
+        }
+        else if (discount.isEmpty())
+        {
+            productDiscount.setError("Please write product discount...");
+            productDiscount.requestFocus();
+        }
+        else if(subCategorySelectorSpinner.getSelectedItem() == null)
         {
             Toast.makeText(this, "Please select a sub-category", Toast.LENGTH_SHORT).show();
         }
-        else if(brand.isEmpty())
+        else if(brandSelectorSpinner.getSelectedItem() == null)
         {
             Toast.makeText(this, "Please select a brand", Toast.LENGTH_SHORT).show();
         }
         else {
+            progressBar.setVisibility(VISIBLE);
             storeProductInformation();
         }
     }
@@ -236,12 +313,77 @@ public class AddAProduct extends AppCompatActivity {
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                        if(response.isSuccessful())
+                        {
+                            try {
+                                String path = response.body().string();
 
+                                OwoProduct owoProduct = new OwoProduct();
+
+                                owoProduct.setProductName(productName.getText().toString());
+                                owoProduct.setProductCategoryId(categoryEntity.getCategoryId());
+                                SubCategoryEntity subCategoryEntity = (SubCategoryEntity) subCategorySelectorSpinner.getSelectedItem();
+                                owoProduct.setProductSubCategoryId(subCategoryEntity.getSub_category_id());
+                                owoProduct.setProductPrice(Double.parseDouble(productPrice.getText().toString()));
+                                owoProduct.setProductDiscount(Double.parseDouble(productDiscount.getText().toString()));
+                                owoProduct.setProductQuantity(Integer.parseInt(productQuantity.getText().toString()));
+                                owoProduct.setProductDescription(productDescription.getText().toString());
+
+                                owoProduct.setProductCreationDate(new SimpleDateFormat("dd-MM-yyyy", Locale.US).format(new Date()));
+                                owoProduct.setProductCreationTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US).format(new Date()));
+
+                                owoProduct.setProductImage(path);
+                                owoProduct.setBrands((Brands) brandSelectorSpinner.getSelectedItem());
+
+                                RetrofitClient.getInstance().getApi()
+                                        .createProduct(owoProduct)
+                                        .enqueue(new Callback<OwoProduct>() {
+                                            @Override
+                                            public void onResponse(@NotNull Call<OwoProduct> call, @NotNull Response<OwoProduct> response) {
+                                                if(response.isSuccessful())
+                                                {
+                                                    progressBar.setVisibility(GONE);
+                                                    Toast.makeText(AddAProduct.this, "Product created successfully", Toast.LENGTH_SHORT).show();
+
+                                                    Intent intent = new Intent(AddAProduct.this, HomeActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                                else
+                                                {
+                                                    progressBar.setVisibility(GONE);
+                                                    Toast.makeText(AddAProduct.this, "Failed to upload product, please try again", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(@NotNull Call<OwoProduct> call, @NotNull Throwable t) {
+                                                progressBar.setVisibility(GONE);
+                                                Log.e("AddAProduct", "Error occurred, Error is: "+t.getMessage());
+                                                Toast.makeText(AddAProduct.this, "Failed to add product, please try again", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                progressBar.setVisibility(GONE);
+                                Log.e("AddAProduct", "Error occurred, Error is: "+e.getMessage());
+                            }
+                        }
+                        else
+                        {
+                            progressBar.setVisibility(GONE);
+                            Toast.makeText(AddAProduct.this, "Failed to upload product image, please try again", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-
+                        progressBar.setVisibility(GONE);
+                        Log.e("AddAProduct", "Error occurred, Error is: "+t.getMessage());
+                        Toast.makeText(AddAProduct.this, "Failed to upload image, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

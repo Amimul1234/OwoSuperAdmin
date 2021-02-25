@@ -13,11 +13,11 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.owoSuperAdmin.productsManagement.entity.Owo_product;
+import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.productsManagement.UpdateProduct;
 
-public class SearchAdapter extends PagedListAdapter<Owo_product, SearchAdapter.ItemViewHolder>{
+public class SearchAdapter extends PagedListAdapter<OwoProduct, SearchAdapter.ItemViewHolder>{
 
     private Context mCtx;
 
@@ -36,14 +36,14 @@ public class SearchAdapter extends PagedListAdapter<Owo_product, SearchAdapter.I
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
 
-        Owo_product item = getItem(position);
+        OwoProduct item = getItem(position);
 
         if (item != null) {
 
-            Glide.with(mCtx).load(item.getProduct_image()).into(holder.imageView);
+            Glide.with(mCtx).load(item.getProductImage()).into(holder.imageView);
 
-            holder.txtProductName.setText(item.getProduct_name());
-            holder.txtProductPrice.setText(String.valueOf(item.getProduct_price()));
+            holder.txtProductName.setText(item.getProductName());
+            holder.txtProductPrice.setText(String.valueOf(item.getProductPrice()));
 
         } else {
             Toast.makeText(mCtx, "Item is null", Toast.LENGTH_LONG).show();
@@ -51,15 +51,15 @@ public class SearchAdapter extends PagedListAdapter<Owo_product, SearchAdapter.I
 
     }
 
-    private static DiffUtil.ItemCallback<Owo_product> DIFF_CALLBACK =
-            new DiffUtil.ItemCallback<Owo_product>() {
+    private static DiffUtil.ItemCallback<OwoProduct> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<OwoProduct>() {
                 @Override
-                public boolean areItemsTheSame(Owo_product oldItem, Owo_product newItem) {
-                    return oldItem.getProduct_id() == newItem.getProduct_id();
+                public boolean areItemsTheSame(OwoProduct oldItem, OwoProduct newItem) {
+                    return oldItem.getProductId() == newItem.getProductId();
                 }
 
                 @Override
-                public boolean areContentsTheSame(Owo_product oldItem, Owo_product newItem) {
+                public boolean areContentsTheSame(OwoProduct oldItem, OwoProduct newItem) {
                     return true;
                 }
             };
@@ -82,7 +82,7 @@ public class SearchAdapter extends PagedListAdapter<Owo_product, SearchAdapter.I
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            Owo_product products = getItem(position);
+            OwoProduct products = getItem(position);
             Intent intent = new Intent(mCtx, UpdateProduct.class);
             intent.putExtra("Products", products);
             mCtx.startActivity(intent);

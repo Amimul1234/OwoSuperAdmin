@@ -12,7 +12,7 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.owoSuperAdmin.productsManagement.entity.Owo_product;
+import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.productsManagement.search.SearchAdapter;
 import com.owoSuperAdmin.productsManagement.search.SearchViewModel;
@@ -53,9 +53,9 @@ public class SearchedProducts extends AppCompatActivity {
     private void getItem(String query) {
         SearchViewModel searchViewModel = new SearchViewModel(query);//Refreshing the model for new filtration
 
-        searchViewModel.itemPagedList.observe(this, new Observer<PagedList<Owo_product>>() {
+        searchViewModel.itemPagedList.observe(this, new Observer<PagedList<OwoProduct>>() {
             @Override
-            public void onChanged(@Nullable PagedList<Owo_product> items) {
+            public void onChanged(@Nullable PagedList<OwoProduct> items) {
                 adapter.submitList(items);
                 progressBar.setVisibility(View.GONE);
                 showOnRecyclerView();

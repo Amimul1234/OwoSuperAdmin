@@ -4,7 +4,7 @@ import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
-import com.owoSuperAdmin.productsManagement.entity.Owo_product;
+import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.ordersManagement.entity.Shop_keeper_orders;
 import com.owoSuperAdmin.shopManagement.entity.Shops;
 import java.util.List;
@@ -34,16 +34,16 @@ public interface Api {
 
     //Product Management
     @POST("/addProduct")
-    Call<Owo_product> createProduct(@Body Owo_product owo_product);
+    Call<OwoProduct> createProduct(@Body OwoProduct owo_product);
 
     @PUT("/updateProduct")
-    Call<Owo_product> updateProduct(@Body Owo_product product);
+    Call<OwoProduct> updateProduct(@Body OwoProduct product);
 
     @DELETE("/deleteProduct/{product_id}")
-    Call<ResponseBody> deleteProduct(@Path("product_id") int product_id);
+    Call<ResponseBody> deleteProduct(@Path("product_id") Long product_id);
 
     @GET("/allProducts")
-    Call<List<Owo_product>> getAllProducts(@Query("page") int page);
+    Call<List<OwoProduct>> getAllProducts(@Query("page") int page);
 
     @PUT("/setOrderState")
     Call<ResponseBody> setOrderState(
@@ -53,7 +53,7 @@ public interface Api {
 
 
     @GET("/searchProduct_admin")
-    Call<List<Owo_product>> searchProduct(
+    Call<List<OwoProduct>> searchProduct(
             @Query("page") int page,
             @Query("product_name") String product_name
     );

@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import androidx.paging.PageKeyedDataSource;
 
-import com.owoSuperAdmin.productsManagement.entity.Owo_product;
+import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 
 public class ItemDataSourceFactory extends DataSource.Factory {
 
-    private MutableLiveData<PageKeyedDataSource<Integer, Owo_product>> itemLiveDataSource = new MutableLiveData<>();
+    private MutableLiveData<PageKeyedDataSource<Integer, OwoProduct>> itemLiveDataSource = new MutableLiveData<>();
 
 
     @Override
@@ -18,7 +18,7 @@ public class ItemDataSourceFactory extends DataSource.Factory {
         return itemDataSource;
     }
 
-    public MutableLiveData<PageKeyedDataSource<Integer, Owo_product>> getItemLiveDataSource() {
+    public MutableLiveData<PageKeyedDataSource<Integer, OwoProduct>> getItemLiveDataSource() {
         return itemLiveDataSource;
     }
 }

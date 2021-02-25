@@ -11,8 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import com.owoSuperAdmin.productsManagement.entity.Owo_product;
 import com.owoSuperAdmin.owoshop.R;
+import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.productsManagement.products.ItemAdapter;
 import com.owoSuperAdmin.productsManagement.products.ItemViewModel;
 
@@ -52,9 +52,9 @@ public class AvailableProducts extends AppCompatActivity implements View.OnClick
         adapter = new ItemAdapter(this);
         ItemViewModel itemViewModel = new ItemViewModel();
 
-        itemViewModel.itemPagedList.observe(this, new Observer<PagedList<Owo_product>>() {
+        itemViewModel.itemPagedList.observe(this, new Observer<PagedList<OwoProduct>>() {
             @Override
-            public void onChanged(@Nullable PagedList<Owo_product> items) {
+            public void onChanged(@Nullable PagedList<OwoProduct> items) {
                 adapter.submitList(items);
                 showOnRecyclerView();
             }

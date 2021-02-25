@@ -45,6 +45,7 @@ public class UpdateOfferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_offer);
 
+        /*
         nameUpdate = (EditText)findViewById(R.id.offer_name_update);
         startDateUpdate  =(EditText)findViewById(R.id.start_date_update);
         endDateUpdate = (EditText)findViewById(R.id.end_date_update);
@@ -237,6 +238,9 @@ public class UpdateOfferActivity extends AppCompatActivity {
 
     }
 
+         */
+
+        /*
     private void updateLabel() {
 
         String myFormat = "dd/MM/yyyy";
@@ -249,6 +253,8 @@ public class UpdateOfferActivity extends AppCompatActivity {
             endDateUpdate.setText(sdf.format(myCalendar.getTime()));
     }
 
+         */
 
 
+    }
 }

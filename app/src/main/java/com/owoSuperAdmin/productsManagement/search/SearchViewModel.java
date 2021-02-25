@@ -6,12 +6,12 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PageKeyedDataSource;
 import androidx.paging.PagedList;
 
-import com.owoSuperAdmin.productsManagement.entity.Owo_product;
+import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 
 public class SearchViewModel extends ViewModel {
 
-    public LiveData<PagedList<Owo_product>> itemPagedList;
-    LiveData<PageKeyedDataSource<Integer, Owo_product>> liveDataSource;
+    public LiveData<PagedList<OwoProduct>> itemPagedList;
+    LiveData<PageKeyedDataSource<Integer, OwoProduct>> liveDataSource;
 
     public SearchViewModel(String searched_product) {
 

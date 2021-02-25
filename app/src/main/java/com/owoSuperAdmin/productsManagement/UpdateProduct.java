@@ -23,8 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.owoSuperAdmin.network.RetrofitClient;
-import com.owoSuperAdmin.productsManagement.entity.Owo_product;
+import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.owoshop.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -63,14 +65,14 @@ public class UpdateProduct extends AppCompatActivity {
 
         loadingbar =new ProgressDialog(this);
 
-        final Owo_product product = (Owo_product) getIntent().getSerializableExtra("Products");
+        final OwoProduct product = (OwoProduct) getIntent().getSerializableExtra("Products");
 
-        Glide.with(this).load(product.getProduct_image()).into(imageUpdate);
-        collapsingToolbarLayout.setTitle(product.getProduct_name());
-        descriptionUpdate.setText(product.getProduct_description());
-        priceUpdate.setText(String.valueOf(product.getProduct_price()));
-        discountUpdate.setText(String.valueOf(product.getProduct_discount()));
-        quantity_update.setText(String.valueOf(product.getProduct_quantity()));
+        Glide.with(this).load(product.getProductImage()).into(imageUpdate);
+        collapsingToolbarLayout.setTitle(product.getProductName());
+        descriptionUpdate.setText(product.getProductDescription());
+        priceUpdate.setText(String.valueOf(product.getProductPrice()));
+        discountUpdate.setText(String.valueOf(product.getProductDiscount()));
+        quantity_update.setText(String.valueOf(product.getProductQuantity()));
 
         calculate_new_price.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +116,7 @@ public class UpdateProduct extends AppCompatActivity {
                             loadingbar.setCanceledOnTouchOutside(false);
                             loadingbar.show();
 
-                            StorageReference ProductImagesRef = FirebaseStorage.getInstance().getReferenceFromUrl(product.getProduct_image());
+                            StorageReference ProductImagesRef = FirebaseStorage.getInstance().getReferenceFromUrl(product.getProductImage());
 
                             ProductImagesRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -123,7 +125,7 @@ public class UpdateProduct extends AppCompatActivity {
                                     Toast.makeText(UpdateProduct.this, "Product Image removed successfully", Toast.LENGTH_SHORT).show();
 
                                     Call<ResponseBody> call = RetrofitClient.getInstance()
-                                            .getApi().deleteProduct(product.getProduct_id());
+                                            .getApi().deleteProduct(product.getProductId());
 
                                     call.enqueue(new Callback<ResponseBody>() {
                                         @Override
@@ -183,17 +185,17 @@ public class UpdateProduct extends AppCompatActivity {
                 loadingbar.show();
 
 
-                product.setProduct_description(descriptionUpdate.getText().toString());
-                product.setProduct_price(Double.parseDouble(priceUpdate.getText().toString()));
-                product.setProduct_discount(Double.parseDouble(discountUpdate.getText().toString()));
-                product.setProduct_quantity(Integer.parseInt(quantity_update.getText().toString()));
+                product.setProductDescription(descriptionUpdate.getText().toString());
+                product.setProductPrice(Double.parseDouble(priceUpdate.getText().toString()));
+                product.setProductDiscount(Double.parseDouble(discountUpdate.getText().toString()));
+                product.setProductQuantity(Integer.parseInt(quantity_update.getText().toString()));
 
-                Call<Owo_product> call = RetrofitClient.getInstance()
+                Call<OwoProduct> call = RetrofitClient.getInstance()
                         .getApi().updateProduct(product);
 
-                call.enqueue(new Callback<Owo_product>() {
+                call.enqueue(new Callback<OwoProduct>() {
                     @Override
-                    public void onResponse(Call<Owo_product> call, Response<Owo_product> response) {
+                    public void onResponse(@NotNull Call<OwoProduct> call, @NotNull Response<OwoProduct> response) {
 
                         if(response.isSuccessful())
                         {
@@ -212,7 +214,7 @@ public class UpdateProduct extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Owo_product> call, Throwable t) {
+                    public void onFailure(@NotNull Call<OwoProduct> call, @NotNull Throwable t) {
                         Toast.makeText(UpdateProduct.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

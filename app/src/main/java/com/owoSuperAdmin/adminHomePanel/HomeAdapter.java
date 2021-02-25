@@ -314,16 +314,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             Intent intent=new Intent(context, QuponActivity.class);
             context.startActivity(intent);
         }
-        else if(position == 10)
-        {
-            Intent intent=new Intent(context, AddASubCategory.class);
-            context.startActivity(intent);
-        }
-        else if(position == 11)
-        {
-            Intent intent = new Intent(context, AddABrand.class);
-            context.startActivity(intent);
-        }
         else if(position == 12)
         {
             Intent intent = new Intent(context, AddATimeSlot.class);
