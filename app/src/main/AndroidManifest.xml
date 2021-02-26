@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.deleteBrand.DeleteBrand"></activity>
+        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.deleteBrand.DeleteBrand"/>
         <activity android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllBrandsOfASubCategory" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.UpdateBrand" />
         <activity android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllSubCategoriesOfACategory" />
@@ -74,7 +74,7 @@
             android:screenOrientation="portrait" />
         <activity android:name="com.owoSuperAdmin.offersManagement.UpdateOfferActivity" />
         <activity android:name="com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity" />
-        <activity android:name="com.owoSuperAdmin.productsManagement.ProductDetails" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.ProductDetailsModification" />
         <activity android:name="com.owoSuperAdmin.productsManagement.allProducts.AvailableProducts" />
         <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddAProduct" />
         <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity" />
@@ -105,7 +105,8 @@
 
         <activity android:name="com.owoSuperAdmin.adminHomePanel.HomeActivity" />
 
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

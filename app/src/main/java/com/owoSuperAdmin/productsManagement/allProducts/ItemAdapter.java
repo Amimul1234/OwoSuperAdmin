@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
-import com.owoSuperAdmin.productsManagement.ProductDetails;
+import com.owoSuperAdmin.productsManagement.ProductDetailsModification;
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.owoshop.R;
 
@@ -122,7 +122,7 @@ public class ItemAdapter extends PagedListAdapter<OwoProduct, ItemAdapter.ItemVi
         public void onClick(View v) {
             OwoProduct owoProduct = getItem(getAdapterPosition());
 
-            Intent intent = new Intent(mCtx, ProductDetails.class);
+            Intent intent = new Intent(mCtx, ProductDetailsModification.class);
             intent.putExtra("Products", owoProduct);
             mCtx.startActivity(intent);
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/white"
-    tools:context="com.owoSuperAdmin.productsManagement.ProductDetails">
+    tools:context="com.owoSuperAdmin.productsManagement.ProductDetailsModification">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -138,14 +138,14 @@
                 <EditText
                     android:id="@+id/product_discount_update"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:hint="@string/_300"
+                    android:inputType="numberDecimal"
                     android:textColor="@color/red"
                     android:textColorHint="@color/black"
-                    android:inputType="numberDecimal"
-                    android:background="@color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
