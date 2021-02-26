@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -14,9 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,10 +24,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.owoSuperAdmin.adminHomePanel.HomeActivity;
+import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
+import com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.CategoryCustomSpinnerAdapter;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
 import com.owoSuperAdmin.owoshop.R;
-
 import org.jetbrains.annotations.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,8 +36,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
@@ -64,6 +64,10 @@ public class CreateOffersActivity extends AppCompatActivity {
     private ProgressDialog loading;
     private SwitchMaterial enable_offer_switch;
 
+    private final List<CategoryEntity> categoryEntityList = new ArrayList<>();
+
+    private Spinner categorySelectorSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +79,8 @@ public class CreateOffersActivity extends AppCompatActivity {
         offer_is_for_spinner = findViewById(R.id.offer_is_for);
         enable_offer_switch = findViewById(R.id.enable_offer_switch);
 
+        categorySelectorSpinner = findViewById(R.id.categorySelectorSpinner);
+
         loading = new ProgressDialog(this);
 
         Button createOfferBtn = findViewById(R.id.create_offer_btn);
@@ -82,73 +88,42 @@ public class CreateOffersActivity extends AppCompatActivity {
         ImageView offer_end_date_picker = findViewById(R.id.end_date_picker);
         ImageView back_to_home = findViewById(R.id.back_to_home);
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
+        fetchCategories();
 
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel(1);
-            }
+        final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel(1);
         };
 
-        final DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
+        final DatePickerDialog.OnDateSetListener date2 = (view, year, monthOfYear, dayOfMonth) -> {
 
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel(2);
-            }
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel(2);
         };
 
-        offer_start_date_picker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(CreateOffersActivity.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
+        offer_start_date_picker.setOnClickListener(v -> new DatePickerDialog(CreateOffersActivity.this, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show());
+
+
+        offer_end_date_picker.setOnClickListener(v -> new DatePickerDialog(CreateOffersActivity.this, date2, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show());
+
+        back_to_home.setOnClickListener(v -> {
+            Intent intent = new Intent(CreateOffersActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
 
+        createOfferImage.setOnClickListener(v -> requestStoragePermission());
 
-        offer_end_date_picker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(CreateOffersActivity.this, date2, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        back_to_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CreateOffersActivity.this, HomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
-        createOfferImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestStoragePermission();
-            }
-        });
-
-        createOfferBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ValidateOfferData();
-            }
-        });
+        createOfferBtn.setOnClickListener(v -> ValidateOfferData());
     }
 
     private void updateLabel(int state) {
@@ -206,7 +181,8 @@ public class CreateOffersActivity extends AppCompatActivity {
         }
     }
 
-    private void StoreOfferInformation() {
+    private void StoreOfferInformation()
+    {
 
         loading.setTitle("Add A New Offer");
         loading.setMessage("Please wait, we are adding the new offer...");
@@ -256,23 +232,29 @@ public class CreateOffersActivity extends AppCompatActivity {
                             offersEntity.setOffer_end_date(EndDate);
                             offersEntity.setOffer_is_for(offer_is_for_spinner.getSelectedItem().toString());
                             offersEntity.setOffer_image(path);
-                            offersEntity.setCategory("ABCD");//Should obviously change letter
+                            offersEntity.setCategoryEntity((CategoryEntity) categorySelectorSpinner.getSelectedItem());//Should obviously change letter
                             offersEntity.setEnabled(enable_offer_switch.isChecked());
 
                             SaveOfferInfoToDatabase(offersEntity);
+                        }
+                        else
+                        {
+                            loading.dismiss();
+                            Toast.makeText(CreateOffersActivity.this, "Error uploading image to server", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                        Toast.makeText(CreateOffersActivity.this, "Error uploading image to server", Toast.LENGTH_SHORT).show();
                         loading.dismiss();
                         Log.e(TAG, t.getMessage());
+                        Toast.makeText(CreateOffersActivity.this, "Error uploading image to server", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    private void SaveOfferInfoToDatabase(OffersEntity offersEntity) {
+    private void SaveOfferInfoToDatabase(OffersEntity offersEntity)
+    {
         RetrofitClient.getInstance().getApi()
                 .addAnOffer(offersEntity)
                 .enqueue(new Callback<ResponseBody>() {
@@ -282,6 +264,7 @@ public class CreateOffersActivity extends AppCompatActivity {
                         {
                             loading.dismiss();
                             Toast.makeText(CreateOffersActivity.this, "Offer is added successfully...", Toast.LENGTH_SHORT).show();
+
                             Intent intent=new Intent(CreateOffersActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish();
@@ -301,15 +284,16 @@ public class CreateOffersActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                        loading.dismiss();
                         Log.e(TAG, t.getMessage());
                         Toast.makeText(CreateOffersActivity.this, "Failed to create offer", Toast.LENGTH_SHORT).show();
-                        loading.dismiss();
                     }
                 });
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode != RESULT_CANCELED) {
@@ -344,26 +328,21 @@ public class CreateOffersActivity extends AppCompatActivity {
         }
     }
 
-
-    private void selectImage(Context context) {
-
+    private void selectImage(Context context)
+    {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Choose your profile picture");
 
-        builder.setItems(options, new DialogInterface.OnClickListener() {
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Take Photo")) {
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePicture, 0);
 
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(takePicture, 0);
-
-                } else if (options[item].equals("Choose from Gallery")) {
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(pickPhoto , 1);
-                }
+            } else if (options[item].equals("Choose from Gallery")) {
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto , 1);
             }
         });
 
@@ -371,30 +350,22 @@ public class CreateOffersActivity extends AppCompatActivity {
         builder.show();
     }
 
-
-    private void requestStoragePermission() {
+    private void requestStoragePermission()
+    {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)) {
             new AlertDialog.Builder(this)
                     .setTitle("Permission needed")
                     .setMessage("This permission is needed because of taking image from gallery")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                    .setPositiveButton("ok", (dialog, which) -> {
 
-                            ActivityCompat.requestPermissions(CreateOffersActivity.this,
-                                    new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        ActivityCompat.requestPermissions(CreateOffersActivity.this,
+                                new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
-                            selectImage(CreateOffersActivity.this);
-                        }
+                        selectImage(CreateOffersActivity.this);
                     })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
+                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
                     .create().show();
         } else {
             ActivityCompat.requestPermissions(this,
@@ -404,5 +375,42 @@ public class CreateOffersActivity extends AppCompatActivity {
         }
     }
 
+    private void fetchCategories()
+    {
+
+        loading.setTitle("All Categories");
+        loading.setMessage("Please wait while we are fetching all the categories");
+        loading.show();
+
+        RetrofitClient.getInstance().getApi()
+                .getAllCategories()
+                .enqueue(new Callback<List<CategoryEntity>>() {
+                    @Override
+                    public void onResponse(@NotNull Call<List<CategoryEntity>> call, @NotNull Response<List<CategoryEntity>> response) {
+                        if(response.isSuccessful())
+                        {
+                            loading.dismiss();
+                            categoryEntityList.clear();
+                            assert response.body() != null;
+                            categoryEntityList.addAll(response.body());
+                            CategoryCustomSpinnerAdapter categoryCustomSpinnerAdapter = new CategoryCustomSpinnerAdapter(CreateOffersActivity.this,
+                                    categoryEntityList);
+                            categorySelectorSpinner.setAdapter(categoryCustomSpinnerAdapter);
+                        }
+                        else
+                        {
+                            loading.dismiss();
+                            Toast.makeText(CreateOffersActivity.this, "Can not get categories, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<List<CategoryEntity>> call, @NotNull Throwable t) {
+                        loading.dismiss();
+                        Log.e("Add Offer", "Error is: "+t.getMessage());
+                        Toast.makeText(CreateOffersActivity.this, "Can not get categories, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
 }

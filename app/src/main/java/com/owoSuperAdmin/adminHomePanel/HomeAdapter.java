@@ -276,40 +276,22 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             builder.show();
         }
 
-        else if (position==5)
+        else if(position == 5)//Users management
         {
 
         }
-        else if (position==6)
-        {
-            CharSequence[] options=new CharSequence[]{"Shop Management", "Shop Orders"};
-            AlertDialog.Builder builder=new AlertDialog.Builder(context);
-            builder.setTitle("SHOPS");
-            builder.setItems(options, (dialog, i) -> {
-                if (i==0)
-                {
-                    Intent intent=new Intent(context, ManageRegisteredShops.class);
-                    context.startActivity(intent);
 
-                }
-                else if(i==1)
-                {
-                    Intent intent = new Intent(context, confirm_shop_orders.class);
-                    context.startActivity(intent);
-                }
-            });
-            builder.show();
-        }
-        else if (position==7)
+        else if (position==6)//Shop Orders management
         {
-
+            Intent intent = new Intent(context, confirm_shop_orders.class);
+            context.startActivity(intent);
         }
-        else if (position==8)
+        else if (position == 8)
         {
             Intent intent=new Intent(context, CloudMessagingActivity.class);
             context.startActivity(intent);
         }
-        else if (position==9)
+        else if (position == 9)
         {
             Intent intent=new Intent(context, QuponActivity.class);
             context.startActivity(intent);
@@ -320,6 +302,5 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             context.startActivity(intent);
         }
     }
-
 }
 

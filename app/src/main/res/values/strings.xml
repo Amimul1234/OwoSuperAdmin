@@ -117,5 +117,12 @@
     <string name="product_description_goes_here">Product Description Goes Here</string>
     <string name="delete_product">Delete Product</string>
     <string name="update_product">Update Product</string>
+    <string name="create_a_new_offer">CREATE A NEW OFFER</string>
+    <string name="offer_image">Offer Image</string>
+    <string name="please_select_start_date">Please Select Start Date</string>
+    <string name="date_picker">Date Picker</string>
+    <string name="please_select_end_date">Please Select End Date</string>
+    <string name="enable_offer_now">Enable Offer Now</string>
+    <string name="create_offer">Create Offer</string>
 
 </resources>
