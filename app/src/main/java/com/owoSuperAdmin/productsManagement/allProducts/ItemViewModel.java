@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.productsManagement.products;
+package com.owoSuperAdmin.productsManagement.allProducts;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -6,6 +6,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PageKeyedDataSource;
 import androidx.paging.PagedList;
 
+import com.owoSuperAdmin.productsManagement.allProducts.ItemDataSourceFactory;
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 
 public class ItemViewModel extends ViewModel {
@@ -20,7 +21,7 @@ public class ItemViewModel extends ViewModel {
 
         PagedList.Config config =
                 (new PagedList.Config.Builder())
-                        .setPageSize(30)                          //setPageSize() is a mandatory for paging list.
+                        .setPageSize(10)                          //setPageSize() is a mandatory for paging list.
                         .setEnablePlaceholders(false)
                         .build();
 

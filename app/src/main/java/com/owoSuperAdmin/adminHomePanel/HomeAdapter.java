@@ -25,7 +25,7 @@ import com.owoSuperAdmin.owoshop.CloudMessagingActivity;
 import com.owoSuperAdmin.owoshop.CreateNewAdminActivity;
 import com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity;
 import com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops;
-import com.owoSuperAdmin.productsManagement.AvailableProducts;
+import com.owoSuperAdmin.productsManagement.allProducts.AvailableProducts;
 import com.owoSuperAdmin.offersManagement.QuponActivity;
 import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity;

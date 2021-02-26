@@ -35,19 +35,13 @@
         android:layout_below="@id/topbar"/>
 
 
-    <com.agrawalsuneet.dotsloader.loaders.AllianceLoader
+    <ProgressBar
         android:id="@+id/loader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone"
-        app:alliance_animDuration="500"
-        app:alliance_distanceMultiplier="4"
-        app:alliance_dotsRadius="20dp"
-        app:alliance_firstDotsColor="@color/red"
-        app:alliance_secondDotsColor="@color/green"
-        app:alliance_strokeWidth="8dp"
-        app:alliance_thirdDotsColor="@color/blue" />
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

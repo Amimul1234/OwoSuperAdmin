@@ -61,7 +61,7 @@
         <activity android:name="com.owoSuperAdmin.offersManagement.QuponActivity" />
         <activity android:name="com.owoSuperAdmin.productsManagement.SearchedProducts" />
         <activity android:name=".CloudMessagingActivity" />
-        <activity android:name="com.owoSuperAdmin.productsManagement.PreViewProductDetails" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.PreViewProductDetails" />
         <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.confirmed_order_details" />
 
         <meta-data
@@ -74,8 +74,8 @@
             android:screenOrientation="portrait" />
         <activity android:name="com.owoSuperAdmin.offersManagement.UpdateOfferActivity" />
         <activity android:name="com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity" />
-        <activity android:name="com.owoSuperAdmin.productsManagement.UpdateProduct" />
-        <activity android:name="com.owoSuperAdmin.productsManagement.AvailableProducts" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.ProductDetails" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.allProducts.AvailableProducts" />
         <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddAProduct" />
         <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity" />
         <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity" />

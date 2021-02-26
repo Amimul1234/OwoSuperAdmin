@@ -7,34 +7,6 @@
         Owo Dokan Products are first class in terms of quality as well as price. Owo ensures you
         to get best price</string>
 
-    <string name="mobile_description">Cell phone redirects here. For the film, see Cell Phone (film).
-        Handphone redirects here. For the film, see Handphone (film).
-        For the modern mobile phone, see Smartphone.
-
-        Evolution of mobile phones, to an early smartphone
-        A mobile phone, cellular phone, cell phone, cellphone
-        or hand phone, sometimes shortened to simply mobile,
-        cell or just phone, is a portable telephone that can
-        make and receive calls over a radio frequency link
-        while the user is moving within a telephone service area.
-        The radio frequency link establishes a connection to the
-        switching systems of a mobile phone operator,
-        which provides access to the public switched telephone
-        network (PSTN). Modern mobile telephone services use a
-        cellular network architecture and, therefore, mobile telephones
-        are called cellular telephones or cell phones in North America.
-        In addition to telephony, digital mobile phones (2G) support a
-        variety of other services, such as text messaging, MMS, email
-        , Internet access, short-range wireless communications (infrared, Bluetooth)
-        , business applications, video games and digital photography.
-        Mobile phones offering only those capabilities are known as feature phones;
-        mobile phones which offer greatly advanced computing capabilities are referred to as smartphones.
-
-        The development of metal-oxide-semiconductor (MOS) large-scale integration (LSI) technology,
-        information theory and cellular networking led to the development of affordable mobile
-        communications
-    </string>
-
     <string-array name="adminPanelItems">
         <item>Admin Management</item>
         <item>Shop Management</item>
@@ -44,12 +16,10 @@
         <item>User Management</item>
         <item>Order Management</item>
     </string-array>
-
     <string-array name="offer_is_for">
         <item>ShopKeeper</item>
         <item>Consumer</item>
     </string-array>
-
     <string name="title_activity_location_from_map">Map</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
@@ -93,7 +63,6 @@
     <string name="update_category">Update Category</string>
     <string name="delete_category">Delete Category</string>
     <string name="update_category_details">Update Category Details</string>
-
     <string name="delete_category_details">Delete Category Details</string>
     <string name="categories">Categories</string>
     <string name="sub_categories">Sub Categories</string>
@@ -106,10 +75,8 @@
     <string name="click_to_add_sub_category_picture">Click to add sub-category picture</string>
     <string name="click_to_choose_product_image">Click to choose product image</string>
     <string name="product_image">Product Image</string>
-    <string name="product_name">Product Name</string>
     <string name="product_description">Product Description</string>
     <string name="product_quantity">Product Quantity</string>
-    <string name="product_price">Product Price</string>
     <string name="discount_taka">Discount taka</string>
     <string name="calculate">Calculate</string>
     <string name="discount_price">Discounted Price:</string>
@@ -131,5 +98,24 @@
     <string name="please_enter_brand_name">Please enter brand name</string>
     <string name="delete_brand">Delete Brand</string>
     <string name="all_available_offers">All Available Offers</string>
+    <string name="all_products">All Products</string>
+    <string name="search_button">Search Button</string>
+    <string name="dummy_image">Dummy Image</string>
+    <string name="product_price">Product Price</string>
+    <string name="discount">Discount</string>
+    <string name="_0">0%</string>
+    <string name="product_name">Product Name</string>
+    <string name="calculate_new_price">Calculate New Price</string>
+    <string name="new_price">New Price:</string>
+    <string name="_0_00">0.00</string>
+    <string name="_500">500</string>
+    <string name="quantity">Quantity :</string>
+    <string name="_300">300</string>
+    <string name="discountHint">Discount:</string>
+    <string name="priceHint">Price:</string>
+    <string name="_1200">1200</string>
+    <string name="product_description_goes_here">Product Description Goes Here</string>
+    <string name="delete_product">Delete Product</string>
+    <string name="update_product">Update Product</string>
 
 </resources>

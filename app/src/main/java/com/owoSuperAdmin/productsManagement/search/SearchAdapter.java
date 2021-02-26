@@ -13,9 +13,9 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.owoSuperAdmin.productsManagement.ProductDetails;
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.owoshop.R;
-import com.owoSuperAdmin.productsManagement.UpdateProduct;
 
 public class SearchAdapter extends PagedListAdapter<OwoProduct, SearchAdapter.ItemViewHolder>{
 
@@ -83,7 +83,7 @@ public class SearchAdapter extends PagedListAdapter<OwoProduct, SearchAdapter.It
         public void onClick(View v) {
             int position = getAdapterPosition();
             OwoProduct products = getItem(position);
-            Intent intent = new Intent(mCtx, UpdateProduct.class);
+            Intent intent = new Intent(mCtx, ProductDetails.class);
             intent.putExtra("Products", products);
             mCtx.startActivity(intent);
         }

@@ -1,13 +1,10 @@
-package com.owoSuperAdmin.productsManagement;
+package com.owoSuperAdmin.productsManagement.addProduct;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.owoSuperAdmin.owoshop.R;
@@ -72,12 +69,7 @@ public class PreViewProductDetails extends AppCompatActivity {
 
 
 
-        back_to_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        back_to_home.setOnClickListener(v -> finish());
 
     }
 }

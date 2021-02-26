@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/white"
-    tools:context="com.owoSuperAdmin.productsManagement.UpdateProduct">
+    tools:context="com.owoSuperAdmin.productsManagement.ProductDetails">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             app:title="Product Name"
             app:scrimAnimationDuration="10"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="@color/blue"
             app:expandedTitleMarginBottom="15dp"
             app:expandedTitleMarginEnd="20dp"
             app:expandedTitleMarginStart="25dp"
@@ -34,14 +35,14 @@
             app:collapsedTitleTextAppearance="@style/CollapsingToolbarLayoutCollapsedTextStyle"
             >
 
-
             <ImageView
                 android:id="@+id/product_image_update"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:scaleType="fitXY"
                 android:layout_gravity="center"
-                android:src="@drawable/logo1"/>
+                android:src="@drawable/logo1"
+                android:contentDescription="@string/product_image" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/z_toolbar"
@@ -53,14 +54,15 @@
 
                 <ImageView
                     android:id="@+id/back_to_home"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/blue"
                     android:focusable="true"
                     android:clickable="true"
                     android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_baseline_arrow_back_24" />
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    android:contentDescription="@string/back_button" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -95,7 +97,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Price: "
+                    android:text="@string/priceHint"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="20dp"
                     android:textSize="20sp"
@@ -106,7 +108,7 @@
                     android:id="@+id/product_price_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="1200"
+                    android:hint="@string/_1200"
                     android:inputType="numberDecimal"
                     android:layout_marginStart="25dp"
                     android:textColor="@color/red"
@@ -114,8 +116,6 @@
                     android:background="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
-
-
             </LinearLayout>
 
 
@@ -128,7 +128,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discount: "
+                    android:text="@string/discountHint"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="20dp"
                     android:textSize="20sp"
@@ -139,7 +139,7 @@
                     android:id="@+id/product_discount_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="300"
+                    android:hint="@string/_300"
                     android:textColor="@color/red"
                     android:textColorHint="@color/black"
                     android:inputType="numberDecimal"
@@ -157,7 +157,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quantity : "
+                    android:text="@string/quantity"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="20dp"
                     android:textSize="20sp"
@@ -168,7 +168,7 @@
                     android:id="@+id/product_quantity_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="500"
+                    android:hint="@string/_500"
                     android:textColor="@color/red"
                     android:textColorHint="@color/black"
                     android:background="@color/white"
@@ -187,10 +187,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Price: "
+                    android:text="@string/new_price"
                     android:textAlignment="center"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/blue"
                     android:textSize="20sp"/>
 
                 <TextView
@@ -198,12 +198,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="0.00"
+                    android:text="@string/_0_00"
                     android:textAlignment="center"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/blue"
                     android:background="@color/white"
                     />
+
             </LinearLayout>
 
             <Button
@@ -212,10 +213,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/buttons_blue"
-                android:text="Calculate Price"
+                android:text="@string/calculate_new_price"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:fontFamily="@font/ethnocentric"/>
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
             <View
                 android:layout_width="match_parent"
@@ -230,11 +231,12 @@
                 android:padding="20dp"
                 android:textColorHint="#000000"
                 android:textColor="#000000"
-                android:text="@string/mobile_description"
+                android:text="@string/product_description_goes_here"
                 android:textSize="20sp"
                 android:background="@color/white"
                 android:textAlignment="textStart"
-                />
+                android:autofillHints="Product Description"
+                android:inputType="textMultiLine" />
 
             <View
                 android:layout_width="match_parent"
@@ -253,9 +255,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/buttons_blue"
-                    android:text="Update Product"
-                    android:fontFamily="@font/ethnocentric"
+                    android:text="@string/update_product"
                     android:textStyle="bold"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
                     />
 
@@ -266,22 +268,15 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="50dp"
                     android:background="@drawable/buttons_red"
-                    android:text="Delete Product"
-                    android:fontFamily="@font/ethnocentric"
+                    android:text="@string/delete_product"
                     android:textStyle="bold"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
                     />
 
-
-
-
-
             </LinearLayout>
 
-
-
         </LinearLayout>
-
 
     </androidx.core.widget.NestedScrollView>
 

@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -27,16 +26,11 @@ public class SemiAdminActivity extends AppCompatActivity {
     private RecyclerView adminsList;
     private ImageView back_button_to_home;
     private DatabaseReference adminsRef;
-    private ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_semi_admin);
-
-        shimmerFrameLayout = findViewById(R.id.shimmer_animation);
-        shimmerFrameLayout.setVisibility(View.VISIBLE);
-        shimmerFrameLayout.startShimmer();
 
         adminsList = findViewById(R.id.semi_admin_recyclerviewid);
         back_button_to_home = findViewById(R.id.back_from_semi_admins);
@@ -71,8 +65,6 @@ public class SemiAdminActivity extends AppCompatActivity {
                     @Override
                     public void onDataChanged() {
                         super.onDataChanged();
-                        shimmerFrameLayout.stopShimmer();
-                        shimmerFrameLayout.setVisibility(View.GONE);
                     }
 
                     @Override

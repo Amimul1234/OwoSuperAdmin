@@ -33,17 +33,20 @@ public interface Api {
     Call<List<Shops>> getAllRegisteredShops(@Query("pageNumber") int pageNumber);
 
     //Product Management
+    @GET("/getAllProducts")
+    Call<List<OwoProduct>> getAllProducts(@Query("page") int page);
+
+    @GET("/getAProduct")
+    Call<OwoProduct> getAProduct(@Query("productId") Long productId);
+
     @POST("/addProduct")
     Call<OwoProduct> createProduct(@Body OwoProduct owo_product);
 
     @PUT("/updateProduct")
     Call<OwoProduct> updateProduct(@Body OwoProduct product);
 
-    @DELETE("/deleteProduct/{product_id}")
-    Call<ResponseBody> deleteProduct(@Path("product_id") Long product_id);
-
-    @GET("/allProducts")
-    Call<List<OwoProduct>> getAllProducts(@Query("page") int page);
+    @DELETE("/deleteProduct")
+    Call<ResponseBody> deleteProduct(@Query("productId") Long productId);
 
     @PUT("/setOrderState")
     Call<ResponseBody> setOrderState(

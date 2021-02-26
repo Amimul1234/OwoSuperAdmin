@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.productsManagement.products;
+package com.owoSuperAdmin.productsManagement.allProducts;
 
 import android.util.Log;
 import androidx.annotation.NonNull;
@@ -24,7 +24,6 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, OwoProduct> {
                 .enqueue(new Callback<List<OwoProduct>>() {
                     @Override
                     public void onResponse(@NotNull Call<List<OwoProduct>> call, @NotNull Response<List<OwoProduct>> response) {
-
                         if (response.isSuccessful()) {
                             callback.onResult(response.body(), null, FIRST_PAGE + 1);
                         }
@@ -77,7 +76,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, OwoProduct> {
                 .getAllProducts(params.key)
                 .enqueue(new Callback<List<OwoProduct>>() {
                     @Override
-                    public void onResponse(Call<List<OwoProduct>> call, Response<List<OwoProduct>> response) {
+                    public void onResponse(@NotNull Call<List<OwoProduct>> call, @NotNull Response<List<OwoProduct>> response) {
 
                         if(response.isSuccessful()){
                             callback.onResult(response.body(), params.key+1);

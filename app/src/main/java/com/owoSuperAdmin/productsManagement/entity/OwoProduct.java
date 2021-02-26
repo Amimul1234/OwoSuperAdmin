@@ -1,5 +1,6 @@
 package com.owoSuperAdmin.productsManagement.entity;
 
+import androidx.annotation.Nullable;
 import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import java.io.Serializable;
 
@@ -135,5 +136,16 @@ public class OwoProduct implements Serializable {
 
     public void setBrands(Brands brands) {
         this.brands = brands;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        OwoProduct owoProduct = (OwoProduct) obj;
+        return this.productId.equals(owoProduct.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }
