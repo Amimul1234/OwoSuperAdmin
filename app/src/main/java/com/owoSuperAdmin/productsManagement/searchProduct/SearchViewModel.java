@@ -1,11 +1,10 @@
-package com.owoSuperAdmin.productsManagement.search;
+package com.owoSuperAdmin.productsManagement.searchProduct;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PageKeyedDataSource;
 import androidx.paging.PagedList;
-
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 
 public class SearchViewModel extends ViewModel {

@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.productsManagement.search;
+package com.owoSuperAdmin.productsManagement.searchProduct;
 
 import android.util.Log;
 import androidx.annotation.NonNull;

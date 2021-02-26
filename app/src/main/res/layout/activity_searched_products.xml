@@ -23,6 +23,7 @@
             android:focusable="true"
             app:defaultQueryHint="Search Products"
             />
+
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     <ProgressBar

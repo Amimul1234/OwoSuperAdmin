@@ -1,9 +1,8 @@
-package com.owoSuperAdmin.productsManagement.search;
+package com.owoSuperAdmin.productsManagement.searchProduct;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import androidx.paging.PageKeyedDataSource;
-
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 
 public class SearchDataSourceFactory extends DataSource.Factory {

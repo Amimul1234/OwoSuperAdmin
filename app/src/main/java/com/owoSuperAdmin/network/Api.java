@@ -55,7 +55,7 @@ public interface Api {
     );
 
 
-    @GET("/searchProduct_admin")
+    @GET("/searchProductWithName")
     Call<List<OwoProduct>> searchProduct(
             @Query("page") int page,
             @Query("product_name") String product_name

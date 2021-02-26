@@ -119,7 +119,8 @@ public class ProductDetailsModification extends AppCompatActivity {
         }
     }
 
-    private void updateProductInfo() {
+    private void updateProductInfo()
+    {
         progressDialog.setTitle("Update Product Data");
         progressDialog.setMessage("Please wait while we are updating product data");
         progressDialog.show();
