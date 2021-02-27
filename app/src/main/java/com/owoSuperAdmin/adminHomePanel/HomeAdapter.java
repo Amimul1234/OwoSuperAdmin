@@ -31,6 +31,8 @@ import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity;
 import com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory;
 import com.owoSuperAdmin.ordersManagement.confirm_shop_orders;
+import com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers;
+
 import org.jetbrains.annotations.NotNull;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
@@ -278,7 +280,25 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
 
         else if(position == 5)//Users management
         {
+            CharSequence[] brandsOptions = new CharSequence[]{"All Enabled Shop Keepers",
+                    "Disabled Shop Keepers"};
 
+            AlertDialog.Builder brandsBuilder = new AlertDialog.Builder(context);
+            brandsBuilder.setTitle("Shop Keeper Management");
+
+            brandsBuilder.setItems(brandsOptions, ((dialog1, which) -> {
+                if(which == 0)
+                {
+                    Intent intent = new Intent(context, AllEnabledShopKeepers.class);
+                    context.startActivity(intent);
+                }
+                else if(which == 1)
+                {
+
+                }
+            }));
+
+            brandsBuilder.show();
         }
 
         else if (position==6)//Shop Orders management

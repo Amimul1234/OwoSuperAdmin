@@ -7,6 +7,8 @@ import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.ordersManagement.entity.Shop_keeper_orders;
 import com.owoSuperAdmin.shopManagement.entity.Shops;
+import com.owoSuperAdmin.userManagement.shopKeeperUser.entity.ShopKeeperUser;
+
 import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -141,5 +143,9 @@ public interface Api {
 
     @DELETE("/deleteOffer")
     Call<ResponseBody> deleteAnOffer(@Query("offerId") Long offerId);
+
+    //ShopKeeper User management
+    @GET("/getAllEnabledShopKeepers")
+    Call<List<ShopKeeperUser>> getAllEnabledShopKeepers(@Query("page") int page);
 
 }

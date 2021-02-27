@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
     <uses-feature android:name="android.hardware.camera2.full" />
@@ -21,92 +22,135 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m"
-        tools:ignore="AllowBackup">
-        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.deleteBrand.DeleteBrand"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllBrandsOfASubCategory"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.UpdateBrand"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllSubCategoriesOfACategory"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllCategories"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.SubCategoryDeleteActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategorySubCategoriesOfCategory"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.SubCategoryUpdateActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategorySubCategoriesOfCategory"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.category.DeleteCategoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.category.UpdateCategoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.category.AddNewCategory"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.CompletedOrderDetails"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Cancelled_order_details"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Shipped_orders_details"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Picked_order_details"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Processing_orders_details"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_shipped_to_delivered"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".AddATimeSlot"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.completed_order_state"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.shipped_order_activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_picked_to_shipped"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_processing_to_picked"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.picked_order_activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.pending_order_details"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.CompletedOrders"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.cancel_order"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_confirmed_to_processing"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.orders.pending_orders"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.confirm_shop_orders"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.offersManagement.QuponActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.productsManagement.SearchedProducts"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CloudMessagingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.PreViewProductDetails"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.confirmed_order_details"
-            android:screenOrientation="portrait"/>
+        tools:ignore="AllowBackup"
+        tools:targetApi="m">
+        <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers"></activity>
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.brand.deleteBrand.DeleteBrand"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllBrandsOfASubCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.UpdateBrand"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllSubCategoriesOfACategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllCategories"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.SubCategoryDeleteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategorySubCategoriesOfCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.SubCategoryUpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategorySubCategoriesOfCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.category.DeleteCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.category.UpdateCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.category.AddNewCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.CompletedOrderDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Cancelled_order_details"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Shipped_orders_details"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Picked_order_details"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Processing_orders_details"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_shipped_to_delivered"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddATimeSlot"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.completed_order_state"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.shipped_order_activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_picked_to_shipped"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_processing_to_picked"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.picked_order_activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.pending_order_details"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.CompletedOrders"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.cancel_order"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_confirmed_to_processing"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.orders.pending_orders"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.confirm_shop_orders"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.offersManagement.QuponActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.productsManagement.SearchedProducts"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CloudMessagingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.productsManagement.addProduct.PreViewProductDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.confirmed_order_details"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -116,33 +160,44 @@
             android:name=".LocationFromMap"
             android:label="@string/title_activity_location_from_map"
             android:screenOrientation="portrait" />
-
-        <activity android:name="com.owoSuperAdmin.offersManagement.deleteOffer.DeleteOfferActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.productsManagement.ProductDetailsModification"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.productsManagement.allProducts.AvailableProducts"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddAProduct"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.adminManagement.UpdateSemiAdminActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.adminManagement.SemiAdminActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.login.LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="com.owoSuperAdmin.login.Splash_screen"
+        <activity
+            android:name="com.owoSuperAdmin.offersManagement.deleteOffer.DeleteOfferActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.productsManagement.ProductDetailsModification"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.productsManagement.allProducts.AvailableProducts"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.productsManagement.addProduct.AddAProduct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.adminManagement.UpdateSemiAdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.adminManagement.SemiAdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.owoSuperAdmin.login.Splash_screen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -150,9 +205,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CreateNewAdminActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".CreateNewAdminActivity"
-            android:screenOrientation="portrait"/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -163,10 +219,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name="com.owoSuperAdmin.adminHomePanel.HomeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.owoSuperAdmin.adminHomePanel.HomeActivity"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".MyFirebaseMessagingService"
+        <service
+            android:name=".MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
