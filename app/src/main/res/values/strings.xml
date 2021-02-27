@@ -124,5 +124,9 @@
     <string name="please_select_end_date">Please Select End Date</string>
     <string name="enable_offer_now">Enable Offer Now</string>
     <string name="create_offer">Create Offer</string>
+    <string name="offer_name">Offer Name</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="delete_offer">Delete Offer</string>
 
 </resources>

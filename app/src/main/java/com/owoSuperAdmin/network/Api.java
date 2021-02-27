@@ -139,4 +139,7 @@ public interface Api {
     @GET("/getAllOffers")
     Call<List<OffersEntity>> getAllOffers();
 
+    @DELETE("/deleteOffer")
+    Call<ResponseBody> deleteAnOffer(@Query("offerId") Long offerId);
+
 }

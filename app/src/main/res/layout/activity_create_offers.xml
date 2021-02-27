@@ -35,7 +35,7 @@
     <ImageView
         android:id="@+id/create_offers_image"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="200dp"
         android:layout_margin="10dp"
         android:padding="5dp"
         android:scaleType="fitXY"

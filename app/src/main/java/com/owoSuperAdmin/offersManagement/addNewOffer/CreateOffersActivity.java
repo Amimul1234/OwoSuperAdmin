@@ -220,6 +220,7 @@ public class CreateOffersActivity extends AppCompatActivity {
                             String path = null;
 
                             try {
+                                assert response.body() != null;
                                 path = response.body().string();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -274,6 +275,7 @@ public class CreateOffersActivity extends AppCompatActivity {
                             loading.dismiss();
                             Toast.makeText(CreateOffersActivity.this, "Error creating offer..., try again", Toast.LENGTH_SHORT).show();
                             try {
+                                assert response.body() != null;
                                 Log.e(TAG, response.body().string());
                             } catch (IOException e) {
                                 e.printStackTrace();

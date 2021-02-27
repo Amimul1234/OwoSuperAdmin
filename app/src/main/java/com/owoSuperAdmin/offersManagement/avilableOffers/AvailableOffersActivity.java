@@ -61,7 +61,6 @@ public class AvailableOffersActivity extends AppCompatActivity {
                     public void onResponse(@NotNull Call<List<OffersEntity>> call, @NotNull Response<List<OffersEntity>> response) {
                         if(response.isSuccessful())
                         {
-
                             assert response.body() != null;
                             offersEntityList.addAll(response.body());
                             availableOffersAdapter.notifyDataSetChanged();
