@@ -2,6 +2,7 @@ package com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,8 @@ public class AllEnabledShopKeeperAdapter extends PagedListAdapter<ShopKeeperUser
 
         if (shopKeeperUser != null) {
 
-            Glide.with(mCtx).load(HostAddress.HOST_ADDRESS.getAddress()+shopKeeperUser.getImageUri()).into(holder.shopKeeperImage);
+            if(shopKeeperUser.getImageUri() != null)
+                Glide.with(mCtx).load(HostAddress.HOST_ADDRESS.getAddress()+shopKeeperUser.getImageUri()).into(holder.shopKeeperImage);
 
             holder.shopKeeperMobileNumber.setText(shopKeeperUser.getMobileNumber());
             holder.shopKeeperName.setText(shopKeeperUser.getName());
@@ -95,14 +97,11 @@ public class AllEnabledShopKeeperAdapter extends PagedListAdapter<ShopKeeperUser
 
         @Override
         public void onClick(View v) {
-            /*
-            OwoProduct owoProduct = getItem(getAdapterPosition());
+            ShopKeeperUser shopKeeperUser = getItem(getAdapterPosition());
 
-            Intent intent = new Intent(mCtx, ProductDetailsModification.class);
-            intent.putExtra("Products", owoProduct);
+            Intent intent = new Intent(mCtx, ShopKeeperUserDetails.class);
+            intent.putExtra("shopKeeperDetails", shopKeeperUser);
             mCtx.startActivity(intent);
-
-             */
 
         }
     }

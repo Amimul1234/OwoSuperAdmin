@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.ShopKeeperUserDetails">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/blue"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true"
+            app:title="User Name"
+            app:scrimAnimationDuration="10"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/blue"
+            app:expandedTitleMarginBottom="20dp"
+            app:expandedTitleGravity="bottom|center"
+            app:collapsedTitleGravity="start"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyleWhite"
+            app:collapsedTitleTextAppearance="@style/CollapsingToolbarLayoutCollapsedTextStyle"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userProfileImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/white"
+                android:src="@drawable/person"/>
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/z_toolbar"
+                android:background="@android:color/transparent"
+                android:paddingEnd = "15dp"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:id="@+id/back_to_home"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    android:contentDescription="@string/back_button" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="#E4EAEF"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/userInformationTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_information"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/user_information_card"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_below="@+id/userInformationTag"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="15dp"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="2"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout
+                        android:id="@+id/user_name_change_layout"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        >
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/userImage"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/person"
+                            android:layout_gravity="center_vertical"
+                            app:civ_border_color="@color/black"
+                            app:civ_border_width="1dp"
+                            android:layout_marginStart="10dp"/>
+
+                        <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/user_name"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:ellipsize="end"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey"/>
+
+                    <LinearLayout
+                        android:id="@+id/user_mobile_number_change_layout"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/mobile_logo"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:contentDescription="@string/mobile_logo" />
+
+                        <TextView
+                            android:id="@+id/userMobileNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/xxxxxxxxxxx"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/editorialTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/do_action_on_user"
+                android:textSize="18sp"
+                android:layout_below="@+id/user_information_card"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pin_change_card"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/editorialTag"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="15dp"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="5dp">
+
+                <Button
+                    android:id="@+id/disableUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/buttons_blue"
+                    android:text="@string/disable_user"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="15dp"/>
+
+                <Button
+                    android:id="@+id/deleteUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/buttons_red"
+                    android:text="@string/delete_user"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="15dp"/>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -131,5 +131,12 @@
     <string name="shop_keeper_name">Shop Keeper Name</string>
     <string name="shop_keeper_mobile_number">Shop Keeper Mobile Number</string>
     <string name="all_enabled_shop_keeper">All Enabled Shop Keeper</string>
+    <string name="user_information">User Information</string>
+    <string name="user_name">User Name</string>
+    <string name="xxxxxxxxxxx">XXXXXXXXXXX</string>
+    <string name="mobile_logo">Mobile Logo</string>
+    <string name="disable_user">Disable User</string>
+    <string name="delete_user">Delete User</string>
+    <string name="do_action_on_user">Do Action On User</string>
 
 </resources>

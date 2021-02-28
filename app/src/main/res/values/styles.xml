@@ -41,6 +41,12 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
+    <style name="CollapsingToolbarLayoutExpandedTextStyleWhite">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
     <style name="CollapsingToolbarLayoutExpandedTextStyle">
         <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>

@@ -24,7 +24,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers"></activity>
+        <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.ShopKeeperUserDetails"></activity>
+        <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers" />
         <activity
             android:name="com.owoSuperAdmin.categoryManagement.brand.deleteBrand.DeleteBrand"
             android:screenOrientation="portrait" />
