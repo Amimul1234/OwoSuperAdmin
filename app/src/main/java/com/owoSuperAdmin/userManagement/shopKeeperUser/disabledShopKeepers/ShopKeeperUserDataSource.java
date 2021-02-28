@@ -4,14 +4,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
-
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.entity.ShopKeeperUser;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,7 +21,7 @@ public class ShopKeeperUserDataSource extends PageKeyedDataSource<Integer, ShopK
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getAllEnabledShopKeepers(FIRST_PAGE)
+                .getAllDisabledAccounts(FIRST_PAGE)
                 .enqueue(new Callback<List<ShopKeeperUser>>() {
                     @Override
                     public void onResponse(@NotNull Call<List<ShopKeeperUser>> call, @NotNull Response<List<ShopKeeperUser>> response) {
@@ -51,7 +47,7 @@ public class ShopKeeperUserDataSource extends PageKeyedDataSource<Integer, ShopK
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getAllEnabledShopKeepers(params.key)
+                .getAllDisabledAccounts(params.key)
                 .enqueue(new Callback<List<ShopKeeperUser>>() {
                     @Override
                     public void onResponse(@NotNull Call<List<ShopKeeperUser>> call, @NotNull Response<List<ShopKeeperUser>> response) {
@@ -78,7 +74,7 @@ public class ShopKeeperUserDataSource extends PageKeyedDataSource<Integer, ShopK
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getAllEnabledShopKeepers(params.key)
+                .getAllDisabledAccounts(params.key)
                 .enqueue(new Callback<List<ShopKeeperUser>>() {
                     @Override
                     public void onResponse(@NotNull Call<List<ShopKeeperUser>> call, @NotNull Response<List<ShopKeeperUser>> response) {

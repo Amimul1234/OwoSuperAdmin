@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.productsManagement.SearchedProducts;
 
@@ -23,7 +21,7 @@ public class AllDisabledShopKeepers extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_enabled_shop_keepers);
+        setContentView(R.layout.activity_all_disabled_shop_keepers);
 
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         allEnabledShopKeepers = findViewById(R.id.allEnabledShopKeepers);

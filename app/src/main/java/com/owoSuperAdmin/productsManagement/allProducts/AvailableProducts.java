@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,14 +42,12 @@ public class AvailableProducts extends AppCompatActivity implements View.OnClick
             getProducts();
             showOnRecyclerView();
         });
-
-
     }
 
 
     public void getProducts() {
-        productsAdapter = new ItemAdapter(this);
 
+        productsAdapter = new ItemAdapter(this);
         ItemViewModel itemViewModel = new ItemViewModel();
 
         itemViewModel.itemPagedList.observe(this, items -> {

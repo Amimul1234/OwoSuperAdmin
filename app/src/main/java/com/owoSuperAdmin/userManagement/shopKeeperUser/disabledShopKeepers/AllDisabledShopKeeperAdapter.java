@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.owoshop.R;
@@ -45,7 +43,8 @@ public class AllDisabledShopKeeperAdapter extends PagedListAdapter<ShopKeeperUse
 
         if (shopKeeperUser != null) {
 
-            Glide.with(mCtx).load(HostAddress.HOST_ADDRESS.getAddress()+shopKeeperUser.getImageUri()).into(holder.shopKeeperImage);
+            if(shopKeeperUser.getImageUri() != null)
+                Glide.with(mCtx).load(HostAddress.HOST_ADDRESS.getAddress()+shopKeeperUser.getImageUri()).into(holder.shopKeeperImage);
 
             holder.shopKeeperMobileNumber.setText(shopKeeperUser.getMobileNumber());
             holder.shopKeeperName.setText(shopKeeperUser.getName());

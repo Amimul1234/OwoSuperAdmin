@@ -147,6 +147,9 @@ public interface Api {
     @GET("/getAllEnabledShopKeepers")
     Call<List<ShopKeeperUser>> getAllEnabledShopKeepers(@Query("page") int page);
 
+    @GET("/getAllDisabledAccounts")
+    Call<List<ShopKeeperUser>> getAllDisabledAccounts(@Query("page") int page);
+
     @PUT("/disableShopKeeper")
     Call<ResponseBody> disableShopKeeper(@Query("mobileNumber") String mobileNumber);
 

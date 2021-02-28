@@ -32,6 +32,7 @@ import com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity
 import com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory;
 import com.owoSuperAdmin.ordersManagement.confirm_shop_orders;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers;
+import com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers.AllDisabledShopKeepers;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -294,7 +295,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 }
                 else if(which == 1)
                 {
-
+                    Intent intent = new Intent(context, AllDisabledShopKeepers.class);
+                    context.startActivity(intent);
                 }
             }));
 
