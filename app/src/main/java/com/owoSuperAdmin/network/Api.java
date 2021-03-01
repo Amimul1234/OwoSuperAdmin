@@ -153,6 +153,9 @@ public interface Api {
     @PUT("/disableShopKeeper")
     Call<ResponseBody> disableShopKeeper(@Query("mobileNumber") String mobileNumber);
 
+    @PUT("/enableShopKeeper")
+    Call<ResponseBody> enableShopKeeper(@Query("mobileNumber") String mobileNumber);
+
     @DELETE("/deleteShopKeeper")
     Call<ResponseBody> deleteShopKeeper(@Query("mobileNumber") String mobileNumber);
 

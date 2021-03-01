@@ -2,6 +2,7 @@ package com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.owoshop.R;
+import com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.ShopKeeperUserDetails;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.entity.ShopKeeperUser;
 
 import org.jetbrains.annotations.NotNull;
@@ -97,15 +99,11 @@ public class AllDisabledShopKeeperAdapter extends PagedListAdapter<ShopKeeperUse
 
         @Override
         public void onClick(View v) {
-            /*
-            OwoProduct owoProduct = getItem(getAdapterPosition());
+            ShopKeeperUser shopKeeperUser = getItem(getAdapterPosition());
 
-            Intent intent = new Intent(mCtx, ProductDetailsModification.class);
-            intent.putExtra("Products", owoProduct);
+            Intent intent = new Intent(mCtx, DisabledShopKeeperUserDetails.class);
+            intent.putExtra("shopKeeperDetails", shopKeeperUser);
             mCtx.startActivity(intent);
-
-             */
-
         }
     }
 

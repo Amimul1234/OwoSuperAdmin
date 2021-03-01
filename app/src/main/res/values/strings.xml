@@ -139,5 +139,6 @@
     <string name="delete_user">Delete User</string>
     <string name="do_action_on_user">Do Action On User</string>
     <string name="all_disabled_shop_keepers">All Disabled Shop Keepers</string>
+    <string name="enable_user">Enable User</string>
 
 </resources>
