@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static RetrofitClient mInstance;
-    private Retrofit retrofit;
+    private final Retrofit retrofit;
 
     private static final String AUTH = "Basic "+
             Base64.encodeToString(("owodokan:c711a757bd3a3d528dfade364e61fb5b8397dd074ef1ff7a68a6a285c18cb285").getBytes(), Base64.NO_WRAP);

@@ -90,6 +90,9 @@ public interface Api {
     @GET("/getAllCategories")
     Call<List<CategoryEntity>> getAllCategories();
 
+    @GET("/getCategoryListBasedOnId")
+    Call<List<String>> getCategoryListBasedOnId(@Query("categoryIds") List<Long> categoryIds);
+
     @PUT("/updateCategory")
     Call<ResponseBody> updateCategory(@Query("categoryId") Long categoryId, @Body CategoryEntity categoryEntity);
 
