@@ -216,6 +216,7 @@ public class AddAProduct extends AppCompatActivity {
                         if(response.isSuccessful())
                         {
                             progressBar.setVisibility(GONE);
+                            assert response.body() != null;
                             subCategoryEntityList.addAll(response.body());
                             addProductSubCategorySpinnerAdapter.notifyDataSetChanged();
                         }
@@ -316,6 +317,7 @@ public class AddAProduct extends AppCompatActivity {
                         if(response.isSuccessful())
                         {
                             try {
+                                assert response.body() != null;
                                 String path = response.body().string();
 
                                 OwoProduct owoProduct = new OwoProduct();

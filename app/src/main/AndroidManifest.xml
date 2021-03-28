@@ -24,7 +24,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers.DisabledShopKeeperUserDetails"></activity>
+        <activity android:name="com.owoSuperAdmin.shopManagement.allRegisteredShops.ApprovedShopDetails"></activity>
+        <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers.DisabledShopKeeperUserDetails" />
         <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.ShopKeeperUserDetails" />
         <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers" />
         <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers.AllDisabledShopKeepers" />

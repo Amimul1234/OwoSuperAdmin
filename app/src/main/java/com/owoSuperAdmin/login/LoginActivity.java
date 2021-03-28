@@ -20,7 +20,6 @@ import com.owoSuperAdmin.owoshop.R;
 import java.util.Objects;
 
 
-@SuppressWarnings("deprecation")
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email_address, password;

@@ -100,6 +100,7 @@ public class ApproveAPendingShop extends AppCompatActivity {
                         public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response) {
                             if(response.isSuccessful())
                             {
+                                assert response.body() != null;
                                 req_category_1.setText(response.body().get(0));
                                 checkbox2.setVisibility(View.GONE);
                                 checkBox3.setVisibility(View.GONE);
@@ -131,6 +132,7 @@ public class ApproveAPendingShop extends AppCompatActivity {
                         public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response) {
                             if(response.isSuccessful())
                             {
+                                assert response.body() != null;
                                 req_category_1.setText(response.body().get(0));
                                 req_category_2.setText(response.body().get(1));
                                 checkBox3.setVisibility(View.GONE);
@@ -164,6 +166,7 @@ public class ApproveAPendingShop extends AppCompatActivity {
                         public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response) {
                             if(response.isSuccessful())
                             {
+                                assert response.body() != null;
                                 req_category_1.setText(response.body().get(0));
                                 req_category_2.setText(response.body().get(1));
                                 req_category_3.setText(response.body().get(2));
