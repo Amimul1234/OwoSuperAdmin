@@ -18,7 +18,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.owoSuperAdmin.adminHomePanel.HomeActivity;
-import com.owoSuperAdmin.adminManagement.entity.SemiAdmins;
 import com.owoSuperAdmin.owoshop.R;
 
 public class UpdateSemiAdminActivity extends AppCompatActivity {
@@ -54,7 +53,7 @@ public class UpdateSemiAdminActivity extends AppCompatActivity {
 
 
         final SemiAdmins semiAdmins = (SemiAdmins) getIntent().
-                getSerializableExtra("Semi Admin");//Getting the required class from the SemiAdminActivity
+                getSerializableExtra("Semi Admin");//Getting the required class from the AdminRegisterActivity
 
 
         Glide.with(UpdateSemiAdminActivity.this).load(semiAdmins.getProfileImage()).into(admin_profile_pic);

@@ -16,10 +16,12 @@
         <item>User Management</item>
         <item>Order Management</item>
     </string-array>
+
     <string-array name="offer_is_for">
         <item>ShopKeeper</item>
         <item>Consumer</item>
     </string-array>
+
     <string name="title_activity_location_from_map">Map</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
@@ -140,5 +142,11 @@
     <string name="do_action_on_user">Do Action On User</string>
     <string name="all_disabled_shop_keepers">All Disabled Shop Keepers</string>
     <string name="enable_user">Enable User</string>
+    <string name="shopkpr">ShopKPR</string>
+    <string name="semi_admin">Semi Admin</string>
+    <string name="semi_admins">Semi Admins</string>
+    <string name="admin_name">Admin Name</string>
+    <string name="admin_email_address">Admin Email Address</string>
+    <string name="all_admins">All Admins</string>
 
 </resources>

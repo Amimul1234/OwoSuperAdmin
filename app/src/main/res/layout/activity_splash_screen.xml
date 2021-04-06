@@ -8,14 +8,14 @@
     tools:context="com.owoSuperAdmin.login.Splash_screen">
 
     <ImageView
-        android:id="@+id/splash_logo"
+        android:id="@+id/shop"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/logo1"
+        android:src="@drawable/shopkpr_logo"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

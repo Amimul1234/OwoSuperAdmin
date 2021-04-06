@@ -192,7 +192,7 @@
             android:name="com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.adminManagement.SemiAdminActivity"
+            android:name="com.owoSuperAdmin.adminManagement.AdminRegisterActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.owoSuperAdmin.login.LoginActivity"

@@ -1,5 +1,6 @@
 package com.owoSuperAdmin.network;
 
+import com.owoSuperAdmin.adminManagement.entity.AdminLogin;
 import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
@@ -23,6 +24,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Api {
+
     //Shops Management
     @POST("/approveShop")
     Call<Shops> approveShop(@Body Shops shops);
@@ -161,5 +163,9 @@ public interface Api {
 
     @DELETE("/deleteShopKeeper")
     Call<ResponseBody> deleteShopKeeper(@Query("mobileNumber") String mobileNumber);
+
+    //admin management
+    @GET("/admin/adminLogin/v1/getAllAdminInfo/")
+    Call<List<AdminLogin>> getAllAdmins();
 
 }
