@@ -16,7 +16,12 @@ import com.owoSuperAdmin.adminManagement.entity.AdminLoginWrapper;
 import com.owoSuperAdmin.adminManagement.entity.AdminPermissions;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
+import com.owoSuperAdmin.utilities.PasswordHashing;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import okhttp3.ResponseBody;
@@ -152,7 +157,8 @@ public class CreateNewAdminActivity extends AppCompatActivity {
 
         adminLogin.setAdminName(adminName.getText().toString());
         adminLogin.setAdminEmailAddress(adminEmailAddress.getText().toString());
-        adminLogin.setAdminPassword(adminPassword.getText().toString());
+
+        adminLogin.setAdminPassword(PasswordHashing.sha256(adminPassword.getText().toString()));
 
         List<AdminPermissions> adminPermissionsList = new ArrayList<>();
 
@@ -200,4 +206,5 @@ public class CreateNewAdminActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }
