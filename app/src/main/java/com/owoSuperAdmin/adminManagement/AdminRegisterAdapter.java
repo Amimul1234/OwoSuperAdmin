@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.adminManagement.entity;
+package com.owoSuperAdmin.adminManagement;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.owoSuperAdmin.adminManagement.entity.AdminLogin;
 import com.owoSuperAdmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class AdminRegisterAdapter extends RecyclerView.Adapter<AdminRegisterAdapter.ViewHolder> {
 
-    private List<AdminLogin> adminLoginList;
+    private final List<AdminLogin> adminLoginList;
     private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 

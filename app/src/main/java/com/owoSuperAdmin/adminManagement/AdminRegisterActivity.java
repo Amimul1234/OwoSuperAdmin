@@ -6,7 +6,6 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.owoSuperAdmin.adminManagement.entity.AdminLogin;
-import com.owoSuperAdmin.adminManagement.entity.AdminRegisterAdapter;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
@@ -48,14 +47,13 @@ public class AdminRegisterActivity extends AppCompatActivity {
                         {
                             adminLoginList.addAll(response.body());
                             adminRegisterAdapter.notifyDataSetChanged();
-                            progressDialog.dismiss();
                         }
                         else
                         {
                             Toast.makeText(AdminRegisterActivity.this, "Can not get admin data, " +
                                     "please try again", Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
                         }
+                        progressDialog.dismiss();
                     }
 
                     @Override

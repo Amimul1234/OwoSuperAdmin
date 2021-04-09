@@ -210,7 +210,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateNewAdminActivity"
+            android:name="com.owoSuperAdmin.adminManagement.CreateNewAdminActivity"
             android:screenOrientation="portrait" />
 
         <provider

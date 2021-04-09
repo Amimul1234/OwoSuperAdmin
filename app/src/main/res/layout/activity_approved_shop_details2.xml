@@ -298,7 +298,7 @@
                 android:id="@+id/approve_shop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/approve_shop"
+                android:text="@string/semiShop"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:background="@drawable/buttons_blue"

@@ -22,7 +22,7 @@ import com.owoSuperAdmin.owoshop.AddATimeSlot;
 import com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity;
 import com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity;
 import com.owoSuperAdmin.owoshop.CloudMessagingActivity;
-import com.owoSuperAdmin.owoshop.CreateNewAdminActivity;
+import com.owoSuperAdmin.adminManagement.CreateNewAdminActivity;
 import com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity;
 import com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops;
 import com.owoSuperAdmin.productsManagement.allProducts.AvailableProducts;

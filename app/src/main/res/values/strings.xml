@@ -3,10 +3,6 @@
     <string name="maps_api_key">AIzaSyDX6YQ4dRErpb5muuAg0vtBHIK9o20iDns</string>
 
 
-    <string name="product_dalali">
-        Owo Dokan Products are first class in terms of quality as well as price. Owo ensures you
-        to get best price</string>
-
     <string-array name="adminPanelItems">
         <item>Admin Management</item>
         <item>Shop Management</item>
@@ -24,7 +20,6 @@
 
     <string name="title_activity_location_from_map">Map</string>
     <string name="email_address">Email Address</string>
-    <string name="password">Password</string>
     <string name="log_in">Log In</string>
     <string name="logo">Logo</string>
     <string name="see_password">See Password</string>
@@ -46,7 +41,7 @@
     <string name="requested_categories">Requested Categories:</string>
     <string name="shop_keeper_trade_license_image">Shop Keeper Trade License Image</string>
     <string name="see_in_map">See Shop Address In Map</string>
-    <string name="approve_shop">Approve Shop</string>
+    <string name="semiShop">Approve Shop</string>
     <string name="shop_approval">Shop Approval Requests</string>
     <string name="no_requests_image">No Requests Image</string>
     <string name="back_to_main_admin_panel">Back To Main Admin Panel</string>
@@ -148,5 +143,18 @@
     <string name="admin_name">Admin Name</string>
     <string name="admin_email_address">Admin Email Address</string>
     <string name="all_admins">All Admins</string>
+    <string name="admin_s_name">Admin Name</string>
+    <string name="admin_s_email_address">Admin Email Address</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="admin_accesses">Admin accesses</string>
+    <string name="admin_registration">Admin Registration</string>
+    <string name="shop_management">Shop Management</string>
+    <string name="product_management">Product Management</string>
+    <string name="offer_management">Offer Management</string>
+    <string name="user_management">User Management</string>
+    <string name="order_management">Order Management</string>
+    <string name="create_admin">Create admin</string>
+    <string name="show_password">Show password</string>
 
 </resources>
