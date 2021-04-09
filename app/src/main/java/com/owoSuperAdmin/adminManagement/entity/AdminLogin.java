@@ -61,6 +61,6 @@ public class AdminLogin {
     }
 
     public void setAdminPermissionsList(List<AdminPermissions> adminPermissionsList) {
-        this.adminPermissionsList = adminPermissionsList;
+        this.adminPermissionsList.addAll(adminPermissionsList);
     }
 }

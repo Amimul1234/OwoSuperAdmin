@@ -1,6 +1,8 @@
 package com.owoSuperAdmin.network;
 
 import com.owoSuperAdmin.adminManagement.entity.AdminLogin;
+import com.owoSuperAdmin.adminManagement.entity.AdminLoginWrapper;
+import com.owoSuperAdmin.adminManagement.entity.AdminPermissions;
 import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
@@ -167,5 +169,8 @@ public interface Api {
     //admin management
     @GET("/admin/adminLogin/v1/getAllAdminInfo/")
     Call<List<AdminLogin>> getAllAdmins();
+
+    @POST("/admin/adminLogin/v1/addAnAdmin")
+    Call<ResponseBody> addAnAdmin(@Body AdminLoginWrapper adminLoginWrapper);
 
 }
