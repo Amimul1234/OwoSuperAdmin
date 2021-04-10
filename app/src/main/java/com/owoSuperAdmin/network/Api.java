@@ -181,4 +181,7 @@ public interface Api {
 
     @DELETE("/admin/adminLogin/v1/deleteAdmin")
     Call<ResponseBody> deleteAdmin(@Query("adminId") Integer adminId);
+
+    @GET("/admin/adminLogin/v1/getAdminInfo")
+    Call<AdminLoginWrapper> getAdminCredential(@Query("adminEmailAddress") String adminEmailAddress);
 }
