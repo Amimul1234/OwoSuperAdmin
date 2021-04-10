@@ -7,17 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.owoSuperAdmin.adminHomePanel.HomeActivity;
 import com.owoSuperAdmin.owoshop.R;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -33,9 +30,9 @@ public class QuponActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qupon);
 
-        quponCode=(EditText)findViewById(R.id.qupon_code);
-        quponDiscount=(EditText)findViewById(R.id.qupon_discount);
-        createQuponBtn=(Button)findViewById(R.id.create_qupon_btn);
+        quponCode = findViewById(R.id.qupon_code);
+        quponDiscount = findViewById(R.id.qupon_discount);
+        createQuponBtn = findViewById(R.id.create_qupon_btn);
 
 
         createQuponBtn.setOnClickListener(new View.OnClickListener() {
