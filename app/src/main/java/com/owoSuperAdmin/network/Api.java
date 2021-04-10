@@ -173,4 +173,10 @@ public interface Api {
     @POST("/admin/adminLogin/v1/addAnAdmin")
     Call<ResponseBody> addAnAdmin(@Body AdminLoginWrapper adminLoginWrapper);
 
+    @GET("/admin/adminLogin/v1/getAdminPermissions")
+    Call<List<AdminPermissions>> getAdminAllPermissions(@Query("adminId") Integer adminId);
+
+    @PUT("/admin/adminLogin/v1/updateAdminPermission")
+    Call<ResponseBody> updateAdminPermissions(@Body AdminLoginWrapper adminLoginWrapper);
+
 }

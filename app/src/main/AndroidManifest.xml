@@ -24,7 +24,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name="com.owoSuperAdmin.shopManagement.allRegisteredShops.ApprovedShopDetails"></activity>
+        <activity android:name="com.owoSuperAdmin.adminManagement.DeleteAdmin"></activity>
+        <activity android:name="com.owoSuperAdmin.shopManagement.allRegisteredShops.ApprovedShopDetails" />
         <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers.DisabledShopKeeperUserDetails" />
         <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.ShopKeeperUserDetails" />
         <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers" />
@@ -186,13 +187,13 @@
             android:name="com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.adminManagement.UpdateSemiAdminActivity"
+            android:name="com.owoSuperAdmin.adminManagement.UpdateAdminData"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.adminManagement.AdminRegisterActivity"
+            android:name="com.owoSuperAdmin.adminManagement.AllAdmins"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.owoSuperAdmin.login.LoginActivity"

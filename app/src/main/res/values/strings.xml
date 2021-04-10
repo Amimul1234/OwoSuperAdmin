@@ -156,5 +156,8 @@
     <string name="order_management">Order Management</string>
     <string name="create_admin">Create admin</string>
     <string name="show_password">Show password</string>
+    <string name="update_admin_info">Update Admin Info</string>
+    <string name="update_admin_data">Update Admin Data</string>
+    <string name="admin_image">admin image</string>
 
 </resources>

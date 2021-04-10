@@ -1,9 +1,10 @@
 package com.owoSuperAdmin.adminManagement.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminLogin {
+public class AdminLogin implements Serializable {
 
     private Integer adminId;
     private String adminName;

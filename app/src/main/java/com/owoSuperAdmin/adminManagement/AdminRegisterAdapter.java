@@ -1,14 +1,14 @@
 package com.owoSuperAdmin.adminManagement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.owoSuperAdmin.adminManagement.entity.AdminLogin;
@@ -20,10 +20,11 @@ public class AdminRegisterAdapter extends RecyclerView.Adapter<AdminRegisterAdap
 
     private final List<AdminLogin> adminLoginList;
     private final LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private final Context mctx;
 
     public AdminRegisterAdapter(Context context, List<AdminLogin> adminLoginList) {
         this.mInflater = LayoutInflater.from(context);
+        mctx = context;
         this.adminLoginList = adminLoginList;
     }
 
@@ -55,7 +56,8 @@ public class AdminRegisterAdapter extends RecyclerView.Adapter<AdminRegisterAdap
         return adminLoginList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
         ImageView adminLetterImage;
         TextView adminName;
         TextView adminEmail;
@@ -68,24 +70,37 @@ public class AdminRegisterAdapter extends RecyclerView.Adapter<AdminRegisterAdap
             adminName = itemView.findViewById(R.id.semi_admin_name);
             adminEmail = itemView.findViewById(R.id.adminEmailAddress);
 
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(v -> {
+
+                AdminLogin adminLogin = adminLoginList.get(getAdapterPosition());
+
+                CharSequence[] adminOptions = new CharSequence[] {"Update Data", "Delete Admin"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mctx);
+                builder.setTitle("Admin Data");
+
+                builder.setItems(adminOptions, (dialog, i) -> {
+                    switch (i)
+                    {
+                        case 0:
+                        {
+                            Intent intent = new Intent(mctx, UpdateAdminData.class);
+                            intent.putExtra("adminLogin", adminLogin);
+                            mctx.startActivity(intent);
+                            break;
+                        }
+                        case 1:
+                        {
+                            Intent intent = new Intent(mctx, DeleteAdmin.class);
+                            intent.putExtra("adminLogin", adminLogin);
+                            mctx.startActivity(intent);
+                            break;
+                        }
+                    }
+                });
+
+                builder.show();
+            });
         }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
-    }
-
-    AdminLogin getItem(int id) {
-        return adminLoginList.get(id);
-    }
-
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }

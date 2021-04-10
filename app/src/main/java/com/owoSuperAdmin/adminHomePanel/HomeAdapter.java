@@ -11,6 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.owoSuperAdmin.adminManagement.AdminRegisterAdapter;
+import com.owoSuperAdmin.adminManagement.AllAdmins;
+import com.owoSuperAdmin.adminManagement.DeleteAdmin;
+import com.owoSuperAdmin.adminManagement.UpdateAdminData;
 import com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand;
 import com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllCategories;
 import com.owoSuperAdmin.categoryManagement.category.AddNewCategory;
@@ -88,8 +93,30 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
     private void takeNecessaryActions(int position) {
         if (position==0) //Admin management
         {
-            Intent intent=new Intent(context, CreateNewAdminActivity.class);
-            context.startActivity(intent);
+            CharSequence[] adminOptions = new CharSequence[] {"Register a new admin","All Admins"};
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Admin Management");
+
+            builder.setItems(adminOptions, (dialog, i) -> {
+                switch (i)
+                {
+                    case 0:
+                    {
+                        Intent intent = new Intent(context, CreateNewAdminActivity.class);
+                        context.startActivity(intent);
+                        break;
+                    }
+                    case 1:
+                    {
+                        Intent intent = new Intent(context, AllAdmins.class);
+                        context.startActivity(intent);
+                        break;
+                    }
+                }
+            });
+
+            builder.show();
         }
         else if (position == 1) //Shops management
         {
