@@ -35,8 +35,8 @@ public class CreateNewAdminActivity extends AppCompatActivity {
 
     private EditText adminName, adminEmailAddress, adminPassword, adminConfirmPassword;
 
-    private SwitchMaterial approveShop, shopManagement, productManagement,
-        offerManagement, userManagement, orderManagement;
+    private SwitchMaterial adminManagement, shopManagement, productManagement,
+        offerManagement, categoryManagement, userManagement, orderManagement;
 
     private ProgressBar progressBar;
 
@@ -57,12 +57,13 @@ public class CreateNewAdminActivity extends AppCompatActivity {
         showPassword = findViewById(R.id.show_password);
         showConfirmPassword = findViewById(R.id.show_confirmed_password);
 
-        approveShop = findViewById(R.id.approve_shop);
+        adminManagement = findViewById(R.id.admin_management);
         shopManagement = findViewById(R.id.shop_management);
         productManagement = findViewById(R.id.product_management);
         offerManagement = findViewById(R.id.offer_management);
         userManagement = findViewById(R.id.user_management);
         orderManagement = findViewById(R.id.order_management);
+        categoryManagement = findViewById(R.id.category_management);
 
         progressBar = findViewById(R.id.complete_progress);
 
@@ -132,14 +133,16 @@ public class CreateNewAdminActivity extends AppCompatActivity {
     }
 
     private void checkPermissionSwitches() {
-        if(approveShop.isChecked())
-            permissionList.add("Approve Shop");
+        if(adminManagement.isChecked())
+            permissionList.add("Admin Management");
         if(shopManagement.isChecked())
             permissionList.add("Shop Management");
         if(productManagement.isChecked())
             permissionList.add("Product Management");
         if(offerManagement.isChecked())
             permissionList.add("Offer Management");
+        if(categoryManagement.isChecked())
+            permissionList.add("Category Management");
         if(userManagement.isChecked())
             permissionList.add("User Management");
         if(orderManagement.isChecked())

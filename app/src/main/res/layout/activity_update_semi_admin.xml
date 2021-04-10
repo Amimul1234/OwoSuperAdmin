@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.owoSuperAdmin.adminManagement.CreateNewAdminActivity">
+    tools:context="com.owoSuperAdmin.adminManagement.UpdateAdminData">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
@@ -122,11 +122,11 @@
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/semiShop"
+                    android:text="@string/admin_management"
                     android:textSize="20sp" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/approve_shop"
+                    android:id="@+id/admin_management"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -206,15 +206,38 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/linear5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/linear4">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_management"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/category_management"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/linear4">
+                android:layout_below="@id/linear5">
 
                 <TextView
                     android:layout_width="250dp"
@@ -231,13 +254,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear6"
+                android:id="@+id/linear7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@+id/linear5">
+                android:layout_below="@+id/linear6">
 
                 <TextView
                     android:layout_width="250dp"
@@ -253,6 +276,7 @@
 
             </LinearLayout>
 
+
             <Button
                 android:id="@+id/update_admin_data"
                 android:layout_width="match_parent"
@@ -262,7 +286,7 @@
                 android:textSize="22sp"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center"
-                android:layout_below="@id/linear6"
+                android:layout_below="@id/linear7"
                 android:layout_marginTop="40dp"
                 />
 

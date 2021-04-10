@@ -179,4 +179,6 @@ public interface Api {
     @PUT("/admin/adminLogin/v1/updateAdminPermission")
     Call<ResponseBody> updateAdminPermissions(@Body AdminLoginWrapper adminLoginWrapper);
 
+    @DELETE("/admin/adminLogin/v1/deleteAdmin")
+    Call<ResponseBody> deleteAdmin(@Query("adminId") Integer adminId);
 }

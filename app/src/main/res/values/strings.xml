@@ -159,5 +159,8 @@
     <string name="update_admin_info">Update Admin Info</string>
     <string name="update_admin_data">Update Admin Data</string>
     <string name="admin_image">admin image</string>
+    <string name="delete_admin">Delete Admin</string>
+    <string name="admin_management">Admin Management</string>
+    <string name="category_management">Category Management</string>
 
 </resources>

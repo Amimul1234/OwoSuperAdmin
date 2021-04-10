@@ -30,8 +30,8 @@ public class UpdateAdminData extends AppCompatActivity {
 
     private AdminLogin adminLogin;
 
-    private SwitchMaterial approveShop, shopManagement, productManagement, offerManagement,
-        userManagement, orderManagement;
+    private SwitchMaterial adminManagement, shopManagement, productManagement, offerManagement,
+        categoryManagement, userManagement, orderManagement;
 
     private EditText newAdminName, newAdminEmail;
     private ProgressDialog progressDialog;
@@ -59,10 +59,11 @@ public class UpdateAdminData extends AppCompatActivity {
 
         adminImage.setImageDrawable(textDrawable);
 
-        approveShop = findViewById(R.id.approve_shop);
+        adminManagement = findViewById(R.id.admin_management);
         shopManagement = findViewById(R.id.shop_management);
         productManagement = findViewById(R.id.product_management);
         offerManagement = findViewById(R.id.offer_management);
+        categoryManagement = findViewById(R.id.category_management);
         userManagement = findViewById(R.id.user_management);
         orderManagement = findViewById(R.id.order_management);
 
@@ -77,7 +78,6 @@ public class UpdateAdminData extends AppCompatActivity {
         progressDialog.show();
 
         fetchPermissionsData();
-
 
         backToHome.setOnClickListener(v -> onBackPressed());
 
@@ -103,14 +103,16 @@ public class UpdateAdminData extends AppCompatActivity {
     }
 
     private void checkPermissionSwitches() {
-        if(approveShop.isChecked())
-            permissionList.add("Approve Shop");
+        if(adminManagement.isChecked())
+            permissionList.add("Admin Management");
         if(shopManagement.isChecked())
             permissionList.add("Shop Management");
         if(productManagement.isChecked())
             permissionList.add("Product Management");
         if(offerManagement.isChecked())
             permissionList.add("Offer Management");
+        if(categoryManagement.isChecked())
+            permissionList.add("Category Management");
         if(userManagement.isChecked())
             permissionList.add("User Management");
         if(orderManagement.isChecked())
@@ -181,6 +183,7 @@ public class UpdateAdminData extends AppCompatActivity {
                     public void onResponse(@NotNull Call<List<AdminPermissions>> call, @NotNull Response<List<AdminPermissions>> response) {
                         if(response.isSuccessful())
                         {
+                            assert response.body() != null;
                             turnOnSwitches(response.body());
                         }
                         else
@@ -212,14 +215,16 @@ public class UpdateAdminData extends AppCompatActivity {
             permissionsList.add(adminPermissionsList.get(i).getPermission());
         }
 
-        if(permissionsList.contains("Approve Shop"))
-            approveShop.setChecked(true);
+        if(permissionsList.contains("Admin Management"))
+            adminManagement.setChecked(true);
         if(permissionsList.contains("Shop Management"))
             shopManagement.setChecked(true);
         if(permissionsList.contains("Product Management"))
             productManagement.setChecked(true);
         if(permissionsList.contains("Offer Management"))
             offerManagement.setChecked(true);
+        if(permissionsList.contains("Category Management"))
+            categoryManagement.setChecked(true);
         if(permissionsList.contains("User Management"))
             userManagement.setChecked(true);
         if(permissionsList.contains("Order Management"))
