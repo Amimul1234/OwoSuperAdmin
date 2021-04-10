@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.owoSuperAdmin.adminManagement.entity.AdminLogin;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
@@ -90,5 +89,9 @@ public class AllAdmins extends AppCompatActivity {
                 });
     }
 
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadAdminData();
+    }
 }

@@ -49,6 +49,7 @@ public class UpdateAdminData extends AppCompatActivity {
 
         newAdminName = findViewById(R.id.new_admin_name);
         newAdminEmail = findViewById(R.id.admin_email_address);
+
         ImageView adminImage = findViewById(R.id.admin_image);
 
         ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
@@ -115,14 +116,13 @@ public class UpdateAdminData extends AppCompatActivity {
         if(orderManagement.isChecked())
             permissionList.add("Order Management");
 
+        adminLogin.setAdminEmailAddress(newAdminEmail.getText().toString());
+        adminLogin.setAdminName(newAdminName.getText().toString());
+
         addToDataBase();
     }
 
     private void addToDataBase() {
-
-        adminLogin.setAdminEmailAddress(newAdminEmail.getText().toString());
-        adminLogin.setAdminName(newAdminName.getText().toString());
-
         List<AdminPermissions> adminPermissionsList = new ArrayList<>();
 
         for(int i=0; i<permissionList.size(); i++)
