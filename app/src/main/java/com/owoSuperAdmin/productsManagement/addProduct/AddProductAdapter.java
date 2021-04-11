@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.owoshop.R;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -4,23 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
-import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
-import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategoriesAdapter;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +40,12 @@ public class DeleteSubCategoryAllCategories extends AppCompatActivity {
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
 
-        swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
+        swipeRefreshLayout.setOnRefreshListener(()->
+        {
+            getCategoryData();
+            showRecycler();
+        });
+
 
         deleteRecyclerView.setHasFixedSize(true);
 
@@ -64,7 +62,6 @@ public class DeleteSubCategoryAllCategories extends AppCompatActivity {
                     public void onResponse(@NotNull Call<List<CategoryEntity>> call, @NotNull Response<List<CategoryEntity>> response) {
                         if(response.isSuccessful())
                         {
-
                             assert response.body() != null;
                             categoryEntities.addAll(response.body());
                             deleteSubCategoryAllCategoriesAdapter.notifyDataSetChanged();
@@ -83,7 +80,6 @@ public class DeleteSubCategoryAllCategories extends AppCompatActivity {
                     }
                 });
     }
-
 
     private void showRecycler() {
         deleteSubCategoryAllCategoriesAdapter = new DeleteSubCategoryAllCategoriesAdapter(DeleteSubCategoryAllCategories.this, categoryEntities);

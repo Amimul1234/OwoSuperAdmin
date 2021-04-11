@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.owoSuperAdmin.categoryManagement.brand.deleteBrand.DeleteBrand">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue"
+        >
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24_white"
+            android:contentDescription="@string/back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_brand"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/categoryImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/edit_text_black"
+        android:src="@drawable/category_management"
+        android:contentDescription="@string/category_image" />
+
+
+    <TextView
+        android:id="@+id/categoryName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/categoryImage"
+        android:paddingStart="15dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_text_black"
+        android:textAlignment="textStart"
+        />
+
+    <ProgressBar
+        android:id="@+id/categoryDeleteProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/categoryName"
+        android:indeterminateTint="@color/blue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/deleteCategoryDetails"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/categoryDeleteProgressBar"
+        android:background="@drawable/buttons_blue"
+        android:layout_margin="20dp"
+        android:text="@string/delete_brand"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

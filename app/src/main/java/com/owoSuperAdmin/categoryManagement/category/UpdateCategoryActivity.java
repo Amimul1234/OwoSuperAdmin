@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.network.RetrofitClient;
@@ -63,7 +64,9 @@ public class UpdateCategoryActivity extends AppCompatActivity {
         backButton.setOnClickListener(v -> onBackPressed());
 
         categoryName.setText(categoryEntity.getCategoryName());
-        Glide.with(this).load(HostAddress.HOST_ADDRESS.getAddress()+categoryEntity.getCategoryImage()).into(categoryImage);
+
+        Glide.with(this).load(HostAddress.HOST_ADDRESS.getAddress()+categoryEntity.getCategoryImage())
+                .diskCacheStrategy(DiskCacheStrategy.ALL).timeout(6000).into(categoryImage);
 
         categoryImage.setOnClickListener(v -> requestStoragePermission());
 

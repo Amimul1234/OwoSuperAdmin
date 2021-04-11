@@ -41,7 +41,7 @@
         android:contentDescription="@string/category_image" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/subCategoryName"
         android:layout_width="match_parent"
         android:layout_height="50dp"

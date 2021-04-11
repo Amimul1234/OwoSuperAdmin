@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/white"
-    tools:context="com.owoSuperAdmin.productsManagement.PreViewProductDetails">
+    tools:context="com.owoSuperAdmin.productsManagement.addProduct.PreViewProductDetails">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_preview"
@@ -259,7 +259,7 @@
                 android:id="@+id/product_preview_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/mobile_description"
+                android:text="@string/product_description"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"

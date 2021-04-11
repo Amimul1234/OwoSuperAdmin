@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.owoshop.R;
+import com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop;
 import com.owoSuperAdmin.shopManagement.entity.Shops;
 import com.owoSuperAdmin.utilities.NetworkState;
 import org.jetbrains.annotations.NotNull;
@@ -156,13 +157,12 @@ public class RegisteredShopAdapter extends PagedListAdapter<Shops, RecyclerView.
             shopImage = itemView.findViewById(R.id.shopImage);
 
             itemView.setOnClickListener(v -> {
+
                 Shops shops = getItem(getAdapterPosition());
-                /*
-                Intent intent = new Intent(mCtx, ApproveAPendingShop.class);
+
+                Intent intent = new Intent(mCtx, ApprovedShopDetails.class);
                 intent.putExtra("ShopRequest", shops);
                 mCtx.startActivity(intent);
-
-                 */
             });
         }
     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
@@ -14,20 +15,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth;
 import com.owoSuperAdmin.adminHomePanel.HomeActivity;
+import com.owoSuperAdmin.adminManagement.entity.AdminLoginWrapper;
+import com.owoSuperAdmin.adminManagement.entity.AdminPermissions;
+import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
-import java.util.Objects;
+import com.owoSuperAdmin.utilities.PasswordHashing;
+import org.jetbrains.annotations.NotNull;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-
-@SuppressWarnings("deprecation")
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email_address, password;
-    private FirebaseAuth mAuth;
     private ImageView visibility;
     private Boolean isShowPassword = false;
-    public static String login_password;
+    public String login_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         email_address = findViewById(R.id.admin_email_address);
         password = findViewById(R.id.admin_password);
         visibility = findViewById(R.id.show_password);
-        mAuth = FirebaseAuth.getInstance();
 
         loginButton.setOnClickListener(v -> verify());
 
@@ -94,29 +97,63 @@ public class LoginActivity extends AppCompatActivity {
         {
             ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
             progressDialog.setTitle("Sing In");
-            progressDialog.setMessage("Signing In...please wait");
+            progressDialog.setMessage("Signing in...please wait");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
-            mAuth.signInWithEmailAndPassword(email, login_password)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
+            loginCheck(email, PasswordHashing.sha256(login_password), progressDialog);
 
-                            progressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this, "Log in successful", Toast.LENGTH_SHORT).show();
-
-                            Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            finish();
-                            startActivity(intent);
-
-                        } else {
-                            progressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
-                        }
-
-                    });
         }
+    }
+
+    private void loginCheck(String email, String login_password, ProgressDialog progressDialog)
+    {
+        RetrofitClient.getInstance().getApi()
+                .getAdminCredential(email)
+                .enqueue(new Callback<AdminLoginWrapper>() {
+                    @Override
+                    public void onResponse(@NotNull Call<AdminLoginWrapper> call, @NotNull Response<AdminLoginWrapper> response) {
+                        if(response.isSuccessful())
+                        {
+                            AdminLoginWrapper adminLoginWrapper = response.body();
+
+                            assert adminLoginWrapper != null;
+                            if(login_password.equals(adminLoginWrapper.getAdminLogin().getAdminPassword()))
+                            {
+                                progressDialog.dismiss();
+
+                                Toast.makeText(LoginActivity.this, "Log in successful", Toast.LENGTH_SHORT).show();
+
+                                AdminCredentials.adminName = adminLoginWrapper.getAdminLogin().getAdminName();
+                                AdminCredentials.adminPassword = adminLoginWrapper.getAdminLogin().getAdminPassword();
+
+                                for(AdminPermissions adminPermissions : adminLoginWrapper.getAdminPermissionsList())
+                                {
+                                    AdminCredentials.adminPermissionList.add(adminPermissions.getPermission());
+                                }
+
+                                Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                finish();
+                                startActivity(intent);
+                            }
+
+                            else
+                            {
+                                progressDialog.dismiss();
+                                Toast.makeText(LoginActivity.this, "Password didn't match", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<AdminLoginWrapper> call, @NotNull Throwable t) {
+                        progressDialog.dismiss();
+                        Log.e("Login", "Error while logging in, Error is: "+t.getMessage());
+                        Toast.makeText(LoginActivity.this, "Error occurred while logging in", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

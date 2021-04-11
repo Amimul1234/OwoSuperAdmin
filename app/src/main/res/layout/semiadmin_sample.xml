@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp"
     android:layout_margin="5dp"
@@ -11,16 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dp"
-        android:background="@drawable/edittext_design">
+        android:gravity="center">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/semi_admin_profile_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/colorPrimary"
             android:scaleType="centerCrop"
             android:src="@drawable/person"/>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,29 +31,32 @@
                 android:id="@+id/semi_admin_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Amimul Ehsan Rahi"
+                android:text="@string/admin_name"
                 android:maxLines="1"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:fontFamily="@font/ethnocentric"
+                android:textAlignment="textStart"
                 android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
                 />
 
             <TextView
-                android:id="@+id/semi_admin_mobile_number"
+                android:id="@+id/adminEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/semi_admin_name"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:textAlignment="center"
-                android:fontFamily="@font/ethnocentric"
-                android:text="01731304074"
-                android:layout_marginTop="10dp"/>
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginStart="5dp"
+                android:text="@string/admin_email_address"/>
 
         </RelativeLayout>
 

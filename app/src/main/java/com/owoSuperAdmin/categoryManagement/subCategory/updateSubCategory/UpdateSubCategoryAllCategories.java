@@ -40,7 +40,10 @@ public class UpdateSubCategoryAllCategories extends AppCompatActivity {
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
 
-        swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
+        swipeRefreshLayout.setOnRefreshListener(()->{
+            getCategoryData();
+            showRecycler();
+        });
 
         updateRecyclerView.setHasFixedSize(true);
 
@@ -66,7 +69,6 @@ public class UpdateSubCategoryAllCategories extends AppCompatActivity {
                         {
                             Toast.makeText(getApplicationContext(), "No more categories", Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                     @Override

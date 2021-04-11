@@ -33,8 +33,14 @@ public class ShopCreationRequestsActivity extends AppCompatActivity {
 
         getShops();
 
-        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
+        swipeRefreshLayout.setOnRefreshListener(()->{
+            getShops();
+            showOnRecyclerView();
+        });
+
         swipeRefreshLayout.setOnRefreshListener(this::getShops);
+
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
     }
 
     private void getShops() {
@@ -59,5 +65,11 @@ public class ShopCreationRequestsActivity extends AppCompatActivity {
         shopApprovalRequestRecyclerView.setAdapter(shopRequestsAdapter);
         shopRequestsAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getShops();
     }
 }

@@ -3,38 +3,6 @@
     <string name="maps_api_key">AIzaSyDX6YQ4dRErpb5muuAg0vtBHIK9o20iDns</string>
 
 
-    <string name="product_dalali">
-        Owo Dokan Products are first class in terms of quality as well as price. Owo ensures you
-        to get best price</string>
-
-    <string name="mobile_description">Cell phone redirects here. For the film, see Cell Phone (film).
-        Handphone redirects here. For the film, see Handphone (film).
-        For the modern mobile phone, see Smartphone.
-
-        Evolution of mobile phones, to an early smartphone
-        A mobile phone, cellular phone, cell phone, cellphone
-        or hand phone, sometimes shortened to simply mobile,
-        cell or just phone, is a portable telephone that can
-        make and receive calls over a radio frequency link
-        while the user is moving within a telephone service area.
-        The radio frequency link establishes a connection to the
-        switching systems of a mobile phone operator,
-        which provides access to the public switched telephone
-        network (PSTN). Modern mobile telephone services use a
-        cellular network architecture and, therefore, mobile telephones
-        are called cellular telephones or cell phones in North America.
-        In addition to telephony, digital mobile phones (2G) support a
-        variety of other services, such as text messaging, MMS, email
-        , Internet access, short-range wireless communications (infrared, Bluetooth)
-        , business applications, video games and digital photography.
-        Mobile phones offering only those capabilities are known as feature phones;
-        mobile phones which offer greatly advanced computing capabilities are referred to as smartphones.
-
-        The development of metal-oxide-semiconductor (MOS) large-scale integration (LSI) technology,
-        information theory and cellular networking led to the development of affordable mobile
-        communications
-    </string>
-
     <string-array name="adminPanelItems">
         <item>Admin Management</item>
         <item>Shop Management</item>
@@ -52,7 +20,6 @@
 
     <string name="title_activity_location_from_map">Map</string>
     <string name="email_address">Email Address</string>
-    <string name="password">Password</string>
     <string name="log_in">Log In</string>
     <string name="logo">Logo</string>
     <string name="see_password">See Password</string>
@@ -74,7 +41,7 @@
     <string name="requested_categories">Requested Categories:</string>
     <string name="shop_keeper_trade_license_image">Shop Keeper Trade License Image</string>
     <string name="see_in_map">See Shop Address In Map</string>
-    <string name="approve_shop">Approve Shop</string>
+    <string name="semiShop">Approve Shop</string>
     <string name="shop_approval">Shop Approval Requests</string>
     <string name="no_requests_image">No Requests Image</string>
     <string name="back_to_main_admin_panel">Back To Main Admin Panel</string>
@@ -93,7 +60,6 @@
     <string name="update_category">Update Category</string>
     <string name="delete_category">Delete Category</string>
     <string name="update_category_details">Update Category Details</string>
-
     <string name="delete_category_details">Delete Category Details</string>
     <string name="categories">Categories</string>
     <string name="sub_categories">Sub Categories</string>
@@ -106,10 +72,8 @@
     <string name="click_to_add_sub_category_picture">Click to add sub-category picture</string>
     <string name="click_to_choose_product_image">Click to choose product image</string>
     <string name="product_image">Product Image</string>
-    <string name="product_name">Product Name</string>
     <string name="product_description">Product Description</string>
     <string name="product_quantity">Product Quantity</string>
-    <string name="product_price">Product Price</string>
     <string name="discount_taka">Discount taka</string>
     <string name="calculate">Calculate</string>
     <string name="discount_price">Discounted Price:</string>
@@ -118,5 +82,90 @@
     <string name="choose_a_brand">Choose a brand</string>
     <string name="add_product">Add Product</string>
     <string name="preview">Preview</string>
+    <string name="add_a_new_brand">Add A New Brand</string>
+    <string name="brand_image">Brand Image</string>
+    <string name="click_to_add_brand_image">(Click to add brand image)</string>
+    <string name="select_a_category">Select A Category</string>
+    <string name="select_a_sub_category">Select A Sub Category</string>
+    <string name="enter_brand_name">Enter brand name</string>
+    <string name="brands">Brands</string>
+    <string name="empty_image">Empty Image</string>
+    <string name="update_brand">Update Brand</string>
+    <string name="brand_name">Brand Name</string>
+    <string name="please_enter_brand_name">Please enter brand name</string>
+    <string name="delete_brand">Delete Brand</string>
+    <string name="all_available_offers">All Available Offers</string>
+    <string name="all_products">All Products</string>
+    <string name="search_button">Search Button</string>
+    <string name="dummy_image">Dummy Image</string>
+    <string name="product_price">Product Price</string>
+    <string name="discount">Discount</string>
+    <string name="_0">0%</string>
+    <string name="product_name">Product Name</string>
+    <string name="calculate_new_price">Calculate New Price</string>
+    <string name="new_price">New Price:</string>
+    <string name="_0_00">0.00</string>
+    <string name="_500">500</string>
+    <string name="quantity">Quantity :</string>
+    <string name="_300">300</string>
+    <string name="discountHint">Discount:</string>
+    <string name="priceHint">Price:</string>
+    <string name="_1200">1200</string>
+    <string name="product_description_goes_here">Product Description Goes Here</string>
+    <string name="delete_product">Delete Product</string>
+    <string name="update_product">Update Product</string>
+    <string name="create_a_new_offer">CREATE A NEW OFFER</string>
+    <string name="offer_image">Offer Image</string>
+    <string name="please_select_start_date">Please Select Start Date</string>
+    <string name="date_picker">Date Picker</string>
+    <string name="please_select_end_date">Please Select End Date</string>
+    <string name="enable_offer_now">Enable Offer Now</string>
+    <string name="create_offer">Create Offer</string>
+    <string name="offer_name">Offer Name</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="delete_offer">Delete Offer</string>
+    <string name="shop_keeper_name">Shop Keeper Name</string>
+    <string name="shop_keeper_mobile_number">Shop Keeper Mobile Number</string>
+    <string name="all_enabled_shop_keeper">All Enabled Shop Keeper</string>
+    <string name="user_information">User Information</string>
+    <string name="user_name">User Name</string>
+    <string name="xxxxxxxxxxx">XXXXXXXXXXX</string>
+    <string name="mobile_logo">Mobile Logo</string>
+    <string name="disable_user">Disable User</string>
+    <string name="delete_user">Delete User</string>
+    <string name="do_action_on_user">Do Action On User</string>
+    <string name="all_disabled_shop_keepers">All Disabled Shop Keepers</string>
+    <string name="enable_user">Enable User</string>
+    <string name="shopkpr">ShopKPR</string>
+    <string name="semi_admin">Semi Admin</string>
+    <string name="semi_admins">Semi Admins</string>
+    <string name="admin_name">Admin Name</string>
+    <string name="admin_email_address">Admin Email Address</string>
+    <string name="all_admins">All Admins</string>
+    <string name="admin_s_name">Admin Name</string>
+    <string name="admin_s_email_address">Admin Email Address</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="admin_accesses">Admin accesses</string>
+    <string name="admin_registration">Admin Registration</string>
+    <string name="shop_management">Shop Management</string>
+    <string name="product_management">Product Management</string>
+    <string name="offer_management">Offer Management</string>
+    <string name="user_management">User Management</string>
+    <string name="order_management">Order Management</string>
+    <string name="create_admin">Create admin</string>
+    <string name="show_password">Show password</string>
+    <string name="update_admin_info">Update Admin Info</string>
+    <string name="update_admin_data">Update Admin Data</string>
+    <string name="admin_image">admin image</string>
+    <string name="delete_admin">Delete Admin</string>
+    <string name="admin_management">Admin Management</string>
+    <string name="category_management">Category Management</string>
+    <string name="create_a_push_notification">Create a push notification</string>
+    <string name="push_notification_image">Push Notification Image</string>
+    <string name="please_enter_notification_title">Please Enter Notification Title</string>
+    <string name="please_enter_notification_body">Please enter notification body</string>
+    <string name="send_push_notification">Send Push Notification</string>
 
 </resources>

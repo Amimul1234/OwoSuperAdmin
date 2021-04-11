@@ -4,18 +4,13 @@ import java.io.Serializable;
 
 public class ShopKeeperPermissions implements Serializable {
     private Long id;
-    private String permittedCategory;
+    private Long permittedCategoryId;
 
     public ShopKeeperPermissions() {
     }
 
-    public ShopKeeperPermissions(Long id, String permittedCategory) {
-        this.id = id;
-        this.permittedCategory = permittedCategory;
-    }
-
-    public ShopKeeperPermissions(String permittedCategory) {
-        this.permittedCategory = permittedCategory;
+    public ShopKeeperPermissions(Long permittedCategoryId) {
+        this.permittedCategoryId = permittedCategoryId;
     }
 
     public Long getId() {
@@ -26,11 +21,11 @@ public class ShopKeeperPermissions implements Serializable {
         this.id = id;
     }
 
-    public String getPermittedCategory() {
-        return permittedCategory;
+    public Long getPermittedCategoryId() {
+        return permittedCategoryId;
     }
 
-    public void setPermittedCategory(String permittedCategory) {
-        this.permittedCategory = permittedCategory;
+    public void setPermittedCategoryId(Long permittedCategoryId) {
+        this.permittedCategoryId = permittedCategoryId;
     }
 }

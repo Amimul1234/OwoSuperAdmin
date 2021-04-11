@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.ordersManagement.order_adapter.PickedOrderAdapter;
 import com.owoSuperAdmin.ordersManagement.entity.Shop_keeper_orders;
@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class set_picked_to_shipped extends AppCompatActivity {
 
     private ImageView back_to_home;
-    private AllianceLoader allianceLoader;
+    private ProgressBar allianceLoader;
     private RecyclerView picked_order_recycler_view;
     private List<Shop_keeper_orders> shop_keeper_ordersList = new ArrayList<>();
     private PickedOrderAdapter pickedOrderAdapter;

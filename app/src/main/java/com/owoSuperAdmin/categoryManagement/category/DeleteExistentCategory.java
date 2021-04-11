@@ -40,6 +40,11 @@ public class DeleteExistentCategory extends AppCompatActivity {
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
 
+        swipeRefreshLayout.setOnRefreshListener(()->{
+            getData();
+            showRecycler();
+        });
+
         swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
 
         deleteRecyclerView.setHasFixedSize(true);
@@ -55,10 +60,8 @@ public class DeleteExistentCategory extends AppCompatActivity {
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
+    public void getData()
+    {
         categoryEntities.clear();
 
         RetrofitClient.getInstance().getApi()
@@ -78,13 +81,18 @@ public class DeleteExistentCategory extends AppCompatActivity {
                         }
 
                     }
-
                     @Override
                     public void onFailure(@NotNull Call<List<CategoryEntity>> call, @NotNull Throwable t) {
                         Log.e("Update cat. ", "Error is: "+t.getMessage());
                         Toast.makeText(DeleteExistentCategory.this, "Error fetching categories, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getData();
     }
 
     @Override

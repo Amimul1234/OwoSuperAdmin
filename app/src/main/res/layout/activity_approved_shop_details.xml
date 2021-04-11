@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.owoSuperAdmin.shopManagement.RegisteredShop">
+    tools:context="com.owoSuperAdmin.shopManagement.allRegisteredShops.ManageRegisteredShops">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/scroller"
@@ -283,19 +282,12 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.agrawalsuneet.dotsloader.loaders.AllianceLoader
-        android:id="@+id/alliance_loader"
+    <ProgressBar
+        android:id="@+id/loader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:alliance_animDuration="500"
-        app:alliance_distanceMultiplier="4"
-        app:alliance_dotsRadius="20dp"
-        app:alliance_firstDotsColor="@color/red"
-        app:alliance_secondDotsColor="@color/green"
-        app:alliance_strokeWidth="8dp"
-        app:alliance_thirdDotsColor="@color/blue"
-        android:layout_centerInParent="true"/>
-
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone"/>
 
 </RelativeLayout>

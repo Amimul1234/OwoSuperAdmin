@@ -5,13 +5,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import com.agrawalsuneet.dotsloader.loaders.AllianceLoader;
+import android.widget.ProgressBar;
 import com.owoSuperAdmin.owoshop.R;
 
 public class completed_order_state extends AppCompatActivity {
 
     private ImageView back_to_home;
-    private AllianceLoader allianceLoader;
+    private ProgressBar loader;
     private RecyclerView update_order_state;
 
     @Override
@@ -20,7 +20,7 @@ public class completed_order_state extends AppCompatActivity {
         setContentView(R.layout.activity_completed_order_state);
 
         back_to_home = findViewById(R.id.back_to_home);
-        allianceLoader = findViewById(R.id.loader);
+        loader = findViewById(R.id.loader);
         update_order_state = findViewById(R.id.update_order_state);
 
         back_to_home.setOnClickListener(new View.OnClickListener() {

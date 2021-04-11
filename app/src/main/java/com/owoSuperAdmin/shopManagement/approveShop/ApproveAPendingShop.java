@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.shopManagement.entity.ShopKeeperPermissions;
@@ -35,14 +36,14 @@ public class ApproveAPendingShop extends AppCompatActivity {
     private Shops shops;
     private ProgressBar loader;
 
-    private final List<String> permissions = new ArrayList<>();
+    private final List<Long> permissions = new ArrayList<>();
 
     int size = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_shop_details);
+        setContentView(R.layout.activity_approved_shop_details2);
 
         shops = (Shops) getIntent().getSerializableExtra("ShopRequest");
 
@@ -75,36 +76,124 @@ public class ApproveAPendingShop extends AppCompatActivity {
         shop_service_mobile.setText(shops.getShop_service_mobile());
         shop_address.setText(shops.getShop_address());
 
-        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getShop_image_uri()).into(shop_image);
-        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getShop_keeper_nid_front_uri()).into(shop_keeper_nid);
-        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getTrade_license_url()).into(shop_trade_license);
+        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getShop_image_uri()).
+                timeout(6000).diskCacheStrategy(DiskCacheStrategy.ALL).into(shop_image);
+
+        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getShop_keeper_nid_front_uri()).
+                timeout(6000).diskCacheStrategy(DiskCacheStrategy.ALL).into(shop_keeper_nid);
+
+        Glide.with(getApplicationContext()).load(HostAddress.HOST_ADDRESS.getAddress()+shops.getTrade_license_url()).
+                timeout(6000).diskCacheStrategy(DiskCacheStrategy.ALL).into(shop_trade_license);
 
         size = shops.getShopKeeperPermissions().size();
 
         if(size == 1)
         {
-            req_category_1.setText(shops.getShopKeeperPermissions().get(0).getPermittedCategory());
-            checkbox2.setVisibility(View.GONE);
-            checkBox3.setVisibility(View.GONE);
+            List<Long> categoryId = new ArrayList<>();
+
+            categoryId.add(shops.getShopKeeperPermissions().get(0).getPermittedCategoryId());
+
+            RetrofitClient.getInstance().getApi()
+                    .getCategoryListBasedOnId(categoryId)
+                    .enqueue(new Callback<List<String>>() {
+                        @Override
+                        public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response) {
+                            if(response.isSuccessful())
+                            {
+                                assert response.body() != null;
+                                req_category_1.setText(response.body().get(0));
+                                checkbox2.setVisibility(View.GONE);
+                                checkBox3.setVisibility(View.GONE);
+                            }
+                            else
+                            {
+                                Toast.makeText(ApproveAPendingShop.this, "Can not get category name, please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NotNull Call<List<String>> call, @NotNull Throwable t) {
+                            Log.e("ApproveShop", "Error is: "+t.getMessage());
+                            Toast.makeText(ApproveAPendingShop.this, "Can not get category name, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
         else if(size == 2)
         {
-            req_category_1.setText(shops.getShopKeeperPermissions().get(0).getPermittedCategory());
-            req_category_2.setText(shops.getShopKeeperPermissions().get(1).getPermittedCategory());
-            checkBox3.setVisibility(View.GONE);
+            List<Long> categoryId = new ArrayList<>();
+
+            categoryId.add(shops.getShopKeeperPermissions().get(0).getPermittedCategoryId());
+            categoryId.add(shops.getShopKeeperPermissions().get(1).getPermittedCategoryId());
+
+            RetrofitClient.getInstance().getApi()
+                    .getCategoryListBasedOnId(categoryId)
+                    .enqueue(new Callback<List<String>>() {
+                        @Override
+                        public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response) {
+                            if(response.isSuccessful())
+                            {
+                                assert response.body() != null;
+                                req_category_1.setText(response.body().get(0));
+                                req_category_2.setText(response.body().get(1));
+                                checkBox3.setVisibility(View.GONE);
+                            }
+                            else
+                            {
+                                Toast.makeText(ApproveAPendingShop.this, "Can not get category name, please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NotNull Call<List<String>> call, @NotNull Throwable t) {
+                            Log.e("ApproveShop", "Error is: "+t.getMessage());
+                            Toast.makeText(ApproveAPendingShop.this, "Can not get category name, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
         }
         else
         {
-            req_category_1.setText(shops.getShopKeeperPermissions().get(0).getPermittedCategory());
-            req_category_2.setText(shops.getShopKeeperPermissions().get(1).getPermittedCategory());
-            req_category_3.setText(shops.getShopKeeperPermissions().get(2).getPermittedCategory());
+            List<Long> categoryId = new ArrayList<>();
+
+            categoryId.add(shops.getShopKeeperPermissions().get(0).getPermittedCategoryId());
+            categoryId.add(shops.getShopKeeperPermissions().get(1).getPermittedCategoryId());
+            categoryId.add(shops.getShopKeeperPermissions().get(2).getPermittedCategoryId());
+
+            RetrofitClient.getInstance().getApi()
+                    .getCategoryListBasedOnId(categoryId)
+                    .enqueue(new Callback<List<String>>() {
+                        @Override
+                        public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response) {
+                            if(response.isSuccessful())
+                            {
+                                assert response.body() != null;
+                                req_category_1.setText(response.body().get(0));
+                                req_category_2.setText(response.body().get(1));
+                                req_category_3.setText(response.body().get(2));
+                            }
+                            else
+                            {
+                                Toast.makeText(ApproveAPendingShop.this, "Can not get category name, please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NotNull Call<List<String>> call, @NotNull Throwable t) {
+                            Log.e("ApproveShop", "Error is: "+t.getMessage());
+                            Toast.makeText(ApproveAPendingShop.this, "Can not get category name, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
 
         see_in_map.setOnClickListener(v -> {
-            com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(shops.getLatitude(), shops.getLongitude());
+
+            com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(
+                    shops.getLatitude(), shops.getLongitude());
+
             Intent intent = new Intent(ApproveAPendingShop.this, LocationFromMap.class);
             intent.putExtra("latlang", mapsLatLng);
             startActivity(intent);
+
         });
 
         approve_shop.setOnClickListener(view -> {
@@ -149,25 +238,26 @@ public class ApproveAPendingShop extends AppCompatActivity {
 
         if(checkbox1.isChecked())
         {
-            permissions.add(req_category_1.getText().toString());
+            permissions.add(shops.getShopKeeperPermissions().get(0).getPermittedCategoryId());
         }
         if(checkbox2.isChecked())
         {
-            permissions.add(req_category_2.getText().toString());
+            permissions.add(shops.getShopKeeperPermissions().get(1).getPermittedCategoryId());
         }
         if(checkBox3.isChecked())
         {
-            permissions.add(req_category_3.getText().toString());
+            permissions.add(shops.getShopKeeperPermissions().get(2).getPermittedCategoryId());
         }
 
         loader.setVisibility(View.VISIBLE);
 
         Shops newShop = new Shops();
-        List<ShopKeeperPermissions> shopKeeperPermissionsList = new ArrayList<>();
 
+        List<ShopKeeperPermissions> shopKeeperPermissionsList = new ArrayList<>();
 
         for(int i=0; i<permissions.size(); i++)
         {
+            shopKeeperPermissionsList.add(new ShopKeeperPermissions(permissions.get(i)));
             shops.getShopKeeperPermissions().add(new ShopKeeperPermissions(permissions.get(i)));
         }
 

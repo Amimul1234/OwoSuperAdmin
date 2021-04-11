@@ -40,7 +40,10 @@ public class UpdateExistentCategory extends AppCompatActivity {
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.blue));
 
-        swipeRefreshLayout.setOnRefreshListener(this::showRecycler);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getCategoryData();
+            showRecycler();
+        });
 
         updateRecyclerView.setHasFixedSize(true);
 

@@ -1,14 +1,10 @@
 package com.owoSuperAdmin.ordersManagement;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
-import com.owoSuperAdmin.ordersManagement.entity.Shop_keeper_orders;
 import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.ordersManagement.completedOrders.CompletedAdapter;
 import com.owoSuperAdmin.ordersManagement.completedOrders.CompletedViewModel;
@@ -32,12 +28,7 @@ public class CompletedOrders extends AppCompatActivity{
 
         getCompletedOrders();
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getCompletedOrders();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> getCompletedOrders());
 
     }
 
@@ -45,12 +36,9 @@ public class CompletedOrders extends AppCompatActivity{
         completedAdapter = new CompletedAdapter(this);
         CompletedViewModel completedViewModel = new CompletedViewModel();
 
-        completedViewModel.itemPagedList.observe(this, new Observer<PagedList<Shop_keeper_orders>>() {
-            @Override
-            public void onChanged(@Nullable PagedList<Shop_keeper_orders> items) {
-                completedAdapter.submitList(items);
-                showOnRecyclerView();
-            }
+        completedViewModel.itemPagedList.observe(this, items -> {
+            completedAdapter.submitList(items);
+            showOnRecyclerView();
         });
 
     }

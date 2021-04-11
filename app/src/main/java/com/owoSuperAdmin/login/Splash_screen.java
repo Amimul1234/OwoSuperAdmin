@@ -9,10 +9,8 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.owoSuperAdmin.owoshop.R;
 
-@SuppressWarnings("deprecation")
 public class Splash_screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
