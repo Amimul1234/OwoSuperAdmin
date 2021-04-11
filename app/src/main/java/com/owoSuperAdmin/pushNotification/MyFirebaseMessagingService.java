@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.owoshop;
+package com.owoSuperAdmin.pushNotification;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -7,13 +7,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.owoSuperAdmin.owoshop.R;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -24,7 +24,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         if (remoteMessage.getData().isEmpty())
-            showNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+            showNotification(Objects.requireNonNull(remoteMessage.getNotification()).getTitle(),remoteMessage.getNotification().getBody());
 
         else
             showNotification(remoteMessage.getData());
@@ -32,8 +32,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void showNotification(Map<String, String> data) {
 
-        String title=data.get("title").toString();
-        String body=data.get("body").toString();
+        String title= data.get("title");
+        String body= data.get("body");
 
         NotificationManager notificationManager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID="com.OwoDokan.owoshop.test";
@@ -92,9 +92,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(@NonNull String s) {
-
         super.onNewToken(s);
         Log.d("TOKENFIREBASE",s);
     }
 }
-//https://console.firebase.google.com/u/1/project/owodokan2/notification/compose

@@ -186,10 +186,14 @@ public class ApproveAPendingShop extends AppCompatActivity {
         }
 
         see_in_map.setOnClickListener(v -> {
-            com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(shops.getLatitude(), shops.getLongitude());
+
+            com.google.android.gms.maps.model.LatLng mapsLatLng = new com.google.android.gms.maps.model.LatLng(
+                    shops.getLatitude(), shops.getLongitude());
+
             Intent intent = new Intent(ApproveAPendingShop.this, LocationFromMap.class);
             intent.putExtra("latlang", mapsLatLng);
             startActivity(intent);
+
         });
 
         approve_shop.setOnClickListener(view -> {

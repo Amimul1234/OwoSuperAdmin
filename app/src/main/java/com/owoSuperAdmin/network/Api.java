@@ -9,6 +9,7 @@ import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.ordersManagement.entity.Shop_keeper_orders;
+import com.owoSuperAdmin.pushNotification.NotificationData;
 import com.owoSuperAdmin.shopManagement.entity.Shops;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.entity.ShopKeeperUser;
 import java.util.List;
@@ -184,4 +185,8 @@ public interface Api {
 
     @GET("/admin/adminLogin/v1/getAdminInfo")
     Call<AdminLoginWrapper> getAdminCredential(@Query("adminEmailAddress") String adminEmailAddress);
+
+    //push notification api
+    @POST("/send-notification")
+    Call<ResponseBody> sendNotification(@Body NotificationData notificationData, @Query("topic") String topic);
 }

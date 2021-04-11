@@ -162,5 +162,10 @@
     <string name="delete_admin">Delete Admin</string>
     <string name="admin_management">Admin Management</string>
     <string name="category_management">Category Management</string>
+    <string name="create_a_push_notification">Create a push notification</string>
+    <string name="push_notification_image">Push Notification Image</string>
+    <string name="please_enter_notification_title">Please Enter Notification Title</string>
+    <string name="please_enter_notification_body">Please enter notification body</string>
+    <string name="send_push_notification">Send Push Notification</string>
 
 </resources>

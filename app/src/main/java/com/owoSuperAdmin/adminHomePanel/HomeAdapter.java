@@ -20,6 +20,7 @@ import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
 import com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories;
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
 import com.owoSuperAdmin.login.AdminCredentials;
+import com.owoSuperAdmin.pushNotification.CloudMessagingActivity;
 import com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity;
 import com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity;
 import com.owoSuperAdmin.adminManagement.CreateNewAdminActivity;
@@ -336,7 +337,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             case "User Management":
             {
                 CharSequence[] brandsOptions = new CharSequence[]{"All Enabled Shop Keepers",
-                        "Disabled Shop Keepers"};
+                        "Disabled Shop Keepers", "Send Notification"};
 
                 AlertDialog.Builder brandsBuilder = new AlertDialog.Builder(context);
                 brandsBuilder.setTitle("Shop Keeper Management");
@@ -350,6 +351,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     else if(which == 1)
                     {
                         Intent intent = new Intent(context, AllDisabledShopKeepers.class);
+                        context.startActivity(intent);
+                    }
+                    else if(which == 2)
+                    {
+                        Intent intent=new Intent(context, CloudMessagingActivity.class);
                         context.startActivity(intent);
                     }
                 }));
