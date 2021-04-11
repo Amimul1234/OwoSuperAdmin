@@ -43,7 +43,7 @@ public class ApproveAPendingShop extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_shop_details);
+        setContentView(R.layout.activity_approved_shop_details2);
 
         shops = (Shops) getIntent().getSerializableExtra("ShopRequest");
 
