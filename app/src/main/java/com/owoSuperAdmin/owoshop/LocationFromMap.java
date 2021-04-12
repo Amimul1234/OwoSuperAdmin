@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -22,8 +21,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
-
-//Getting location from map
 
 public class LocationFromMap extends AppCompatActivity
         implements OnMapReadyCallback {
@@ -50,6 +47,7 @@ public class LocationFromMap extends AppCompatActivity
         latLng = getIntent().getParcelableExtra("latlang");
 
         Places.initialize(getApplicationContext(), getString(R.string.maps_api_key));
+
         placesClient = Places.createClient(this);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -61,19 +59,21 @@ public class LocationFromMap extends AppCompatActivity
     }
 
     @Override
-    public void onMapReady(GoogleMap map) {
+    public void onMapReady(GoogleMap map)
+    {
+
         this.map = map;
 
         this.map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
             @Override
-            // Return null here, so that getInfoContents() is called next.
             public View getInfoWindow(Marker arg0) {
                 return null;
             }
 
             @Override
-            public View getInfoContents(Marker marker) {
+            public View getInfoContents(Marker marker)
+            {
 
                 View infoWindow = getLayoutInflater().inflate(R.layout.custom_info_contents,
                         (FrameLayout) findViewById(R.id.map), false);
@@ -89,52 +89,53 @@ public class LocationFromMap extends AppCompatActivity
         });
 
 
-        getLocationPermission();// Prompt the user for permission.
+        getLocationPermission();
 
-
-        updateLocationUI(map); // Turn on the My Location layer and the related control on the map.
+        updateLocationUI(map);
     }
 
     private void getLocationPermission() {
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
             locationPermissionGranted = true;
-        } else {
+        }
+        else {
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+
         locationPermissionGranted = false;
 
-        switch (requestCode) {
-            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermissionGranted = true;
-                }
+        if (requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+        {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                locationPermissionGranted = true;
             }
         }
+
         updateLocationUI(map);
     }
 
-    private void updateLocationUI(GoogleMap map) {
+    private void updateLocationUI(GoogleMap map)
+    {
+
         map.addMarker(new MarkerOptions()
                 .position(latLng)
-                .title("Marker in Sydney"));
+                .title("Store is here"));
 
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         map.animateCamera(CameraUpdateFactory.zoomIn());
-        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-        map.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+
+        map.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM), 2000, null);
     }
 }

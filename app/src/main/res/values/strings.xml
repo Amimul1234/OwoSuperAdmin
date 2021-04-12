@@ -171,5 +171,9 @@
     <string name="order_management">Order Management</string>
     <string name="shop_orders_management">Shop Orders Management</string>
     <string name="approve_new_shop">Approve New Shop</string>
+    <string name="nid_card">NID Card</string>
+    <string name="selling_categories">Selling Categories:</string>
+    <string name="shop_trade_license">Shop Trade License</string>
+    <string name="delete_shop">Delete Shop</string>
 
 </resources>

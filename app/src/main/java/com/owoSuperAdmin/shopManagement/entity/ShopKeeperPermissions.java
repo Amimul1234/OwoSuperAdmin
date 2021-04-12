@@ -3,6 +3,7 @@ package com.owoSuperAdmin.shopManagement.entity;
 import java.io.Serializable;
 
 public class ShopKeeperPermissions implements Serializable {
+
     private Long id;
     private Long permittedCategoryId;
 

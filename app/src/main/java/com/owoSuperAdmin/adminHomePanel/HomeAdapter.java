@@ -142,8 +142,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             }
             case "Shop Management":
             {
-                CharSequence[] options=new CharSequence[] {"Manage Registered Shops","Approve A New Shop",
-                        "Manage Blocked Shops", "Category Extension Requests"};
+                CharSequence[] options=new CharSequence[] {"Manage Registered Shops","Approve A New Shop", "Category Extension Requests"};
 
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
                 builder.setTitle("Shop Management");
@@ -165,6 +164,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         }
                         case 2:
                         {
+                            //category extension requests
                             Intent intent = new Intent(context, confirm_shop_orders.class);
                             context.startActivity(intent);
                             break;
