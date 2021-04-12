@@ -259,21 +259,6 @@
                 android:textSize="20sp"
                 />
 
-            <Button
-                android:id="@+id/delete_shop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/delete_shop"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:background="@drawable/buttons_blue"
-                android:textSize="20sp"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                />
-
         </LinearLayout>
 
     </ScrollView>
