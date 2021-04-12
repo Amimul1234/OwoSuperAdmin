@@ -46,9 +46,8 @@ public class ManageRegisteredShops extends AppCompatActivity {
             showOnRecyclerView();
         });
 
-        registeredShopViewModel.getNetworkState().observe(this, networkState -> {
-            registeredShopAdapter.setNetworkState(networkState);
-        });
+        registeredShopViewModel.getNetworkState().observe(this, networkState ->
+                registeredShopAdapter.setNetworkState(networkState));
     }
 
     private void showOnRecyclerView() {

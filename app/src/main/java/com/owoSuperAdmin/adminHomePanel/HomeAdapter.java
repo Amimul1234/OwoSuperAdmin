@@ -72,7 +72,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     icons.add(R.drawable.order_management);
                     break;
             }
-
         }
     }
 

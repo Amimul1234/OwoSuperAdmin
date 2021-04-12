@@ -153,7 +153,6 @@
     <string name="product_management">Product Management</string>
     <string name="offer_management">Offer Management</string>
     <string name="user_management">User Management</string>
-    <string name="order_management">Order Management</string>
     <string name="create_admin">Create admin</string>
     <string name="show_password">Show password</string>
     <string name="update_admin_info">Update Admin Info</string>
@@ -167,5 +166,10 @@
     <string name="please_enter_notification_title">Please Enter Notification Title</string>
     <string name="please_enter_notification_body">Please enter notification body</string>
     <string name="send_push_notification">Send Push Notification</string>
+    <string name="image">image</string>
+    <string name="pending_orders">Pending Orders</string>
+    <string name="order_management">Order Management</string>
+    <string name="shop_orders_management">Shop Orders Management</string>
+    <string name="approve_new_shop">Approve New Shop</string>
 
 </resources>

@@ -33,15 +33,17 @@ public class ApproveAPendingShop extends AppCompatActivity {
     private TextView req_category_2;
     private TextView req_category_3;
     private CheckBox checkbox1, checkbox2, checkBox3;
-    private Shops shops;
     private ProgressBar loader;
+
+    private Shops shops;
 
     private final List<Long> permissions = new ArrayList<>();
 
     int size = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approved_shop_details2);
 
@@ -52,10 +54,10 @@ public class ApproveAPendingShop extends AppCompatActivity {
         TextView shop_keeper_mobile = findViewById(R.id.shop_owner_mobile);
         TextView shop_address = findViewById(R.id.shop_address);
         TextView shop_service_mobile = findViewById(R.id.shop_service_mobile);
+
         req_category_1 = findViewById(R.id.requested_category_1);
         req_category_2 = findViewById(R.id.requested_category_2);
         req_category_3 = findViewById(R.id.requested_category_3);
-
 
         checkbox1 = findViewById(R.id.category_1_check_box);
         checkbox2 = findViewById(R.id.category_2_check_box);
@@ -67,6 +69,7 @@ public class ApproveAPendingShop extends AppCompatActivity {
 
         Button see_in_map = findViewById(R.id.shop_address_in_map);
         Button approve_shop = findViewById(R.id.approve_shop);
+        ImageView backButton = findViewById(R.id.backButton);
 
         loader = findViewById(R.id.progressBar);
 
@@ -232,6 +235,8 @@ public class ApproveAPendingShop extends AppCompatActivity {
             }
 
         });
+
+        backButton.setOnClickListener(v -> onBackPressed());
     }
 
     private void validate() {

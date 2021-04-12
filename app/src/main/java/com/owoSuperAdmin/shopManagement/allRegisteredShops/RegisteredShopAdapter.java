@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.owoshop.R;
-import com.owoSuperAdmin.shopManagement.approveShop.ApproveAPendingShop;
 import com.owoSuperAdmin.shopManagement.entity.Shops;
 import com.owoSuperAdmin.utilities.NetworkState;
 import org.jetbrains.annotations.NotNull;

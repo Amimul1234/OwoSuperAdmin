@@ -279,7 +279,9 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 />
+
         </LinearLayout>
+
     </ScrollView>
 
     <ProgressBar

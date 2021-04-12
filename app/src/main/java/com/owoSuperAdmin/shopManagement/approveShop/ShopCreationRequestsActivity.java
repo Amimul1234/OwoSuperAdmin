@@ -53,9 +53,8 @@ public class ShopCreationRequestsActivity extends AppCompatActivity {
             showOnRecyclerView();
         });
 
-        itemViewModelShopRegistrationRequests.getNetworkState().observe(this, networkState -> {
-            shopRequestsAdapter.setNetworkState(networkState);
-        });
+        itemViewModelShopRegistrationRequests.getNetworkState().observe(this, networkState ->
+                shopRequestsAdapter.setNetworkState(networkState));
     }
 
     private void showOnRecyclerView() {

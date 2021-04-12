@@ -159,6 +159,7 @@ public class ShopRequestsAdapter extends PagedListAdapter<Shops, RecyclerView.Vi
 
             itemView.setOnClickListener(v -> {
                 Shops shops = getItem(getAdapterPosition());
+
                 Intent intent = new Intent(mCtx, ApproveAPendingShop.class);
                 intent.putExtra("ShopRequest", shops);
                 mCtx.startActivity(intent);

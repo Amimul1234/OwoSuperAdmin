@@ -19,8 +19,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ApprovedShopDetails extends AppCompatActivity {
-
+public class ApprovedShopDetails extends AppCompatActivity
+{
     private TextView req_category_1;
     private TextView req_category_2, req_category_3;
 
@@ -135,10 +135,12 @@ public class ApprovedShopDetails extends AppCompatActivity {
                         @Override
                         public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response) {
                             if (response.isSuccessful()) {
+
                                 assert response.body() != null;
                                 req_category_1.setText(response.body().get(0));
                                 req_category_2.setText(response.body().get(1));
                                 req_category_3.setText(response.body().get(2));
+
                             } else {
                                 Toast.makeText(ApprovedShopDetails.this, "Can not get category name, please try again", Toast.LENGTH_SHORT).show();
                             }
