@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.owoSuperAdmin.network.RetrofitClient;
@@ -23,6 +24,7 @@ public class AllAvailableTimeSlots extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private final List<TimeSlot> timeSlotList = new ArrayList<>();
     private RecyclerView timeSlotRecyclerView;
+    private ImageView emptyImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class AllAvailableTimeSlots extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         timeSlotRecyclerView = findViewById(R.id.timeSlotsRecyclerView);
+        emptyImageView = findViewById(R.id.empty_image_view);
         allAvailableTimeSlotsAdapter = new AllAvailableTimeSlotsAdapter(this, timeSlotList);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -57,10 +60,21 @@ public class AllAvailableTimeSlots extends AppCompatActivity {
                     public void onResponse(@NotNull Call<List<TimeSlot>> call, @NotNull Response<List<TimeSlot>> response) {
                         if(response.isSuccessful())
                         {
-                            progressDialog.dismiss();
-                            timeSlotList.addAll(response.body());
-                            timeSlotRecyclerView.setAdapter(allAvailableTimeSlotsAdapter);
-                            allAvailableTimeSlotsAdapter.notifyDataSetChanged();
+                            assert response.body() != null;
+                            if(response.body().size() == 0)
+                            {
+                                progressDialog.dismiss();
+                                emptyImageView.setVisibility(View.VISIBLE);
+                            }
+                            else
+                            {
+                                progressDialog.dismiss();
+                                emptyImageView.setVisibility(View.GONE);
+                                assert response.body() != null;
+                                timeSlotList.addAll(response.body());
+                                timeSlotRecyclerView.setAdapter(allAvailableTimeSlotsAdapter);
+                                allAvailableTimeSlotsAdapter.notifyDataSetChanged();
+                            }
                         }
                         else
                         {

@@ -41,4 +41,12 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"/>
 
+    <ImageView
+        android:id="@+id/empty_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/empty"
+        android:visibility="gone"
+        android:contentDescription="@string/empty_image" />
+
 </RelativeLayout>
