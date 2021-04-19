@@ -3,9 +3,11 @@ package com.owoSuperAdmin.utilities;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-public class PasswordHashing {
+public class PasswordHashing
+{
     public static String sha256(final String base) {
         try{
+
             final MessageDigest digest = MessageDigest.getInstance("SHA-512");
             final byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
             final StringBuilder hexString = new StringBuilder();

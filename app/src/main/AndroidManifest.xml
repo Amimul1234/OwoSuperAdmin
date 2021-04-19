@@ -97,7 +97,7 @@
             android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_shipped_to_delivered"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AddATimeSlot"
+            android:name="com.owoSuperAdmin.timeSlot.AddATimeSlot"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand"

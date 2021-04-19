@@ -20,6 +20,7 @@ import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
 import com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories;
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
 import com.owoSuperAdmin.login.AdminCredentials;
+import com.owoSuperAdmin.timeSlot.AddATimeSlot;
 import com.owoSuperAdmin.pushNotification.CloudMessagingActivity;
 import com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity;
 import com.owoSuperAdmin.offersManagement.avilableOffers.AvailableOffersActivity;
@@ -43,7 +44,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
     private final List<String> segment = new ArrayList<>();
     private final List<Integer> icons = new ArrayList<>();
 
-    public HomeAdapter(Context context) {
+    public HomeAdapter(Context context)
+    {
         this.context = context;
         segment.addAll(AdminCredentials.adminPermissionList);
 
@@ -366,19 +368,33 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
 
             case "Order Management":
             {
-                Intent intent = new Intent(context, confirm_shop_orders.class);
-                context.startActivity(intent);
+                CharSequence[] brandsOptions = new CharSequence[]{"Manage Time Slots",
+                        "Manage Shop Order"};
+
+                AlertDialog.Builder brandsBuilder = new AlertDialog.Builder(context);
+                brandsBuilder.setTitle("Shop Order Management");
+
+                brandsBuilder.setItems(brandsOptions, ((dialog1, which) -> {
+                    if(which == 0)
+                    {
+                        Intent intent = new Intent(context, AddATimeSlot.class);
+                        context.startActivity(intent);
+                    }
+                    else if(which == 1)
+                    {
+                        Intent intent = new Intent(context, confirm_shop_orders.class);
+                        context.startActivity(intent);
+                    }
+                }));
+
+                brandsBuilder.show();
+
                 break;
             }
 
         }
 
         /*
-        else if (position == 8)
-        {
-            Intent intent=new Intent(context, CloudMessagingActivity.class);
-            context.startActivity(intent);
-        }
         else if (position == 9)
         {
             Intent intent=new Intent(context, QuponActivity.class);
@@ -389,7 +405,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             Intent intent = new Intent(context, AddATimeSlot.class);
             context.startActivity(intent);
         }
-
          */
     }
 }

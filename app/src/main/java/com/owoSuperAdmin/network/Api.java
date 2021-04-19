@@ -11,6 +11,7 @@ import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.ordersManagement.entity.Shop_keeper_orders;
 import com.owoSuperAdmin.pushNotification.NotificationData;
 import com.owoSuperAdmin.shopManagement.entity.Shops;
+import com.owoSuperAdmin.timeSlot.TimeSlot;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.entity.ShopKeeperUser;
 import java.util.List;
 import okhttp3.MultipartBody;
@@ -27,6 +28,16 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Api {
+
+    //Time slot management
+    @POST("/addNewTimeSlot")
+    Call<ResponseBody> addNewTimeSlot(@Body TimeSlot timeSlot);
+
+    @DELETE("/deleteTimeSlot")
+    Call<ResponseBody> deleteTimeSlot(@Query("timeSlotId") Long timeSlotId);
+
+    @GET("/getAllAvailableTimeSlots")
+    Call<List<TimeSlot>> getAllAvailableTimeSlots();
 
     //Shops Management
     @POST("/approveShop")

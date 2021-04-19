@@ -11,21 +11,10 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:src="@drawable/shopkpr_logo"
-        android:scaleType="fitXY"
+        android:layout_height="300dp"
+        android:src="@drawable/logo_final"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/logo" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/shopkpr"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:textColor="#FFBF00"
-        android:layout_marginTop="30dp"
-        android:gravity="center"/>
-
 
     <LinearLayout
         android:gravity="center_vertical"

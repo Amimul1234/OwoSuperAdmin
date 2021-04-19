@@ -175,5 +175,7 @@
     <string name="selling_categories">Selling Categories:</string>
     <string name="shop_trade_license">Shop Trade License</string>
     <string name="delete_shop">Delete Shop</string>
+    <string name="enter_time_slot">Enter time slot</string>
+    <string name="add_a_time_slot">Add A Time Slot</string>
 
 </resources>
