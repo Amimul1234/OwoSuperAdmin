@@ -20,6 +20,7 @@ import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
 import com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories;
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
 import com.owoSuperAdmin.login.AdminCredentials;
+import com.owoSuperAdmin.offersManagement.QuponActivity;
 import com.owoSuperAdmin.timeSlot.AddATimeSlot;
 import com.owoSuperAdmin.pushNotification.CloudMessagingActivity;
 import com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity;
@@ -32,6 +33,7 @@ import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity;
 import com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory;
 import com.owoSuperAdmin.ordersManagement.confirm_shop_orders;
+import com.owoSuperAdmin.timeSlot.AllAvailableTimeSlots;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers.AllDisabledShopKeepers;
 import org.jetbrains.annotations.NotNull;
@@ -166,7 +168,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         }
                         case 2:
                         {
-                            //category extension requests
                             Intent intent = new Intent(context, confirm_shop_orders.class);
                             context.startActivity(intent);
                             break;
@@ -368,8 +369,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
 
             case "Order Management":
             {
-                CharSequence[] brandsOptions = new CharSequence[]{"Manage Time Slots",
-                        "Manage Shop Order"};
+                CharSequence[] brandsOptions = new CharSequence[]{"Manage Shop Order",
+                        "Manage Time Slots", "Manage Qupon", "Manage Gift card"};
 
                 AlertDialog.Builder brandsBuilder = new AlertDialog.Builder(context);
                 brandsBuilder.setTitle("Shop Order Management");
@@ -377,35 +378,45 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 brandsBuilder.setItems(brandsOptions, ((dialog1, which) -> {
                     if(which == 0)
                     {
-                        Intent intent = new Intent(context, AddATimeSlot.class);
+                        Intent intent = new Intent(context, confirm_shop_orders.class);
                         context.startActivity(intent);
                     }
                     else if(which == 1)
                     {
-                        Intent intent = new Intent(context, confirm_shop_orders.class);
+
+                        CharSequence[] timSlotsOptions = new CharSequence[]{"Add New Time Slot",
+                                "All Available Time Slots"};
+
+                        AlertDialog.Builder timeSlotsOptionBuilder = new AlertDialog.Builder(context);
+                        timeSlotsOptionBuilder.setTitle("Time Slots Management");
+
+                        timeSlotsOptionBuilder.setItems(timSlotsOptions, ((dialog, which1) -> {
+                            if(which1 == 0)
+                            {
+                                Intent intent = new Intent(context, AddATimeSlot.class);
+                                context.startActivity(intent);
+                            }
+                            else if(which1 == 1)
+                            {
+                                Intent intent = new Intent(context, AllAvailableTimeSlots.class);
+                                context.startActivity(intent);
+                            }
+                        }));
+
+                        timeSlotsOptionBuilder.show();
+                    }
+                    else if(which == 2)
+                    {
+                        Intent intent=new Intent(context, QuponActivity.class);
                         context.startActivity(intent);
                     }
                 }));
 
                 brandsBuilder.show();
-
                 break;
             }
 
         }
-
-        /*
-        else if (position == 9)
-        {
-            Intent intent=new Intent(context, QuponActivity.class);
-            context.startActivity(intent);
-        }
-        else if(position == 12)
-        {
-            Intent intent = new Intent(context, AddATimeSlot.class);
-            context.startActivity(intent);
-        }
-         */
     }
 }
 

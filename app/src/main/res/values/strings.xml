@@ -177,5 +177,7 @@
     <string name="delete_shop">Delete Shop</string>
     <string name="enter_time_slot">Enter time slot</string>
     <string name="add_a_time_slot">Add A Time Slot</string>
+    <string name="all_available_time_slots">All Available Time Slots</string>
+    <string name="clock">Clock</string>
 
 </resources>
