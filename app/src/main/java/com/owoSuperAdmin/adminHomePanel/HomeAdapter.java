@@ -32,7 +32,7 @@ import com.owoSuperAdmin.productsManagement.allProducts.AvailableProducts;
 import com.owoSuperAdmin.owoshop.R;
 import com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity;
 import com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory;
-import com.owoSuperAdmin.ordersManagement.confirm_shop_orders;
+import com.owoSuperAdmin.orderManagement.ShopOrderManagement;
 import com.owoSuperAdmin.timeSlot.AllAvailableTimeSlots;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.AllEnabledShopKeepers;
 import com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers.AllDisabledShopKeepers;
@@ -168,7 +168,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         }
                         case 2:
                         {
-                            Intent intent = new Intent(context, confirm_shop_orders.class);
+                            Intent intent = new Intent(context, ShopOrderManagement.class);
                             context.startActivity(intent);
                             break;
                         }
@@ -378,7 +378,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 brandsBuilder.setItems(brandsOptions, ((dialog1, which) -> {
                     if(which == 0)
                     {
-                        Intent intent = new Intent(context, confirm_shop_orders.class);
+                        Intent intent = new Intent(context, ShopOrderManagement.class);
                         context.startActivity(intent);
                     }
                     else if(which == 1)

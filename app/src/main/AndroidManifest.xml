@@ -80,22 +80,22 @@
             android:name="com.owoSuperAdmin.categoryManagement.category.AddNewCategory"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.CompletedOrderDetails"
+            android:name="com.owoSuperAdmin.orderManagement.completedOrders.CompletedOrderDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Cancelled_order_details"
+            android:name="com.owoSuperAdmin.orderManagement.cancelledOrders.CancelledOrderDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Shipped_orders_details"
+            android:name="com.owoSuperAdmin.orderManagement.shipped.ShippedOrdersDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Picked_order_details"
+            android:name="com.owoSuperAdmin.orderManagement.pickedOrders.Picked_order_details"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.Processing_orders_details"
+            android:name="com.owoSuperAdmin.orderManagement.processingOrders.Processing_orders_details"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_shipped_to_delivered"
+            android:name="com.owoSuperAdmin.orderManagement.shipped.SetShippedToDeliveredState"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.owoSuperAdmin.timeSlot.AddATimeSlot"
@@ -104,37 +104,34 @@
             android:name="com.owoSuperAdmin.categoryManagement.brand.addBrand.AddABrand"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.completed_order_state"
+            android:name="com.owoSuperAdmin.orderManagement.shipped.ShippedOrders"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.shipped_order_activity"
+            android:name="com.owoSuperAdmin.orderManagement.pickedOrders.SetPickedToShipped"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_picked_to_shipped"
+            android:name="com.owoSuperAdmin.orderManagement.processingOrders.SetProcessingToPicked"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_processing_to_picked"
+            android:name="com.owoSuperAdmin.orderManagement.pickedOrders.PickedOrderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.picked_order_activity"
+            android:name="com.owoSuperAdmin.orderManagement.pendingOrders.PendingOrderDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.pending_order_details"
+            android:name="com.owoSuperAdmin.orderManagement.completedOrders.CompletedOrdersList"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.CompletedOrders"
+            android:name="com.owoSuperAdmin.orderManagement.cancelledOrders.CanceledOrderList"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.cancel_order"
+            android:name="com.owoSuperAdmin.orderManagement.confirmedOrders.SetConfirmedOrderToProcessingState"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.state_updater.set_confirmed_to_processing"
+            android:name="com.owoSuperAdmin.orderManagement.pendingOrders.PendingOrders"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.orders.pending_orders"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.owoSuperAdmin.ordersManagement.confirm_shop_orders"
+            android:name="com.owoSuperAdmin.orderManagement.ShopOrderManagement"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.owoSuperAdmin.categoryManagement.subCategory.addSubCategory.AddASubCategory"
@@ -155,7 +152,7 @@
             android:name="com.owoSuperAdmin.productsManagement.addProduct.PreViewProductDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.owoSuperAdmin.ordersManagement.detailsOfCurrentState.confirmed_order_details"
+            android:name="com.owoSuperAdmin.orderManagement.confirmedOrders.confirmed_order_details"
             android:screenOrientation="portrait" />
 
         <meta-data
