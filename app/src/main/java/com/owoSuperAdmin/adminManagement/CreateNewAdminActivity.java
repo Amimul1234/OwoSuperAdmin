@@ -36,7 +36,7 @@ public class CreateNewAdminActivity extends AppCompatActivity {
     private EditText adminName, adminEmailAddress, adminPassword, adminConfirmPassword;
 
     private SwitchMaterial adminManagement, shopManagement, productManagement,
-        offerManagement, categoryManagement, userManagement, orderManagement;
+        offerManagement, categoryManagement, userManagement, orderManagement, giftAndDealManagement;
 
     private ProgressBar progressBar;
 
@@ -64,6 +64,7 @@ public class CreateNewAdminActivity extends AppCompatActivity {
         userManagement = findViewById(R.id.user_management);
         orderManagement = findViewById(R.id.order_management);
         categoryManagement = findViewById(R.id.category_management);
+        giftAndDealManagement = findViewById(R.id.gift_and_deal_management);
 
         progressBar = findViewById(R.id.complete_progress);
 
@@ -140,13 +141,15 @@ public class CreateNewAdminActivity extends AppCompatActivity {
         if(productManagement.isChecked())
             permissionList.add("Product Management");
         if(offerManagement.isChecked())
-            permissionList.add("Offer Management");
+            permissionList.add("Banner Management");
         if(categoryManagement.isChecked())
             permissionList.add("Category Management");
         if(userManagement.isChecked())
             permissionList.add("User Management");
         if(orderManagement.isChecked())
             permissionList.add("Order Management");
+        if(giftAndDealManagement.isChecked())
+            permissionList.add("Gift and Deal Management");
 
         addToDatabase();
     }

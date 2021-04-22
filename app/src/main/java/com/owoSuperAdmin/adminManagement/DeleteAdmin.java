@@ -27,8 +27,8 @@ public class DeleteAdmin extends AppCompatActivity {
 
     private AdminLogin adminLogin;
 
-    private SwitchMaterial approveShop, shopManagement, productManagement, offerManagement,
-            userManagement, orderManagement;
+    private SwitchMaterial approveShop, shopManagement, productManagement, bannerManagement,
+            userManagement, orderManagement, giftAndDealManagement;
 
     private ProgressDialog progressDialog;
 
@@ -59,9 +59,10 @@ public class DeleteAdmin extends AppCompatActivity {
         approveShop = findViewById(R.id.approve_shop);
         shopManagement = findViewById(R.id.shop_management);
         productManagement = findViewById(R.id.product_management);
-        offerManagement = findViewById(R.id.offer_management);
+        bannerManagement = findViewById(R.id.offer_management);
         userManagement = findViewById(R.id.user_management);
         orderManagement = findViewById(R.id.order_management);
+        giftAndDealManagement = findViewById(R.id.gift_and_deal_management);
 
         newAdminName.setText(adminLogin.getAdminName());
         newAdminEmail.setText(adminLogin.getAdminEmailAddress());
@@ -161,12 +162,14 @@ public class DeleteAdmin extends AppCompatActivity {
             shopManagement.setChecked(true);
         if(permissionsList.contains("Product Management"))
             productManagement.setChecked(true);
-        if(permissionsList.contains("Offer Management"))
-            offerManagement.setChecked(true);
+        if(permissionsList.contains("Banner Management"))
+            bannerManagement.setChecked(true);
         if(permissionsList.contains("User Management"))
             userManagement.setChecked(true);
         if(permissionsList.contains("Order Management"))
             orderManagement.setChecked(true);
+        if(permissionsList.contains("Gift and Deal Management"))
+            giftAndDealManagement.setChecked(true);
 
         progressDialog.dismiss();
     }

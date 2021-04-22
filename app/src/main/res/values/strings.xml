@@ -180,5 +180,7 @@
     <string name="all_available_time_slots">All Available Time Slots</string>
     <string name="clock">Clock</string>
     <string name="empty_slots">Empty Slots</string>
+    <string name="gift_and_deal_management">Gift and Deal Management</string>
+    <string name="banner_management">Banner Management</string>
 
 </resources>

@@ -23,8 +23,8 @@ public class AdminRegisterAdapter extends RecyclerView.Adapter<AdminRegisterAdap
     private final Context mctx;
 
     public AdminRegisterAdapter(Context context, List<AdminLogin> adminLoginList) {
-        this.mInflater = LayoutInflater.from(context);
         mctx = context;
+        this.mInflater = LayoutInflater.from(context);
         this.adminLoginList = adminLoginList;
     }
 

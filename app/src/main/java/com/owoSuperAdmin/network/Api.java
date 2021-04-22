@@ -53,6 +53,9 @@ public interface Api {
     @GET("/getAllProducts")
     Call<List<OwoProduct>> getAllProducts(@Query("page") int page);
 
+    @GET("/getAllStockedOutProducts")
+    Call<List<OwoProduct>> getAllStockedOutProducts(@Query("page") int page);
+
     @GET("/getAProduct")
     Call<OwoProduct> getAProduct(@Query("productId") Long productId);
 

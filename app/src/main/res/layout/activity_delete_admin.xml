@@ -243,11 +243,34 @@
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/order_management"
+                    android:text="@string/banner_management"
                     android:textSize="20sp" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/order_management"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/linear6">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gift_and_deal_management"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/gift_and_deal_management"
                     android:layout_width="match_parent"
                     android:layout_marginEnd="10dp"
                     android:layout_height="wrap_content" />
@@ -263,7 +286,7 @@
                 android:textSize="22sp"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center"
-                android:layout_below="@id/linear6"
+                android:layout_below="@id/linear7"
                 android:layout_marginTop="40dp"
                 />
 

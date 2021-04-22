@@ -21,6 +21,7 @@ import com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.Delete
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
 import com.owoSuperAdmin.login.AdminCredentials;
 import com.owoSuperAdmin.offersManagement.QuponActivity;
+import com.owoSuperAdmin.productsManagement.stockedOutProducts.StockedOutProducts;
 import com.owoSuperAdmin.timeSlot.AddATimeSlot;
 import com.owoSuperAdmin.pushNotification.CloudMessagingActivity;
 import com.owoSuperAdmin.productsManagement.addProduct.AddProductActivity;
@@ -43,6 +44,7 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
 
     private final Context context;
+
     private final List<String> segment = new ArrayList<>();
     private final List<Integer> icons = new ArrayList<>();
 
@@ -63,7 +65,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 case "Product Management":
                     icons.add(R.drawable.product_management);
                     break;
-                case "Offer Management":
+                case "Banner Management":
                     icons.add(R.drawable.offer_management);
                     break;
                 case "Category Management":
@@ -74,6 +76,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     break;
                 case "Order Management":
                     icons.add(R.drawable.order_management);
+                    break;
+                case "Gift and Deal Management":
+                    icons.add(R.drawable.gift);
                     break;
             }
         }
@@ -181,34 +186,41 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
 
             case "Product Management":
             {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                View view = LayoutInflater.from(context).inflate(R.layout.custom_products_alert_dialog, null);
+                CharSequence[] options=new CharSequence[] {"Add New Product", "All Products", "Stocked Out Products"};
 
-                Button add_a_new_product = view.findViewById(R.id.add_a_new_product);
-                Button available_products = view.findViewById(R.id.available_products);
+                AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                builder.setTitle("Products Management");
 
-                builder.setView(view);
-
-                final AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-
-                add_a_new_product.setOnClickListener(v -> {
-                    Intent intent=new Intent(context, AddProductActivity.class);
-                    context.startActivity(intent);
-                    alertDialog.cancel();
+                builder.setItems(options, (dialog, i) -> {
+                    switch (i)
+                    {
+                        case 0:
+                        {
+                            Intent intent=new Intent(context, AddProductActivity.class);
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case 1:
+                        {
+                            Intent intent=new Intent(context, AvailableProducts.class);
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case 2:
+                        {
+                            Intent intent = new Intent(context, StockedOutProducts.class);
+                            context.startActivity(intent);
+                            break;
+                        }
+                    }
                 });
 
-                available_products.setOnClickListener(v -> {
-                    Intent intent=new Intent(context, AvailableProducts.class);
-                    context.startActivity(intent);
-                    alertDialog.cancel();
-                });
-
+                builder.show();
                 break;
             }
 
-            case "Offer Management":
+            case "Banner Management":
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
 

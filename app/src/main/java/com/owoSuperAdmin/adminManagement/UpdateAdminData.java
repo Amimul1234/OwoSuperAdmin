@@ -30,8 +30,8 @@ public class UpdateAdminData extends AppCompatActivity {
 
     private AdminLogin adminLogin;
 
-    private SwitchMaterial adminManagement, shopManagement, productManagement, offerManagement,
-        categoryManagement, userManagement, orderManagement;
+    private SwitchMaterial adminManagement, shopManagement, productManagement, bannerManagement,
+        categoryManagement, userManagement, orderManagement, giftAndDealsManagement;
 
     private EditText newAdminName, newAdminEmail;
     private ProgressDialog progressDialog;
@@ -62,10 +62,11 @@ public class UpdateAdminData extends AppCompatActivity {
         adminManagement = findViewById(R.id.admin_management);
         shopManagement = findViewById(R.id.shop_management);
         productManagement = findViewById(R.id.product_management);
-        offerManagement = findViewById(R.id.offer_management);
+        bannerManagement = findViewById(R.id.offer_management);
         categoryManagement = findViewById(R.id.category_management);
         userManagement = findViewById(R.id.user_management);
         orderManagement = findViewById(R.id.order_management);
+        giftAndDealsManagement = findViewById(R.id.gift_and_deal_management);
 
         Button updateAdminData = findViewById(R.id.update_admin_data);
 
@@ -109,14 +110,16 @@ public class UpdateAdminData extends AppCompatActivity {
             permissionList.add("Shop Management");
         if(productManagement.isChecked())
             permissionList.add("Product Management");
-        if(offerManagement.isChecked())
-            permissionList.add("Offer Management");
+        if(bannerManagement.isChecked())
+            permissionList.add("Banner Management");
         if(categoryManagement.isChecked())
             permissionList.add("Category Management");
         if(userManagement.isChecked())
             permissionList.add("User Management");
         if(orderManagement.isChecked())
             permissionList.add("Order Management");
+        if(giftAndDealsManagement.isChecked())
+            permissionList.add("Gift and Deal Management");
 
         adminLogin.setAdminEmailAddress(newAdminEmail.getText().toString());
         adminLogin.setAdminName(newAdminName.getText().toString());
@@ -221,14 +224,16 @@ public class UpdateAdminData extends AppCompatActivity {
             shopManagement.setChecked(true);
         if(permissionsList.contains("Product Management"))
             productManagement.setChecked(true);
-        if(permissionsList.contains("Offer Management"))
-            offerManagement.setChecked(true);
+        if(permissionsList.contains("Banner Management"))
+            bannerManagement.setChecked(true);
         if(permissionsList.contains("Category Management"))
             categoryManagement.setChecked(true);
         if(permissionsList.contains("User Management"))
             userManagement.setChecked(true);
         if(permissionsList.contains("Order Management"))
             orderManagement.setChecked(true);
+        if(permissionsList.contains("Gift and Deal Management"))
+            giftAndDealsManagement.setChecked(true);
 
         progressDialog.dismiss();
     }
