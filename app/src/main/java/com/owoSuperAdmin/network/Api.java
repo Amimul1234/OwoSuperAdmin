@@ -6,6 +6,7 @@ import com.owoSuperAdmin.adminManagement.entity.AdminPermissions;
 import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
+import com.owoSuperAdmin.giftAndDeals.entity.Gifts;
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
 import com.owoSuperAdmin.orderManagement.Shop_keeper_orders;
@@ -203,4 +204,9 @@ public interface Api {
     //push notification api
     @POST("/send-notification")
     Call<ResponseBody> sendNotification(@Body NotificationData notificationData, @Query("topic") String topic);
+
+    //Gifts and deals management
+    @POST("/createGiftCard")
+    Call<ResponseBody> createGiftCard(@Body Gifts gifts);
+
 }

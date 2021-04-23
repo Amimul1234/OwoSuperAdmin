@@ -19,6 +19,8 @@ import com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory;
 import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
 import com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories;
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
+import com.owoSuperAdmin.giftAndDeals.AllGifts;
+import com.owoSuperAdmin.giftAndDeals.CreateNewGift;
 import com.owoSuperAdmin.login.AdminCredentials;
 import com.owoSuperAdmin.offersManagement.QuponActivity;
 import com.owoSuperAdmin.productsManagement.stockedOutProducts.StockedOutProducts;
@@ -428,6 +430,58 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 break;
             }
 
+            case "Gift and Deal Management": {
+
+                CharSequence[] giftAndDealOptions = new CharSequence[]{"Manage gift cards",
+                        "Manage Deals", "Manage Offers"};
+
+                AlertDialog.Builder giftAndDealBuilder = new AlertDialog.Builder(context);
+                giftAndDealBuilder.setTitle("Gift and Deal Management");
+
+                giftAndDealBuilder.setItems(giftAndDealOptions, ((dialog1, which) ->
+                {
+                    if(which == 0)
+                    {
+                        CharSequence[] giftsOptions = new CharSequence[]{"Add new gift card",
+                                "All Gift Cards"};
+
+                        AlertDialog.Builder giftsBuilder = new AlertDialog.Builder(context);
+                        giftsBuilder.setTitle("Gift Management");
+
+                        giftsBuilder.setItems(giftsOptions, ((dialog, which1) -> {
+
+                            Intent intent;
+
+                            if(which1 == 0)
+                            {
+                                intent = new Intent(context, CreateNewGift.class);
+                            }
+                            else
+                            {
+                                intent = new Intent(context, AllGifts.class);
+                            }
+
+                            context.startActivity(intent);
+
+                        }));
+                    }
+                    else if(which == 1)
+                    {
+                        Intent intent = new Intent(context, AllCategories.class);
+                        intent.putExtra("indicate", "update");
+                        context.startActivity(intent);
+                    }
+                    else if(which == 2)
+                    {
+                        Intent intent = new Intent(context, AllCategories.class);
+                        intent.putExtra("indicate", "delete");
+                        context.startActivity(intent);
+                    }
+                }));
+
+                giftAndDealBuilder.show();
+                break;
+            }
         }
     }
 }

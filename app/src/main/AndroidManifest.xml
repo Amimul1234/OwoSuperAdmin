@@ -24,9 +24,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-
-        <activity android:name="com.owoSuperAdmin.timeSlot.AllAvailableTimeSlots"/>
-        <activity android:name="com.owoSuperAdmin.productsManagement.stockedOutProducts.StockedOutProducts"/>
+        <activity android:name="com.owoSuperAdmin.giftAndDeals.AllGifts"></activity>
+        <activity android:name="com.owoSuperAdmin.giftAndDeals.CreateNewGift" />
+        <activity android:name="com.owoSuperAdmin.timeSlot.AllAvailableTimeSlots" />
+        <activity android:name="com.owoSuperAdmin.productsManagement.stockedOutProducts.StockedOutProducts" />
         <activity android:name="com.owoSuperAdmin.adminManagement.DeleteAdmin" />
         <activity android:name="com.owoSuperAdmin.shopManagement.allRegisteredShops.ApprovedShopDetails" />
         <activity android:name="com.owoSuperAdmin.userManagement.shopKeeperUser.disabledShopKeepers.DisabledShopKeeperUserDetails" />
