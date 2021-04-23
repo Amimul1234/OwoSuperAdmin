@@ -464,6 +464,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                             context.startActivity(intent);
 
                         }));
+
+                        giftsBuilder.show();
+
                     }
                     else if(which == 1)
                     {
@@ -480,6 +483,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                 }));
 
                 giftAndDealBuilder.show();
+
                 break;
             }
         }

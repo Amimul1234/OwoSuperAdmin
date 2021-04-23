@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,23 +20,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.giftAndDeals.entity.Gifts;
 import com.owoSuperAdmin.network.RetrofitClient;
-import com.owoSuperAdmin.offersManagement.addNewOffer.CreateOffersActivity;
-import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
 import com.owoSuperAdmin.owoshop.R;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -159,6 +151,32 @@ public class CreateNewGift extends AppCompatActivity {
 
     private void saveGiftsToDatabase(Gifts gifts) {
 
+        RetrofitClient.getInstance().getApi()
+                .createGiftCard(gifts)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                        if(response.isSuccessful())
+                        {
+                            progressDialog.dismiss();
+                            Toast.makeText(CreateNewGift.this, "Gift image added successfully...", Toast.LENGTH_SHORT).show();
+
+                            onBackPressed();
+                        }
+                        else
+                        {
+                            progressDialog.dismiss();
+                            Toast.makeText(CreateNewGift.this, "Can not save gift card, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                        progressDialog.dismiss();
+                        Log.e(TAG, t.getMessage());
+                        Toast.makeText(CreateNewGift.this, "Can not save gift card, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
