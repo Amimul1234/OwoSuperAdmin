@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.giftAndDeals;
+package com.owoSuperAdmin.giftAndDeals.gifts;
 
 import android.content.Context;
 import android.util.Log;

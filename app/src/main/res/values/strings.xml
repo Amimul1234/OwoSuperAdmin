@@ -188,5 +188,9 @@
     <string name="enter_gift_card_details">Enter Gift Card Details</string>
     <string name="create_gift_card">Create Gift Card</string>
     <string name="all_gift_cards">All Gift Cards</string>
+    <string name="create_deal">Create Deal</string>
+    <string name="click_to_add_deal_image">Click to add deal image</string>
+    <string name="enter_deal_details">Enter deal details</string>
+    <string name="create_new_deal">Create New Deal</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.giftAndDeals;
+package com.owoSuperAdmin.giftAndDeals.gifts;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.owoSuperAdmin.giftAndDeals.entity.Gifts;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;

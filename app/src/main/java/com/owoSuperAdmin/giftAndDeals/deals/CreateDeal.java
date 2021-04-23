@@ -1,4 +1,4 @@
-package com.owoSuperAdmin.giftAndDeals;
+package com.owoSuperAdmin.giftAndDeals.deals;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,43 +38,45 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateNewGift extends AppCompatActivity {
+public class CreateDeal extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
-    private ImageView giftImage;
-    private EditText giftCardDetails;
+    private ImageView dealImage;
+    private EditText dealDetails;
 
     private final int STORAGE_PERMISSION_CODE = 1;
-    private final String TAG = "Create Gift";
+    private final String TAG = "Create Deal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_gift);
+        setContentView(R.layout.activity_create_deal);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Create new gift card");
-        progressDialog.setMessage("Please wait while we are creating new gift card");
+        progressDialog.setTitle("Create new deal");
+        progressDialog.setMessage("Please wait while we are creating new deal");
 
-        giftImage = findViewById(R.id.gift_image);
-        giftCardDetails = findViewById(R.id.gift_card_description);
-        Button createGiftCard = findViewById(R.id.create_gift_card);
+        dealImage = findViewById(R.id.deal_image);
+        dealDetails = findViewById(R.id.deal_description);
 
-        giftImage.setOnClickListener(v -> requestStoragePermission());
-        createGiftCard.setOnClickListener(v -> validateInput());
+        Button createDeal = findViewById(R.id.create_deal);
+
+        dealImage.setOnClickListener(v -> requestStoragePermission());
+        createDeal.setOnClickListener(v -> validateInput());
+
     }
 
     private void validateInput() {
 
-        if(giftImage.getDrawable().getConstantState() ==
-                Objects.requireNonNull(ContextCompat.getDrawable(CreateNewGift.this, R.drawable.gift)).getConstantState())
+        if(dealImage.getDrawable().getConstantState() ==
+                Objects.requireNonNull(ContextCompat.getDrawable(CreateDeal.this, R.drawable.deals)).getConstantState())
         {
-            Toast.makeText(this, "Offer image is mandatory...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Deals image is mandatory...", Toast.LENGTH_SHORT).show();
         }
-        else if(giftCardDetails.getText().toString().isEmpty())
+        else if(dealDetails.getText().toString().isEmpty())
         {
-            giftCardDetails.setError("Please enter gift details");
-            giftCardDetails.requestFocus();
+            dealDetails.setError("Please enter deal details");
+            dealDetails.requestFocus();
         }
         else
         {
@@ -86,13 +88,13 @@ public class CreateNewGift extends AppCompatActivity {
 
     private void saveToDatabase() {
 
-        Bitmap bitmap = ((BitmapDrawable) giftImage.getDrawable()).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) dealImage.getDrawable()).getBitmap();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
 
         String filename = UUID.randomUUID().toString();
 
-        File file = new File(CreateNewGift.this.getCacheDir() + File.separator + filename + ".jpg");
+        File file = new File(CreateDeal.this.getCacheDir() + File.separator + filename + ".jpg");
 
         try {
             FileOutputStream fo = new FileOutputStream(file);
@@ -107,7 +109,7 @@ public class CreateNewGift extends AppCompatActivity {
         MultipartBody.Part multipartFile = MultipartBody.Part.createFormData("multipartFile", file.getName(), requestBody);
 
         RetrofitClient.getInstance().getApi()
-                .uploadImageToServer("Gift Card", multipartFile)
+                .uploadImageToServer("Deals", multipartFile)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
@@ -126,7 +128,7 @@ public class CreateNewGift extends AppCompatActivity {
 
                             Gifts gifts = new Gifts();
 
-                            gifts.setGiftDetails(giftCardDetails.getText().toString());
+                            gifts.setGiftDetails(dealDetails.getText().toString());
                             gifts.setGiftImage(path);
 
                             saveGiftsToDatabase(gifts);
@@ -134,7 +136,7 @@ public class CreateNewGift extends AppCompatActivity {
                         else
                         {
                             progressDialog.dismiss();
-                            Toast.makeText(CreateNewGift.this, "Error uploading image to server", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateDeal.this, "Error uploading image to server", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -142,7 +144,7 @@ public class CreateNewGift extends AppCompatActivity {
                     public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                         progressDialog.dismiss();
                         Log.e(TAG, t.getMessage());
-                        Toast.makeText(CreateNewGift.this, "Error uploading image to server", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateDeal.this, "Error uploading image to server", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -159,14 +161,14 @@ public class CreateNewGift extends AppCompatActivity {
                         if(response.isSuccessful())
                         {
                             progressDialog.dismiss();
-                            Toast.makeText(CreateNewGift.this, "Gift image added successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateDeal.this, "Deals image added successfully...", Toast.LENGTH_SHORT).show();
 
                             onBackPressed();
                         }
                         else
                         {
                             progressDialog.dismiss();
-                            Toast.makeText(CreateNewGift.this, "Can not save gift card, please try again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateDeal.this, "Can not save deals card, please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -174,7 +176,7 @@ public class CreateNewGift extends AppCompatActivity {
                     public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                         progressDialog.dismiss();
                         Log.e(TAG, t.getMessage());
-                        Toast.makeText(CreateNewGift.this, "Can not save gift card, please try again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateDeal.this, "Can not save deals card, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -189,7 +191,7 @@ public class CreateNewGift extends AppCompatActivity {
                 case 0:
                     if (resultCode == RESULT_OK && data != null) {
                         Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
-                        giftImage.setImageBitmap(selectedImage);
+                        dealImage.setImageBitmap(selectedImage);
                     }
 
                     break;
@@ -205,7 +207,7 @@ public class CreateNewGift extends AppCompatActivity {
 
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
-                                giftImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                dealImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
                                 cursor.close();
                             }
                         }
@@ -248,10 +250,10 @@ public class CreateNewGift extends AppCompatActivity {
                     .setMessage("This permission is needed because of taking image from gallery")
                     .setPositiveButton("ok", (dialog, which) -> {
 
-                        ActivityCompat.requestPermissions(CreateNewGift.this,
+                        ActivityCompat.requestPermissions(CreateDeal.this,
                                 new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
-                        selectImage(CreateNewGift.this);
+                        selectImage(CreateDeal.this);
                     })
                     .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
                     .create().show();
@@ -259,7 +261,7 @@ public class CreateNewGift extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
-            selectImage(CreateNewGift.this);
+            selectImage(CreateDeal.this);
         }
     }
 
