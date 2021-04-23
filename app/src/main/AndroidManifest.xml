@@ -24,7 +24,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name="com.owoSuperAdmin.giftAndDeals.deals.CreateDeal"></activity>
+        <activity android:name="com.owoSuperAdmin.giftAndDeals.deals.AllDealsActivity"></activity>
+        <activity android:name="com.owoSuperAdmin.giftAndDeals.deals.CreateDeal" />
         <activity android:name="com.owoSuperAdmin.giftAndDeals.gifts.AllGifts" />
         <activity android:name="com.owoSuperAdmin.giftAndDeals.gifts.CreateNewGift" />
         <activity android:name="com.owoSuperAdmin.timeSlot.AllAvailableTimeSlots" />

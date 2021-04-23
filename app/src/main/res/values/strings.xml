@@ -192,5 +192,6 @@
     <string name="click_to_add_deal_image">Click to add deal image</string>
     <string name="enter_deal_details">Enter deal details</string>
     <string name="create_new_deal">Create New Deal</string>
+    <string name="all_deals">All Deals</string>
 
 </resources>

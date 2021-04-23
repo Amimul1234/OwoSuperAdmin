@@ -19,6 +19,8 @@ import com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory;
 import com.owoSuperAdmin.categoryManagement.category.UpdateExistentCategory;
 import com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories;
 import com.owoSuperAdmin.categoryManagement.subCategory.updateSubCategory.UpdateSubCategoryAllCategories;
+import com.owoSuperAdmin.giftAndDeals.deals.AllDealsActivity;
+import com.owoSuperAdmin.giftAndDeals.deals.CreateDeal;
 import com.owoSuperAdmin.giftAndDeals.gifts.AllGifts;
 import com.owoSuperAdmin.giftAndDeals.gifts.CreateNewGift;
 import com.owoSuperAdmin.login.AdminCredentials;
@@ -384,7 +386,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             case "Order Management":
             {
                 CharSequence[] brandsOptions = new CharSequence[]{"Manage Shop Order",
-                        "Manage Time Slots", "Manage Qupon", "Manage Gift card"};
+                        "Manage Time Slots", "Manage Qupon"};
 
                 AlertDialog.Builder brandsBuilder = new AlertDialog.Builder(context);
                 brandsBuilder.setTitle("Shop Order Management");
@@ -470,9 +472,31 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     }
                     else if(which == 1)
                     {
-                        Intent intent = new Intent(context, AllCategories.class);
-                        intent.putExtra("indicate", "update");
-                        context.startActivity(intent);
+
+                        CharSequence[] dealsOption = new CharSequence[]{"Add New Deal",
+                                "All Deals"};
+
+                        AlertDialog.Builder dealsBuilder = new AlertDialog.Builder(context);
+                        dealsBuilder.setTitle("Deal Management");
+
+                        dealsBuilder.setItems(dealsOption, ((dialog, which1) -> {
+
+                            Intent intent;
+
+                            if(which1 == 0)
+                            {
+                                intent = new Intent(context, CreateDeal.class);
+                            }
+                            else
+                            {
+                                intent = new Intent(context, AllDealsActivity.class);
+                            }
+
+                            context.startActivity(intent);
+
+                        }));
+
+                        dealsBuilder.show();
                     }
                     else if(which == 2)
                     {

@@ -6,6 +6,7 @@ import com.owoSuperAdmin.adminManagement.entity.AdminPermissions;
 import com.owoSuperAdmin.categoryManagement.brand.addBrand.Brands;
 import com.owoSuperAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.owoSuperAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
+import com.owoSuperAdmin.giftAndDeals.entity.Deals;
 import com.owoSuperAdmin.giftAndDeals.entity.Gifts;
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
 import com.owoSuperAdmin.productsManagement.entity.OwoProduct;
@@ -214,5 +215,14 @@ public interface Api {
 
     @DELETE("/deleteGiftCard")
     Call<ResponseBody> deleteGiftCard(@Query("giftCardId") Long giftCardId);
+
+    @POST("/createNewDeal")
+    Call<ResponseBody> createNewDeal(@Body Deals deals);
+
+    @GET("/getAllDeals")
+    Call<List<Deals>> getAllDeals();
+
+    @DELETE("/deleteDeal")
+    Call<ResponseBody> deleteDeal(@Query("dealsId") Long dealsId);
 
 }

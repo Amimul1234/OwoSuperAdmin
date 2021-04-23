@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.owoSuperAdmin.giftAndDeals.entity.Deals;
 import com.owoSuperAdmin.giftAndDeals.entity.Gifts;
 import com.owoSuperAdmin.network.RetrofitClient;
 import com.owoSuperAdmin.owoshop.R;
@@ -126,12 +128,12 @@ public class CreateDeal extends AppCompatActivity {
                                 Log.e(TAG, e.getMessage());
                             }
 
-                            Gifts gifts = new Gifts();
+                            Deals deals = new Deals();
 
-                            gifts.setGiftDetails(dealDetails.getText().toString());
-                            gifts.setGiftImage(path);
+                            deals.setDealDetails(dealDetails.getText().toString());
+                            deals.setDealImage(path);
 
-                            saveGiftsToDatabase(gifts);
+                            saveGiftsToDatabase(deals);
                         }
                         else
                         {
@@ -151,10 +153,9 @@ public class CreateDeal extends AppCompatActivity {
 
     }
 
-    private void saveGiftsToDatabase(Gifts gifts) {
-
+    private void saveGiftsToDatabase(Deals deals) {
         RetrofitClient.getInstance().getApi()
-                .createGiftCard(gifts)
+                .createNewDeal(deals)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
