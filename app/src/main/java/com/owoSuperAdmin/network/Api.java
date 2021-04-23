@@ -212,4 +212,7 @@ public interface Api {
     @GET("/getAllGiftCards")
     Call<List<Gifts>> getGistsCardList();
 
+    @DELETE("/deleteGiftCard")
+    Call<ResponseBody> deleteGiftCard(@Query("giftCardId") Long giftCardId);
+
 }

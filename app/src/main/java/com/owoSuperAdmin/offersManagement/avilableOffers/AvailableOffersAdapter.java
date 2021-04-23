@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.owoSuperAdmin.configurationsFile.HostAddress;
 import com.owoSuperAdmin.offersManagement.deleteOffer.DeleteOfferActivity;
 import com.owoSuperAdmin.offersManagement.entity.OffersEntity;
@@ -42,7 +43,7 @@ public class AvailableOffersAdapter extends RecyclerView.Adapter<AvailableOffers
     public void onBindViewHolder(@NonNull final xyz holder, final int position) {
         
         Glide.with(context).load(HostAddress.HOST_ADDRESS.getAddress()+offersEntityList.get(position).getOffer_image()).
-                into(holder.imageView);
+                diskCacheStrategy(DiskCacheStrategy.ALL).timeout(6000).into(holder.imageView);
 
         Format formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
