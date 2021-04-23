@@ -209,4 +209,7 @@ public interface Api {
     @POST("/createGiftCard")
     Call<ResponseBody> createGiftCard(@Body Gifts gifts);
 
+    @GET("/getAllGiftCards")
+    Call<List<Gifts>> getGistsCardList();
+
 }

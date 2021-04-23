@@ -187,5 +187,6 @@
     <string name="click_to_upload_gift_image">(Click to upload gift image)</string>
     <string name="enter_gift_card_details">Enter Gift Card Details</string>
     <string name="create_gift_card">Create Gift Card</string>
+    <string name="all_gift_cards">All Gift Cards</string>
 
 </resources>
