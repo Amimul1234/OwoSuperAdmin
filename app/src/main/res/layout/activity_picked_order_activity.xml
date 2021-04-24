@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.owoSuperAdmin.orderManagement.pickedOrders.PickedOrderActivity">
+    tools:context="com.shopKPRAdmin.orderManagement.pickedOrders.PickedOrderActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

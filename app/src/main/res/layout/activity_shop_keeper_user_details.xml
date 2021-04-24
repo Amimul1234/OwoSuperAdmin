@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.owoSuperAdmin.userManagement.shopKeeperUser.allShopKeepers.ShopKeeperUserDetails">
+    tools:context="com.shopKPRAdmin.userManagement.shopKeeperUser.allShopKeepers.ShopKeeperUserDetails">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

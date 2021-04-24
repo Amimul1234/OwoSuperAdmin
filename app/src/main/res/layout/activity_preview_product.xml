@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/white"
-    tools:context="com.owoSuperAdmin.productsManagement.addProduct.PreViewProductDetails">
+    tools:context="com.shopKPRAdmin.productsManagement.addProduct.PreViewProductDetails">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_preview"

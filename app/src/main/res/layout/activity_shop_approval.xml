@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:animateLayoutChanges="true"
-    tools:context="com.owoSuperAdmin.shopManagement.approveShop.ShopCreationRequestsActivity">
+    tools:context="com.shopKPRAdmin.shopManagement.approveShop.ShopCreationRequestsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/shopApprovalToolbar"

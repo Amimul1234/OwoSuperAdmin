@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owoSuperAdmin.giftAndDeals.Deals">
+    tools:context="com.shopKPRAdmin.giftAndDeals.Deals">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

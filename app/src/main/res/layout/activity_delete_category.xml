@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.owoSuperAdmin.categoryManagement.category.DeleteCategoryActivity">
+    tools:context="com.shopKPRAdmin.categoryManagement.category.DeleteCategoryActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

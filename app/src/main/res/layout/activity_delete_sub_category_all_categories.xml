@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:animateLayoutChanges="true"
-    tools:context="com.owoSuperAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories">
+    tools:context="com.shopKPRAdmin.categoryManagement.subCategory.deleteSubCategory.DeleteSubCategoryAllCategories">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/deleteCategoryToolbar"
         android:layout_width="match_parent"

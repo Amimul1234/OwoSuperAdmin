@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/white"
-    tools:context="com.owoSuperAdmin.productsManagement.ProductDetailsModification">
+    tools:context="com.shopKPRAdmin.productsManagement.ProductDetailsModification">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

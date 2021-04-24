@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:animateLayoutChanges="true"
     android:layout_height="match_parent"
-    tools:context="com.owoSuperAdmin.categoryManagement.category.DeleteExistentCategory">
+    tools:context="com.shopKPRAdmin.categoryManagement.category.DeleteExistentCategory">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/deleteCategoryToolbar"

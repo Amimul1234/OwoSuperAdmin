@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:animateLayoutChanges="true"
     android:layout_height="match_parent"
-    tools:context="com.owoSuperAdmin.categoryManagement.brand.updateBrand.AllSubCategoriesOfACategory">
+    tools:context="com.shopKPRAdmin.categoryManagement.brand.updateBrand.AllSubCategoriesOfACategory">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/updateSubCategoryToolbar"
