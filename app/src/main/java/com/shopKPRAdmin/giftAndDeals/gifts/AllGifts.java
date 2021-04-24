@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.shopKPRAdmin.giftAndDeals.entity.Gifts;
 import com.shopKPRAdmin.network.RetrofitClient;
 import com.shopKPRAdmin.owoshop.R;
