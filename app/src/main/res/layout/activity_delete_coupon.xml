@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shopKPRAdmin.offersManagement.qupon.CreateNewQupon">
+    tools:context="com.shopKPRAdmin.offersManagement.qupon.DeleteCoupon">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -23,9 +23,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create_a_new_coupon"
+            android:text="@string/delete_coupon"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:layout_marginStart="30dp"
             android:textStyle="bold"
             />
@@ -34,36 +34,35 @@
 
 
     <ImageView
-        android:id="@+id/add_coupon_image"
+        android:id="@+id/offerImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="10dp"
         android:padding="5dp"
-        android:scaleType="centerInside"
+        android:scaleType="fitXY"
         android:src="@drawable/qupon_demo_image"
         android:contentDescription="@string/offer_image" />
 
-    <EditText
-        android:id="@+id/coupon_discount_amount"
+    <TextView
+        android:id="@+id/offerIsFor"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_qupon_discount_in_taka"
-        android:background="@drawable/edit_text_black"
+        android:layout_height="45dp"
+        android:padding="10dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
-        android:inputType="number"
-        android:padding="12dp"/>
+        android:background="@drawable/edit_text_black"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         >
 
         <EditText
-            android:id="@+id/coupon_start_date"
+            android:id="@+id/offerStartDate"
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,9 +78,8 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_baseline_date_range_24"
-            android:layout_toEndOf="@+id/coupon_start_date"
+            android:layout_toEndOf="@+id/offerStartDate"
             android:layout_alignParentTop="true"
-            android:layout_alignBottom="@+id/coupon_start_date"
             android:contentDescription="@string/date_picker" />
     </RelativeLayout>
 
@@ -89,13 +87,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         >
 
         <EditText
-            android:id="@+id/coupon_end_date"
+            android:id="@+id/offerEndDate"
             android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -114,9 +112,9 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_baseline_date_range_24"
-            android:layout_toEndOf="@+id/coupon_end_date"
+            android:layout_toEndOf="@+id/offerEndDate"
             android:layout_alignParentTop="true"
-            android:layout_alignBottom="@+id/coupon_end_date"
+            android:layout_alignBottom="@+id/offerEndDate"
             android:contentDescription="@string/date_picker" />
 
     </RelativeLayout>
@@ -142,26 +140,25 @@
             />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/enable_coupon_switch"
+            android:id="@+id/offerStateIndicatorSwitch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             />
+
     </RelativeLayout>
 
-
-
     <Button
-        android:id="@+id/create_coupon_button"
+        android:id="@+id/deleteOfferButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_coupon"
+        android:text="@string/delete_coupon"
         android:textAllCaps="false"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/buttons_blue"
+        android:background="@drawable/buttons_red"
         android:textStyle = "bold"
         android:textSize="25sp"
         android:textColor="@android:color/white"

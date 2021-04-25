@@ -157,7 +157,8 @@ public class CreateOffersActivity extends AppCompatActivity {
 
     private void ValidateOfferData() {
 
-        if(createOfferImage.getDrawable().getConstantState() == Objects.requireNonNull(ContextCompat.getDrawable(CreateOffersActivity.this, R.drawable.offers)).getConstantState())
+        if(createOfferImage.getDrawable().getConstantState() ==
+                Objects.requireNonNull(ContextCompat.getDrawable(CreateOffersActivity.this, R.drawable.offers)).getConstantState())
         {
             Toast.makeText(this, "Offer image is mandatory...", Toast.LENGTH_SHORT).show();
         }

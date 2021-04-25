@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -31,7 +32,7 @@
                 android:layout_marginStart="10dp"
                 android:padding="5dp"
                 android:background="@drawable/buttons_red"
-                android:text="Create a new offer"
+                android:text="@string/create_a_new_banner"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -45,7 +46,7 @@
                 android:padding="5dp"
                 android:layout_below="@+id/create_a_new_offer"
                 android:background="@drawable/buttons_red"
-                android:text="Available Offers     "
+                android:text="All Banners                   "
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />

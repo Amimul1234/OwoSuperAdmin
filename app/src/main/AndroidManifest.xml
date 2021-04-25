@@ -24,7 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name="com.shopKPRAdmin.giftAndDeals.deals.AllDealsActivity"></activity>
+        <activity android:name="com.shopKPRAdmin.offersManagement.qupon.DeleteCoupon"></activity>
+        <activity android:name="com.shopKPRAdmin.offersManagement.qupon.AllAvailableCoupons" />
+        <activity android:name="com.shopKPRAdmin.giftAndDeals.deals.AllDealsActivity" />
         <activity android:name="com.shopKPRAdmin.giftAndDeals.deals.CreateDeal" />
         <activity android:name="com.shopKPRAdmin.giftAndDeals.gifts.AllGifts" />
         <activity android:name="com.shopKPRAdmin.giftAndDeals.gifts.CreateNewGift" />
@@ -145,7 +147,7 @@
             android:name="com.shopKPRAdmin.shopManagement.approveShop.ApproveAPendingShop"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.shopKPRAdmin.offersManagement.QuponActivity"
+            android:name="com.shopKPRAdmin.offersManagement.qupon.CreateNewQupon"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.shopKPRAdmin.productsManagement.SearchedProducts"
@@ -165,7 +167,7 @@
             android:value="@string/maps_api_key" />
 
         <activity
-            android:name="com.shopKPRAdmin.owoshop.LocationFromMap"
+            android:name=".LocationFromMap"
             android:label="@string/title_activity_location_from_map"
             android:screenOrientation="portrait" />
         <activity

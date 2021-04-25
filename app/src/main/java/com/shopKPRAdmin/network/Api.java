@@ -9,6 +9,7 @@ import com.shopKPRAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.shopKPRAdmin.giftAndDeals.entity.Deals;
 import com.shopKPRAdmin.giftAndDeals.entity.Gifts;
 import com.shopKPRAdmin.offersManagement.entity.OffersEntity;
+import com.shopKPRAdmin.offersManagement.qupon.Qupon;
 import com.shopKPRAdmin.productsManagement.entity.OwoProduct;
 import com.shopKPRAdmin.orderManagement.Shop_keeper_orders;
 import com.shopKPRAdmin.pushNotification.NotificationData;
@@ -224,5 +225,14 @@ public interface Api {
 
     @DELETE("/deleteDeal")
     Call<ResponseBody> deleteDeal(@Query("dealsId") Long dealsId);
+
+    @POST("/addNewQupon")
+    Call<ResponseBody> addNewCoupon(@Body Qupon qupon);
+
+    @GET("/getAllQupon")
+    Call<List<Qupon>> quponList();
+
+    @DELETE("/deleteQupon")
+    Call<ResponseBody> deleteCoupon(@Query("quponId") Long quponId);
 
 }

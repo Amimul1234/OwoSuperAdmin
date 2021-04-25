@@ -24,7 +24,8 @@ import com.shopKPRAdmin.giftAndDeals.deals.CreateDeal;
 import com.shopKPRAdmin.giftAndDeals.gifts.AllGifts;
 import com.shopKPRAdmin.giftAndDeals.gifts.CreateNewGift;
 import com.shopKPRAdmin.login.AdminCredentials;
-import com.shopKPRAdmin.offersManagement.QuponActivity;
+import com.shopKPRAdmin.offersManagement.qupon.AllAvailableCoupons;
+import com.shopKPRAdmin.offersManagement.qupon.CreateNewQupon;
 import com.shopKPRAdmin.productsManagement.stockedOutProducts.StockedOutProducts;
 import com.shopKPRAdmin.timeSlot.AddATimeSlot;
 import com.shopKPRAdmin.pushNotification.CloudMessagingActivity;
@@ -423,8 +424,29 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     }
                     else if(which == 2)
                     {
-                        Intent intent=new Intent(context, QuponActivity.class);
-                        context.startActivity(intent);
+                        CharSequence[] quponOptions = new CharSequence[]{"Create A New Qupon",
+                                "All Available Qupon"};
+
+                        AlertDialog.Builder quponOptionsBuilder = new AlertDialog.Builder(context);
+                        brandsBuilder.setTitle("Qupon Management");
+
+
+                        quponOptionsBuilder.setItems(quponOptions, ((dialog, which1) ->
+                        {
+                            if(which1 == 0)
+                            {
+                                Intent intent=new Intent(context, CreateNewQupon.class);
+                                context.startActivity(intent);
+                            }
+                            else if(which1 == 1)
+                            {
+                                Intent intent = new Intent(context, AllAvailableCoupons.class);
+                                context.startActivity(intent);
+                            }
+                        }));
+
+                        quponOptionsBuilder.show();
+
                     }
                 }));
 
