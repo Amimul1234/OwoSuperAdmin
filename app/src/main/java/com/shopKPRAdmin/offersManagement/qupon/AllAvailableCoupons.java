@@ -9,7 +9,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.shopKPRAdmin.network.RetrofitClient;
-import com.shopKPRAdmin.offersManagement.entity.OffersEntity;
 import com.shopKPRAdmin.owoshop.R;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;

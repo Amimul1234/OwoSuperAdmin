@@ -1,10 +1,10 @@
 package com.shopKPRAdmin.orderManagement.shipped;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,13 +15,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.shopKPRAdmin.network.RetrofitClient;
 import com.shopKPRAdmin.orderManagement.pendingOrders.PendingOrderDetailsItemAdapter;
 import com.shopKPRAdmin.orderManagement.ShopKeeperOrderedProducts;
 import com.shopKPRAdmin.orderManagement.Shop_keeper_orders;
 import com.shopKPRAdmin.orderManagement.pendingOrders.PendingOrders;
 import com.shopKPRAdmin.owoshop.R;
-
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import okhttp3.ResponseBody;
@@ -32,6 +36,7 @@ import retrofit2.Response;
 public class ShippedOrdersDetails extends AppCompatActivity {
 
     private ProgressBar progressBar;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,33 @@ public class ShippedOrdersDetails extends AppCompatActivity {
 
         progressBar = findViewById(R.id.log_in_progress);
 
+
+        DatabaseReference orderNumberReference = database.getReference("Shop Order Number");
+
+        orderNumberReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    int order_count = snapshot.getValue(Integer.class);
+                    order_count++;
+                    orderNumberReference.setValue(order_count);
+                    orderNumberReference.removeEventListener(this);
+                }
+                else
+                {
+                    orderNumberReference.setValue(1);
+                    orderNumberReference.removeEventListener(this);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("ShippedActivity", error.getMessage());
+            }
+        });
+
+
         PendingOrderDetailsItemAdapter adapter = new PendingOrderDetailsItemAdapter(this, shop_keeperOrderedProductsList);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
@@ -79,109 +111,94 @@ public class ShippedOrdersDetails extends AppCompatActivity {
         mobile_number.setText(order_model_class.getReceiver_phone());
         shipping_method.setText(order_model_class.getMethod());
 
-        back_from_order_details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
+        back_from_order_details.setOnClickListener(v -> onBackPressed());
+
+
+        mobile_number.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:+88"+order_model_class.getReceiver_phone()));
+            startActivity(intent);
         });
 
+        confirm_button.setOnClickListener(v -> {
+            progressBar.setVisibility(View.VISIBLE);
 
-        mobile_number.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL); //calling activity
-                intent.setData(Uri.parse("tel:+88"+order_model_class.getReceiver_phone()));
-                startActivity(intent);
-            }
-        });
+            RetrofitClient.getInstance().getApi()
+                    .setOrderState(order_model_class.getOrder_number(), "Delivered")
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                            if(response.isSuccessful())
+                            {
+                                Toast.makeText(ShippedOrdersDetails.this, "Order settled for delivered state", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.INVISIBLE);
 
-        confirm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
 
-                RetrofitClient.getInstance().getApi()
-                        .setOrderState(order_model_class.getOrder_number(), "Delivered")
-                        .enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
-                                if(response.isSuccessful())
-                                {
-                                    Toast.makeText(ShippedOrdersDetails.this, "Order settled for delivered state", Toast.LENGTH_SHORT).show();
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                    Intent intent = new Intent(ShippedOrdersDetails.this, SetShippedToDeliveredState.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                                else
-                                {
-                                    Toast.makeText(ShippedOrdersDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
-                                    Log.e("Error", "Server error occurred");
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                }
+                                Intent intent = new Intent(ShippedOrdersDetails.this, SetShippedToDeliveredState.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
                             }
-
-                            @Override
-                            public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                                Log.e("Error", t.getMessage());
+                            else
+                            {
+                                Toast.makeText(ShippedOrdersDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
+                                Log.e("Error", "Server error occurred");
+                                progressBar.setVisibility(View.INVISIBLE);
                             }
-                        });
-            }
-        });
-
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                CharSequence[] options = new CharSequence[]{"NO", "YES"};
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(ShippedOrdersDetails.this);
-
-                builder.setTitle("Are you sure you want to cancel order?");
-
-                builder.setCancelable(false);
-
-                builder.setItems(options, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(which == 1)
-                        {
-                            RetrofitClient.getInstance().getApi()
-                                    .setOrderState(order_model_class.getOrder_number(), "Cancelled")
-                                    .enqueue(new Callback<ResponseBody>() {
-                                        @Override
-                                        public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
-                                            if(response.isSuccessful())
-                                            {
-                                                Toast.makeText(ShippedOrdersDetails.this, "Order cancelled", Toast.LENGTH_SHORT).show();
-                                                progressBar.setVisibility(View.INVISIBLE);
-                                                Intent intent = new Intent(ShippedOrdersDetails.this, PendingOrders.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                            else
-                                            {
-                                                Toast.makeText(ShippedOrdersDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
-                                                Log.e("Error", "Server error occurred");
-                                                progressBar.setVisibility(View.INVISIBLE);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                                            Log.e("Error", t.getMessage());
-                                        }
-                                    });
                         }
-                    }
-                });
 
-                builder.show();
+                        @Override
+                        public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                            Log.e("Error", t.getMessage());
+                        }
+                    });
+        });
 
-            }
+        cancel_button.setOnClickListener(v -> {
+
+            CharSequence[] options = new CharSequence[]{"NO", "YES"};
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(ShippedOrdersDetails.this);
+
+            builder.setTitle("Are you sure you want to cancel order?");
+
+            builder.setCancelable(false);
+
+            builder.setItems(options, (dialog, which) -> {
+                if(which == 1)
+                {
+                    RetrofitClient.getInstance().getApi()
+                            .setOrderState(order_model_class.getOrder_number(), "Cancelled")
+                            .enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                                    if(response.isSuccessful())
+                                    {
+                                        Toast.makeText(ShippedOrdersDetails.this, "Order cancelled", Toast.LENGTH_SHORT).show();
+                                        progressBar.setVisibility(View.INVISIBLE);
+                                        Intent intent = new Intent(ShippedOrdersDetails.this, PendingOrders.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(ShippedOrdersDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
+                                        Log.e("Error", "Server error occurred");
+                                        progressBar.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                                    Log.e("Error", t.getMessage());
+                                }
+                            });
+                }
+            });
+
+            builder.show();
+
         });
     }
 }

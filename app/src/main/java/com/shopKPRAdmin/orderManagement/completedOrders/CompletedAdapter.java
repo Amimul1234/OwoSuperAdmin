@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import com.shopKPRAdmin.orderManagement.Shop_keeper_orders;
 import com.shopKPRAdmin.owoshop.R;
+import org.jetbrains.annotations.NotNull;
 
 public class CompletedAdapter extends PagedListAdapter<Shop_keeper_orders, CompletedAdapter.ViewHolder>{
 
-    private Context mCtx;
+    private final Context mCtx;
 
 
     public CompletedAdapter(Context mCtx) {
@@ -50,7 +51,7 @@ public class CompletedAdapter extends PagedListAdapter<Shop_keeper_orders, Compl
 
     }
 
-    private static DiffUtil.ItemCallback<Shop_keeper_orders> DIFF_CALLBACK =
+    private static final DiffUtil.ItemCallback<Shop_keeper_orders> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<Shop_keeper_orders>() {
                 @Override
                 public boolean areItemsTheSame(Shop_keeper_orders shop_keeper_orders_old, Shop_keeper_orders shop_keeper_orders_new) {
@@ -58,7 +59,7 @@ public class CompletedAdapter extends PagedListAdapter<Shop_keeper_orders, Compl
                 }
 
                 @Override
-                public boolean areContentsTheSame(Shop_keeper_orders shop_keeper_orders_old, Shop_keeper_orders shop_keeper_orders_new) {
+                public boolean areContentsTheSame(@NotNull Shop_keeper_orders shop_keeper_orders_old, @NotNull Shop_keeper_orders shop_keeper_orders_new) {
                     return true;
                 }
             };
@@ -76,13 +77,11 @@ public class CompletedAdapter extends PagedListAdapter<Shop_keeper_orders, Compl
             order_address_city = itemView.findViewById(R.id.order_address_city);
             time_and_date = itemView.findViewById(R.id.order_date_time);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mCtx, CompletedOrderDetails.class);//For giving product description to the user when clicks on a cart item
-                    intent.putExtra("pending_order", getItem(getAdapterPosition()));
-                    mCtx.startActivity(intent);
-                }
+            itemView.setOnClickListener(v ->
+            {
+                Intent intent = new Intent(mCtx, CompletedOrderDetails.class);
+                intent.putExtra("pending_order", getItem(getBindingAdapterPosition()));
+                mCtx.startActivity(intent);
             });
         }
     }

@@ -201,5 +201,6 @@
     <string name="all_available_coupons">All Available Coupons</string>
     <string name="coupon_discount">Coupon Discount</string>
     <string name="delete_coupon">Delete Coupon</string>
+    <string name="coupon_code">Coupon Code</string>
 
 </resources>

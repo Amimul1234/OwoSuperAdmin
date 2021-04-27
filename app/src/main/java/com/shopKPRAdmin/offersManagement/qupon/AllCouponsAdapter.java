@@ -47,6 +47,7 @@ public class AllCouponsAdapter extends RecyclerView.Adapter<AllCouponsAdapter.xy
         holder.couponDiscount.setText("৳ " + String.valueOf(couponsList.get(position).getDiscount()));
         holder.offerStartDate.setText(startDate);
         holder.offerEndDate.setText(endDate);
+        holder.couponCode.setText("Coupon Code: ShopKPR#"+couponsList.get(position).getQuponId());
     }
 
     @Override
@@ -59,7 +60,7 @@ public class AllCouponsAdapter extends RecyclerView.Adapter<AllCouponsAdapter.xy
 
         private final TextView couponDiscount;
         private final TextView offerStartDate;
-        private final TextView offerEndDate;
+        private final TextView offerEndDate,couponCode;
 
         public xyz(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +68,7 @@ public class AllCouponsAdapter extends RecyclerView.Adapter<AllCouponsAdapter.xy
             couponDiscount = itemView.findViewById(R.id.couponTaka);
             offerStartDate = itemView.findViewById(R.id.offerStartDate);
             offerEndDate = itemView.findViewById(R.id.offerEndDate);
+            couponCode = itemView.findViewById(R.id.coupon_code);
 
             itemView.setOnClickListener(v -> {
 
