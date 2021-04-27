@@ -1,12 +1,13 @@
 package com.shopKPRAdmin.orderManagement;
 
 import com.shopKPRAdmin.shopManagement.entity.Shops;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shop_keeper_orders implements Serializable {
+public class Shop_keeper_orders implements Serializable
+{
+
     private long order_number;
     private String additional_comments;
     private double coupon_discount;

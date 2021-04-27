@@ -1,5 +1,7 @@
 package com.shopKPRAdmin.network;
 
+import android.util.Pair;
+
 import com.shopKPRAdmin.adminManagement.entity.AdminLogin;
 import com.shopKPRAdmin.adminManagement.entity.AdminLoginWrapper;
 import com.shopKPRAdmin.adminManagement.entity.AdminPermissions;
@@ -76,7 +78,6 @@ public interface Api {
             @Query("order_id") long order_id,
             @Query("order_state") String order_state
     );
-
 
     @GET("/searchProductWithName")
     Call<List<OwoProduct>> searchProduct(

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,7 +60,7 @@ public class PendingOrderDetails extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        order_number.setText(order_model_class != null ? "#"+order_model_class.getOrder_number() : null);
+        order_number.setText("#" + order_model_class.getOrder_number());
         order_date.setText(order_model_class.getDate());
         total_taka.setText(String.valueOf(order_model_class.getTotal_amount()));
         discount.setText(String.valueOf(order_model_class.getCoupon_discount()));
@@ -97,6 +96,7 @@ public class PendingOrderDetails extends AppCompatActivity
                             {
                                 Toast.makeText(PendingOrderDetails.this, "Order settled for confirmation state", Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.INVISIBLE);
+
                                 Intent intent = new Intent(PendingOrderDetails.this, PendingOrders.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
@@ -119,7 +119,7 @@ public class PendingOrderDetails extends AppCompatActivity
 
         cancel_button.setOnClickListener(v -> {
 
-            CharSequence options[] = new CharSequence[]{"NO", "YES"};
+            CharSequence[] options = new CharSequence[]{"NO", "YES"};
 
             AlertDialog.Builder builder = new AlertDialog.Builder(PendingOrderDetails.this);
 
@@ -127,39 +127,36 @@ public class PendingOrderDetails extends AppCompatActivity
 
             builder.setCancelable(false);
 
-            builder.setItems(options, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if(which == 1)
-                    {
-                        RetrofitClient.getInstance().getApi()
-                                .setOrderState(order_model_class.getOrder_number(), "Cancelled")
-                                .enqueue(new Callback<ResponseBody>() {
-                                    @Override
-                                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
-                                        if(response.isSuccessful())
-                                        {
-                                            Toast.makeText(PendingOrderDetails.this, "Order cancelled", Toast.LENGTH_SHORT).show();
-                                            progressBar.setVisibility(View.INVISIBLE);
-                                            Intent intent = new Intent(PendingOrderDetails.this, PendingOrders.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(PendingOrderDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
-                                            Log.e("Error", "Server error occurred");
-                                            progressBar.setVisibility(View.INVISIBLE);
-                                        }
+            builder.setItems(options, (dialog, which) -> {
+                if(which == 1)
+                {
+                    RetrofitClient.getInstance().getApi()
+                            .setOrderState(order_model_class.getOrder_number(), "Cancelled")
+                            .enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                                    if(response.isSuccessful())
+                                    {
+                                        Toast.makeText(PendingOrderDetails.this, "Order cancelled", Toast.LENGTH_SHORT).show();
+                                        progressBar.setVisibility(View.INVISIBLE);
+                                        Intent intent = new Intent(PendingOrderDetails.this, PendingOrders.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                        finish();
                                     }
+                                    else
+                                    {
+                                        Toast.makeText(PendingOrderDetails.this, "Please try again", Toast.LENGTH_SHORT).show();
+                                        Log.e("Error", "Server error occurred");
+                                        progressBar.setVisibility(View.INVISIBLE);
+                                    }
+                                }
 
-                                    @Override
-                                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                                        Log.e("Error", t.getMessage());
-                                    }
-                                });
-                    }
+                                @Override
+                                public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                                    Log.e("Error", t.getMessage());
+                                }
+                            });
                 }
             });
             builder.show();

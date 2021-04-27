@@ -2,7 +2,8 @@ package com.shopKPRAdmin.orderManagement;
 
 import java.io.Serializable;
 
-public class ShopKeeperOrderedProducts implements Serializable {
+public class ShopKeeperOrderedProducts implements Serializable
+{
     private long id;
     private long product_id;
     private String product_name;
