@@ -1,9 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context="com.shopKPRAdmin.shopInfoChange.ChangeShopInfoActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/shop_info_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_24_white"
+            android:contentDescription="@string/back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_shop_info"
+            android:layout_marginStart="25dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scroll"
+        android:layout_below="@+id/shop_info_toolbar"
+        >
+
+        <LinearLayout
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/shopImageOld"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/shop_image"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/shop_image"/>
+
+            <ImageView
+                android:id="@+id/shopImageNew"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/shop_image"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/shop_image"/>
+
+            <TextView
+                android:id="@+id/shopNameOld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:autofillHints="name"
+                android:background="@drawable/edit_text_black"
+                android:drawablePadding="8dp"
+                android:hint="@string/shop_name"
+                android:padding="18dp"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                app:drawableStartCompat="@drawable/ic_baseline_shopping_cart_24" />
+
+            <TextView
+                android:id="@+id/shopNameNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:autofillHints="name"
+                android:background="@drawable/edit_text_black"
+                android:drawablePadding="8dp"
+                android:hint="@string/shop_name"
+                android:padding="18dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:drawableStartCompat="@drawable/ic_baseline_shopping_cart_24" />
+
+
+            <TextView
+                android:id="@+id/shopAddressOld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shop_address"
+                android:padding="18dp"
+                android:background="@drawable/edit_text_black"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:layout_margin="5dp"
+                android:drawablePadding="8dp"
+                android:autofillHints="address"
+                app:drawableStartCompat="@drawable/ic_baseline_place_24" />
+
+            <TextView
+                android:id="@+id/shopAddressNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shop_address"
+                android:padding="18dp"
+                android:background="@drawable/edit_text_black"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_margin="5dp"
+                android:drawablePadding="8dp"
+                android:autofillHints="address"
+                app:drawableStartCompat="@drawable/ic_baseline_place_24" />
+
+            <TextView
+                android:id="@+id/shopOwnerNameOld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shop_owner_name"
+                android:padding="18dp"
+                android:background="@drawable/edit_text_black"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:layout_margin="5dp"
+                android:drawablePadding="8dp"
+                android:autofillHints="name"
+                app:drawableStartCompat="@drawable/ic_baseline_person_24" />
+
+            <TextView
+                android:id="@+id/shopOwnerNameNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shop_owner_name"
+                android:padding="18dp"
+                android:background="@drawable/edit_text_black"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_margin="5dp"
+                android:drawablePadding="8dp"
+                android:autofillHints="name"
+                app:drawableStartCompat="@drawable/ic_baseline_person_24" />
+
+            <TextView
+                android:id="@+id/shopServiceMobileOld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shop_service_mobile"
+                android:padding="18dp"
+                android:background="@drawable/edit_text_black"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:layout_margin="5dp"
+                android:maxLength="11"
+                android:drawablePadding="8dp"
+                android:autofillHints="@string/shop_keeper_mobile_number"
+                app:drawableStartCompat="@drawable/ic_baseline_local_phone_24" />
+
+            <TextView
+                android:id="@+id/shopServiceMobileNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shop_service_mobile"
+                android:padding="18dp"
+                android:background="@drawable/edit_text_black"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_margin="5dp"
+                android:maxLength="11"
+                android:drawablePadding="8dp"
+                android:autofillHints="@string/shop_keeper_mobile_number"
+                app:drawableStartCompat="@drawable/ic_baseline_local_phone_24" />
+
+            <ImageView
+                android:id="@+id/shopOwnerNidOld"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/card_edge"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/nid_front" />
+
+            <ImageView
+                android:id="@+id/shopOwnerNidNew"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/card_edge"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/nid_front" />
+
+            <ImageView
+                android:id="@+id/shopTradeLicenseOld"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:src="@drawable/trade_license"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/shop_trade_license" />
+
+            <ImageView
+                android:id="@+id/shopTradeLicenseNew"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:src="@drawable/trade_license"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/shop_trade_license" />
+
+            <Button
+                android:id="@+id/approveShopChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/approve_change"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:background="@drawable/buttons_blue"
+                android:textSize="22sp"
+                android:padding="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

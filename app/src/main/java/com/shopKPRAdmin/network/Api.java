@@ -240,4 +240,7 @@ public interface Api {
     @GET("/getAllChangeRequests")
     Call<List<ChangeShopInfo>> getAllShopChangeRequests();
 
+    @GET("/getShopInfo")
+    Call<Shops> getShopInfo(@Query("shop_phone") String shop_phone);
+
 }

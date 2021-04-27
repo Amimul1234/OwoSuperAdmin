@@ -31,8 +31,8 @@
     <string name="shop_name">Shop Name</string>
     <string name="shop_image">Shop Image</string>
     <string name="shopkeeper_personal_information">Shopkeeper Personal Information</string>
-    <string name="shop_owner_name">Shop Owner Name:</string>
-    <string name="shop_owner_mobile">Shop Owner Mobile:</string>
+    <string name="shop_owner_name">Shop Owner Name</string>
+    <string name="shop_owner_mobile">Shop Owner Mobile</string>
     <string name="shop_owner_nid">Shop Owner NID:</string>
     <string name="shop_information">Shop Information</string>
     <string name="shop_keeper_nid_front_image">Shop Keeper Nid Front Image</string>
@@ -204,5 +204,8 @@
     <string name="coupon_code">Coupon Code</string>
     <string name="approve_shop_information_change">Approve Shop Information Change</string>
     <string name="information_change">Information Change</string>
+    <string name="nid_front">Nid Front</string>
+    <string name="change_shop_info">Change Shop Info</string>
+    <string name="approve_change">Approve Change</string>
 
 </resources>
