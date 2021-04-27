@@ -84,7 +84,8 @@ public class PendingOrderDetails extends AppCompatActivity
             startActivity(intent);
         });
 
-        confirm_button.setOnClickListener(v -> {
+        confirm_button.setOnClickListener(v ->
+        {
             progressBar.setVisibility(View.VISIBLE);
 
             RetrofitClient.getInstance().getApi()
