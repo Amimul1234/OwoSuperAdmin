@@ -202,5 +202,7 @@
     <string name="coupon_discount">Coupon Discount</string>
     <string name="delete_coupon">Delete Coupon</string>
     <string name="coupon_code">Coupon Code</string>
+    <string name="approve_shop_information_change">Approve Shop Information Change</string>
+    <string name="information_change">Information Change</string>
 
 </resources>

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,7 @@ import com.shopKPRAdmin.login.AdminCredentials;
 import com.shopKPRAdmin.offersManagement.qupon.AllAvailableCoupons;
 import com.shopKPRAdmin.offersManagement.qupon.CreateNewQupon;
 import com.shopKPRAdmin.productsManagement.stockedOutProducts.StockedOutProducts;
+import com.shopKPRAdmin.shopInfoChange.ApproveShopInfoChange;
 import com.shopKPRAdmin.timeSlot.AddATimeSlot;
 import com.shopKPRAdmin.pushNotification.CloudMessagingActivity;
 import com.shopKPRAdmin.productsManagement.addProduct.AddProductActivity;
@@ -156,7 +159,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             }
             case "Shop Management":
             {
-                CharSequence[] options=new CharSequence[] {"Manage Registered Shops","Approve A New Shop", "Category Extension Requests"};
+                CharSequence[] options=new CharSequence[] {"Manage Registered Shops","Approve A New Shop",
+                        "Approve Shop Info Change", "Category Extension Requests"};
 
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
                 builder.setTitle("Shop Management");
@@ -178,8 +182,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                         }
                         case 2:
                         {
-                            Intent intent = new Intent(context, ShopOrderManagement.class);
+                            Intent intent = new Intent(context, ApproveShopInfoChange.class);
                             context.startActivity(intent);
+                            break;
+                        }
+                        case 3:
+                        {
+                            Toast.makeText(context, "Not activated", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }

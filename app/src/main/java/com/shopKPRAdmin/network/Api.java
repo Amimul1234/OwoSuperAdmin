@@ -15,6 +15,7 @@ import com.shopKPRAdmin.offersManagement.qupon.Qupon;
 import com.shopKPRAdmin.productsManagement.entity.OwoProduct;
 import com.shopKPRAdmin.orderManagement.Shop_keeper_orders;
 import com.shopKPRAdmin.pushNotification.NotificationData;
+import com.shopKPRAdmin.shopInfoChange.ChangeShopInfo;
 import com.shopKPRAdmin.shopManagement.entity.Shops;
 import com.shopKPRAdmin.timeSlot.TimeSlot;
 import com.shopKPRAdmin.userManagement.shopKeeperUser.entity.ShopKeeperUser;
@@ -235,5 +236,8 @@ public interface Api {
 
     @DELETE("/deleteQupon")
     Call<ResponseBody> deleteCoupon(@Query("quponId") Long quponId);
+
+    @GET("/getAllChangeRequests")
+    Call<List<ChangeShopInfo>> getAllShopChangeRequests();
 
 }

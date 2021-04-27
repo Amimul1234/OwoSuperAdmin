@@ -157,7 +157,7 @@ public class RegisteredShopAdapter extends PagedListAdapter<Shops, RecyclerView.
 
             itemView.setOnClickListener(v -> {
 
-                Shops shops = getItem(getAdapterPosition());
+                Shops shops = getItem(getBindingAdapterPosition());
 
                 Intent intent = new Intent(mCtx, ApprovedShopDetails.class);
                 intent.putExtra("ShopRequest", shops);
