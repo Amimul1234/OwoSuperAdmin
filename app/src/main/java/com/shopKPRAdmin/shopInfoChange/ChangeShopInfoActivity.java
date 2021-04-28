@@ -1,6 +1,8 @@
 package com.shopKPRAdmin.shopInfoChange;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import com.shopKPRAdmin.network.RetrofitClient;
 import com.shopKPRAdmin.owoshop.R;
 import com.shopKPRAdmin.shopManagement.entity.Shops;
 import org.jetbrains.annotations.NotNull;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,8 +34,7 @@ public class ChangeShopInfoActivity extends AppCompatActivity {
     private TextView shopOwnerOldName;
     private TextView shopServiceMobileOld;
 
-    private Button approveShopChange;
-    private ImageView backToHome;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -56,8 +58,10 @@ public class ChangeShopInfoActivity extends AppCompatActivity {
         TextView shopOwnerNewName = findViewById(R.id.shopOwnerNameNew);
         shopServiceMobileOld = findViewById(R.id.shopServiceMobileOld);
         TextView shopServiceMobileNew = findViewById(R.id.shopServiceMobileNew);
-        approveShopChange = findViewById(R.id.approveShopChange);
-        backToHome = findViewById(R.id.back_button);
+        Button approveShopChange = findViewById(R.id.approveShopChange);
+        ImageView backToHome = findViewById(R.id.back_button);
+
+        progressDialog = new ProgressDialog(this);
 
         Glide.with(this).load(HostAddress.HOST_ADDRESS.getAddress() + changeShopInfo.getNewShopImageURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL).timeout(6000).into(shopImageNew);
@@ -80,6 +84,38 @@ public class ChangeShopInfoActivity extends AppCompatActivity {
     }
 
     private void approveChange() {
+
+        progressDialog.setTitle("Shop Info Change");
+        progressDialog.setMessage("Please wait while we are changing shop info");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+
+        RetrofitClient.getInstance().getApi()
+                .approveShopInfoChange(changeShopInfo)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                        if(response.isSuccessful())
+                        {
+                            progressDialog.dismiss();
+                            Toast.makeText(ChangeShopInfoActivity.this, "Shop Info change approved", Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                        }
+                        else
+                        {
+                            progressDialog.dismiss();
+                            Toast.makeText(ChangeShopInfoActivity.this, "Can not change shop info, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                        progressDialog.dismiss();
+                        Log.e("ChangeShopInfo", t.getMessage());
+                        Toast.makeText(ChangeShopInfoActivity.this, "Can not change shop info, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void getOldShopInfo() {

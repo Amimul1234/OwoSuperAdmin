@@ -1,14 +1,12 @@
 package com.shopKPRAdmin.shopInfoChange;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.shopKPRAdmin.network.RetrofitClient;
 import com.shopKPRAdmin.owoshop.R;
@@ -58,6 +56,7 @@ public class ApproveShopInfoChange extends AppCompatActivity {
                         if(response.isSuccessful())
                         {
                             changeShopInfoList.clear();
+                            assert response.body() != null;
                             changeShopInfoList.addAll(response.body());
                             shopInfoChangeAdapter.notifyDataSetChanged();
                             swipeRefreshLayout.setRefreshing(false);
@@ -74,5 +73,11 @@ public class ApproveShopInfoChange extends AppCompatActivity {
                         Toast.makeText(ApproveShopInfoChange.this, "Can not get shop change requests list", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getShopChangeList();
     }
 }

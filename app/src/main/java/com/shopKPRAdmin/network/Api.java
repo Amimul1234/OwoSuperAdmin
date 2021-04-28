@@ -243,4 +243,7 @@ public interface Api {
     @GET("/getShopInfo")
     Call<Shops> getShopInfo(@Query("shop_phone") String shop_phone);
 
+    @POST("/approveShopInfoChange")
+    Call<ResponseBody> approveShopInfoChange(@Body ChangeShopInfo changeShopInfo);
+
 }
