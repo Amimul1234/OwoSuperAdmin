@@ -248,4 +248,10 @@ public interface Api {
     @POST("/createNewNotification")
     Call<ResponseBody> createNewNotification(@Body Notifications notifications);
 
+    @GET("/getAllNotifications")
+    Call<List<Notifications>> getAllNotifications();
+
+    @DELETE("/deleteNotification")
+    Call<ResponseBody> deleteNotification(@Query("notificationId") Long notificationId);
+
 }

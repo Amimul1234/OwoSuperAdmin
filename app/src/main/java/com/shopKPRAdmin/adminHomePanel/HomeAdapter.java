@@ -25,6 +25,7 @@ import com.shopKPRAdmin.giftAndDeals.deals.AllDealsActivity;
 import com.shopKPRAdmin.giftAndDeals.deals.CreateDeal;
 import com.shopKPRAdmin.giftAndDeals.gifts.AllGifts;
 import com.shopKPRAdmin.giftAndDeals.gifts.CreateNewGift;
+import com.shopKPRAdmin.giftAndDeals.notifications.AllNotifications;
 import com.shopKPRAdmin.giftAndDeals.notifications.CreateNewNotification;
 import com.shopKPRAdmin.login.AdminCredentials;
 import com.shopKPRAdmin.offersManagement.qupon.AllAvailableCoupons;
@@ -548,7 +549,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                             }
                             else
                             {
-                                intent = new Intent(context, AllGifts.class);
+                                intent = new Intent(context, AllNotifications.class);
                             }
 
                             context.startActivity(intent);

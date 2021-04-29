@@ -211,5 +211,6 @@
     <string name="click_to_upload_notification_image">(Click to upload notification image)</string>
     <string name="create_new_notification">Create New Notification</string>
     <string name="enter_notification_details">Enter Notification Details</string>
+    <string name="all_notifications">All Notifications</string>
 
 </resources>
