@@ -207,5 +207,9 @@
     <string name="nid_front">Nid Front</string>
     <string name="change_shop_info">Change Shop Info</string>
     <string name="approve_change">Approve Change</string>
+    <string name="create_a_notification">Create A Notification</string>
+    <string name="click_to_upload_notification_image">(Click to upload notification image)</string>
+    <string name="create_new_notification">Create New Notification</string>
+    <string name="enter_notification_details">Enter Notification Details</string>
 
 </resources>

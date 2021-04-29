@@ -1,7 +1,5 @@
 package com.shopKPRAdmin.network;
 
-import android.util.Pair;
-
 import com.shopKPRAdmin.adminManagement.entity.AdminLogin;
 import com.shopKPRAdmin.adminManagement.entity.AdminLoginWrapper;
 import com.shopKPRAdmin.adminManagement.entity.AdminPermissions;
@@ -10,6 +8,7 @@ import com.shopKPRAdmin.categoryManagement.category.entity.CategoryEntity;
 import com.shopKPRAdmin.categoryManagement.subCategory.entity.SubCategoryEntity;
 import com.shopKPRAdmin.giftAndDeals.entity.Deals;
 import com.shopKPRAdmin.giftAndDeals.entity.Gifts;
+import com.shopKPRAdmin.giftAndDeals.entity.Notifications;
 import com.shopKPRAdmin.offersManagement.entity.OffersEntity;
 import com.shopKPRAdmin.offersManagement.qupon.Qupon;
 import com.shopKPRAdmin.productsManagement.entity.OwoProduct;
@@ -245,5 +244,8 @@ public interface Api {
 
     @POST("/approveShopInfoChange")
     Call<ResponseBody> approveShopInfoChange(@Body ChangeShopInfo changeShopInfo);
+
+    @POST("/createNewNotification")
+    Call<ResponseBody> createNewNotification(@Body Notifications notifications);
 
 }

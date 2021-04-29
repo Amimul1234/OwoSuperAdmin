@@ -24,7 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
-        <activity android:name="com.shopKPRAdmin.shopInfoChange.ChangeShopInfoActivity"></activity>
+        <activity android:name="com.shopKPRAdmin.giftAndDeals.notifications.AllNotifications"></activity>
+        <activity android:name="com.shopKPRAdmin.giftAndDeals.notifications.CreateNewNotification" />
+        <activity android:name="com.shopKPRAdmin.shopInfoChange.ChangeShopInfoActivity" />
         <activity android:name="com.shopKPRAdmin.shopInfoChange.ApproveShopInfoChange" />
         <activity android:name="com.shopKPRAdmin.offersManagement.qupon.DeleteCoupon" />
         <activity android:name="com.shopKPRAdmin.offersManagement.qupon.AllAvailableCoupons" />

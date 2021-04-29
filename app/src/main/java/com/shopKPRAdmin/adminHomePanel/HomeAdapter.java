@@ -25,6 +25,7 @@ import com.shopKPRAdmin.giftAndDeals.deals.AllDealsActivity;
 import com.shopKPRAdmin.giftAndDeals.deals.CreateDeal;
 import com.shopKPRAdmin.giftAndDeals.gifts.AllGifts;
 import com.shopKPRAdmin.giftAndDeals.gifts.CreateNewGift;
+import com.shopKPRAdmin.giftAndDeals.notifications.CreateNewNotification;
 import com.shopKPRAdmin.login.AdminCredentials;
 import com.shopKPRAdmin.offersManagement.qupon.AllAvailableCoupons;
 import com.shopKPRAdmin.offersManagement.qupon.CreateNewQupon;
@@ -466,7 +467,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
             case "Gift and Deal Management": {
 
                 CharSequence[] giftAndDealOptions = new CharSequence[]{"Manage gift cards",
-                        "Manage Deals", "Manage Offers"};
+                        "Manage Deals", "Manage Notifications"};
 
                 AlertDialog.Builder giftAndDealBuilder = new AlertDialog.Builder(context);
                 giftAndDealBuilder.setTitle("Gift and Deal Management");
@@ -531,10 +532,33 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.xyz>{
                     }
                     else if(which == 2)
                     {
-                        Intent intent = new Intent(context, AllCategories.class);
-                        intent.putExtra("indicate", "delete");
-                        context.startActivity(intent);
+                        CharSequence[] giftsOptions = new CharSequence[]{"Create New Notification",
+                                "All Notifications"};
+
+                        AlertDialog.Builder giftsBuilder = new AlertDialog.Builder(context);
+                        giftsBuilder.setTitle("Notifications Management");
+
+                        giftsBuilder.setItems(giftsOptions, ((dialog, which1) -> {
+
+                            Intent intent;
+
+                            if(which1 == 0)
+                            {
+                                intent = new Intent(context, CreateNewNotification.class);
+                            }
+                            else
+                            {
+                                intent = new Intent(context, AllGifts.class);
+                            }
+
+                            context.startActivity(intent);
+
+                        }));
+
+                        giftsBuilder.show();
+
                     }
+
                 }));
 
                 giftAndDealBuilder.show();
