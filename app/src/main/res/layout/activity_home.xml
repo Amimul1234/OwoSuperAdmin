@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="OWO DOKAN"
+            app:title="ShopKpr"
             app:titleEnabled="true"
             app:scrimAnimationDuration="10"
             android:fitsSystemWindows="true"
@@ -33,14 +33,15 @@
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/circularlogo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/circular_logo"
                 android:fitsSystemWindows="true"
                 android:layout_gravity="end"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="10dp"
                 android:contentDescription="@string/circular_logo" />
+
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/z_toolbar"
