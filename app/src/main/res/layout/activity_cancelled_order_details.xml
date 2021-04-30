@@ -126,6 +126,17 @@
                 android:textColor="@color/blue"
                 android:layout_marginBottom="15dp"/>
 
+            <TextView
+                android:id="@+id/time_slot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shipping_method"
+                android:text="Cash on delivery"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/blue"
+                android:layout_marginBottom="15dp"/>
+
 
             <TextView
                 android:id="@+id/tagline_1"
@@ -134,7 +145,7 @@
                 android:text="Ordered Products"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:layout_below="@+id/shipping_method"
+                android:layout_below="@+id/time_slot"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"/>
 

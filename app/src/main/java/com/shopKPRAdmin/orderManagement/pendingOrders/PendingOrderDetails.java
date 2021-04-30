@@ -44,6 +44,8 @@ public class PendingOrderDetails extends AppCompatActivity
         TextView shipping_address = findViewById(R.id.shipping_address);
         TextView mobile_number = findViewById(R.id.mobile_number);
         TextView additional_comments = findViewById(R.id.additional_comments);
+        TextView timeSlot = findViewById(R.id.time_slot);
+
         ImageView back_from_order_details = findViewById(R.id.back_from_order_details);
         TextView shipping_method = findViewById(R.id.shipping_method);
         Button confirm_button = findViewById(R.id.confirm_order_button);
@@ -61,6 +63,7 @@ public class PendingOrderDetails extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         order_number.setText("#" + order_model_class.getOrder_number());
+        timeSlot.setText("Time Slot: "+order_model_class.getTime_slot());
         order_date.setText(order_model_class.getDate());
         total_taka.setText(String.valueOf(order_model_class.getTotal_amount()));
         discount.setText(String.valueOf(order_model_class.getCoupon_discount()));

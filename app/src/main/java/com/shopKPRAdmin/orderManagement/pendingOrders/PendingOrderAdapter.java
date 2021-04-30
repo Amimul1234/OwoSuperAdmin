@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.shopKPRAdmin.orderManagement.Shop_keeper_orders;
 import com.shopKPRAdmin.owoshop.R;
-
 import java.util.List;
 
 public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapter.ViewHolder>
@@ -70,7 +69,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
             itemView.setOnClickListener(v ->
             {
                 Intent intent = new Intent(mCtx, PendingOrderDetails.class);
-                intent.putExtra("pending_order", shopKeeperOrders.get(getAdapterPosition()));
+                intent.putExtra("pending_order", shopKeeperOrders.get(getBindingAdapterPosition()));
                 mCtx.startActivity(intent);
             });
         }

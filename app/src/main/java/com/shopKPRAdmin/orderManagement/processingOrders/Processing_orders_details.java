@@ -20,7 +20,6 @@ import com.shopKPRAdmin.orderManagement.pendingOrders.PendingOrderDetailsItemAda
 import com.shopKPRAdmin.orderManagement.ShopKeeperOrderedProducts;
 import com.shopKPRAdmin.orderManagement.Shop_keeper_orders;
 import com.shopKPRAdmin.owoshop.R;
-
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import okhttp3.ResponseBody;
@@ -45,14 +44,15 @@ public class Processing_orders_details extends AppCompatActivity {
         TextView discount = findViewById(R.id.discount_taka);
         TextView sub_total = findViewById(R.id.sub_total);
         TextView shipping_address = findViewById(R.id.shipping_address);
-        TextView mobile_number = findViewById(R.id.mobile_number);
         TextView additional_comments = findViewById(R.id.additional_comments);
+        TextView timeSlot = findViewById(R.id.time_slot);
+
         ImageView back_from_order_details = findViewById(R.id.back_from_order_details);
         TextView shipping_method = findViewById(R.id.shipping_method);
         Button confirm_button = findViewById(R.id.confirm_order_button);
         Button cancel_button = findViewById(R.id.cancel_order);
 
-        mobile_number = findViewById(R.id.mobile_number);
+        TextView mobile_number = findViewById(R.id.mobile_number);
 
         List<ShopKeeperOrderedProducts> shop_keeperOrderedProductsList = order_model_class.getShop_keeper_ordered_products();
         RecyclerView recyclerView = findViewById(R.id.ordered_products);
@@ -65,7 +65,9 @@ public class Processing_orders_details extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        order_number.setText(order_model_class != null ? "#"+order_model_class.getOrder_number() : null);
+        order_number.setText("#" + order_model_class.getOrder_number());
+        timeSlot.setText("Time Slot: "+order_model_class.getTime_slot());
+
         order_date.setText(order_model_class.getDate());
         total_taka.setText(String.valueOf(order_model_class.getTotal_amount()));
         discount.setText(String.valueOf(order_model_class.getCoupon_discount()));

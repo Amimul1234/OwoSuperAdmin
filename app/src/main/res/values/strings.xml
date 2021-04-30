@@ -212,5 +212,8 @@
     <string name="create_new_notification">Create New Notification</string>
     <string name="enter_notification_details">Enter Notification Details</string>
     <string name="all_notifications">All Notifications</string>
+    <string name="order_number">Order Number</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="cash_on_delivery">Cash on delivery</string>
 
 </resources>
