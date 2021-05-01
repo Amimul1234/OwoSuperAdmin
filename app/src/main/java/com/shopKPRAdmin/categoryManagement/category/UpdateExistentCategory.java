@@ -80,7 +80,8 @@ public class UpdateExistentCategory extends AppCompatActivity {
     }
 
 
-    private void showRecycler() {
+    private void showRecycler()
+    {
         updateCategoryAdapter = new UpdateCategoryAdapter(UpdateExistentCategory.this, categoryEntities);
         updateRecyclerView.setAdapter(updateCategoryAdapter);
         updateRecyclerView.setLayoutManager(linearLayoutManager);

@@ -59,7 +59,6 @@ public class DeleteBrand extends AppCompatActivity {
         String imagePath = brands.getBrandImage();
         String cleanPath = imagePath.substring(34);
 
-
         RetrofitClient.getInstance().getApi()
                 .deleteBrand(subCategoryId, brands.getBrandId())
                 .enqueue(new Callback<ResponseBody>()

@@ -59,7 +59,7 @@ public class UpdateCategoryAdapter extends RecyclerView.Adapter<UpdateCategoryAd
             textView = itemView.findViewById(R.id.categoryName);
 
             itemView.setOnClickListener(v -> {
-                CategoryEntity categoryEntity = categoryEntities.get(getAdapterPosition());
+                CategoryEntity categoryEntity = categoryEntities.get(getBindingAdapterPosition());
 
                 Intent intent = new Intent(context, UpdateCategoryActivity.class);
                 intent.putExtra("categoryEntity", categoryEntity);

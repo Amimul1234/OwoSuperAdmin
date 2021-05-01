@@ -32,8 +32,8 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface Api {
-
+public interface Api
+{
     //Time slot management
     @POST("shopKpr/admin/addNewTimeSlot")
     Call<ResponseBody> addNewTimeSlot(@Body TimeSlot timeSlot);
@@ -82,7 +82,6 @@ public interface Api {
             @Query("product_name") String product_name
     );
 
-
     //Orders management
     @GET("shopKpr/admin/getPendingOrders")
     Call<List<Shop_keeper_orders>> getShopKeeperPendingOrders();
@@ -111,47 +110,49 @@ public interface Api {
             @Query("order_state") String order_state
     );
 
-
     //Category Management
-    @POST("/addNewCategory")
+    @POST("shopKpr/admin/addNewCategory")
     Call<ResponseBody> addNewCategory(@Body CategoryEntity categoryEntity);
 
-    @GET("/getAllCategories")
-    Call<List<CategoryEntity>> getAllCategories();
+    @PUT("shopKpr/admin/updateCategory")
+    Call<ResponseBody> updateCategory(@Query("categoryId") Long categoryId,
+                                      @Body CategoryEntity categoryEntity);
 
-    @GET("/getCategoryListBasedOnId")
-    Call<List<String>> getCategoryListBasedOnId(@Query("categoryIds") List<Long> categoryIds);
-
-    @PUT("/updateCategory")
-    Call<ResponseBody> updateCategory(@Query("categoryId") Long categoryId, @Body CategoryEntity categoryEntity);
-
-    @DELETE("/deleteCategory")
+    @DELETE("shopKpr/admin/deleteCategory")
     Call<ResponseBody> deleteCategory(@Query("categoryId") Long categoryId);
 
-    //Sub categories management
-    @POST("/addNewSubCategory")
-    Call<ResponseBody> addNewSubCategory(@Query("categoryId") Long categoryId, @Body SubCategoryEntity subCategoryEntity);
+    @GET("shopKpr/admin/getAllCategories")
+    Call<List<CategoryEntity>> getAllCategories();
 
-    @GET("/getAllSubCategories")
+    @GET("shopKpr/admin/getCategoryListBasedOnId")
+    Call<List<String>> getCategoryListBasedOnId(@Query("categoryIds") List<Long> categoryIds);
+
+    //Sub categories management
+    @POST("shopKpr/admin/addNewSubCategory")
+    Call<ResponseBody> addNewSubCategory(@Query("categoryId") Long categoryId,
+                                         @Body SubCategoryEntity subCategoryEntity);
+
+    @GET("shopKpr/admin/getAllSubCategories")
     Call<List<SubCategoryEntity>> getAllSubCategories(@Query("categoryId") Long categoryId);
 
-    @PUT("/updateSubCategory")
-    Call<ResponseBody> updateSubCategory(@Query("categoryId") Long categoryId, @Body SubCategoryEntity subCategoryEntity);
+    @PUT("shopKpr/admin/updateSubCategory")
+    Call<ResponseBody> updateSubCategory(@Query("categoryId") Long categoryId,
+                                         @Body SubCategoryEntity subCategoryEntity);
 
-    @DELETE("/deleteSubCategory")
+    @DELETE("shopKpr/admin/deleteSubCategory")
     Call<ResponseBody> deleteSubCategory(@Query("subCategoryId") Long subCategoryId);
 
     //Brands Management
-    @GET("/getAllBrandsOfASubCategory")
+    @GET("shopKpr/admin/getAllBrandsOfASubCategory")
     Call<List<Brands>> getAllBrands(@Query("subCategoryId") Long subCategoryId);
 
-    @POST("/addABrand")
+    @POST("shopKpr/admin/addABrand")
     Call<ResponseBody> addABrand(@Body Brands brands);
 
-    @PUT("/updateBrand")
+    @PUT("shopKpr/admin/updateBrand")
     Call<ResponseBody> updateBrand(@Query("subCategoryId") Long subCategoryId, @Body Brands brands);
 
-    @DELETE("/deleteBrand")
+    @DELETE("shopKpr/admin/deleteBrand")
     Call<ResponseBody> deleteBrand(@Query("subCategoryId") Long subCategoryId, @Query("brandsId") Long brandsId);
 
     //Image Controller
