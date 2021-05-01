@@ -155,7 +155,7 @@ public interface Api
     @DELETE("shopKpr/admin/deleteBrand")
     Call<ResponseBody> deleteBrand(@Query("subCategoryId") Long subCategoryId, @Query("brandsId") Long brandsId);
 
-    //Image Controller
+    //Image Management
     @Multipart
     @POST("/imageController/{directory}")
     Call<ResponseBody> uploadImageToServer(
@@ -167,29 +167,29 @@ public interface Api
     Call<ResponseBody> deleteImage(@Query("path_of_image") String path_of_image);
 
     //Offers Management
-    @POST("/addAnOffer")
+    @POST("shopKpr/admin/addAnOffer")
     Call<ResponseBody> addAnOffer(@Body OffersEntity offersEntity);
 
-    @GET("/getAllOffers")
-    Call<List<OffersEntity>> getAllOffers();
-
-    @DELETE("/deleteOffer")
+    @DELETE("shopKpr/admin/deleteOffer")
     Call<ResponseBody> deleteAnOffer(@Query("offerId") Long offerId);
 
+    @GET("shopKpr/admin/getAllOffers")
+    Call<List<OffersEntity>> getAllOffers();
+
     //ShopKeeper User management
-    @GET("/getAllEnabledShopKeepers")
+    @GET("shopKpr/admin/getAllEnabledShopKeepers")
     Call<List<ShopKeeperUser>> getAllEnabledShopKeepers(@Query("page") int page);
 
-    @GET("/getAllDisabledAccounts")
+    @GET("shopKpr/admin/getAllDisabledAccounts")
     Call<List<ShopKeeperUser>> getAllDisabledAccounts(@Query("page") int page);
 
-    @PUT("/disableShopKeeper")
+    @PUT("shopKpr/admin/disableShopKeeper")
     Call<ResponseBody> disableShopKeeper(@Query("mobileNumber") String mobileNumber);
 
-    @PUT("/enableShopKeeper")
+    @PUT("shopKpr/admin/enableShopKeeper")
     Call<ResponseBody> enableShopKeeper(@Query("mobileNumber") String mobileNumber);
 
-    @DELETE("/deleteShopKeeper")
+    @DELETE("shopKpr/admin/deleteShopKeeper")
     Call<ResponseBody> deleteShopKeeper(@Query("mobileNumber") String mobileNumber);
 
     //admin management
@@ -211,51 +211,55 @@ public interface Api
     @GET("/admin/adminLogin/v1/getAdminInfo")
     Call<AdminLoginWrapper> getAdminCredential(@Query("adminEmailAddress") String adminEmailAddress);
 
-    //push notification api
-    @POST("/send-notification")
-    Call<ResponseBody> sendNotification(@Body NotificationData notificationData, @Query("topic") String topic);
+    //push notification management
+    @POST("shopKpr/admin/send-notification")
+    Call<ResponseBody> sendNotification(@Body NotificationData notificationData,
+                                        @Query("topic") String topic);
 
     //Gifts and deals management
-    @POST("/createGiftCard")
+    @POST("shopKpr/admin/createGiftCard")
     Call<ResponseBody> createGiftCard(@Body Gifts gifts);
 
-    @GET("/getAllGiftCards")
-    Call<List<Gifts>> getGistsCardList();
-
-    @DELETE("/deleteGiftCard")
+    @DELETE("shopKpr/admin/deleteGiftCard")
     Call<ResponseBody> deleteGiftCard(@Query("giftCardId") Long giftCardId);
 
-    @POST("/createNewDeal")
+    @POST("shopKpr/admin/createNewDeal")
     Call<ResponseBody> createNewDeal(@Body Deals deals);
 
-    @GET("/getAllDeals")
-    Call<List<Deals>> getAllDeals();
-
-    @DELETE("/deleteDeal")
+    @DELETE("shopKpr/admin/deleteDeal")
     Call<ResponseBody> deleteDeal(@Query("dealsId") Long dealsId);
 
-    @POST("/addNewQupon")
+    @GET("shopKpr/admin/getAllGiftCards")
+    Call<List<Gifts>> getGistsCardList();
+
+    @GET("shopKpr/admin/getAllDeals")
+    Call<List<Deals>> getAllDeals();
+
+    //qupon management
+    @POST("shopKpr/admin/addNewQupon")
     Call<ResponseBody> addNewCoupon(@Body Qupon qupon);
 
-    @GET("/getAllQupon")
-    Call<List<Qupon>> quponList();
-
-    @DELETE("/deleteQupon")
+    @DELETE("shopKpr/admin/deleteQupon")
     Call<ResponseBody> deleteCoupon(@Query("quponId") Long quponId);
 
-    @GET("/getAllChangeRequests")
+    @GET("shopKpr/admin/getAllQupon")
+    Call<List<Qupon>> quponList();
+
+    //shop info change management
+    @GET("shopKpr/admin/getAllChangeRequests")
     Call<List<ChangeShopInfo>> getAllShopChangeRequests();
 
-    @POST("/approveShopInfoChange")
+    @POST("shopKpr/admin/approveShopInfoChange")
     Call<ResponseBody> approveShopInfoChange(@Body ChangeShopInfo changeShopInfo);
 
-    @POST("/createNewNotification")
+    //Notifications management
+    @POST("shopKpr/admin/createNewNotification")
     Call<ResponseBody> createNewNotification(@Body Notifications notifications);
 
-    @GET("/getAllNotifications")
+    @GET("shopKpr/admin/getAllNotifications")
     Call<List<Notifications>> getAllNotifications();
 
-    @DELETE("/deleteNotification")
+    @DELETE("shopKpr/admin/deleteNotification")
     Call<ResponseBody> deleteNotification(@Query("notificationId") Long notificationId);
 
 }
