@@ -35,76 +35,82 @@ import retrofit2.http.Query;
 public interface Api {
 
     //Time slot management
-    @POST("/addNewTimeSlot")
+    @POST("shopKpr/admin/addNewTimeSlot")
     Call<ResponseBody> addNewTimeSlot(@Body TimeSlot timeSlot);
 
-    @DELETE("/deleteTimeSlot")
+    @DELETE("shopKpr/admin/deleteTimeSlot")
     Call<ResponseBody> deleteTimeSlot(@Query("timeSlotId") Long timeSlotId);
 
-    @GET("/getAllAvailableTimeSlots")
+    @GET("shopKpr/admin/getAllAvailableTimeSlots")
     Call<List<TimeSlot>> getAllAvailableTimeSlots();
 
     //Shops Management
-    @POST("/approveShop")
+    @POST("shopKpr/admin/approveShop")
     Call<Shops> approveShop(@Body Shops shops);
 
-    @GET("/getAllShopRegistrationRequests")
+    @GET("shopKpr/admin/getAllShopRegistrationRequests")
     Call<List<Shops>> getAllShopRegistrationRequests(@Query("pageNumber") int pageNumber);
 
-    @GET("/getAllRegisteredShops")
+    @GET("shopKpr/admin/getAllRegisteredShops")
     Call<List<Shops>> getAllRegisteredShops(@Query("pageNumber") int pageNumber);
 
+    @GET("shopKpr/admin/getShopInfo")
+    Call<Shops> getShopInfo(@Query("shop_phone") String shop_phone);
+
     //Product Management
-    @GET("/getAllProducts")
+    @GET("shopKpr/admin/getAllProducts")
     Call<List<OwoProduct>> getAllProducts(@Query("page") int page);
 
-    @GET("/getAllStockedOutProducts")
+    @GET("shopKpr/admin/getAllStockedOutProducts")
     Call<List<OwoProduct>> getAllStockedOutProducts(@Query("page") int page);
 
-    @GET("/getAProduct")
+    @GET("shopKpr/admin/getAProduct")
     Call<OwoProduct> getAProduct(@Query("productId") Long productId);
 
-    @POST("/addProduct")
+    @POST("shopKpr/admin/addProduct")
     Call<OwoProduct> createProduct(@Body OwoProduct owo_product);
 
-    @PUT("/updateProduct")
+    @PUT("shopKpr/admin/updateProduct")
     Call<OwoProduct> updateProduct(@Body OwoProduct product);
 
-    @DELETE("/deleteProduct")
+    @DELETE("shopKpr/admin/deleteProduct")
     Call<ResponseBody> deleteProduct(@Query("productId") Long productId);
 
-    @PUT("/setOrderState")
-    Call<ResponseBody> setOrderState(
-            @Query("order_id") long order_id,
-            @Query("order_state") String order_state
-    );
-
-    @GET("/searchProductWithName")
+    @GET("shopKpr/admin/searchProductWithName")
     Call<List<OwoProduct>> searchProduct(
             @Query("page") int page,
             @Query("product_name") String product_name
     );
 
-    @GET("/getPendingOrders")
+
+    //Orders management
+    @GET("shopKpr/admin/getPendingOrders")
     Call<List<Shop_keeper_orders>> getShopKeeperPendingOrders();
 
-    @GET("/getConfirmedOrders")
+    @GET("shopKpr/admin/getConfirmedOrders")
     Call<List<Shop_keeper_orders>> getShopkeeperConfirmedOrders();
 
-    @GET("/getProcessingOrders")
+    @GET("shopKpr/admin/getProcessingOrders")
     Call<List<Shop_keeper_orders>> getProcessingOrders();
 
-    @GET("/getPickedOrders")
+    @GET("shopKpr/admin/getPickedOrders")
     Call<List<Shop_keeper_orders>> getPickedOrders();
 
-    @GET("/getShippedOrders")
+    @GET("shopKpr/admin/getShippedOrders")
     Call<List<Shop_keeper_orders>> getShippedOrders();
 
-    @GET("/getDeliveredOrders")
+    @GET("shopKpr/admin/getDeliveredOrders")
     Call<List<Shop_keeper_orders>> getDeliveredOrders(@Query("page_num") int page_num);
 
-    @GET("/getCancelledOrders")
+    @GET("shopKpr/admin/getCancelledOrders")
     Call<List<Shop_keeper_orders>> getCancelledOrders(@Query("page_num") int page_num);
+
+    @PUT("shopKpr/admin/setOrderState")
+    Call<ResponseBody> setOrderState(
+            @Query("order_id") long order_id,
+            @Query("order_state") String order_state
+    );
+
 
     //Category Management
     @POST("/addNewCategory")
@@ -238,9 +244,6 @@ public interface Api {
 
     @GET("/getAllChangeRequests")
     Call<List<ChangeShopInfo>> getAllShopChangeRequests();
-
-    @GET("/getShopInfo")
-    Call<Shops> getShopInfo(@Query("shop_phone") String shop_phone);
 
     @POST("/approveShopInfoChange")
     Call<ResponseBody> approveShopInfoChange(@Body ChangeShopInfo changeShopInfo);
