@@ -1,6 +1,5 @@
 package com.shopKPRAdmin.productsManagement.entity;
 
-import androidx.annotation.Nullable;
 import com.shopKPRAdmin.categoryManagement.brand.addBrand.Brands;
 import java.io.Serializable;
 
@@ -17,16 +16,15 @@ public class OwoProduct implements Serializable {
     private String productCreationTime;
     private String productImage;
     private Brands brands;
+    private String productExpireDate;
 
     public OwoProduct() {
-
     }
 
-    public OwoProduct(long productId, String productName, Long productCategoryId,
-                      Long productSubCategoryId, Double productPrice, Double productDiscount,
-                      Integer productQuantity, String productDescription,
-                      String productCreationDate, String productCreationTime,
-                      String productImage, Brands brands)
+    public OwoProduct(Long productId, String productName, Long productCategoryId, Long productSubCategoryId,
+                      Double productPrice, Double productDiscount, Integer productQuantity, String productDescription,
+                      String productCreationDate, String productCreationTime, String productImage, Brands brands,
+                      String productExpireDate)
     {
         this.productId = productId;
         this.productName = productName;
@@ -40,13 +38,14 @@ public class OwoProduct implements Serializable {
         this.productCreationTime = productCreationTime;
         this.productImage = productImage;
         this.brands = brands;
+        this.productExpireDate = productExpireDate;
     }
 
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -138,14 +137,11 @@ public class OwoProduct implements Serializable {
         this.brands = brands;
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
-        OwoProduct owoProduct = (OwoProduct) obj;
-        return this.productId.equals(owoProduct.productId);
+    public String getProductExpireDate() {
+        return productExpireDate;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public void setProductExpireDate(String productExpireDate) {
+        this.productExpireDate = productExpireDate;
     }
 }

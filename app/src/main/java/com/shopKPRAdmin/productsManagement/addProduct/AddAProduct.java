@@ -50,7 +50,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -60,7 +59,7 @@ public class AddAProduct extends AppCompatActivity {
     private final int STORAGE_PERMISSION_CODE = 1;
 
     private ImageView productImage;
-    private EditText productName, productDescription, productQuantity, productPrice, productDiscount;
+    private EditText productName, productDescription, productQuantity, productPrice, productDiscount, productExpireDate;
     private TextView discountedPrice;
     private Spinner subCategorySelectorSpinner, brandSelectorSpinner;
     private CategoryEntity categoryEntity;
@@ -84,6 +83,7 @@ public class AddAProduct extends AppCompatActivity {
         productQuantity = findViewById(R.id.productQuantity);
         productPrice = findViewById(R.id.productPrice);
         productDiscount = findViewById(R.id.productDiscount);
+        productExpireDate = findViewById(R.id.productExpireDate);
         Button calculateDiscount = findViewById(R.id.calculateDiscount);
         Button addNewProduct = findViewById(R.id.addNewProduct);
         discountedPrice = findViewById(R.id.discountedPrice);
@@ -289,6 +289,7 @@ public class AddAProduct extends AppCompatActivity {
     }
 
     private void storeProductInformation() {
+
         Bitmap bitmap = ((BitmapDrawable) productImage.getDrawable()).getBitmap();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -330,6 +331,7 @@ public class AddAProduct extends AppCompatActivity {
                                 owoProduct.setProductDiscount(Double.parseDouble(productDiscount.getText().toString()));
                                 owoProduct.setProductQuantity(Integer.parseInt(productQuantity.getText().toString()));
                                 owoProduct.setProductDescription(productDescription.getText().toString());
+                                owoProduct.setProductExpireDate(productExpireDate.getText().toString());
 
                                 owoProduct.setProductCreationDate(new SimpleDateFormat("dd-MM-yyyy", Locale.US).format(new Date()));
                                 owoProduct.setProductCreationTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US).format(new Date()));

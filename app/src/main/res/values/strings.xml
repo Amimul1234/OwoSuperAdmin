@@ -215,5 +215,6 @@
     <string name="order_number">Order Number</string>
     <string name="phone_number">Phone Number</string>
     <string name="cash_on_delivery">Cash on delivery</string>
+    <string name="product_expire_date">Product Expire Date</string>
 
 </resources>
