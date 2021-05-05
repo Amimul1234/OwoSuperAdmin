@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.shopKPRAdmin.giftAndDeals.entity.Deals;
 import com.shopKPRAdmin.network.RetrofitClient;
 import com.shopKPRAdmin.owoshop.R;
